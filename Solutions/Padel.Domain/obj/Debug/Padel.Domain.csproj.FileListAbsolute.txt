@@ -1,0 +1,13 @@
+C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\Padel.Domain.dll
+C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\Padel.Domain.pdb
+C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\SharpArch.Domain.dll
+C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\Newtonsoft.Json.pdb
+C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\SharpArch.Domain.pdb
+C:\Projects\Padel\Solutions\Padel.Domain\obj\Debug\Padel.Domain.dll
+C:\Projects\Padel\Solutions\Padel.Domain\obj\Debug\Padel.Domain.pdb
+C:\Projects\Padel\Solutions\Padel.Domain\obj\Debug\Padel.Domain.csprojResolveAssemblyReference.cache

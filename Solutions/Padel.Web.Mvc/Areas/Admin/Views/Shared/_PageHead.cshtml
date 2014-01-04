@@ -1,0 +1,21 @@
+﻿@{
+    Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Menus.BreadcrumbModelView BreadcrumbModelView = ViewBag.BreadcrumbModelView;
+}
+<div class="page-head">
+    <h2 class="pull-left">
+        @ViewBag.PageTitle</h2>
+    <div class="clearfix">
+    </div>
+    <!-- Breadcrumb -->
+    <div class="bread-crumb">
+        <a href="@(BreadcrumbModelView.First().Url)"><i class="fa fa-home"></i>@(BreadcrumbModelView.First().Name)</a>
+        @foreach (var item in BreadcrumbModelView.Skip(1))
+        {
+            <!-- Divider -->
+            <span class="divider">/</span> 
+            <a href="@(item.Url)" class="bread-current">@(item.Name)</a>    
+        }
+    </div>
+    <div class="clearfix">
+    </div>
+</div>

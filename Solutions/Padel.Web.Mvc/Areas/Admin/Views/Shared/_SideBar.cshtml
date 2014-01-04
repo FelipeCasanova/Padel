@@ -1,0 +1,28 @@
+﻿@{
+    Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Menus.SideBarModelView SideBarModelView = ViewBag.SideBarModelView;
+}
+
+<div class="sidebar">
+    <div class="sidebar-dropdown">
+        <a href="#" class="open">Navigation</a></div>
+    <!-- Search form -->
+    <form class="navbar-form" role="search">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+        <button class="btn search-button" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+    </form>
+    <!--- Sidebar navigation -->
+    <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
+    <ul id="nav" style="display: block;">
+        <!-- Main menu with font awesome icon -->
+        <li><a href="@(Url.Action(MVC.Admin.HomeAdmin.Actions.ActionNames.Index, MVC.Admin.HomeAdmin.Name))" class="@(SideBarModelView.Any(m => m.IsSelected) ? "" : "open")">
+            <i class="fa fa-home"></i><span>Dashboard</span></a></li>
+        @foreach (var item in SideBarModelView)
+        {
+            @PadelHelper.RenderSideBarMenuItem(item);
+        }
+    </ul>
+</div>

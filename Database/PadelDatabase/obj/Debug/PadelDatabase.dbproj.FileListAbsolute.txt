@@ -1,0 +1,8 @@
+C:\Projects\Padel\Database\PadelDatabase\sql\debug\Padel_Script.PreDeployment.sql
+C:\Projects\Padel\Database\PadelDatabase\sql\debug\Padel_Script.PostDeployment.sql
+C:\Projects\Padel\Database\PadelDatabase\sql\debug\Padel_Database.sqlsettings
+C:\Projects\Padel\Database\PadelDatabase\sql\debug\Padel_Database.sqldeployment
+C:\Projects\Padel\Database\PadelDatabase\sql\debug\Padel_Database.sqlcmdvars
+C:\Projects\Padel\Database\PadelDatabase\sql\debug\PadelDatabase.deploymanifest
+C:\Projects\Padel\Database\PadelDatabase\sql\debug\PadelDatabase.dbschema
+C:\Projects\Padel\Database\PadelDatabase\obj\Debug\PadelDatabase.dbschema

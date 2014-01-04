@@ -1,0 +1,37 @@
+﻿@model Padel.Web.Mvc.Controllers.ViewModels.UsuarioRegistrarModelView
+@Html.Partial(MVC.Shared.Views.Errors._ModalError)
+@Html.ValidationSummary(true, "Ha habido un error al crear el usuario.", new { @class = "alert alert-danger" })
+@Html.AntiForgeryToken()
+<div class="input-group">
+    <span class="input-group-addon glyphicon glyphicon-user">@Html.Raw(" ")</span>
+    @Html.TextBoxFor(m => m.Usuario.Nombre, new { @class = "form-control", placeholder = "Introduzca su nombre" })
+    @Html.ValidationMessageFor(m => m.Usuario.Nombre)
+</div>
+<div class="input-group">
+    <span class="input-group-addon glyphicon glyphicon-phone">@Html.Raw(" ")</span>
+    @Html.HiddenFor(m => m.Usuario.TelefonoMovil, new { Value = "{{telefonoMovil}}" })
+    @Html.TextBoxFor(m => m.TelefonoMovil, new { @class = "form-control", placeholder = "Introduzca su teléfono móvil", ng_model = "telefonoMovil" })
+    @Html.ValidationMessageFor(m => m.TelefonoMovil)
+</div>
+<div class="input-group">
+    <span class="input-group-addon">@Html.Raw("@")</span>
+    @Html.HiddenFor(m => m.Usuario.Email, new { Value = "{{email}}" })
+    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Dirección de correo electrónico", autocomplete = "off", ng_model = "email" })
+    @Html.ValidationMessageFor(m => m.Email)
+</div>
+<div class="input-group well">
+    <span class="padel-label">@Html.Raw("Indique su sexo")</span>
+    @Html.RadioButtonFor(m => m.Usuario.Sexo, "Hombre", new { @class = "padel-radiobutton", popovercontainer = "true" })
+    Hombre
+    @Html.RadioButtonFor(m => m.Usuario.Sexo, "Mujer", new { @class = "padel-radiobutton", popovercontainer = "true" })
+    Mujer
+    @Html.ValidationMessageFor(m => m.Usuario.Sexo)
+</div>
+<div class="input-group">
+    <span class="input-group-addon glyphicon glyphicon-off">@Html.Raw(" ")</span>
+    @Html.HiddenFor(m => m.Usuario.Password, new { Value = "{{password}}" })
+    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Password", type = "password", autocomplete = "off", ng_model = "password" })
+    @Html.ValidationMessageFor(m => m.Password)
+    @Html.TextBoxFor(m => m.PasswordConfirm, new { @class = "form-control", placeholder = "Introduzca de nuevo el password", type = "password", autocomplete = "off" })
+    @Html.ValidationMessageFor(m => m.PasswordConfirm)
+</div>

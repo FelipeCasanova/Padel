@@ -1,0 +1,70 @@
+﻿<!-- Carousel
+    ================================================== -->
+<div class="container">   
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        }
+    </ol>
+    <div class="carousel-inner">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="item active">
+                <img style="height:auto;" src="@Url.Content(Links.Content.img.bola_red_jpg)" alt="Regístrate en padel" />
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>
+                            Forma parte de nuestra comunidad.</h1>
+                        <p>
+                            Hazte miembro de esta comunidad de jugadores de pádel de forma <code>gratuita</code>
+                            . A qué estás esperando! ;-).</p>
+                        <p>
+                            <a class="btn btn-lg btn-primary" href="#" role="button" data-toggle="modal" data-target="#registroModal">
+                                Regístrate hoy</a></p>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="item @(User.Identity.IsAuthenticated ? "active" : "")">
+            <img style="height:auto;" src="@Url.Content(Links.Content.img.chica_padel_jpg)" alt="Torneos de padel" />
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>
+                        Torneos.</h1>
+                    <p>
+                        Échale un vistazo a los torneos que se van a celebrar o que ya han comenzado. Te
+                        esperamos!.</p>
+                    <p>
+                        @(Html.ActionLink<TorneosController>(m => m.Index(), "Ver torneos", new { @class = "btn btn-lg btn-primary" }))
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img style="height:auto;" src="@Url.Content(Links.Content.img.competicion_padel_jpg)" alt="Contacta con padel" />
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>
+                        ¿Tienes alguna duda?</h1>
+                    <p>
+                        Si tiene alguna duda no dude en ponerse en contacto con nuestro equipo de profesionales.
+                        Le contestarán lo antes posible.</p>
+                    <p>
+                        @(Html.ActionLink<ContactoController>(m => m.Index(), "Ir a contacto", new { @class = "btn btn-lg btn-primary" }))
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left">
+    </span></a><a class="right carousel-control" href="#myCarousel" data-slide="next"><span
+        class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+<!-- /.carousel -->
+</div>

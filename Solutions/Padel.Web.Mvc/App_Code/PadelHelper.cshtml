@@ -1,0 +1,23 @@
+﻿@helper RenderSideBarMenuItem(Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Menus.SideBarItem item)
+    {
+    <li class="@(item.SubMenu != null ? "has_sub" : "")">
+    <a href="@item.Url" class="@(item.SubMenu != null && item.IsSelected ? "subdrop" : item.IsSelected ? "open" : "")">
+    <i class="@item.Class">
+    </i>
+    <span>@(item.Name)</span>
+        @if (item.SubMenu != null)
+        {
+            <span class="pull-right"><i class="@(item.IsSelected ? "fa fa-chevron-down" : "fa fa-chevron-left")"></i></span>
+        }
+    </a>
+        @if (item.SubMenu != null)
+        {
+            <ul style="@(item.IsSelected ? "display: block;" : "")">
+                @foreach (var subitem in item.SubMenu)
+                {
+                    @RenderSideBarMenuItem(subitem)
+                }
+            </ul>
+        }
+    </li>   
+}

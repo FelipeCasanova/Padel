@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Entrar";
+    Layout = @MVC.Shared.Views._LayoutLogin;
+}
+@using (Ajax.BeginForm(MVC.Usuarios._Entrar(), new AjaxOptions
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                OnComplete = "ajaxComplete",
+                UpdateTargetId = "entrarView"
+            }, new { @class = "form-signin" }))
+{
+    <div class="modal-body">
+        <div class="row">
+            <div id="entrarView" class="form entrar col-md-8 padel-vertical-separator">
+                @Html.Partial(MVC.Shared.Views.Usuarios._Entrar)
+            </div>
+            <div class="col-md-4">
+                <ul class="padel-list">
+                    <li><span>Entra con tu email o numero de teléfono.</span></li>
+                    <li><span>No dude en ponerse en contacto con nosotros si tiene alguna duda. Le contestaremos
+                        lo antes posible.</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+            Cerrar</button>
+        <button type="submit" class="btn btn-primary" data-loading-text="Loading...">
+            Enviar</button>
+    </div>
+}

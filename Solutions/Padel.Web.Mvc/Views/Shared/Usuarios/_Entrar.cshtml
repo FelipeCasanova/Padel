@@ -1,0 +1,16 @@
+﻿@model Padel.Web.Mvc.Controllers.ViewModels.UsuarioEntrarModelView
+@Html.Partial(MVC.Shared.Views.Errors._ModalError)
+@Html.ValidationSummary(true, "Ha ocurrido un error al intentar entrar.", new { @class = "alert alert-danger" })
+@Html.AntiForgeryToken()
+<div class="input-group">
+    <span class="input-group-addon glyphicon glyphicon-user">@Html.Raw(" ")</span> 
+    <span data-toggle="tooltip" data-placement="top" title="Por favor, ingresa la dirección de email o número tlefónico registrado con tu cuenta en padel.com.">
+        @Html.TextBoxFor(m => m.EmailOTelefonoMovil, new { @class = "form-control", placeholder = "Email o número telefónico", autocomplete = "off" })
+    </span>
+    @Html.ValidationMessageFor(m => m.EmailOTelefonoMovil)
+</div>
+<div class="input-group">
+    <span class="input-group-addon glyphicon glyphicon-off">@Html.Raw(" ")</span>
+    @Html.TextBoxFor(m => m.PasswordEntrar, new { @class = "form-control", placeholder = "Password", type = "password", autocomplete = "off" })
+    @Html.ValidationMessageFor(m => m.PasswordEntrar)
+</div>
