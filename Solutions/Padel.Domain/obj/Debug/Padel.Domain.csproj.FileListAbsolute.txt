@@ -11,3 +11,16 @@ C:\Projects\Padel\Solutions\Padel.Domain\bin\Debug\SharpArch.Domain.pdb
 C:\Projects\Padel\Solutions\Padel.Domain\obj\Debug\Padel.Domain.dll
 C:\Projects\Padel\Solutions\Padel.Domain\obj\Debug\Padel.Domain.pdb
 C:\Projects\Padel\Solutions\Padel.Domain\obj\Debug\Padel.Domain.csprojResolveAssemblyReference.cache
+C:\repos\padel\Solutions\Padel.Domain\bin\Debug\Padel.Domain.dll
+C:\repos\padel\Solutions\Padel.Domain\bin\Debug\Padel.Domain.pdb
+C:\repos\padel\Solutions\Padel.Domain\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\repos\padel\Solutions\Padel.Domain\bin\Debug\Newtonsoft.Json.dll
+C:\repos\padel\Solutions\Padel.Domain\bin\Debug\SharpArch.Domain.dll
+C:\repos\padel\Solutions\Padel.Domain\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\repos\padel\Solutions\Padel.Domain\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\repos\padel\Solutions\Padel.Domain\bin\Debug\Newtonsoft.Json.pdb
+C:\repos\padel\Solutions\Padel.Domain\bin\Debug\Newtonsoft.Json.xml
+C:\repos\padel\Solutions\Padel.Domain\bin\Debug\SharpArch.Domain.pdb
+C:\repos\padel\Solutions\Padel.Domain\obj\Debug\Padel.Domain.csprojResolveAssemblyReference.cache
+C:\repos\padel\Solutions\Padel.Domain\obj\Debug\Padel.Domain.dll
+C:\repos\padel\Solutions\Padel.Domain\obj\Debug\Padel.Domain.pdb

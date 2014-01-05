@@ -1,468 +1,781 @@
-2014-01-03 20:41:02,884 [6] ?.lambda_method(:0) - NHibernate 3.3.1.4000 (3.3.1.4000)
+2014-01-05 02:37:48,269 [14] ?.lambda_method(:0) - NHibernate 3.3.1.4000 (3.3.1.4000)
 
-2014-01-03 20:41:03,098 [6] ?.lambda_method(:0) - hibernate-configuration section not found in application configuration file
+2014-01-05 02:37:48,367 [14] ?.lambda_method(:0) - hibernate-configuration section not found in application configuration file
 
-2014-01-03 20:41:03,111 [6] ?.lambda_method(:0) - Bytecode provider name : lcg
+2014-01-05 02:37:48,368 [14] ?.lambda_method(:0) - Bytecode provider name : lcg
 
-2014-01-03 20:41:03,113 [6] ?.lambda_method(:0) - Using reflection optimizer
+2014-01-05 02:37:48,369 [14] ?.lambda_method(:0) - Using reflection optimizer
 
-2014-01-03 20:41:03,245 [6] ?.lambda_method(:0) - checking mappings queue
+2014-01-05 02:37:48,407 [14] ?.lambda_method(:0) - connection.connection_string_name=PadelDB
 
-2014-01-03 20:41:03,246 [6] ?.lambda_method(:0) - processing one-to-many association mappings
+2014-01-05 02:37:48,407 [14] ?.lambda_method(:0) - dialect=NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:03,246 [6] ?.lambda_method(:0) - processing one-to-one association property references
+2014-01-05 02:37:48,408 [14] ?.lambda_method(:0) - connection.provider=NHibernate.Connection.DriverConnectionProvider
 
-2014-01-03 20:41:03,247 [6] ?.lambda_method(:0) - processing foreign key constraints
+2014-01-05 02:37:48,408 [14] ?.lambda_method(:0) - connection.driver_class=NHibernate.Driver.SqlClientDriver
 
-2014-01-03 20:41:03,249 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Torneo
+2014-01-05 02:37:48,408 [14] ?.lambda_method(:0) - show_sql=true
 
-2014-01-03 20:41:03,253 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+2014-01-05 02:37:48,408 [14] ?.lambda_method(:0) - connection.release_mode=auto
 
-2014-01-03 20:41:03,253 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
+2014-01-05 02:37:48,408 [14] ?.lambda_method(:0) - adonet.batch_size=500
 
-2014-01-03 20:41:03,253 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
+2014-01-05 02:37:48,409 [14] ?.lambda_method(:0) - properties: System.Collections.Generic.Dictionary`2[System.String,System.String]
 
-2014-01-03 20:41:03,253 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+2014-01-05 02:37:48,420 [14] ?.lambda_method(:0) - No mapped documents found in assembly: Padel.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 
-2014-01-03 20:41:03,254 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Categoria
+2014-01-05 02:37:48,734 [14] ?.lambda_method(:0) - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Padel.Domain.Role, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="Roles"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="RoleId" /><generator class="identity" /></id><property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Name" /></property></class></hibernate-mapping>
 
-2014-01-03 20:41:03,254 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Categoria
+2014-01-05 02:37:48,840 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:03,254 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Grupo
+2014-01-05 02:37:48,928 [14] ?.lambda_method(:0) - Mapping class: Padel.Domain.Role -> Roles
 
-2014-01-03 20:41:03,254 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Jornada
+2014-01-05 02:37:48,989 [14] ?.lambda_method(:0) - Mapped property: Id -> RoleId, type: Int32
 
-2014-01-03 20:41:03,255 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+2014-01-05 02:37:49,008 [14] ?.lambda_method(:0) - Mapped property: Name -> Name, type: String
 
-2014-01-03 20:41:03,255 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+2014-01-05 02:37:49,029 [14] ?.lambda_method(:0) - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Padel.Domain.Categoria, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="Categorias"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="CategoriaId" /><generator class="identity" /></id><bag cascade="all-delete-orphan" inverse="true" name="Grupo"><key><column name="CategoriaId" /><column name="CategoriaId" /></key><one-to-many class="Padel.Domain.Grupo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" /></bag><property name="FechaInicio" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaInicio" /></property><property name="FechaFin" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaFin" /></property><property name="FechaCreacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaCreacion" /></property><property name="FechaModificacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaModificacion" /></property><many-to-one class="Padel.Domain.Torneo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Torneo"><column name="TorneoId" /></many-to-one><many-to-one class="Padel.Domain.Equipo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Ganador"><column name="GanadorId" /></many-to-one></class></hibernate-mapping>
 
-2014-01-03 20:41:03,255 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+2014-01-05 02:37:49,057 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:03,255 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Role
+2014-01-05 02:37:49,058 [14] ?.lambda_method(:0) - Mapping class: Padel.Domain.Categoria -> Categorias
 
-2014-01-03 20:41:03,255 [6] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
+2014-01-05 02:37:49,059 [14] ?.lambda_method(:0) - Mapped property: Id -> CategoriaId, type: Int32
 
-2014-01-03 20:41:03,256 [6] ?.lambda_method(:0) - processing filters (second pass)
+2014-01-05 02:37:49,078 [14] ?.lambda_method(:0) - Mapped property: Grupo, type: System.Collections.Generic.ICollection`1[[Padel.Domain.Grupo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]](Padel.Domain.Categoria.Grupo)
 
-2014-01-03 20:41:03,471 [6] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
+2014-01-05 02:37:49,078 [14] ?.lambda_method(:0) - Mapped property: FechaInicio -> FechaInicio, type: DateTime
 
-2014-01-03 20:41:03,541 [6] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
+2014-01-05 02:37:49,079 [14] ?.lambda_method(:0) - Mapped property: FechaFin -> FechaFin, type: DateTime
 
-2014-01-03 20:41:03,601 [6] ?.lambda_method(:0) - Using dialect defined converter
+2014-01-05 02:37:49,079 [14] ?.lambda_method(:0) - Mapped property: FechaCreacion -> FechaCreacion, type: DateTime
 
-2014-01-03 20:41:03,602 [6] ?.lambda_method(:0) - Generate SQL with comments: disabled
+2014-01-05 02:37:49,079 [14] ?.lambda_method(:0) - Mapped property: FechaModificacion -> FechaModificacion, type: DateTime
 
-2014-01-03 20:41:03,603 [6] ?.lambda_method(:0) - Initializing connection provider: NHibernate.Connection.DriverConnectionProvider
+2014-01-05 02:37:49,088 [14] ?.lambda_method(:0) - Mapped property: Torneo -> TorneoId, type: Padel.Domain.Torneo
 
-2014-01-03 20:41:03,604 [6] ?.lambda_method(:0) - Configuring ConnectionProvider
+2014-01-05 02:37:49,088 [14] ?.lambda_method(:0) - Mapped property: Ganador -> GanadorId, type: Padel.Domain.Equipo
 
-2014-01-03 20:41:03,606 [6] ?.lambda_method(:0) - Transaction factory: NHibernate.Transaction.AdoNetWithDistributedTransactionFactory
+2014-01-05 02:37:49,089 [14] ?.lambda_method(:0) - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Padel.Domain.Equipo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="Equipos"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="EquipoId" /><generator class="identity" /></id><property name="Nombre" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Nombre" /></property><property name="TipoEquipo" type="FluentNHibernate.Mapping.GenericEnumMapper`1[[Padel.Domain.TipoEquipoEnum, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], FluentNHibernate, Version=1.3.0.727, Culture=neutral, PublicKeyToken=8aa435e3cb308880"><column name="TipoEquipo" /></property><property name="JugadorAVerificado" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="JugadorAVerificado" /></property><property name="JugadorBVerificado" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="JugadorBVerificado" /></property><property name="FechaCreacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaCreacion" /></property><property name="FechaModificacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaModificacion" /></property><many-to-one class="Padel.Domain.Usuario, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="JugadorA"><column name="JugadorAId" /></many-to-one><many-to-one class="Padel.Domain.Usuario, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="JugadorB"><column name="JugadorBId" /></many-to-one></class></hibernate-mapping>
 
-2014-01-03 20:41:03,621 [6] ?.lambda_method(:0) - Optimize cache for minimal puts: False
+2014-01-05 02:37:49,090 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:03,622 [6] ?.lambda_method(:0) - Connection release mode: auto
+2014-01-05 02:37:49,091 [14] ?.lambda_method(:0) - Mapping class: Padel.Domain.Equipo -> Equipos
 
-2014-01-03 20:41:03,622 [6] ?.lambda_method(:0) - Default batch fetch size: 1
+2014-01-05 02:37:49,091 [14] ?.lambda_method(:0) - Mapped property: Id -> EquipoId, type: Int32
 
-2014-01-03 20:41:03,622 [6] ?.lambda_method(:0) - echoing all SQL to stdout
+2014-01-05 02:37:49,091 [14] ?.lambda_method(:0) - Mapped property: Nombre -> Nombre, type: String
 
-2014-01-03 20:41:03,623 [6] ?.lambda_method(:0) - Statistics: disabled
+2014-01-05 02:37:49,097 [14] ?.lambda_method(:0) - Mapped property: TipoEquipo -> TipoEquipo, type: enumstring - TipoEquipoEnum
 
-2014-01-03 20:41:03,623 [6] ?.lambda_method(:0) - Deleted entity synthetic identifier rollback: disabled
+2014-01-05 02:37:49,097 [14] ?.lambda_method(:0) - Mapped property: JugadorAVerificado -> JugadorAVerificado, type: Boolean
 
-2014-01-03 20:41:03,624 [6] ?.lambda_method(:0) - Query translator: NHibernate.Hql.Ast.ANTLR.ASTQueryTranslatorFactory
+2014-01-05 02:37:49,097 [14] ?.lambda_method(:0) - Mapped property: JugadorBVerificado -> JugadorBVerificado, type: Boolean
 
-2014-01-03 20:41:03,645 [6] ?.lambda_method(:0) - Query language substitutions: {'true'='1', 'false'='0', 'yes'=''Y'', 'no'=''N''}
+2014-01-05 02:37:49,097 [14] ?.lambda_method(:0) - Mapped property: FechaCreacion -> FechaCreacion, type: DateTime
 
-2014-01-03 20:41:03,647 [6] ?.lambda_method(:0) - cache provider: NHibernate.Cache.NoCacheProvider, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4
+2014-01-05 02:37:49,098 [14] ?.lambda_method(:0) - Mapped property: FechaModificacion -> FechaModificacion, type: DateTime
 
-2014-01-03 20:41:03,649 [6] ?.lambda_method(:0) - Order SQL inserts for batching: enabled
+2014-01-05 02:37:49,098 [14] ?.lambda_method(:0) - Mapped property: JugadorA -> JugadorAId, type: Padel.Domain.Usuario
 
-2014-01-03 20:41:03,649 [6] ?.lambda_method(:0) - Wrap result sets: disabled
+2014-01-05 02:37:49,098 [14] ?.lambda_method(:0) - Mapped property: JugadorB -> JugadorBId, type: Padel.Domain.Usuario
 
-2014-01-03 20:41:03,650 [6] ?.lambda_method(:0) - Batcher factory: NHibernate.AdoNet.SqlClientBatchingBatcherFactory, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4
+2014-01-05 02:37:49,099 [14] ?.lambda_method(:0) - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Padel.Domain.EquipoToCategoria, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="EquipoToCategorias"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="EquipoToCategoriaId" /><generator class="identity" /></id><property name="JugadorA" type="FluentNHibernate.Mapping.GenericEnumMapper`1[[Padel.Domain.EstadoUsuarioTorneEnum, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], FluentNHibernate, Version=1.3.0.727, Culture=neutral, PublicKeyToken=8aa435e3cb308880"><column name="JugadorA" /></property><property name="JugadorB" type="FluentNHibernate.Mapping.GenericEnumMapper`1[[Padel.Domain.EstadoUsuarioTorneEnum, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], FluentNHibernate, Version=1.3.0.727, Culture=neutral, PublicKeyToken=8aa435e3cb308880"><column name="JugadorB" /></property><property name="FechaCreacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaCreacion" /></property><property name="FechaModificacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaModificacion" /></property><many-to-one class="Padel.Domain.Equipo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Equipo"><column name="EquipoId" /></many-to-one><many-to-one class="Padel.Domain.Categoria, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Categoria"><column name="CategoriaId" /></many-to-one></class></hibernate-mapping>
 
-2014-01-03 20:41:03,651 [6] ?.lambda_method(:0) - Default entity-mode: Poco
+2014-01-05 02:37:49,100 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:03,651 [6] ?.lambda_method(:0) - Named query checking : enabled
+2014-01-05 02:37:49,101 [14] ?.lambda_method(:0) - Mapping class: Padel.Domain.EquipoToCategoria -> EquipoToCategorias
 
-2014-01-03 20:41:03,674 [6] ?.lambda_method(:0) - building session factory
+2014-01-05 02:37:49,101 [14] ?.lambda_method(:0) - Mapped property: Id -> EquipoToCategoriaId, type: Int32
 
-2014-01-03 20:41:03,674 [6] ?.lambda_method(:0) - Session factory constructed with filter configurations : {}
+2014-01-05 02:37:49,102 [14] ?.lambda_method(:0) - Mapped property: JugadorA -> JugadorA, type: enumstring - EstadoUsuarioTorneEnum
 
-2014-01-03 20:41:03,675 [6] ?.lambda_method(:0) - instantiating session factory with properties: {'use_reflection_optimizer'='True', 'connection.connection_string'='Data Source=felipe-pc\sqlexpress;Initial Catalog=Padel;Integrated Security=True', 'dialect'='NHibernate.Dialect.MsSql2008Dialect', 'connection.provider'='NHibernate.Connection.DriverConnectionProvider', 'connection.driver_class'='NHibernate.Driver.SqlClientDriver', 'show_sql'='true', 'connection.release_mode'='auto', 'adonet.batch_size'='500'}
+2014-01-05 02:37:49,102 [14] ?.lambda_method(:0) - Mapped property: JugadorB -> JugadorB, type: enumstring - EstadoUsuarioTorneEnum
 
-2014-01-03 20:41:03,677 [6] ?.lambda_method(:0) - Obtaining IDbConnection from Driver
+2014-01-05 02:37:49,102 [14] ?.lambda_method(:0) - Mapped property: FechaCreacion -> FechaCreacion, type: DateTime
 
-2014-01-03 20:41:08,017 [6] ?.lambda_method(:0) - Closing connection
+2014-01-05 02:37:49,103 [14] ?.lambda_method(:0) - Mapped property: FechaModificacion -> FechaModificacion, type: DateTime
 
-2014-01-03 20:41:08,213 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Role
+2014-01-05 02:37:49,103 [14] ?.lambda_method(:0) - Mapped property: Equipo -> EquipoId, type: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,228 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Role
+2014-01-05 02:37:49,103 [14] ?.lambda_method(:0) - Mapped property: Categoria -> CategoriaId, type: Padel.Domain.Categoria
 
-2014-01-03 20:41:08,275 [6] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Role
+2014-01-05 02:37:49,104 [14] ?.lambda_method(:0) - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Padel.Domain.Grupo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="Grupos"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="GrupoId" /><generator class="identity" /></id><bag cascade="all-delete-orphan" inverse="true" name="Jornadas"><key><column name="GrupoId" /><column name="GrupoId" /></key><one-to-many class="Padel.Domain.Jornada, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" /></bag><property name="FechaCreacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaCreacion" /></property><property name="FechaModificacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaModificacion" /></property><many-to-one class="Padel.Domain.Categoria, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Categoria"><column name="CategoriaId" /></many-to-one></class></hibernate-mapping>
 
-2014-01-03 20:41:08,322 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Categoria
+2014-01-05 02:37:49,105 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:08,322 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Categoria
+2014-01-05 02:37:49,105 [14] ?.lambda_method(:0) - Mapping class: Padel.Domain.Grupo -> Grupos
 
-2014-01-03 20:41:08,324 [6] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Categoria
+2014-01-05 02:37:49,106 [14] ?.lambda_method(:0) - Mapped property: Id -> GrupoId, type: Int32
 
-2014-01-03 20:41:08,328 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Equipo
+2014-01-05 02:37:49,106 [14] ?.lambda_method(:0) - Mapped property: Jornadas, type: System.Collections.Generic.ICollection`1[[Padel.Domain.Jornada, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]](Padel.Domain.Grupo.Jornadas)
 
-2014-01-03 20:41:08,329 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Equipo
+2014-01-05 02:37:49,107 [14] ?.lambda_method(:0) - Mapped property: FechaCreacion -> FechaCreacion, type: DateTime
 
-2014-01-03 20:41:08,329 [6] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Equipo
+2014-01-05 02:37:49,107 [14] ?.lambda_method(:0) - Mapped property: FechaModificacion -> FechaModificacion, type: DateTime
 
-2014-01-03 20:41:08,331 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.EquipoToCategoria
+2014-01-05 02:37:49,107 [14] ?.lambda_method(:0) - Mapped property: Categoria -> CategoriaId, type: Padel.Domain.Categoria
 
-2014-01-03 20:41:08,332 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.EquipoToCategoria
+2014-01-05 02:37:49,108 [14] ?.lambda_method(:0) - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Padel.Domain.Jornada, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="Jornadas"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="JornadaId" /><generator class="identity" /></id><bag cascade="all-delete-orphan" inverse="true" name="Partidos"><key><column name="JornadaId" /><column name="JornadaId" /></key><one-to-many class="Padel.Domain.Partido, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" /></bag><property name="FechaCreacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaCreacion" /></property><property name="FechaModificacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaModificacion" /></property><many-to-one class="Padel.Domain.Grupo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Grupo"><column name="GrupoId" /></many-to-one></class></hibernate-mapping>
 
-2014-01-03 20:41:08,332 [6] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.EquipoToCategoria
+2014-01-05 02:37:49,109 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:08,334 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Grupo
+2014-01-05 02:37:49,110 [14] ?.lambda_method(:0) - Mapping class: Padel.Domain.Jornada -> Jornadas
 
-2014-01-03 20:41:08,334 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Grupo
+2014-01-05 02:37:49,110 [14] ?.lambda_method(:0) - Mapped property: Id -> JornadaId, type: Int32
 
-2014-01-03 20:41:08,335 [6] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Grupo
+2014-01-05 02:37:49,111 [14] ?.lambda_method(:0) - Mapped property: Partidos, type: System.Collections.Generic.ICollection`1[[Padel.Domain.Partido, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]](Padel.Domain.Jornada.Partidos)
 
-2014-01-03 20:41:08,337 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Jornada
+2014-01-05 02:37:49,111 [14] ?.lambda_method(:0) - Mapped property: FechaCreacion -> FechaCreacion, type: DateTime
 
-2014-01-03 20:41:08,337 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Jornada
+2014-01-05 02:37:49,111 [14] ?.lambda_method(:0) - Mapped property: FechaModificacion -> FechaModificacion, type: DateTime
 
-2014-01-03 20:41:08,338 [6] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Jornada
+2014-01-05 02:37:49,111 [14] ?.lambda_method(:0) - Mapped property: Grupo -> GrupoId, type: Padel.Domain.Grupo
 
-2014-01-03 20:41:08,339 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Partido
+2014-01-05 02:37:49,112 [14] ?.lambda_method(:0) - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Padel.Domain.Partido, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="Partidos"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="PartidoId" /><generator class="identity" /></id><property name="Set1A" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Set1A" /></property><property name="Set2A" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Set2A" /></property><property name="Set3A" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Set3A" /></property><property name="Set1B" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Set1B" /></property><property name="Set2B" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Set2B" /></property><property name="Set3B" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Set3B" /></property><property name="FechaCreacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaCreacion" /></property><property name="FechaModificacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaModificacion" /></property><many-to-one class="Padel.Domain.Jornada, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Jornada"><column name="JornadaId" /></many-to-one><many-to-one class="Padel.Domain.Equipo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EquipoA"><column name="EquipoAId" /></many-to-one><many-to-one class="Padel.Domain.Equipo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="EquipoB"><column name="EquipoBId" /></many-to-one><many-to-one class="Padel.Domain.Equipo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Ganador"><column name="GanadorId" /></many-to-one></class></hibernate-mapping>
 
-2014-01-03 20:41:08,340 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Partido
+2014-01-05 02:37:49,114 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:08,341 [6] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Partido
+2014-01-05 02:37:49,114 [14] ?.lambda_method(:0) - Mapping class: Padel.Domain.Partido -> Partidos
 
-2014-01-03 20:41:08,343 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Torneo
+2014-01-05 02:37:49,114 [14] ?.lambda_method(:0) - Mapped property: Id -> PartidoId, type: Int32
 
-2014-01-03 20:41:08,343 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Torneo
+2014-01-05 02:37:49,115 [14] ?.lambda_method(:0) - Mapped property: Set1A -> Set1A, type: Int32
 
-2014-01-03 20:41:08,344 [6] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Torneo
+2014-01-05 02:37:49,115 [14] ?.lambda_method(:0) - Mapped property: Set2A -> Set2A, type: Int32
 
-2014-01-03 20:41:08,347 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Usuario
+2014-01-05 02:37:49,115 [14] ?.lambda_method(:0) - Mapped property: Set3A -> Set3A, type: Int32
 
-2014-01-03 20:41:08,348 [6] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Usuario
+2014-01-05 02:37:49,115 [14] ?.lambda_method(:0) - Mapped property: Set1B -> Set1B, type: Int32
 
-2014-01-03 20:41:08,348 [6] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Usuario
+2014-01-05 02:37:49,116 [14] ?.lambda_method(:0) - Mapped property: Set2B -> Set2B, type: Int32
 
-2014-01-03 20:41:08,388 [6] ?.lambda_method(:0) - Static SQL for collection: Padel.Domain.Categoria.Grupo
+2014-01-05 02:37:49,116 [14] ?.lambda_method(:0) - Mapped property: Set3B -> Set3B, type: Int32
 
-2014-01-03 20:41:08,390 [6] ?.lambda_method(:0) -  Row insert: UPDATE Grupos SET CategoriaId = ? WHERE GrupoId = ?
+2014-01-05 02:37:49,116 [14] ?.lambda_method(:0) - Mapped property: FechaCreacion -> FechaCreacion, type: DateTime
 
-2014-01-03 20:41:08,390 [6] ?.lambda_method(:0) -  Row delete: UPDATE Grupos SET CategoriaId = null WHERE CategoriaId = ? AND GrupoId = ?
+2014-01-05 02:37:49,116 [14] ?.lambda_method(:0) - Mapped property: FechaModificacion -> FechaModificacion, type: DateTime
 
-2014-01-03 20:41:08,391 [6] ?.lambda_method(:0) -  One-shot delete: UPDATE Grupos SET CategoriaId = null WHERE CategoriaId = ?
+2014-01-05 02:37:49,117 [14] ?.lambda_method(:0) - Mapped property: Jornada -> JornadaId, type: Padel.Domain.Jornada
 
-2014-01-03 20:41:08,392 [6] ?.lambda_method(:0) - Static SQL for collection: Padel.Domain.Grupo.Jornadas
+2014-01-05 02:37:49,117 [14] ?.lambda_method(:0) - Mapped property: EquipoA -> EquipoAId, type: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,393 [6] ?.lambda_method(:0) -  Row insert: UPDATE Jornadas SET GrupoId = ? WHERE JornadaId = ?
+2014-01-05 02:37:49,117 [14] ?.lambda_method(:0) - Mapped property: EquipoB -> EquipoBId, type: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,393 [6] ?.lambda_method(:0) -  Row delete: UPDATE Jornadas SET GrupoId = null WHERE GrupoId = ? AND JornadaId = ?
+2014-01-05 02:37:49,118 [14] ?.lambda_method(:0) - Mapped property: Ganador -> GanadorId, type: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,393 [6] ?.lambda_method(:0) -  One-shot delete: UPDATE Jornadas SET GrupoId = null WHERE GrupoId = ?
+2014-01-05 02:37:49,118 [14] ?.lambda_method(:0) - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Padel.Domain.Torneo, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="Torneos"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="TorneoId" /><generator class="identity" /></id><bag cascade="all-delete-orphan" inverse="true" name="Categorias"><key><column name="TorneoId" /><column name="TorneoId" /></key><one-to-many class="Padel.Domain.Categoria, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" /></bag><property name="Name" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Name" /></property><property name="FechaCreacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaCreacion" /></property><property name="FechaModificacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaModificacion" /></property></class></hibernate-mapping>
 
-2014-01-03 20:41:08,393 [6] ?.lambda_method(:0) - Static SQL for collection: Padel.Domain.Jornada.Partidos
+2014-01-05 02:37:49,119 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:08,394 [6] ?.lambda_method(:0) -  Row insert: UPDATE Partidos SET JornadaId = ? WHERE PartidoId = ?
+2014-01-05 02:37:49,120 [14] ?.lambda_method(:0) - Mapping class: Padel.Domain.Torneo -> Torneos
 
-2014-01-03 20:41:08,394 [6] ?.lambda_method(:0) -  Row delete: UPDATE Partidos SET JornadaId = null WHERE JornadaId = ? AND PartidoId = ?
+2014-01-05 02:37:49,120 [14] ?.lambda_method(:0) - Mapped property: Id -> TorneoId, type: Int32
 
-2014-01-03 20:41:08,394 [6] ?.lambda_method(:0) -  One-shot delete: UPDATE Partidos SET JornadaId = null WHERE JornadaId = ?
+2014-01-05 02:37:49,121 [14] ?.lambda_method(:0) - Mapped property: Categorias, type: System.Collections.Generic.ICollection`1[[Padel.Domain.Categoria, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]](Padel.Domain.Torneo.Categorias)
 
-2014-01-03 20:41:08,394 [6] ?.lambda_method(:0) - Static SQL for collection: Padel.Domain.Torneo.Categorias
+2014-01-05 02:37:49,121 [14] ?.lambda_method(:0) - Mapped property: Name -> Name, type: String
 
-2014-01-03 20:41:08,395 [6] ?.lambda_method(:0) -  Row insert: UPDATE Categorias SET TorneoId = ? WHERE CategoriaId = ?
+2014-01-05 02:37:49,121 [14] ?.lambda_method(:0) - Mapped property: FechaCreacion -> FechaCreacion, type: DateTime
 
-2014-01-03 20:41:08,395 [6] ?.lambda_method(:0) -  Row delete: UPDATE Categorias SET TorneoId = null WHERE TorneoId = ? AND CategoriaId = ?
+2014-01-05 02:37:49,122 [14] ?.lambda_method(:0) - Mapped property: FechaModificacion -> FechaModificacion, type: DateTime
 
-2014-01-03 20:41:08,395 [6] ?.lambda_method(:0) -  One-shot delete: UPDATE Categorias SET TorneoId = null WHERE TorneoId = ?
+2014-01-05 02:37:49,125 [14] ?.lambda_method(:0) - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Padel.Domain.Usuario, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="Usuarios"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="UsuarioId" /><generator class="identity" /></id><bag cascade="all" name="Roles" table="RoleToUsuario"><key><column name="UsuarioId" /><column name="UsuarioId" /></key><many-to-many class="Padel.Domain.Role, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"><column name="RoleId" /></many-to-many></bag><property name="Nombre" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Nombre" /></property><property name="Sexo" type="FluentNHibernate.Mapping.GenericEnumMapper`1[[Padel.Domain.SexoEnum, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], FluentNHibernate, Version=1.3.0.727, Culture=neutral, PublicKeyToken=8aa435e3cb308880"><column name="Sexo" /></property><property name="TelefonoMovil" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="TelefonoMovil" /></property><property name="Email" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Email" /></property><property name="Password" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Password" /></property><property name="FechaCreacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaCreacion" /></property><property name="FechaModificacion" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="FechaModificacion" /></property></class></hibernate-mapping>
 
-2014-01-03 20:41:08,413 [6] ?.lambda_method(:0) - Static SQL for collection: Padel.Domain.Usuario.Roles
+2014-01-05 02:37:49,134 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:08,413 [6] ?.lambda_method(:0) -  Row insert: INSERT INTO RoleToUsuario (UsuarioId, RoleId) VALUES (?, ?)
+2014-01-05 02:37:49,135 [14] ?.lambda_method(:0) - Mapping class: Padel.Domain.Usuario -> Usuarios
 
-2014-01-03 20:41:08,414 [6] ?.lambda_method(:0) -  Row update: UPDATE RoleToUsuario SET RoleId = ? WHERE UsuarioId = ? AND RoleId = ?
+2014-01-05 02:37:49,135 [14] ?.lambda_method(:0) - Mapped property: Id -> UsuarioId, type: Int32
 
-2014-01-03 20:41:08,414 [6] ?.lambda_method(:0) -  Row delete: DELETE FROM RoleToUsuario WHERE UsuarioId = ? AND RoleId = ?
+2014-01-05 02:37:49,135 [14] ?.lambda_method(:0) - Mapping collection: Padel.Domain.Usuario.Roles -> RoleToUsuario
 
-2014-01-03 20:41:08,414 [6] ?.lambda_method(:0) -  One-shot delete: DELETE FROM RoleToUsuario WHERE UsuarioId = ?
+2014-01-05 02:37:49,136 [14] ?.lambda_method(:0) - Mapped property: Roles, type: System.Collections.Generic.ICollection`1[[Padel.Domain.Role, Padel.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]](Padel.Domain.Usuario.Roles)
 
-2014-01-03 20:41:08,446 [6] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Role
+2014-01-05 02:37:49,137 [14] ?.lambda_method(:0) - Mapped property: Nombre -> Nombre, type: String
 
-2014-01-03 20:41:08,446 [6] ?.lambda_method(:0) -  Version select: SELECT RoleId FROM Roles WHERE RoleId = ?
+2014-01-05 02:37:49,137 [14] ?.lambda_method(:0) - Mapped property: Sexo -> Sexo, type: enumstring - SexoEnum
 
-2014-01-03 20:41:08,446 [6] ?.lambda_method(:0) -  Snapshot select: SELECT role_.RoleId, role_.Name as Name0_ FROM Roles role_ WHERE role_.RoleId=?
+2014-01-05 02:37:49,138 [14] ?.lambda_method(:0) - Mapped property: TelefonoMovil -> TelefonoMovil, type: Int32
 
-2014-01-03 20:41:08,447 [6] ?.lambda_method(:0) -  Insert 0: INSERT INTO Roles (Name, RoleId) VALUES (?, ?)
+2014-01-05 02:37:49,138 [14] ?.lambda_method(:0) - Mapped property: Email -> Email, type: String
 
-2014-01-03 20:41:08,447 [6] ?.lambda_method(:0) -  Update 0: UPDATE Roles SET Name = ? WHERE RoleId = ?
+2014-01-05 02:37:49,139 [14] ?.lambda_method(:0) - Mapped property: Password -> Password, type: String
 
-2014-01-03 20:41:08,447 [6] ?.lambda_method(:0) -  Delete 0: DELETE FROM Roles WHERE RoleId = ?
+2014-01-05 02:37:49,139 [14] ?.lambda_method(:0) - Mapped property: FechaCreacion -> FechaCreacion, type: DateTime
 
-2014-01-03 20:41:08,447 [6] ?.lambda_method(:0) -  Identity insert: INSERT INTO Roles (Name) VALUES (?); select SCOPE_IDENTITY()
+2014-01-05 02:37:49,139 [14] ?.lambda_method(:0) - Mapped property: FechaModificacion -> FechaModificacion, type: DateTime
 
-2014-01-03 20:41:08,525 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ WHERE role0_.RoleId=?
+2014-01-05 02:37:49,146 [14] ?.lambda_method(:0) - checking mappings queue
 
-2014-01-03 20:41:08,526 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ WHERE role0_.RoleId=?
+2014-01-05 02:37:49,146 [14] ?.lambda_method(:0) - processing one-to-many association mappings
 
-2014-01-03 20:41:08,526 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ with (updlock, rowlock) WHERE role0_.RoleId=?
+2014-01-05 02:37:49,147 [14] ?.lambda_method(:0) - Second pass for collection: Padel.Domain.Categoria.Grupo
 
-2014-01-03 20:41:08,526 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ with (updlock, rowlock, nowait) WHERE role0_.RoleId=?
+2014-01-05 02:37:49,152 [14] ?.lambda_method(:0) - mapping collection: Padel.Domain.Categoria.Grupo -> Grupos
 
-2014-01-03 20:41:08,526 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ with (updlock, rowlock) WHERE role0_.RoleId=?
+2014-01-05 02:37:49,159 [14] ?.lambda_method(:0) - Mapped collection key: CategoriaId, one-to-many: Padel.Domain.Grupo
 
-2014-01-03 20:41:08,529 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ WHERE role0_.RoleId=?
+2014-01-05 02:37:49,159 [14] ?.lambda_method(:0) - Second pass for collection: Padel.Domain.Grupo.Jornadas
 
-2014-01-03 20:41:08,529 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ WHERE role0_.RoleId=?
+2014-01-05 02:37:49,159 [14] ?.lambda_method(:0) - mapping collection: Padel.Domain.Grupo.Jornadas -> Jornadas
 
-2014-01-03 20:41:08,531 [6] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Categoria
+2014-01-05 02:37:49,160 [14] ?.lambda_method(:0) - Mapped collection key: GrupoId, one-to-many: Padel.Domain.Jornada
 
-2014-01-03 20:41:08,531 [6] ?.lambda_method(:0) -  Version select: SELECT CategoriaId FROM Categorias WHERE CategoriaId = ?
+2014-01-05 02:37:49,160 [14] ?.lambda_method(:0) - Second pass for collection: Padel.Domain.Jornada.Partidos
 
-2014-01-03 20:41:08,531 [6] ?.lambda_method(:0) -  Snapshot select: SELECT categoria_.CategoriaId, categoria_.FechaInicio as FechaIni2_1_, categoria_.FechaFin as FechaFin1_, categoria_.FechaCreacion as FechaCre4_1_, categoria_.FechaModificacion as FechaMod5_1_, categoria_.TorneoId as TorneoId1_, categoria_.GanadorId as GanadorId1_ FROM Categorias categoria_ WHERE categoria_.CategoriaId=?
+2014-01-05 02:37:49,160 [14] ?.lambda_method(:0) - mapping collection: Padel.Domain.Jornada.Partidos -> Partidos
 
-2014-01-03 20:41:08,531 [6] ?.lambda_method(:0) -  Insert 0: INSERT INTO Categorias (FechaInicio, FechaFin, FechaCreacion, FechaModificacion, TorneoId, GanadorId, CategoriaId) VALUES (?, ?, ?, ?, ?, ?, ?)
+2014-01-05 02:37:49,160 [14] ?.lambda_method(:0) - Mapped collection key: JornadaId, one-to-many: Padel.Domain.Partido
 
-2014-01-03 20:41:08,532 [6] ?.lambda_method(:0) -  Update 0: UPDATE Categorias SET FechaInicio = ?, FechaFin = ?, FechaCreacion = ?, FechaModificacion = ?, TorneoId = ?, GanadorId = ? WHERE CategoriaId = ?
+2014-01-05 02:37:49,161 [14] ?.lambda_method(:0) - Second pass for collection: Padel.Domain.Torneo.Categorias
 
-2014-01-03 20:41:08,532 [6] ?.lambda_method(:0) -  Delete 0: DELETE FROM Categorias WHERE CategoriaId = ?
+2014-01-05 02:37:49,161 [14] ?.lambda_method(:0) - mapping collection: Padel.Domain.Torneo.Categorias -> Categorias
 
-2014-01-03 20:41:08,532 [6] ?.lambda_method(:0) -  Identity insert: INSERT INTO Categorias (FechaInicio, FechaFin, FechaCreacion, FechaModificacion, TorneoId, GanadorId) VALUES (?, ?, ?, ?, ?, ?); select SCOPE_IDENTITY()
+2014-01-05 02:37:49,161 [14] ?.lambda_method(:0) - Mapped collection key: TorneoId, one-to-many: Padel.Domain.Categoria
 
-2014-01-03 20:41:08,536 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_0_, categoria0_.FechaInicio as FechaIni2_1_0_, categoria0_.FechaFin as FechaFin1_0_, categoria0_.FechaCreacion as FechaCre4_1_0_, categoria0_.FechaModificacion as FechaMod5_1_0_, categoria0_.TorneoId as TorneoId1_0_, categoria0_.GanadorId as GanadorId1_0_ FROM Categorias categoria0_ WHERE categoria0_.CategoriaId=?
+2014-01-05 02:37:49,161 [14] ?.lambda_method(:0) - Second pass for collection: Padel.Domain.Usuario.Roles
 
-2014-01-03 20:41:08,536 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_0_, categoria0_.FechaInicio as FechaIni2_1_0_, categoria0_.FechaFin as FechaFin1_0_, categoria0_.FechaCreacion as FechaCre4_1_0_, categoria0_.FechaModificacion as FechaMod5_1_0_, categoria0_.TorneoId as TorneoId1_0_, categoria0_.GanadorId as GanadorId1_0_ FROM Categorias categoria0_ WHERE categoria0_.CategoriaId=?
+2014-01-05 02:37:49,165 [14] ?.lambda_method(:0) - Mapped collection key: UsuarioId, element: RoleId, type: Padel.Domain.Role
 
-2014-01-03 20:41:08,536 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_0_, categoria0_.FechaInicio as FechaIni2_1_0_, categoria0_.FechaFin as FechaFin1_0_, categoria0_.FechaCreacion as FechaCre4_1_0_, categoria0_.FechaModificacion as FechaMod5_1_0_, categoria0_.TorneoId as TorneoId1_0_, categoria0_.GanadorId as GanadorId1_0_ FROM Categorias categoria0_ with (updlock, rowlock) WHERE categoria0_.CategoriaId=?
+2014-01-05 02:37:49,165 [14] ?.lambda_method(:0) - processing one-to-one association property references
 
-2014-01-03 20:41:08,537 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_0_, categoria0_.FechaInicio as FechaIni2_1_0_, categoria0_.FechaFin as FechaFin1_0_, categoria0_.FechaCreacion as FechaCre4_1_0_, categoria0_.FechaModificacion as FechaMod5_1_0_, categoria0_.TorneoId as TorneoId1_0_, categoria0_.GanadorId as GanadorId1_0_ FROM Categorias categoria0_ with (updlock, rowlock, nowait) WHERE categoria0_.CategoriaId=?
+2014-01-05 02:37:49,166 [14] ?.lambda_method(:0) - processing foreign key constraints
 
-2014-01-03 20:41:08,537 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_0_, categoria0_.FechaInicio as FechaIni2_1_0_, categoria0_.FechaFin as FechaFin1_0_, categoria0_.FechaCreacion as FechaCre4_1_0_, categoria0_.FechaModificacion as FechaMod5_1_0_, categoria0_.TorneoId as TorneoId1_0_, categoria0_.GanadorId as GanadorId1_0_ FROM Categorias categoria0_ with (updlock, rowlock) WHERE categoria0_.CategoriaId=?
+2014-01-05 02:37:49,168 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Torneo
 
-2014-01-03 20:41:08,549 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_1_, categoria0_.FechaInicio as FechaIni2_1_1_, categoria0_.FechaFin as FechaFin1_1_, categoria0_.FechaCreacion as FechaCre4_1_1_, categoria0_.FechaModificacion as FechaMod5_1_1_, categoria0_.TorneoId as TorneoId1_1_, categoria0_.GanadorId as GanadorId1_1_, grupo1_.CategoriaId as Categori4_3_, grupo1_.GrupoId as GrupoId3_, grupo1_.GrupoId as GrupoId4_0_, grupo1_.FechaCreacion as FechaCre2_4_0_, grupo1_.FechaModificacion as FechaMod3_4_0_, grupo1_.CategoriaId as Categori4_4_0_ FROM Categorias categoria0_ left outer join Grupos grupo1_ on categoria0_.CategoriaId=grupo1_.CategoriaId WHERE categoria0_.CategoriaId=?
+2014-01-05 02:37:49,170 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,550 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_1_, categoria0_.FechaInicio as FechaIni2_1_1_, categoria0_.FechaFin as FechaFin1_1_, categoria0_.FechaCreacion as FechaCre4_1_1_, categoria0_.FechaModificacion as FechaMod5_1_1_, categoria0_.TorneoId as TorneoId1_1_, categoria0_.GanadorId as GanadorId1_1_, grupo1_.CategoriaId as Categori4_3_, grupo1_.GrupoId as GrupoId3_, grupo1_.GrupoId as GrupoId4_0_, grupo1_.FechaCreacion as FechaCre2_4_0_, grupo1_.FechaModificacion as FechaMod3_4_0_, grupo1_.CategoriaId as Categori4_4_0_ FROM Categorias categoria0_ left outer join Grupos grupo1_ on categoria0_.CategoriaId=grupo1_.CategoriaId WHERE categoria0_.CategoriaId=?
+2014-01-05 02:37:49,170 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
 
-2014-01-03 20:41:08,550 [6] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Equipo
+2014-01-05 02:37:49,170 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
 
-2014-01-03 20:41:08,551 [6] ?.lambda_method(:0) -  Version select: SELECT EquipoId FROM Equipos WHERE EquipoId = ?
+2014-01-05 02:37:49,170 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,551 [6] ?.lambda_method(:0) -  Snapshot select: SELECT equipo_.EquipoId, equipo_.Nombre as Nombre2_, equipo_.TipoEquipo as TipoEquipo2_, equipo_.JugadorAVerificado as JugadorA4_2_, equipo_.JugadorBVerificado as JugadorB5_2_, equipo_.FechaCreacion as FechaCre6_2_, equipo_.FechaModificacion as FechaMod7_2_, equipo_.JugadorAId as JugadorAId2_, equipo_.JugadorBId as JugadorBId2_ FROM Equipos equipo_ WHERE equipo_.EquipoId=?
+2014-01-05 02:37:49,171 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Categoria
 
-2014-01-03 20:41:08,551 [6] ?.lambda_method(:0) -  Insert 0: INSERT INTO Equipos (Nombre, TipoEquipo, JugadorAVerificado, JugadorBVerificado, FechaCreacion, FechaModificacion, JugadorAId, JugadorBId, EquipoId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+2014-01-05 02:37:49,171 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Categoria
 
-2014-01-03 20:41:08,551 [6] ?.lambda_method(:0) -  Update 0: UPDATE Equipos SET Nombre = ?, TipoEquipo = ?, JugadorAVerificado = ?, JugadorBVerificado = ?, FechaCreacion = ?, FechaModificacion = ?, JugadorAId = ?, JugadorBId = ? WHERE EquipoId = ?
+2014-01-05 02:37:49,171 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Grupo
 
-2014-01-03 20:41:08,552 [6] ?.lambda_method(:0) -  Delete 0: DELETE FROM Equipos WHERE EquipoId = ?
+2014-01-05 02:37:49,171 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Jornada
 
-2014-01-03 20:41:08,552 [6] ?.lambda_method(:0) -  Identity insert: INSERT INTO Equipos (Nombre, TipoEquipo, JugadorAVerificado, JugadorBVerificado, FechaCreacion, FechaModificacion, JugadorAId, JugadorBId) VALUES (?, ?, ?, ?, ?, ?, ?, ?); select SCOPE_IDENTITY()
+2014-01-05 02:37:49,172 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,552 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ WHERE equipo0_.EquipoId=?
+2014-01-05 02:37:49,172 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,552 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ WHERE equipo0_.EquipoId=?
+2014-01-05 02:37:49,172 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,553 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ with (updlock, rowlock) WHERE equipo0_.EquipoId=?
+2014-01-05 02:37:49,172 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Role
 
-2014-01-03 20:41:08,553 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ with (updlock, rowlock, nowait) WHERE equipo0_.EquipoId=?
+2014-01-05 02:37:49,173 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
 
-2014-01-03 20:41:08,553 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ with (updlock, rowlock) WHERE equipo0_.EquipoId=?
+2014-01-05 02:37:49,173 [14] ?.lambda_method(:0) - processing filters (second pass)
 
-2014-01-03 20:41:08,553 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ WHERE equipo0_.EquipoId=?
+2014-01-05 02:37:49,196 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:08,554 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ WHERE equipo0_.EquipoId=?
+2014-01-05 02:37:49,203 [14] ?.lambda_method(:0) - Using dialect: NHibernate.Dialect.MsSql2008Dialect
 
-2014-01-03 20:41:08,554 [6] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.EquipoToCategoria
+2014-01-05 02:37:49,243 [14] ?.lambda_method(:0) - Using dialect defined converter
 
-2014-01-03 20:41:08,554 [6] ?.lambda_method(:0) -  Version select: SELECT EquipoToCategoriaId FROM EquipoToCategorias WHERE EquipoToCategoriaId = ?
+2014-01-05 02:37:49,244 [14] ?.lambda_method(:0) - Generate SQL with comments: disabled
 
-2014-01-03 20:41:08,555 [6] ?.lambda_method(:0) -  Snapshot select: SELECT equipotoca_.EquipoToCategoriaId, equipotoca_.JugadorA as JugadorA3_, equipotoca_.JugadorB as JugadorB3_, equipotoca_.FechaCreacion as FechaCre4_3_, equipotoca_.FechaModificacion as FechaMod5_3_, equipotoca_.EquipoId as EquipoId3_, equipotoca_.CategoriaId as Categori7_3_ FROM EquipoToCategorias equipotoca_ WHERE equipotoca_.EquipoToCategoriaId=?
+2014-01-05 02:37:49,245 [14] ?.lambda_method(:0) - Initializing connection provider: NHibernate.Connection.DriverConnectionProvider
 
-2014-01-03 20:41:08,555 [6] ?.lambda_method(:0) -  Insert 0: INSERT INTO EquipoToCategorias (JugadorA, JugadorB, FechaCreacion, FechaModificacion, EquipoId, CategoriaId, EquipoToCategoriaId) VALUES (?, ?, ?, ?, ?, ?, ?)
+2014-01-05 02:37:49,246 [14] ?.lambda_method(:0) - Configuring ConnectionProvider
 
-2014-01-03 20:41:08,555 [6] ?.lambda_method(:0) -  Update 0: UPDATE EquipoToCategorias SET JugadorA = ?, JugadorB = ?, FechaCreacion = ?, FechaModificacion = ?, EquipoId = ?, CategoriaId = ? WHERE EquipoToCategoriaId = ?
+2014-01-05 02:37:49,249 [14] ?.lambda_method(:0) - Transaction factory: NHibernate.Transaction.AdoNetWithDistributedTransactionFactory
 
-2014-01-03 20:41:08,555 [6] ?.lambda_method(:0) -  Delete 0: DELETE FROM EquipoToCategorias WHERE EquipoToCategoriaId = ?
+2014-01-05 02:37:49,250 [14] ?.lambda_method(:0) - Optimize cache for minimal puts: False
 
-2014-01-03 20:41:08,555 [6] ?.lambda_method(:0) -  Identity insert: INSERT INTO EquipoToCategorias (JugadorA, JugadorB, FechaCreacion, FechaModificacion, EquipoId, CategoriaId) VALUES (?, ?, ?, ?, ?, ?); select SCOPE_IDENTITY()
+2014-01-05 02:37:49,250 [14] ?.lambda_method(:0) - Connection release mode: auto
 
-2014-01-03 20:41:08,556 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ WHERE equipotoca0_.EquipoToCategoriaId=?
+2014-01-05 02:37:49,250 [14] ?.lambda_method(:0) - Default batch fetch size: 1
 
-2014-01-03 20:41:08,556 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ WHERE equipotoca0_.EquipoToCategoriaId=?
+2014-01-05 02:37:49,250 [14] ?.lambda_method(:0) - echoing all SQL to stdout
 
-2014-01-03 20:41:08,556 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ with (updlock, rowlock) WHERE equipotoca0_.EquipoToCategoriaId=?
+2014-01-05 02:37:49,251 [14] ?.lambda_method(:0) - Statistics: disabled
 
-2014-01-03 20:41:08,557 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ with (updlock, rowlock, nowait) WHERE equipotoca0_.EquipoToCategoriaId=?
+2014-01-05 02:37:49,251 [14] ?.lambda_method(:0) - Deleted entity synthetic identifier rollback: disabled
 
-2014-01-03 20:41:08,557 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ with (updlock, rowlock) WHERE equipotoca0_.EquipoToCategoriaId=?
+2014-01-05 02:37:49,252 [14] ?.lambda_method(:0) - Query translator: NHibernate.Hql.Ast.ANTLR.ASTQueryTranslatorFactory
 
-2014-01-03 20:41:08,557 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ WHERE equipotoca0_.EquipoToCategoriaId=?
+2014-01-05 02:37:49,254 [14] ?.lambda_method(:0) - Query language substitutions: {'true'='1', 'false'='0', 'yes'=''Y'', 'no'=''N''}
 
-2014-01-03 20:41:08,557 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ WHERE equipotoca0_.EquipoToCategoriaId=?
+2014-01-05 02:37:49,256 [14] ?.lambda_method(:0) - cache provider: NHibernate.Cache.NoCacheProvider, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4
 
-2014-01-03 20:41:08,558 [6] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Grupo
+2014-01-05 02:37:49,256 [14] ?.lambda_method(:0) - Order SQL inserts for batching: enabled
 
-2014-01-03 20:41:08,558 [6] ?.lambda_method(:0) -  Version select: SELECT GrupoId FROM Grupos WHERE GrupoId = ?
+2014-01-05 02:37:49,257 [14] ?.lambda_method(:0) - Wrap result sets: disabled
 
-2014-01-03 20:41:08,558 [6] ?.lambda_method(:0) -  Snapshot select: SELECT grupo_.GrupoId, grupo_.FechaCreacion as FechaCre2_4_, grupo_.FechaModificacion as FechaMod3_4_, grupo_.CategoriaId as Categori4_4_ FROM Grupos grupo_ WHERE grupo_.GrupoId=?
+2014-01-05 02:37:49,258 [14] ?.lambda_method(:0) - Batcher factory: NHibernate.AdoNet.SqlClientBatchingBatcherFactory, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4
 
-2014-01-03 20:41:08,559 [6] ?.lambda_method(:0) -  Insert 0: INSERT INTO Grupos (FechaCreacion, FechaModificacion, CategoriaId, GrupoId) VALUES (?, ?, ?, ?)
+2014-01-05 02:37:49,259 [14] ?.lambda_method(:0) - Default entity-mode: Poco
 
-2014-01-03 20:41:08,559 [6] ?.lambda_method(:0) -  Update 0: UPDATE Grupos SET FechaCreacion = ?, FechaModificacion = ?, CategoriaId = ? WHERE GrupoId = ?
+2014-01-05 02:37:49,259 [14] ?.lambda_method(:0) - Named query checking : enabled
 
-2014-01-03 20:41:08,559 [6] ?.lambda_method(:0) -  Delete 0: DELETE FROM Grupos WHERE GrupoId = ?
+2014-01-05 02:37:49,278 [14] ?.lambda_method(:0) - building session factory
 
-2014-01-03 20:41:08,559 [6] ?.lambda_method(:0) -  Identity insert: INSERT INTO Grupos (FechaCreacion, FechaModificacion, CategoriaId) VALUES (?, ?, ?); select SCOPE_IDENTITY()
+2014-01-05 02:37:49,279 [14] ?.lambda_method(:0) - Session factory constructed with filter configurations : {}
 
-2014-01-03 20:41:08,559 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ WHERE grupo0_.GrupoId=?
+2014-01-05 02:37:49,280 [14] ?.lambda_method(:0) - instantiating session factory with properties: {'use_reflection_optimizer'='True', 'connection.connection_string_name'='PadelDB', 'dialect'='NHibernate.Dialect.MsSql2008Dialect', 'connection.provider'='NHibernate.Connection.DriverConnectionProvider', 'connection.driver_class'='NHibernate.Driver.SqlClientDriver', 'show_sql'='true', 'connection.release_mode'='auto', 'adonet.batch_size'='500'}
 
-2014-01-03 20:41:08,560 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ WHERE grupo0_.GrupoId=?
+2014-01-05 02:37:49,281 [14] ?.lambda_method(:0) - Obtaining IDbConnection from Driver
 
-2014-01-03 20:41:08,560 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ with (updlock, rowlock) WHERE grupo0_.GrupoId=?
+2014-01-05 02:37:49,517 [14] ?.lambda_method(:0) - Closing connection
 
-2014-01-03 20:41:08,560 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ with (updlock, rowlock, nowait) WHERE grupo0_.GrupoId=?
+2014-01-05 02:37:49,617 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Role
 
-2014-01-03 20:41:08,560 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ with (updlock, rowlock) WHERE grupo0_.GrupoId=?
+2014-01-05 02:37:49,621 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Role
 
-2014-01-03 20:41:08,561 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_1_, grupo0_.FechaCreacion as FechaCre2_4_1_, grupo0_.FechaModificacion as FechaMod3_4_1_, grupo0_.CategoriaId as Categori4_4_1_, jornadas1_.GrupoId as GrupoId3_, jornadas1_.JornadaId as JornadaId3_, jornadas1_.JornadaId as JornadaId5_0_, jornadas1_.FechaCreacion as FechaCre2_5_0_, jornadas1_.FechaModificacion as FechaMod3_5_0_, jornadas1_.GrupoId as GrupoId5_0_ FROM Grupos grupo0_ left outer join Jornadas jornadas1_ on grupo0_.GrupoId=jornadas1_.GrupoId WHERE grupo0_.GrupoId=?
+2014-01-05 02:37:49,642 [14] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Role
 
-2014-01-03 20:41:08,561 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_1_, grupo0_.FechaCreacion as FechaCre2_4_1_, grupo0_.FechaModificacion as FechaMod3_4_1_, grupo0_.CategoriaId as Categori4_4_1_, jornadas1_.GrupoId as GrupoId3_, jornadas1_.JornadaId as JornadaId3_, jornadas1_.JornadaId as JornadaId5_0_, jornadas1_.FechaCreacion as FechaCre2_5_0_, jornadas1_.FechaModificacion as FechaMod3_5_0_, jornadas1_.GrupoId as GrupoId5_0_ FROM Grupos grupo0_ left outer join Jornadas jornadas1_ on grupo0_.GrupoId=jornadas1_.GrupoId WHERE grupo0_.GrupoId=?
+2014-01-05 02:37:49,677 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Categoria
 
-2014-01-03 20:41:08,562 [6] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Jornada
+2014-01-05 02:37:49,677 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Categoria
 
-2014-01-03 20:41:08,562 [6] ?.lambda_method(:0) -  Version select: SELECT JornadaId FROM Jornadas WHERE JornadaId = ?
+2014-01-05 02:37:49,678 [14] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Categoria
 
-2014-01-03 20:41:08,562 [6] ?.lambda_method(:0) -  Snapshot select: SELECT jornada_.JornadaId, jornada_.FechaCreacion as FechaCre2_5_, jornada_.FechaModificacion as FechaMod3_5_, jornada_.GrupoId as GrupoId5_ FROM Jornadas jornada_ WHERE jornada_.JornadaId=?
+2014-01-05 02:37:49,681 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,562 [6] ?.lambda_method(:0) -  Insert 0: INSERT INTO Jornadas (FechaCreacion, FechaModificacion, GrupoId, JornadaId) VALUES (?, ?, ?, ?)
+2014-01-05 02:37:49,682 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Equipo
 
-2014-01-03 20:41:08,562 [6] ?.lambda_method(:0) -  Update 0: UPDATE Jornadas SET FechaCreacion = ?, FechaModificacion = ?, GrupoId = ? WHERE JornadaId = ?
+2014-01-05 02:37:49,682 [14] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Equipo
 
-2014-01-03 20:41:08,563 [6] ?.lambda_method(:0) -  Delete 0: DELETE FROM Jornadas WHERE JornadaId = ?
+2014-01-05 02:37:49,683 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.EquipoToCategoria
 
-2014-01-03 20:41:08,563 [6] ?.lambda_method(:0) -  Identity insert: INSERT INTO Jornadas (FechaCreacion, FechaModificacion, GrupoId) VALUES (?, ?, ?); select SCOPE_IDENTITY()
+2014-01-05 02:37:49,683 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.EquipoToCategoria
 
-2014-01-03 20:41:08,563 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_0_, jornada0_.FechaCreacion as FechaCre2_5_0_, jornada0_.FechaModificacion as FechaMod3_5_0_, jornada0_.GrupoId as GrupoId5_0_ FROM Jornadas jornada0_ WHERE jornada0_.JornadaId=?
+2014-01-05 02:37:49,684 [14] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.EquipoToCategoria
 
-2014-01-03 20:41:08,563 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_0_, jornada0_.FechaCreacion as FechaCre2_5_0_, jornada0_.FechaModificacion as FechaMod3_5_0_, jornada0_.GrupoId as GrupoId5_0_ FROM Jornadas jornada0_ WHERE jornada0_.JornadaId=?
+2014-01-05 02:37:49,685 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Grupo
 
-2014-01-03 20:41:08,564 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_0_, jornada0_.FechaCreacion as FechaCre2_5_0_, jornada0_.FechaModificacion as FechaMod3_5_0_, jornada0_.GrupoId as GrupoId5_0_ FROM Jornadas jornada0_ with (updlock, rowlock) WHERE jornada0_.JornadaId=?
+2014-01-05 02:37:49,685 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Grupo
 
-2014-01-03 20:41:08,564 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_0_, jornada0_.FechaCreacion as FechaCre2_5_0_, jornada0_.FechaModificacion as FechaMod3_5_0_, jornada0_.GrupoId as GrupoId5_0_ FROM Jornadas jornada0_ with (updlock, rowlock, nowait) WHERE jornada0_.JornadaId=?
+2014-01-05 02:37:49,686 [14] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Grupo
 
-2014-01-03 20:41:08,564 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_0_, jornada0_.FechaCreacion as FechaCre2_5_0_, jornada0_.FechaModificacion as FechaMod3_5_0_, jornada0_.GrupoId as GrupoId5_0_ FROM Jornadas jornada0_ with (updlock, rowlock) WHERE jornada0_.JornadaId=?
+2014-01-05 02:37:49,687 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Jornada
 
-2014-01-03 20:41:08,565 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_1_, jornada0_.FechaCreacion as FechaCre2_5_1_, jornada0_.FechaModificacion as FechaMod3_5_1_, jornada0_.GrupoId as GrupoId5_1_, partidos1_.JornadaId as JornadaId3_, partidos1_.PartidoId as PartidoId3_, partidos1_.PartidoId as PartidoId6_0_, partidos1_.Set1A as Set2_6_0_, partidos1_.Set2A as Set3_6_0_, partidos1_.Set3A as Set4_6_0_, partidos1_.Set1B as Set5_6_0_, partidos1_.Set2B as Set6_6_0_, partidos1_.Set3B as Set7_6_0_, partidos1_.FechaCreacion as FechaCre8_6_0_, partidos1_.FechaModificacion as FechaMod9_6_0_, partidos1_.JornadaId as JornadaId6_0_, partidos1_.EquipoAId as EquipoAId6_0_, partidos1_.EquipoBId as EquipoBId6_0_, partidos1_.GanadorId as GanadorId6_0_ FROM Jornadas jornada0_ left outer join Partidos partidos1_ on jornada0_.JornadaId=partidos1_.JornadaId WHERE jornada0_.JornadaId=?
+2014-01-05 02:37:49,687 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Jornada
 
-2014-01-03 20:41:08,565 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_1_, jornada0_.FechaCreacion as FechaCre2_5_1_, jornada0_.FechaModificacion as FechaMod3_5_1_, jornada0_.GrupoId as GrupoId5_1_, partidos1_.JornadaId as JornadaId3_, partidos1_.PartidoId as PartidoId3_, partidos1_.PartidoId as PartidoId6_0_, partidos1_.Set1A as Set2_6_0_, partidos1_.Set2A as Set3_6_0_, partidos1_.Set3A as Set4_6_0_, partidos1_.Set1B as Set5_6_0_, partidos1_.Set2B as Set6_6_0_, partidos1_.Set3B as Set7_6_0_, partidos1_.FechaCreacion as FechaCre8_6_0_, partidos1_.FechaModificacion as FechaMod9_6_0_, partidos1_.JornadaId as JornadaId6_0_, partidos1_.EquipoAId as EquipoAId6_0_, partidos1_.EquipoBId as EquipoBId6_0_, partidos1_.GanadorId as GanadorId6_0_ FROM Jornadas jornada0_ left outer join Partidos partidos1_ on jornada0_.JornadaId=partidos1_.JornadaId WHERE jornada0_.JornadaId=?
+2014-01-05 02:37:49,688 [14] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Jornada
 
-2014-01-03 20:41:08,565 [6] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Partido
+2014-01-05 02:37:49,689 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Partido
 
-2014-01-03 20:41:08,565 [6] ?.lambda_method(:0) -  Version select: SELECT PartidoId FROM Partidos WHERE PartidoId = ?
+2014-01-05 02:37:49,689 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Partido
 
-2014-01-03 20:41:08,566 [6] ?.lambda_method(:0) -  Snapshot select: SELECT partido_.PartidoId, partido_.Set1A as Set2_6_, partido_.Set2A as Set3_6_, partido_.Set3A as Set4_6_, partido_.Set1B as Set5_6_, partido_.Set2B as Set6_6_, partido_.Set3B as Set7_6_, partido_.FechaCreacion as FechaCre8_6_, partido_.FechaModificacion as FechaMod9_6_, partido_.JornadaId as JornadaId6_, partido_.EquipoAId as EquipoAId6_, partido_.EquipoBId as EquipoBId6_, partido_.GanadorId as GanadorId6_ FROM Partidos partido_ WHERE partido_.PartidoId=?
+2014-01-05 02:37:49,690 [14] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Partido
 
-2014-01-03 20:41:08,566 [6] ?.lambda_method(:0) -  Insert 0: INSERT INTO Partidos (Set1A, Set2A, Set3A, Set1B, Set2B, Set3B, FechaCreacion, FechaModificacion, JornadaId, EquipoAId, EquipoBId, GanadorId, PartidoId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2014-01-05 02:37:49,691 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Torneo
 
-2014-01-03 20:41:08,566 [6] ?.lambda_method(:0) -  Update 0: UPDATE Partidos SET Set1A = ?, Set2A = ?, Set3A = ?, Set1B = ?, Set2B = ?, Set3B = ?, FechaCreacion = ?, FechaModificacion = ?, JornadaId = ?, EquipoAId = ?, EquipoBId = ?, GanadorId = ? WHERE PartidoId = ?
+2014-01-05 02:37:49,691 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Torneo
 
-2014-01-03 20:41:08,566 [6] ?.lambda_method(:0) -  Delete 0: DELETE FROM Partidos WHERE PartidoId = ?
+2014-01-05 02:37:49,692 [14] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Torneo
 
-2014-01-03 20:41:08,567 [6] ?.lambda_method(:0) -  Identity insert: INSERT INTO Partidos (Set1A, Set2A, Set3A, Set1B, Set2B, Set3B, FechaCreacion, FechaModificacion, JornadaId, EquipoAId, EquipoBId, GanadorId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); select SCOPE_IDENTITY()
+2014-01-05 02:37:49,693 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Usuario
 
-2014-01-03 20:41:08,567 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ WHERE partido0_.PartidoId=?
+2014-01-05 02:37:49,694 [14] ?.lambda_method(:0) - No custom accessors found for entity: Padel.Domain.Usuario
 
-2014-01-03 20:41:08,567 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ WHERE partido0_.PartidoId=?
+2014-01-05 02:37:49,694 [14] ?.lambda_method(:0) - Create Instantiator using optimizer for:Padel.Domain.Usuario
 
-2014-01-03 20:41:08,567 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ with (updlock, rowlock) WHERE partido0_.PartidoId=?
+2014-01-05 02:37:49,725 [14] ?.lambda_method(:0) - Static SQL for collection: Padel.Domain.Categoria.Grupo
 
-2014-01-03 20:41:08,568 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ with (updlock, rowlock, nowait) WHERE partido0_.PartidoId=?
+2014-01-05 02:37:49,729 [14] ?.lambda_method(:0) -  Row insert: UPDATE Grupos SET CategoriaId = ? WHERE GrupoId = ?
 
-2014-01-03 20:41:08,568 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ with (updlock, rowlock) WHERE partido0_.PartidoId=?
+2014-01-05 02:37:49,731 [14] ?.lambda_method(:0) -  Row delete: UPDATE Grupos SET CategoriaId = null WHERE CategoriaId = ? AND GrupoId = ?
 
-2014-01-03 20:41:08,568 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ WHERE partido0_.PartidoId=?
+2014-01-05 02:37:49,731 [14] ?.lambda_method(:0) -  One-shot delete: UPDATE Grupos SET CategoriaId = null WHERE CategoriaId = ?
 
-2014-01-03 20:41:08,569 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ WHERE partido0_.PartidoId=?
+2014-01-05 02:37:49,733 [14] ?.lambda_method(:0) - Static SQL for collection: Padel.Domain.Grupo.Jornadas
 
-2014-01-03 20:41:08,569 [6] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Torneo
+2014-01-05 02:37:49,734 [14] ?.lambda_method(:0) -  Row insert: UPDATE Jornadas SET GrupoId = ? WHERE JornadaId = ?
 
-2014-01-03 20:41:08,569 [6] ?.lambda_method(:0) -  Version select: SELECT TorneoId FROM Torneos WHERE TorneoId = ?
+2014-01-05 02:37:49,734 [14] ?.lambda_method(:0) -  Row delete: UPDATE Jornadas SET GrupoId = null WHERE GrupoId = ? AND JornadaId = ?
 
-2014-01-03 20:41:08,569 [6] ?.lambda_method(:0) -  Snapshot select: SELECT torneo_.TorneoId, torneo_.Name as Name7_, torneo_.FechaCreacion as FechaCre3_7_, torneo_.FechaModificacion as FechaMod4_7_ FROM Torneos torneo_ WHERE torneo_.TorneoId=?
+2014-01-05 02:37:49,734 [14] ?.lambda_method(:0) -  One-shot delete: UPDATE Jornadas SET GrupoId = null WHERE GrupoId = ?
 
-2014-01-03 20:41:08,570 [6] ?.lambda_method(:0) -  Insert 0: INSERT INTO Torneos (Name, FechaCreacion, FechaModificacion, TorneoId) VALUES (?, ?, ?, ?)
+2014-01-05 02:37:49,735 [14] ?.lambda_method(:0) - Static SQL for collection: Padel.Domain.Jornada.Partidos
 
-2014-01-03 20:41:08,570 [6] ?.lambda_method(:0) -  Update 0: UPDATE Torneos SET Name = ?, FechaCreacion = ?, FechaModificacion = ? WHERE TorneoId = ?
+2014-01-05 02:37:49,735 [14] ?.lambda_method(:0) -  Row insert: UPDATE Partidos SET JornadaId = ? WHERE PartidoId = ?
 
-2014-01-03 20:41:08,570 [6] ?.lambda_method(:0) -  Delete 0: DELETE FROM Torneos WHERE TorneoId = ?
+2014-01-05 02:37:49,735 [14] ?.lambda_method(:0) -  Row delete: UPDATE Partidos SET JornadaId = null WHERE JornadaId = ? AND PartidoId = ?
 
-2014-01-03 20:41:08,570 [6] ?.lambda_method(:0) -  Identity insert: INSERT INTO Torneos (Name, FechaCreacion, FechaModificacion) VALUES (?, ?, ?); select SCOPE_IDENTITY()
+2014-01-05 02:37:49,735 [14] ?.lambda_method(:0) -  One-shot delete: UPDATE Partidos SET JornadaId = null WHERE JornadaId = ?
 
-2014-01-03 20:41:08,571 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_0_, torneo0_.Name as Name7_0_, torneo0_.FechaCreacion as FechaCre3_7_0_, torneo0_.FechaModificacion as FechaMod4_7_0_ FROM Torneos torneo0_ WHERE torneo0_.TorneoId=?
+2014-01-05 02:37:49,736 [14] ?.lambda_method(:0) - Static SQL for collection: Padel.Domain.Torneo.Categorias
 
-2014-01-03 20:41:08,571 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_0_, torneo0_.Name as Name7_0_, torneo0_.FechaCreacion as FechaCre3_7_0_, torneo0_.FechaModificacion as FechaMod4_7_0_ FROM Torneos torneo0_ WHERE torneo0_.TorneoId=?
+2014-01-05 02:37:49,736 [14] ?.lambda_method(:0) -  Row insert: UPDATE Categorias SET TorneoId = ? WHERE CategoriaId = ?
 
-2014-01-03 20:41:08,571 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_0_, torneo0_.Name as Name7_0_, torneo0_.FechaCreacion as FechaCre3_7_0_, torneo0_.FechaModificacion as FechaMod4_7_0_ FROM Torneos torneo0_ with (updlock, rowlock) WHERE torneo0_.TorneoId=?
+2014-01-05 02:37:49,736 [14] ?.lambda_method(:0) -  Row delete: UPDATE Categorias SET TorneoId = null WHERE TorneoId = ? AND CategoriaId = ?
 
-2014-01-03 20:41:08,571 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_0_, torneo0_.Name as Name7_0_, torneo0_.FechaCreacion as FechaCre3_7_0_, torneo0_.FechaModificacion as FechaMod4_7_0_ FROM Torneos torneo0_ with (updlock, rowlock, nowait) WHERE torneo0_.TorneoId=?
+2014-01-05 02:37:49,736 [14] ?.lambda_method(:0) -  One-shot delete: UPDATE Categorias SET TorneoId = null WHERE TorneoId = ?
 
-2014-01-03 20:41:08,572 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_0_, torneo0_.Name as Name7_0_, torneo0_.FechaCreacion as FechaCre3_7_0_, torneo0_.FechaModificacion as FechaMod4_7_0_ FROM Torneos torneo0_ with (updlock, rowlock) WHERE torneo0_.TorneoId=?
+2014-01-05 02:37:49,754 [14] ?.lambda_method(:0) - Static SQL for collection: Padel.Domain.Usuario.Roles
 
-2014-01-03 20:41:08,572 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_1_, torneo0_.Name as Name7_1_, torneo0_.FechaCreacion as FechaCre3_7_1_, torneo0_.FechaModificacion as FechaMod4_7_1_, categorias1_.TorneoId as TorneoId3_, categorias1_.CategoriaId as Categori1_3_, categorias1_.CategoriaId as Categori1_1_0_, categorias1_.FechaInicio as FechaIni2_1_0_, categorias1_.FechaFin as FechaFin1_0_, categorias1_.FechaCreacion as FechaCre4_1_0_, categorias1_.FechaModificacion as FechaMod5_1_0_, categorias1_.TorneoId as TorneoId1_0_, categorias1_.GanadorId as GanadorId1_0_ FROM Torneos torneo0_ left outer join Categorias categorias1_ on torneo0_.TorneoId=categorias1_.TorneoId WHERE torneo0_.TorneoId=?
+2014-01-05 02:37:49,754 [14] ?.lambda_method(:0) -  Row insert: INSERT INTO RoleToUsuario (UsuarioId, RoleId) VALUES (?, ?)
 
-2014-01-03 20:41:08,572 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_1_, torneo0_.Name as Name7_1_, torneo0_.FechaCreacion as FechaCre3_7_1_, torneo0_.FechaModificacion as FechaMod4_7_1_, categorias1_.TorneoId as TorneoId3_, categorias1_.CategoriaId as Categori1_3_, categorias1_.CategoriaId as Categori1_1_0_, categorias1_.FechaInicio as FechaIni2_1_0_, categorias1_.FechaFin as FechaFin1_0_, categorias1_.FechaCreacion as FechaCre4_1_0_, categorias1_.FechaModificacion as FechaMod5_1_0_, categorias1_.TorneoId as TorneoId1_0_, categorias1_.GanadorId as GanadorId1_0_ FROM Torneos torneo0_ left outer join Categorias categorias1_ on torneo0_.TorneoId=categorias1_.TorneoId WHERE torneo0_.TorneoId=?
+2014-01-05 02:37:49,755 [14] ?.lambda_method(:0) -  Row update: UPDATE RoleToUsuario SET RoleId = ? WHERE UsuarioId = ? AND RoleId = ?
 
-2014-01-03 20:41:08,573 [6] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Usuario
+2014-01-05 02:37:49,755 [14] ?.lambda_method(:0) -  Row delete: DELETE FROM RoleToUsuario WHERE UsuarioId = ? AND RoleId = ?
 
-2014-01-03 20:41:08,573 [6] ?.lambda_method(:0) -  Version select: SELECT UsuarioId FROM Usuarios WHERE UsuarioId = ?
+2014-01-05 02:37:49,755 [14] ?.lambda_method(:0) -  One-shot delete: DELETE FROM RoleToUsuario WHERE UsuarioId = ?
 
-2014-01-03 20:41:08,573 [6] ?.lambda_method(:0) -  Snapshot select: SELECT usuario_.UsuarioId, usuario_.Nombre as Nombre8_, usuario_.Sexo as Sexo8_, usuario_.TelefonoMovil as Telefono4_8_, usuario_.Email as Email8_, usuario_.Password as Password8_, usuario_.FechaCreacion as FechaCre7_8_, usuario_.FechaModificacion as FechaMod8_8_ FROM Usuarios usuario_ WHERE usuario_.UsuarioId=?
+2014-01-05 02:37:49,786 [14] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Role
 
-2014-01-03 20:41:08,574 [6] ?.lambda_method(:0) -  Insert 0: INSERT INTO Usuarios (Nombre, Sexo, TelefonoMovil, Email, Password, FechaCreacion, FechaModificacion, UsuarioId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+2014-01-05 02:37:49,786 [14] ?.lambda_method(:0) -  Version select: SELECT RoleId FROM Roles WHERE RoleId = ?
 
-2014-01-03 20:41:08,574 [6] ?.lambda_method(:0) -  Update 0: UPDATE Usuarios SET Nombre = ?, Sexo = ?, TelefonoMovil = ?, Email = ?, Password = ?, FechaCreacion = ?, FechaModificacion = ? WHERE UsuarioId = ?
+2014-01-05 02:37:49,787 [14] ?.lambda_method(:0) -  Snapshot select: SELECT role_.RoleId, role_.Name as Name0_ FROM Roles role_ WHERE role_.RoleId=?
 
-2014-01-03 20:41:08,574 [6] ?.lambda_method(:0) -  Delete 0: DELETE FROM Usuarios WHERE UsuarioId = ?
+2014-01-05 02:37:49,787 [14] ?.lambda_method(:0) -  Insert 0: INSERT INTO Roles (Name, RoleId) VALUES (?, ?)
 
-2014-01-03 20:41:08,574 [6] ?.lambda_method(:0) -  Identity insert: INSERT INTO Usuarios (Nombre, Sexo, TelefonoMovil, Email, Password, FechaCreacion, FechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?); select SCOPE_IDENTITY()
+2014-01-05 02:37:49,787 [14] ?.lambda_method(:0) -  Update 0: UPDATE Roles SET Name = ? WHERE RoleId = ?
 
-2014-01-03 20:41:08,574 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_0_, usuario0_.Nombre as Nombre8_0_, usuario0_.Sexo as Sexo8_0_, usuario0_.TelefonoMovil as Telefono4_8_0_, usuario0_.Email as Email8_0_, usuario0_.Password as Password8_0_, usuario0_.FechaCreacion as FechaCre7_8_0_, usuario0_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios usuario0_ WHERE usuario0_.UsuarioId=?
+2014-01-05 02:37:49,788 [14] ?.lambda_method(:0) -  Delete 0: DELETE FROM Roles WHERE RoleId = ?
 
-2014-01-03 20:41:08,575 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_0_, usuario0_.Nombre as Nombre8_0_, usuario0_.Sexo as Sexo8_0_, usuario0_.TelefonoMovil as Telefono4_8_0_, usuario0_.Email as Email8_0_, usuario0_.Password as Password8_0_, usuario0_.FechaCreacion as FechaCre7_8_0_, usuario0_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios usuario0_ WHERE usuario0_.UsuarioId=?
+2014-01-05 02:37:49,788 [14] ?.lambda_method(:0) -  Identity insert: INSERT INTO Roles (Name) VALUES (?); select SCOPE_IDENTITY()
 
-2014-01-03 20:41:08,575 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_0_, usuario0_.Nombre as Nombre8_0_, usuario0_.Sexo as Sexo8_0_, usuario0_.TelefonoMovil as Telefono4_8_0_, usuario0_.Email as Email8_0_, usuario0_.Password as Password8_0_, usuario0_.FechaCreacion as FechaCre7_8_0_, usuario0_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios usuario0_ with (updlock, rowlock) WHERE usuario0_.UsuarioId=?
+2014-01-05 02:37:49,824 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ WHERE role0_.RoleId=?
 
-2014-01-03 20:41:08,575 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_0_, usuario0_.Nombre as Nombre8_0_, usuario0_.Sexo as Sexo8_0_, usuario0_.TelefonoMovil as Telefono4_8_0_, usuario0_.Email as Email8_0_, usuario0_.Password as Password8_0_, usuario0_.FechaCreacion as FechaCre7_8_0_, usuario0_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios usuario0_ with (updlock, rowlock, nowait) WHERE usuario0_.UsuarioId=?
+2014-01-05 02:37:49,825 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ WHERE role0_.RoleId=?
 
-2014-01-03 20:41:08,576 [6] ?.lambda_method(:0) - Static select for entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_0_, usuario0_.Nombre as Nombre8_0_, usuario0_.Sexo as Sexo8_0_, usuario0_.TelefonoMovil as Telefono4_8_0_, usuario0_.Email as Email8_0_, usuario0_.Password as Password8_0_, usuario0_.FechaCreacion as FechaCre7_8_0_, usuario0_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios usuario0_ with (updlock, rowlock) WHERE usuario0_.UsuarioId=?
+2014-01-05 02:37:49,825 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ with (updlock, rowlock) WHERE role0_.RoleId=?
 
-2014-01-03 20:41:08,580 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_1_, usuario0_.Nombre as Nombre8_1_, usuario0_.Sexo as Sexo8_1_, usuario0_.TelefonoMovil as Telefono4_8_1_, usuario0_.Email as Email8_1_, usuario0_.Password as Password8_1_, usuario0_.FechaCreacion as FechaCre7_8_1_, usuario0_.FechaModificacion as FechaMod8_8_1_, roles1_.UsuarioId as UsuarioId3_, role2_.RoleId as RoleId3_, role2_.RoleId as RoleId0_0_, role2_.Name as Name0_0_ FROM Usuarios usuario0_ left outer join RoleToUsuario roles1_ on usuario0_.UsuarioId=roles1_.UsuarioId left outer join Roles role2_ on roles1_.RoleId=role2_.RoleId WHERE usuario0_.UsuarioId=?
+2014-01-05 02:37:49,826 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ with (updlock, rowlock, nowait) WHERE role0_.RoleId=?
 
-2014-01-03 20:41:08,581 [6] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_1_, usuario0_.Nombre as Nombre8_1_, usuario0_.Sexo as Sexo8_1_, usuario0_.TelefonoMovil as Telefono4_8_1_, usuario0_.Email as Email8_1_, usuario0_.Password as Password8_1_, usuario0_.FechaCreacion as FechaCre7_8_1_, usuario0_.FechaModificacion as FechaMod8_8_1_, roles1_.UsuarioId as UsuarioId3_, role2_.RoleId as RoleId3_, role2_.RoleId as RoleId0_0_, role2_.Name as Name0_0_ FROM Usuarios usuario0_ left outer join RoleToUsuario roles1_ on usuario0_.UsuarioId=roles1_.UsuarioId left outer join Roles role2_ on roles1_.RoleId=role2_.RoleId WHERE usuario0_.UsuarioId=?
+2014-01-05 02:37:49,826 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ with (updlock, rowlock) WHERE role0_.RoleId=?
 
-2014-01-03 20:41:08,587 [6] ?.lambda_method(:0) - Static select for one-to-many Padel.Domain.Categoria.Grupo: SELECT grupo0_.CategoriaId as Categori4_1_, grupo0_.GrupoId as GrupoId1_, grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ WHERE grupo0_.CategoriaId=?
+2014-01-05 02:37:49,829 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ WHERE role0_.RoleId=?
 
-2014-01-03 20:41:08,588 [6] ?.lambda_method(:0) - Static select for one-to-many Padel.Domain.Grupo.Jornadas: SELECT jornadas0_.GrupoId as GrupoId1_, jornadas0_.JornadaId as JornadaId1_, jornadas0_.JornadaId as JornadaId5_0_, jornadas0_.FechaCreacion as FechaCre2_5_0_, jornadas0_.FechaModificacion as FechaMod3_5_0_, jornadas0_.GrupoId as GrupoId5_0_ FROM Jornadas jornadas0_ WHERE jornadas0_.GrupoId=?
+2014-01-05 02:37:49,829 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Role: SELECT role0_.RoleId as RoleId0_0_, role0_.Name as Name0_0_ FROM Roles role0_ WHERE role0_.RoleId=?
 
-2014-01-03 20:41:08,588 [6] ?.lambda_method(:0) - Static select for one-to-many Padel.Domain.Jornada.Partidos: SELECT partidos0_.JornadaId as JornadaId1_, partidos0_.PartidoId as PartidoId1_, partidos0_.PartidoId as PartidoId6_0_, partidos0_.Set1A as Set2_6_0_, partidos0_.Set2A as Set3_6_0_, partidos0_.Set3A as Set4_6_0_, partidos0_.Set1B as Set5_6_0_, partidos0_.Set2B as Set6_6_0_, partidos0_.Set3B as Set7_6_0_, partidos0_.FechaCreacion as FechaCre8_6_0_, partidos0_.FechaModificacion as FechaMod9_6_0_, partidos0_.JornadaId as JornadaId6_0_, partidos0_.EquipoAId as EquipoAId6_0_, partidos0_.EquipoBId as EquipoBId6_0_, partidos0_.GanadorId as GanadorId6_0_ FROM Partidos partidos0_ WHERE partidos0_.JornadaId=?
+2014-01-05 02:37:49,830 [14] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Categoria
 
-2014-01-03 20:41:08,588 [6] ?.lambda_method(:0) - Static select for one-to-many Padel.Domain.Torneo.Categorias: SELECT categorias0_.TorneoId as TorneoId1_, categorias0_.CategoriaId as Categori1_1_, categorias0_.CategoriaId as Categori1_1_0_, categorias0_.FechaInicio as FechaIni2_1_0_, categorias0_.FechaFin as FechaFin1_0_, categorias0_.FechaCreacion as FechaCre4_1_0_, categorias0_.FechaModificacion as FechaMod5_1_0_, categorias0_.TorneoId as TorneoId1_0_, categorias0_.GanadorId as GanadorId1_0_ FROM Categorias categorias0_ WHERE categorias0_.TorneoId=?
+2014-01-05 02:37:49,831 [14] ?.lambda_method(:0) -  Version select: SELECT CategoriaId FROM Categorias WHERE CategoriaId = ?
 
-2014-01-03 20:41:08,593 [6] ?.lambda_method(:0) - Static select for collection Padel.Domain.Usuario.Roles: SELECT roles0_.UsuarioId as UsuarioId1_, roles0_.RoleId as RoleId1_, role1_.RoleId as RoleId0_0_, role1_.Name as Name0_0_ FROM RoleToUsuario roles0_ left outer join Roles role1_ on roles0_.RoleId=role1_.RoleId WHERE roles0_.UsuarioId=?
+2014-01-05 02:37:49,831 [14] ?.lambda_method(:0) -  Snapshot select: SELECT categoria_.CategoriaId, categoria_.FechaInicio as FechaIni2_1_, categoria_.FechaFin as FechaFin1_, categoria_.FechaCreacion as FechaCre4_1_, categoria_.FechaModificacion as FechaMod5_1_, categoria_.TorneoId as TorneoId1_, categoria_.GanadorId as GanadorId1_ FROM Categorias categoria_ WHERE categoria_.CategoriaId=?
 
-2014-01-03 20:41:08,593 [6] ?.lambda_method(:0) - initializing class SessionFactoryObjectFactory
+2014-01-05 02:37:49,831 [14] ?.lambda_method(:0) -  Insert 0: INSERT INTO Categorias (FechaInicio, FechaFin, FechaCreacion, FechaModificacion, TorneoId, GanadorId, CategoriaId) VALUES (?, ?, ?, ?, ?, ?, ?)
 
-2014-01-03 20:41:08,594 [6] ?.lambda_method(:0) - registered: ddcf7a6c5f7f44e088768c439161ceb4(unnamed)
+2014-01-05 02:37:49,831 [14] ?.lambda_method(:0) -  Update 0: UPDATE Categorias SET FechaInicio = ?, FechaFin = ?, FechaCreacion = ?, FechaModificacion = ?, TorneoId = ?, GanadorId = ? WHERE CategoriaId = ?
 
-2014-01-03 20:41:08,594 [6] ?.lambda_method(:0) - no name configured
+2014-01-05 02:37:49,831 [14] ?.lambda_method(:0) -  Delete 0: DELETE FROM Categorias WHERE CategoriaId = ?
 
-2014-01-03 20:41:08,595 [6] ?.lambda_method(:0) - Instantiated session factory
+2014-01-05 02:37:49,832 [14] ?.lambda_method(:0) -  Identity insert: INSERT INTO Categorias (FechaInicio, FechaFin, FechaCreacion, FechaModificacion, TorneoId, GanadorId) VALUES (?, ?, ?, ?, ?, ?); select SCOPE_IDENTITY()
 
-2014-01-03 20:41:08,600 [6] ?.lambda_method(:0) - Checking 0 named HQL queries
+2014-01-05 02:37:49,836 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_0_, categoria0_.FechaInicio as FechaIni2_1_0_, categoria0_.FechaFin as FechaFin1_0_, categoria0_.FechaCreacion as FechaCre4_1_0_, categoria0_.FechaModificacion as FechaMod5_1_0_, categoria0_.TorneoId as TorneoId1_0_, categoria0_.GanadorId as GanadorId1_0_ FROM Categorias categoria0_ WHERE categoria0_.CategoriaId=?
 
-2014-01-03 20:41:08,600 [6] ?.lambda_method(:0) - Checking 0 named SQL queries
+2014-01-05 02:37:49,836 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_0_, categoria0_.FechaInicio as FechaIni2_1_0_, categoria0_.FechaFin as FechaFin1_0_, categoria0_.FechaCreacion as FechaCre4_1_0_, categoria0_.FechaModificacion as FechaMod5_1_0_, categoria0_.TorneoId as TorneoId1_0_, categoria0_.GanadorId as GanadorId1_0_ FROM Categorias categoria0_ WHERE categoria0_.CategoriaId=?
+
+2014-01-05 02:37:49,836 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_0_, categoria0_.FechaInicio as FechaIni2_1_0_, categoria0_.FechaFin as FechaFin1_0_, categoria0_.FechaCreacion as FechaCre4_1_0_, categoria0_.FechaModificacion as FechaMod5_1_0_, categoria0_.TorneoId as TorneoId1_0_, categoria0_.GanadorId as GanadorId1_0_ FROM Categorias categoria0_ with (updlock, rowlock) WHERE categoria0_.CategoriaId=?
+
+2014-01-05 02:37:49,836 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_0_, categoria0_.FechaInicio as FechaIni2_1_0_, categoria0_.FechaFin as FechaFin1_0_, categoria0_.FechaCreacion as FechaCre4_1_0_, categoria0_.FechaModificacion as FechaMod5_1_0_, categoria0_.TorneoId as TorneoId1_0_, categoria0_.GanadorId as GanadorId1_0_ FROM Categorias categoria0_ with (updlock, rowlock, nowait) WHERE categoria0_.CategoriaId=?
+
+2014-01-05 02:37:49,837 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_0_, categoria0_.FechaInicio as FechaIni2_1_0_, categoria0_.FechaFin as FechaFin1_0_, categoria0_.FechaCreacion as FechaCre4_1_0_, categoria0_.FechaModificacion as FechaMod5_1_0_, categoria0_.TorneoId as TorneoId1_0_, categoria0_.GanadorId as GanadorId1_0_ FROM Categorias categoria0_ with (updlock, rowlock) WHERE categoria0_.CategoriaId=?
+
+2014-01-05 02:37:49,850 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_1_, categoria0_.FechaInicio as FechaIni2_1_1_, categoria0_.FechaFin as FechaFin1_1_, categoria0_.FechaCreacion as FechaCre4_1_1_, categoria0_.FechaModificacion as FechaMod5_1_1_, categoria0_.TorneoId as TorneoId1_1_, categoria0_.GanadorId as GanadorId1_1_, grupo1_.CategoriaId as Categori4_3_, grupo1_.GrupoId as GrupoId3_, grupo1_.GrupoId as GrupoId4_0_, grupo1_.FechaCreacion as FechaCre2_4_0_, grupo1_.FechaModificacion as FechaMod3_4_0_, grupo1_.CategoriaId as Categori4_4_0_ FROM Categorias categoria0_ left outer join Grupos grupo1_ on categoria0_.CategoriaId=grupo1_.CategoriaId WHERE categoria0_.CategoriaId=?
+
+2014-01-05 02:37:49,852 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Categoria: SELECT categoria0_.CategoriaId as Categori1_1_1_, categoria0_.FechaInicio as FechaIni2_1_1_, categoria0_.FechaFin as FechaFin1_1_, categoria0_.FechaCreacion as FechaCre4_1_1_, categoria0_.FechaModificacion as FechaMod5_1_1_, categoria0_.TorneoId as TorneoId1_1_, categoria0_.GanadorId as GanadorId1_1_, grupo1_.CategoriaId as Categori4_3_, grupo1_.GrupoId as GrupoId3_, grupo1_.GrupoId as GrupoId4_0_, grupo1_.FechaCreacion as FechaCre2_4_0_, grupo1_.FechaModificacion as FechaMod3_4_0_, grupo1_.CategoriaId as Categori4_4_0_ FROM Categorias categoria0_ left outer join Grupos grupo1_ on categoria0_.CategoriaId=grupo1_.CategoriaId WHERE categoria0_.CategoriaId=?
+
+2014-01-05 02:37:49,853 [14] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Equipo
+
+2014-01-05 02:37:49,853 [14] ?.lambda_method(:0) -  Version select: SELECT EquipoId FROM Equipos WHERE EquipoId = ?
+
+2014-01-05 02:37:49,853 [14] ?.lambda_method(:0) -  Snapshot select: SELECT equipo_.EquipoId, equipo_.Nombre as Nombre2_, equipo_.TipoEquipo as TipoEquipo2_, equipo_.JugadorAVerificado as JugadorA4_2_, equipo_.JugadorBVerificado as JugadorB5_2_, equipo_.FechaCreacion as FechaCre6_2_, equipo_.FechaModificacion as FechaMod7_2_, equipo_.JugadorAId as JugadorAId2_, equipo_.JugadorBId as JugadorBId2_ FROM Equipos equipo_ WHERE equipo_.EquipoId=?
+
+2014-01-05 02:37:49,853 [14] ?.lambda_method(:0) -  Insert 0: INSERT INTO Equipos (Nombre, TipoEquipo, JugadorAVerificado, JugadorBVerificado, FechaCreacion, FechaModificacion, JugadorAId, JugadorBId, EquipoId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+
+2014-01-05 02:37:49,854 [14] ?.lambda_method(:0) -  Update 0: UPDATE Equipos SET Nombre = ?, TipoEquipo = ?, JugadorAVerificado = ?, JugadorBVerificado = ?, FechaCreacion = ?, FechaModificacion = ?, JugadorAId = ?, JugadorBId = ? WHERE EquipoId = ?
+
+2014-01-05 02:37:49,854 [14] ?.lambda_method(:0) -  Delete 0: DELETE FROM Equipos WHERE EquipoId = ?
+
+2014-01-05 02:37:49,854 [14] ?.lambda_method(:0) -  Identity insert: INSERT INTO Equipos (Nombre, TipoEquipo, JugadorAVerificado, JugadorBVerificado, FechaCreacion, FechaModificacion, JugadorAId, JugadorBId) VALUES (?, ?, ?, ?, ?, ?, ?, ?); select SCOPE_IDENTITY()
+
+2014-01-05 02:37:49,854 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ WHERE equipo0_.EquipoId=?
+
+2014-01-05 02:37:49,855 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ WHERE equipo0_.EquipoId=?
+
+2014-01-05 02:37:49,855 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ with (updlock, rowlock) WHERE equipo0_.EquipoId=?
+
+2014-01-05 02:37:49,855 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ with (updlock, rowlock, nowait) WHERE equipo0_.EquipoId=?
+
+2014-01-05 02:37:49,855 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ with (updlock, rowlock) WHERE equipo0_.EquipoId=?
+
+2014-01-05 02:37:49,856 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ WHERE equipo0_.EquipoId=?
+
+2014-01-05 02:37:49,856 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Equipo: SELECT equipo0_.EquipoId as EquipoId2_0_, equipo0_.Nombre as Nombre2_0_, equipo0_.TipoEquipo as TipoEquipo2_0_, equipo0_.JugadorAVerificado as JugadorA4_2_0_, equipo0_.JugadorBVerificado as JugadorB5_2_0_, equipo0_.FechaCreacion as FechaCre6_2_0_, equipo0_.FechaModificacion as FechaMod7_2_0_, equipo0_.JugadorAId as JugadorAId2_0_, equipo0_.JugadorBId as JugadorBId2_0_ FROM Equipos equipo0_ WHERE equipo0_.EquipoId=?
+
+2014-01-05 02:37:49,856 [14] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.EquipoToCategoria
+
+2014-01-05 02:37:49,857 [14] ?.lambda_method(:0) -  Version select: SELECT EquipoToCategoriaId FROM EquipoToCategorias WHERE EquipoToCategoriaId = ?
+
+2014-01-05 02:37:49,857 [14] ?.lambda_method(:0) -  Snapshot select: SELECT equipotoca_.EquipoToCategoriaId, equipotoca_.JugadorA as JugadorA3_, equipotoca_.JugadorB as JugadorB3_, equipotoca_.FechaCreacion as FechaCre4_3_, equipotoca_.FechaModificacion as FechaMod5_3_, equipotoca_.EquipoId as EquipoId3_, equipotoca_.CategoriaId as Categori7_3_ FROM EquipoToCategorias equipotoca_ WHERE equipotoca_.EquipoToCategoriaId=?
+
+2014-01-05 02:37:49,857 [14] ?.lambda_method(:0) -  Insert 0: INSERT INTO EquipoToCategorias (JugadorA, JugadorB, FechaCreacion, FechaModificacion, EquipoId, CategoriaId, EquipoToCategoriaId) VALUES (?, ?, ?, ?, ?, ?, ?)
+
+2014-01-05 02:37:49,857 [14] ?.lambda_method(:0) -  Update 0: UPDATE EquipoToCategorias SET JugadorA = ?, JugadorB = ?, FechaCreacion = ?, FechaModificacion = ?, EquipoId = ?, CategoriaId = ? WHERE EquipoToCategoriaId = ?
+
+2014-01-05 02:37:49,857 [14] ?.lambda_method(:0) -  Delete 0: DELETE FROM EquipoToCategorias WHERE EquipoToCategoriaId = ?
+
+2014-01-05 02:37:49,858 [14] ?.lambda_method(:0) -  Identity insert: INSERT INTO EquipoToCategorias (JugadorA, JugadorB, FechaCreacion, FechaModificacion, EquipoId, CategoriaId) VALUES (?, ?, ?, ?, ?, ?); select SCOPE_IDENTITY()
+
+2014-01-05 02:37:49,858 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ WHERE equipotoca0_.EquipoToCategoriaId=?
+
+2014-01-05 02:37:49,858 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ WHERE equipotoca0_.EquipoToCategoriaId=?
+
+2014-01-05 02:37:49,859 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ with (updlock, rowlock) WHERE equipotoca0_.EquipoToCategoriaId=?
+
+2014-01-05 02:37:49,859 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ with (updlock, rowlock, nowait) WHERE equipotoca0_.EquipoToCategoriaId=?
+
+2014-01-05 02:37:49,859 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ with (updlock, rowlock) WHERE equipotoca0_.EquipoToCategoriaId=?
+
+2014-01-05 02:37:49,860 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ WHERE equipotoca0_.EquipoToCategoriaId=?
+
+2014-01-05 02:37:49,860 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.EquipoToCategoria: SELECT equipotoca0_.EquipoToCategoriaId as EquipoTo1_3_0_, equipotoca0_.JugadorA as JugadorA3_0_, equipotoca0_.JugadorB as JugadorB3_0_, equipotoca0_.FechaCreacion as FechaCre4_3_0_, equipotoca0_.FechaModificacion as FechaMod5_3_0_, equipotoca0_.EquipoId as EquipoId3_0_, equipotoca0_.CategoriaId as Categori7_3_0_ FROM EquipoToCategorias equipotoca0_ WHERE equipotoca0_.EquipoToCategoriaId=?
+
+2014-01-05 02:37:49,860 [14] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Grupo
+
+2014-01-05 02:37:49,861 [14] ?.lambda_method(:0) -  Version select: SELECT GrupoId FROM Grupos WHERE GrupoId = ?
+
+2014-01-05 02:37:49,861 [14] ?.lambda_method(:0) -  Snapshot select: SELECT grupo_.GrupoId, grupo_.FechaCreacion as FechaCre2_4_, grupo_.FechaModificacion as FechaMod3_4_, grupo_.CategoriaId as Categori4_4_ FROM Grupos grupo_ WHERE grupo_.GrupoId=?
+
+2014-01-05 02:37:49,861 [14] ?.lambda_method(:0) -  Insert 0: INSERT INTO Grupos (FechaCreacion, FechaModificacion, CategoriaId, GrupoId) VALUES (?, ?, ?, ?)
+
+2014-01-05 02:37:49,861 [14] ?.lambda_method(:0) -  Update 0: UPDATE Grupos SET FechaCreacion = ?, FechaModificacion = ?, CategoriaId = ? WHERE GrupoId = ?
+
+2014-01-05 02:37:49,862 [14] ?.lambda_method(:0) -  Delete 0: DELETE FROM Grupos WHERE GrupoId = ?
+
+2014-01-05 02:37:49,862 [14] ?.lambda_method(:0) -  Identity insert: INSERT INTO Grupos (FechaCreacion, FechaModificacion, CategoriaId) VALUES (?, ?, ?); select SCOPE_IDENTITY()
+
+2014-01-05 02:37:49,862 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ WHERE grupo0_.GrupoId=?
+
+2014-01-05 02:37:49,862 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ WHERE grupo0_.GrupoId=?
+
+2014-01-05 02:37:49,863 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ with (updlock, rowlock) WHERE grupo0_.GrupoId=?
+
+2014-01-05 02:37:49,863 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ with (updlock, rowlock, nowait) WHERE grupo0_.GrupoId=?
+
+2014-01-05 02:37:49,863 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ with (updlock, rowlock) WHERE grupo0_.GrupoId=?
+
+2014-01-05 02:37:49,864 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_1_, grupo0_.FechaCreacion as FechaCre2_4_1_, grupo0_.FechaModificacion as FechaMod3_4_1_, grupo0_.CategoriaId as Categori4_4_1_, jornadas1_.GrupoId as GrupoId3_, jornadas1_.JornadaId as JornadaId3_, jornadas1_.JornadaId as JornadaId5_0_, jornadas1_.FechaCreacion as FechaCre2_5_0_, jornadas1_.FechaModificacion as FechaMod3_5_0_, jornadas1_.GrupoId as GrupoId5_0_ FROM Grupos grupo0_ left outer join Jornadas jornadas1_ on grupo0_.GrupoId=jornadas1_.GrupoId WHERE grupo0_.GrupoId=?
+
+2014-01-05 02:37:49,864 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Grupo: SELECT grupo0_.GrupoId as GrupoId4_1_, grupo0_.FechaCreacion as FechaCre2_4_1_, grupo0_.FechaModificacion as FechaMod3_4_1_, grupo0_.CategoriaId as Categori4_4_1_, jornadas1_.GrupoId as GrupoId3_, jornadas1_.JornadaId as JornadaId3_, jornadas1_.JornadaId as JornadaId5_0_, jornadas1_.FechaCreacion as FechaCre2_5_0_, jornadas1_.FechaModificacion as FechaMod3_5_0_, jornadas1_.GrupoId as GrupoId5_0_ FROM Grupos grupo0_ left outer join Jornadas jornadas1_ on grupo0_.GrupoId=jornadas1_.GrupoId WHERE grupo0_.GrupoId=?
+
+2014-01-05 02:37:49,864 [14] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Jornada
+
+2014-01-05 02:37:49,865 [14] ?.lambda_method(:0) -  Version select: SELECT JornadaId FROM Jornadas WHERE JornadaId = ?
+
+2014-01-05 02:37:49,865 [14] ?.lambda_method(:0) -  Snapshot select: SELECT jornada_.JornadaId, jornada_.FechaCreacion as FechaCre2_5_, jornada_.FechaModificacion as FechaMod3_5_, jornada_.GrupoId as GrupoId5_ FROM Jornadas jornada_ WHERE jornada_.JornadaId=?
+
+2014-01-05 02:37:49,865 [14] ?.lambda_method(:0) -  Insert 0: INSERT INTO Jornadas (FechaCreacion, FechaModificacion, GrupoId, JornadaId) VALUES (?, ?, ?, ?)
+
+2014-01-05 02:37:49,866 [14] ?.lambda_method(:0) -  Update 0: UPDATE Jornadas SET FechaCreacion = ?, FechaModificacion = ?, GrupoId = ? WHERE JornadaId = ?
+
+2014-01-05 02:37:49,866 [14] ?.lambda_method(:0) -  Delete 0: DELETE FROM Jornadas WHERE JornadaId = ?
+
+2014-01-05 02:37:49,866 [14] ?.lambda_method(:0) -  Identity insert: INSERT INTO Jornadas (FechaCreacion, FechaModificacion, GrupoId) VALUES (?, ?, ?); select SCOPE_IDENTITY()
+
+2014-01-05 02:37:49,866 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_0_, jornada0_.FechaCreacion as FechaCre2_5_0_, jornada0_.FechaModificacion as FechaMod3_5_0_, jornada0_.GrupoId as GrupoId5_0_ FROM Jornadas jornada0_ WHERE jornada0_.JornadaId=?
+
+2014-01-05 02:37:49,867 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_0_, jornada0_.FechaCreacion as FechaCre2_5_0_, jornada0_.FechaModificacion as FechaMod3_5_0_, jornada0_.GrupoId as GrupoId5_0_ FROM Jornadas jornada0_ WHERE jornada0_.JornadaId=?
+
+2014-01-05 02:37:49,867 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_0_, jornada0_.FechaCreacion as FechaCre2_5_0_, jornada0_.FechaModificacion as FechaMod3_5_0_, jornada0_.GrupoId as GrupoId5_0_ FROM Jornadas jornada0_ with (updlock, rowlock) WHERE jornada0_.JornadaId=?
+
+2014-01-05 02:37:49,867 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_0_, jornada0_.FechaCreacion as FechaCre2_5_0_, jornada0_.FechaModificacion as FechaMod3_5_0_, jornada0_.GrupoId as GrupoId5_0_ FROM Jornadas jornada0_ with (updlock, rowlock, nowait) WHERE jornada0_.JornadaId=?
+
+2014-01-05 02:37:49,867 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_0_, jornada0_.FechaCreacion as FechaCre2_5_0_, jornada0_.FechaModificacion as FechaMod3_5_0_, jornada0_.GrupoId as GrupoId5_0_ FROM Jornadas jornada0_ with (updlock, rowlock) WHERE jornada0_.JornadaId=?
+
+2014-01-05 02:37:49,868 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_1_, jornada0_.FechaCreacion as FechaCre2_5_1_, jornada0_.FechaModificacion as FechaMod3_5_1_, jornada0_.GrupoId as GrupoId5_1_, partidos1_.JornadaId as JornadaId3_, partidos1_.PartidoId as PartidoId3_, partidos1_.PartidoId as PartidoId6_0_, partidos1_.Set1A as Set2_6_0_, partidos1_.Set2A as Set3_6_0_, partidos1_.Set3A as Set4_6_0_, partidos1_.Set1B as Set5_6_0_, partidos1_.Set2B as Set6_6_0_, partidos1_.Set3B as Set7_6_0_, partidos1_.FechaCreacion as FechaCre8_6_0_, partidos1_.FechaModificacion as FechaMod9_6_0_, partidos1_.JornadaId as JornadaId6_0_, partidos1_.EquipoAId as EquipoAId6_0_, partidos1_.EquipoBId as EquipoBId6_0_, partidos1_.GanadorId as GanadorId6_0_ FROM Jornadas jornada0_ left outer join Partidos partidos1_ on jornada0_.JornadaId=partidos1_.JornadaId WHERE jornada0_.JornadaId=?
+
+2014-01-05 02:37:49,868 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Jornada: SELECT jornada0_.JornadaId as JornadaId5_1_, jornada0_.FechaCreacion as FechaCre2_5_1_, jornada0_.FechaModificacion as FechaMod3_5_1_, jornada0_.GrupoId as GrupoId5_1_, partidos1_.JornadaId as JornadaId3_, partidos1_.PartidoId as PartidoId3_, partidos1_.PartidoId as PartidoId6_0_, partidos1_.Set1A as Set2_6_0_, partidos1_.Set2A as Set3_6_0_, partidos1_.Set3A as Set4_6_0_, partidos1_.Set1B as Set5_6_0_, partidos1_.Set2B as Set6_6_0_, partidos1_.Set3B as Set7_6_0_, partidos1_.FechaCreacion as FechaCre8_6_0_, partidos1_.FechaModificacion as FechaMod9_6_0_, partidos1_.JornadaId as JornadaId6_0_, partidos1_.EquipoAId as EquipoAId6_0_, partidos1_.EquipoBId as EquipoBId6_0_, partidos1_.GanadorId as GanadorId6_0_ FROM Jornadas jornada0_ left outer join Partidos partidos1_ on jornada0_.JornadaId=partidos1_.JornadaId WHERE jornada0_.JornadaId=?
+
+2014-01-05 02:37:49,869 [14] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Partido
+
+2014-01-05 02:37:49,869 [14] ?.lambda_method(:0) -  Version select: SELECT PartidoId FROM Partidos WHERE PartidoId = ?
+
+2014-01-05 02:37:49,869 [14] ?.lambda_method(:0) -  Snapshot select: SELECT partido_.PartidoId, partido_.Set1A as Set2_6_, partido_.Set2A as Set3_6_, partido_.Set3A as Set4_6_, partido_.Set1B as Set5_6_, partido_.Set2B as Set6_6_, partido_.Set3B as Set7_6_, partido_.FechaCreacion as FechaCre8_6_, partido_.FechaModificacion as FechaMod9_6_, partido_.JornadaId as JornadaId6_, partido_.EquipoAId as EquipoAId6_, partido_.EquipoBId as EquipoBId6_, partido_.GanadorId as GanadorId6_ FROM Partidos partido_ WHERE partido_.PartidoId=?
+
+2014-01-05 02:37:49,869 [14] ?.lambda_method(:0) -  Insert 0: INSERT INTO Partidos (Set1A, Set2A, Set3A, Set1B, Set2B, Set3B, FechaCreacion, FechaModificacion, JornadaId, EquipoAId, EquipoBId, GanadorId, PartidoId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+
+2014-01-05 02:37:49,870 [14] ?.lambda_method(:0) -  Update 0: UPDATE Partidos SET Set1A = ?, Set2A = ?, Set3A = ?, Set1B = ?, Set2B = ?, Set3B = ?, FechaCreacion = ?, FechaModificacion = ?, JornadaId = ?, EquipoAId = ?, EquipoBId = ?, GanadorId = ? WHERE PartidoId = ?
+
+2014-01-05 02:37:49,870 [14] ?.lambda_method(:0) -  Delete 0: DELETE FROM Partidos WHERE PartidoId = ?
+
+2014-01-05 02:37:49,870 [14] ?.lambda_method(:0) -  Identity insert: INSERT INTO Partidos (Set1A, Set2A, Set3A, Set1B, Set2B, Set3B, FechaCreacion, FechaModificacion, JornadaId, EquipoAId, EquipoBId, GanadorId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); select SCOPE_IDENTITY()
+
+2014-01-05 02:37:49,870 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ WHERE partido0_.PartidoId=?
+
+2014-01-05 02:37:49,871 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ WHERE partido0_.PartidoId=?
+
+2014-01-05 02:37:49,871 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ with (updlock, rowlock) WHERE partido0_.PartidoId=?
+
+2014-01-05 02:37:49,871 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ with (updlock, rowlock, nowait) WHERE partido0_.PartidoId=?
+
+2014-01-05 02:37:49,872 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ with (updlock, rowlock) WHERE partido0_.PartidoId=?
+
+2014-01-05 02:37:49,872 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ WHERE partido0_.PartidoId=?
+
+2014-01-05 02:37:49,872 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Partido: SELECT partido0_.PartidoId as PartidoId6_0_, partido0_.Set1A as Set2_6_0_, partido0_.Set2A as Set3_6_0_, partido0_.Set3A as Set4_6_0_, partido0_.Set1B as Set5_6_0_, partido0_.Set2B as Set6_6_0_, partido0_.Set3B as Set7_6_0_, partido0_.FechaCreacion as FechaCre8_6_0_, partido0_.FechaModificacion as FechaMod9_6_0_, partido0_.JornadaId as JornadaId6_0_, partido0_.EquipoAId as EquipoAId6_0_, partido0_.EquipoBId as EquipoBId6_0_, partido0_.GanadorId as GanadorId6_0_ FROM Partidos partido0_ WHERE partido0_.PartidoId=?
+
+2014-01-05 02:37:49,872 [14] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Torneo
+
+2014-01-05 02:37:49,873 [14] ?.lambda_method(:0) -  Version select: SELECT TorneoId FROM Torneos WHERE TorneoId = ?
+
+2014-01-05 02:37:49,873 [14] ?.lambda_method(:0) -  Snapshot select: SELECT torneo_.TorneoId, torneo_.Name as Name7_, torneo_.FechaCreacion as FechaCre3_7_, torneo_.FechaModificacion as FechaMod4_7_ FROM Torneos torneo_ WHERE torneo_.TorneoId=?
+
+2014-01-05 02:37:49,873 [14] ?.lambda_method(:0) -  Insert 0: INSERT INTO Torneos (Name, FechaCreacion, FechaModificacion, TorneoId) VALUES (?, ?, ?, ?)
+
+2014-01-05 02:37:49,873 [14] ?.lambda_method(:0) -  Update 0: UPDATE Torneos SET Name = ?, FechaCreacion = ?, FechaModificacion = ? WHERE TorneoId = ?
+
+2014-01-05 02:37:49,874 [14] ?.lambda_method(:0) -  Delete 0: DELETE FROM Torneos WHERE TorneoId = ?
+
+2014-01-05 02:37:49,874 [14] ?.lambda_method(:0) -  Identity insert: INSERT INTO Torneos (Name, FechaCreacion, FechaModificacion) VALUES (?, ?, ?); select SCOPE_IDENTITY()
+
+2014-01-05 02:37:49,874 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_0_, torneo0_.Name as Name7_0_, torneo0_.FechaCreacion as FechaCre3_7_0_, torneo0_.FechaModificacion as FechaMod4_7_0_ FROM Torneos torneo0_ WHERE torneo0_.TorneoId=?
+
+2014-01-05 02:37:49,874 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_0_, torneo0_.Name as Name7_0_, torneo0_.FechaCreacion as FechaCre3_7_0_, torneo0_.FechaModificacion as FechaMod4_7_0_ FROM Torneos torneo0_ WHERE torneo0_.TorneoId=?
+
+2014-01-05 02:37:49,875 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_0_, torneo0_.Name as Name7_0_, torneo0_.FechaCreacion as FechaCre3_7_0_, torneo0_.FechaModificacion as FechaMod4_7_0_ FROM Torneos torneo0_ with (updlock, rowlock) WHERE torneo0_.TorneoId=?
+
+2014-01-05 02:37:49,875 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_0_, torneo0_.Name as Name7_0_, torneo0_.FechaCreacion as FechaCre3_7_0_, torneo0_.FechaModificacion as FechaMod4_7_0_ FROM Torneos torneo0_ with (updlock, rowlock, nowait) WHERE torneo0_.TorneoId=?
+
+2014-01-05 02:37:49,875 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_0_, torneo0_.Name as Name7_0_, torneo0_.FechaCreacion as FechaCre3_7_0_, torneo0_.FechaModificacion as FechaMod4_7_0_ FROM Torneos torneo0_ with (updlock, rowlock) WHERE torneo0_.TorneoId=?
+
+2014-01-05 02:37:49,876 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_1_, torneo0_.Name as Name7_1_, torneo0_.FechaCreacion as FechaCre3_7_1_, torneo0_.FechaModificacion as FechaMod4_7_1_, categorias1_.TorneoId as TorneoId3_, categorias1_.CategoriaId as Categori1_3_, categorias1_.CategoriaId as Categori1_1_0_, categorias1_.FechaInicio as FechaIni2_1_0_, categorias1_.FechaFin as FechaFin1_0_, categorias1_.FechaCreacion as FechaCre4_1_0_, categorias1_.FechaModificacion as FechaMod5_1_0_, categorias1_.TorneoId as TorneoId1_0_, categorias1_.GanadorId as GanadorId1_0_ FROM Torneos torneo0_ left outer join Categorias categorias1_ on torneo0_.TorneoId=categorias1_.TorneoId WHERE torneo0_.TorneoId=?
+
+2014-01-05 02:37:49,876 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Torneo: SELECT torneo0_.TorneoId as TorneoId7_1_, torneo0_.Name as Name7_1_, torneo0_.FechaCreacion as FechaCre3_7_1_, torneo0_.FechaModificacion as FechaMod4_7_1_, categorias1_.TorneoId as TorneoId3_, categorias1_.CategoriaId as Categori1_3_, categorias1_.CategoriaId as Categori1_1_0_, categorias1_.FechaInicio as FechaIni2_1_0_, categorias1_.FechaFin as FechaFin1_0_, categorias1_.FechaCreacion as FechaCre4_1_0_, categorias1_.FechaModificacion as FechaMod5_1_0_, categorias1_.TorneoId as TorneoId1_0_, categorias1_.GanadorId as GanadorId1_0_ FROM Torneos torneo0_ left outer join Categorias categorias1_ on torneo0_.TorneoId=categorias1_.TorneoId WHERE torneo0_.TorneoId=?
+
+2014-01-05 02:37:49,876 [14] ?.lambda_method(:0) - Static SQL for entity: Padel.Domain.Usuario
+
+2014-01-05 02:37:49,877 [14] ?.lambda_method(:0) -  Version select: SELECT UsuarioId FROM Usuarios WHERE UsuarioId = ?
+
+2014-01-05 02:37:49,879 [14] ?.lambda_method(:0) -  Snapshot select: SELECT usuario_.UsuarioId, usuario_.Nombre as Nombre8_, usuario_.Sexo as Sexo8_, usuario_.TelefonoMovil as Telefono4_8_, usuario_.Email as Email8_, usuario_.Password as Password8_, usuario_.FechaCreacion as FechaCre7_8_, usuario_.FechaModificacion as FechaMod8_8_ FROM Usuarios usuario_ WHERE usuario_.UsuarioId=?
+
+2014-01-05 02:37:49,879 [14] ?.lambda_method(:0) -  Insert 0: INSERT INTO Usuarios (Nombre, Sexo, TelefonoMovil, Email, Password, FechaCreacion, FechaModificacion, UsuarioId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+
+2014-01-05 02:37:49,879 [14] ?.lambda_method(:0) -  Update 0: UPDATE Usuarios SET Nombre = ?, Sexo = ?, TelefonoMovil = ?, Email = ?, Password = ?, FechaCreacion = ?, FechaModificacion = ? WHERE UsuarioId = ?
+
+2014-01-05 02:37:49,879 [14] ?.lambda_method(:0) -  Delete 0: DELETE FROM Usuarios WHERE UsuarioId = ?
+
+2014-01-05 02:37:49,880 [14] ?.lambda_method(:0) -  Identity insert: INSERT INTO Usuarios (Nombre, Sexo, TelefonoMovil, Email, Password, FechaCreacion, FechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?); select SCOPE_IDENTITY()
+
+2014-01-05 02:37:49,880 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_0_, usuario0_.Nombre as Nombre8_0_, usuario0_.Sexo as Sexo8_0_, usuario0_.TelefonoMovil as Telefono4_8_0_, usuario0_.Email as Email8_0_, usuario0_.Password as Password8_0_, usuario0_.FechaCreacion as FechaCre7_8_0_, usuario0_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios usuario0_ WHERE usuario0_.UsuarioId=?
+
+2014-01-05 02:37:49,880 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_0_, usuario0_.Nombre as Nombre8_0_, usuario0_.Sexo as Sexo8_0_, usuario0_.TelefonoMovil as Telefono4_8_0_, usuario0_.Email as Email8_0_, usuario0_.Password as Password8_0_, usuario0_.FechaCreacion as FechaCre7_8_0_, usuario0_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios usuario0_ WHERE usuario0_.UsuarioId=?
+
+2014-01-05 02:37:49,880 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_0_, usuario0_.Nombre as Nombre8_0_, usuario0_.Sexo as Sexo8_0_, usuario0_.TelefonoMovil as Telefono4_8_0_, usuario0_.Email as Email8_0_, usuario0_.Password as Password8_0_, usuario0_.FechaCreacion as FechaCre7_8_0_, usuario0_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios usuario0_ with (updlock, rowlock) WHERE usuario0_.UsuarioId=?
+
+2014-01-05 02:37:49,882 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_0_, usuario0_.Nombre as Nombre8_0_, usuario0_.Sexo as Sexo8_0_, usuario0_.TelefonoMovil as Telefono4_8_0_, usuario0_.Email as Email8_0_, usuario0_.Password as Password8_0_, usuario0_.FechaCreacion as FechaCre7_8_0_, usuario0_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios usuario0_ with (updlock, rowlock, nowait) WHERE usuario0_.UsuarioId=?
+
+2014-01-05 02:37:49,882 [14] ?.lambda_method(:0) - Static select for entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_0_, usuario0_.Nombre as Nombre8_0_, usuario0_.Sexo as Sexo8_0_, usuario0_.TelefonoMovil as Telefono4_8_0_, usuario0_.Email as Email8_0_, usuario0_.Password as Password8_0_, usuario0_.FechaCreacion as FechaCre7_8_0_, usuario0_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios usuario0_ with (updlock, rowlock) WHERE usuario0_.UsuarioId=?
+
+2014-01-05 02:37:49,887 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_1_, usuario0_.Nombre as Nombre8_1_, usuario0_.Sexo as Sexo8_1_, usuario0_.TelefonoMovil as Telefono4_8_1_, usuario0_.Email as Email8_1_, usuario0_.Password as Password8_1_, usuario0_.FechaCreacion as FechaCre7_8_1_, usuario0_.FechaModificacion as FechaMod8_8_1_, roles1_.UsuarioId as UsuarioId3_, role2_.RoleId as RoleId3_, role2_.RoleId as RoleId0_0_, role2_.Name as Name0_0_ FROM Usuarios usuario0_ left outer join RoleToUsuario roles1_ on usuario0_.UsuarioId=roles1_.UsuarioId left outer join Roles role2_ on roles1_.RoleId=role2_.RoleId WHERE usuario0_.UsuarioId=?
+
+2014-01-05 02:37:49,887 [14] ?.lambda_method(:0) - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Padel.Domain.Usuario: SELECT usuario0_.UsuarioId as UsuarioId8_1_, usuario0_.Nombre as Nombre8_1_, usuario0_.Sexo as Sexo8_1_, usuario0_.TelefonoMovil as Telefono4_8_1_, usuario0_.Email as Email8_1_, usuario0_.Password as Password8_1_, usuario0_.FechaCreacion as FechaCre7_8_1_, usuario0_.FechaModificacion as FechaMod8_8_1_, roles1_.UsuarioId as UsuarioId3_, role2_.RoleId as RoleId3_, role2_.RoleId as RoleId0_0_, role2_.Name as Name0_0_ FROM Usuarios usuario0_ left outer join RoleToUsuario roles1_ on usuario0_.UsuarioId=roles1_.UsuarioId left outer join Roles role2_ on roles1_.RoleId=role2_.RoleId WHERE usuario0_.UsuarioId=?
+
+2014-01-05 02:37:49,894 [14] ?.lambda_method(:0) - Static select for one-to-many Padel.Domain.Categoria.Grupo: SELECT grupo0_.CategoriaId as Categori4_1_, grupo0_.GrupoId as GrupoId1_, grupo0_.GrupoId as GrupoId4_0_, grupo0_.FechaCreacion as FechaCre2_4_0_, grupo0_.FechaModificacion as FechaMod3_4_0_, grupo0_.CategoriaId as Categori4_4_0_ FROM Grupos grupo0_ WHERE grupo0_.CategoriaId=?
+
+2014-01-05 02:37:49,894 [14] ?.lambda_method(:0) - Static select for one-to-many Padel.Domain.Grupo.Jornadas: SELECT jornadas0_.GrupoId as GrupoId1_, jornadas0_.JornadaId as JornadaId1_, jornadas0_.JornadaId as JornadaId5_0_, jornadas0_.FechaCreacion as FechaCre2_5_0_, jornadas0_.FechaModificacion as FechaMod3_5_0_, jornadas0_.GrupoId as GrupoId5_0_ FROM Jornadas jornadas0_ WHERE jornadas0_.GrupoId=?
+
+2014-01-05 02:37:49,894 [14] ?.lambda_method(:0) - Static select for one-to-many Padel.Domain.Jornada.Partidos: SELECT partidos0_.JornadaId as JornadaId1_, partidos0_.PartidoId as PartidoId1_, partidos0_.PartidoId as PartidoId6_0_, partidos0_.Set1A as Set2_6_0_, partidos0_.Set2A as Set3_6_0_, partidos0_.Set3A as Set4_6_0_, partidos0_.Set1B as Set5_6_0_, partidos0_.Set2B as Set6_6_0_, partidos0_.Set3B as Set7_6_0_, partidos0_.FechaCreacion as FechaCre8_6_0_, partidos0_.FechaModificacion as FechaMod9_6_0_, partidos0_.JornadaId as JornadaId6_0_, partidos0_.EquipoAId as EquipoAId6_0_, partidos0_.EquipoBId as EquipoBId6_0_, partidos0_.GanadorId as GanadorId6_0_ FROM Partidos partidos0_ WHERE partidos0_.JornadaId=?
+
+2014-01-05 02:37:49,895 [14] ?.lambda_method(:0) - Static select for one-to-many Padel.Domain.Torneo.Categorias: SELECT categorias0_.TorneoId as TorneoId1_, categorias0_.CategoriaId as Categori1_1_, categorias0_.CategoriaId as Categori1_1_0_, categorias0_.FechaInicio as FechaIni2_1_0_, categorias0_.FechaFin as FechaFin1_0_, categorias0_.FechaCreacion as FechaCre4_1_0_, categorias0_.FechaModificacion as FechaMod5_1_0_, categorias0_.TorneoId as TorneoId1_0_, categorias0_.GanadorId as GanadorId1_0_ FROM Categorias categorias0_ WHERE categorias0_.TorneoId=?
+
+2014-01-05 02:37:49,899 [14] ?.lambda_method(:0) - Static select for collection Padel.Domain.Usuario.Roles: SELECT roles0_.UsuarioId as UsuarioId1_, roles0_.RoleId as RoleId1_, role1_.RoleId as RoleId0_0_, role1_.Name as Name0_0_ FROM RoleToUsuario roles0_ left outer join Roles role1_ on roles0_.RoleId=role1_.RoleId WHERE roles0_.UsuarioId=?
+
+2014-01-05 02:37:49,900 [14] ?.lambda_method(:0) - initializing class SessionFactoryObjectFactory
+
+2014-01-05 02:37:49,901 [14] ?.lambda_method(:0) - registered: 76a4e2d3b7c6449c9abf8685c9ba8d6a(unnamed)
+
+2014-01-05 02:37:49,901 [14] ?.lambda_method(:0) - no name configured
+
+2014-01-05 02:37:49,901 [14] ?.lambda_method(:0) - Instantiated session factory
+
+2014-01-05 02:37:49,906 [14] ?.lambda_method(:0) - Checking 0 named HQL queries
+
+2014-01-05 02:37:49,906 [14] ?.lambda_method(:0) - Checking 0 named SQL queries
+
+2014-01-05 02:37:49,910 [14] ?.lambda_method(:0) - checking mappings queue
+
+2014-01-05 02:37:50,166 [14] ?.lambda_method(:0) - processing one-to-many association mappings
+
+2014-01-05 02:37:50,166 [14] ?.lambda_method(:0) - processing one-to-one association property references
+
+2014-01-05 02:37:50,166 [14] ?.lambda_method(:0) - processing foreign key constraints
+
+2014-01-05 02:37:50,167 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Torneo
+
+2014-01-05 02:37:50,167 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+
+2014-01-05 02:37:50,167 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
+
+2014-01-05 02:37:50,168 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
+
+2014-01-05 02:37:50,168 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+
+2014-01-05 02:37:50,168 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Categoria
+
+2014-01-05 02:37:50,168 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Categoria
+
+2014-01-05 02:37:50,169 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Grupo
+
+2014-01-05 02:37:50,169 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Jornada
+
+2014-01-05 02:37:50,169 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+
+2014-01-05 02:37:50,170 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+
+2014-01-05 02:37:50,170 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+
+2014-01-05 02:37:50,170 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Role
+
+2014-01-05 02:37:50,170 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
+
+2014-01-05 02:37:50,171 [14] ?.lambda_method(:0) - processing filters (second pass)
+
+2014-01-05 02:37:50,186 [14] ?.lambda_method(:0) - checking mappings queue
+
+2014-01-05 02:37:50,186 [14] ?.lambda_method(:0) - processing one-to-many association mappings
+
+2014-01-05 02:37:50,186 [14] ?.lambda_method(:0) - processing one-to-one association property references
+
+2014-01-05 02:37:50,187 [14] ?.lambda_method(:0) - processing foreign key constraints
+
+2014-01-05 02:37:50,187 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Torneo
+
+2014-01-05 02:37:50,187 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+
+2014-01-05 02:37:50,188 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
+
+2014-01-05 02:37:50,188 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
+
+2014-01-05 02:37:50,188 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+
+2014-01-05 02:37:50,189 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Categoria
+
+2014-01-05 02:37:50,189 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Categoria
+
+2014-01-05 02:37:50,189 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Grupo
+
+2014-01-05 02:37:50,189 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Jornada
+
+2014-01-05 02:37:50,190 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+
+2014-01-05 02:37:50,190 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+
+2014-01-05 02:37:50,190 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Equipo
+
+2014-01-05 02:37:50,190 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Role
+
+2014-01-05 02:37:50,191 [14] ?.lambda_method(:0) - resolving reference to class: Padel.Domain.Usuario
+
+2014-01-05 02:37:50,191 [14] ?.lambda_method(:0) - processing filters (second pass)
 
