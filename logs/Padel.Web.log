@@ -779,3 +779,323 @@
 
 2014-01-05 02:37:50,191 [14] ?.lambda_method(:0) - processing filters (second pass)
 
+2014-01-05 02:39:56,838 [12] ?.lambda_method(:0) - [session-id=e4c4fab9-e7c0-485f-bc5d-5d603be15fbf] opened session at timestamp: 635244863968, for session factory: [/76a4e2d3b7c6449c9abf8685c9ba8d6a]
+
+2014-01-05 02:39:56,842 [12] ?.lambda_method(:0) - Begin (Unspecified)
+
+2014-01-05 02:39:56,843 [12] ?.lambda_method(:0) - Obtaining IDbConnection from Driver
+
+2014-01-05 02:39:56,924 [12] ?.lambda_method(:0) - put criteria=(TelefonoMovil = 636547424 and Password = String@-1007766262(hash)) alias=this0_
+
+2014-01-05 02:39:56,963 [12] ?.lambda_method(:0) - returning alias=this_ for criteria=(TelefonoMovil = 636547424 and Password = String@-1007766262(hash))
+
+2014-01-05 02:39:56,969 [12] ?.lambda_method(:0) - returning alias=this_ for criteria=(TelefonoMovil = 636547424 and Password = String@-1007766262(hash))
+
+2014-01-05 02:39:56,973 [12] ?.lambda_method(:0) - The initial capacity was set too low at: 8 for the SelectSqlBuilder that needed a capacity of: 10 for the table Usuarios this_
+
+2014-01-05 02:39:57,013 [12] ?.lambda_method(:0) - Opened new IDbCommand, open IDbCommands: 1
+
+2014-01-05 02:39:57,014 [12] ?.lambda_method(:0) - Building an IDbCommand object for the SqlString: SELECT this_.UsuarioId as UsuarioId8_0_, this_.Nombre as Nombre8_0_, this_.Sexo as Sexo8_0_, this_.TelefonoMovil as Telefono4_8_0_, this_.Email as Email8_0_, this_.Password as Password8_0_, this_.FechaCreacion as FechaCre7_8_0_, this_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios this_ WHERE (this_.TelefonoMovil = ? and this_.Password = ?)
+
+2014-01-05 02:39:57,016 [12] ?.lambda_method(:0) - binding '636547424' to parameter: 0
+
+2014-01-05 02:39:57,016 [12] ?.lambda_method(:0) - binding '7e04da88cbb8cc933c7b89fbfe121cca' to parameter: 1
+
+2014-01-05 02:39:57,020 [12] ?.lambda_method(:0) - SELECT this_.UsuarioId as UsuarioId8_0_, this_.Nombre as Nombre8_0_, this_.Sexo as Sexo8_0_, this_.TelefonoMovil as Telefono4_8_0_, this_.Email as Email8_0_, this_.Password as Password8_0_, this_.FechaCreacion as FechaCre7_8_0_, this_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios this_ WHERE (this_.TelefonoMovil = @p0 and this_.Password = @p1)
+
+2014-01-05 02:39:57,026 [12] ?.lambda_method(:0) - SELECT this_.UsuarioId as UsuarioId8_0_, this_.Nombre as Nombre8_0_, this_.Sexo as Sexo8_0_, this_.TelefonoMovil as Telefono4_8_0_, this_.Email as Email8_0_, this_.Password as Password8_0_, this_.FechaCreacion as FechaCre7_8_0_, this_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios this_ WHERE (this_.TelefonoMovil = @p0 and this_.Password = @p1);@p0 = 636547424 [Type: Int32 (0)], @p1 = '7e04da88cbb8cc933c7b89fbfe121cca' [Type: String (4000)]
+
+2014-01-05 02:39:57,027 [12] ?.lambda_method(:0) - Enlist Command
+
+2014-01-05 02:39:57,030 [12] ?.lambda_method(:0) - ExecuteReader took 2 ms
+
+2014-01-05 02:39:57,031 [12] ?.lambda_method(:0) - Opened IDataReader, open IDataReaders: 1
+
+2014-01-05 02:39:57,032 [12] ?.lambda_method(:0) - processing result set
+
+2014-01-05 02:39:57,033 [12] ?.lambda_method(:0) - result set row: 0
+
+2014-01-05 02:39:57,035 [12] ?.lambda_method(:0) - returning '1' as column: UsuarioId8_0_
+
+2014-01-05 02:39:57,040 [12] ?.lambda_method(:0) - result row: EntityKey[Padel.Domain.Usuario#1]
+
+2014-01-05 02:39:57,048 [12] ?.lambda_method(:0) - Initializing object from DataReader: [Padel.Domain.Usuario#1]
+
+2014-01-05 02:39:57,055 [12] ?.lambda_method(:0) - Hydrating entity: [Padel.Domain.Usuario#1]
+
+2014-01-05 02:39:57,056 [12] ?.lambda_method(:0) - returning 'Felipe Casanova' as column: Nombre8_0_
+
+2014-01-05 02:39:57,057 [12] ?.lambda_method(:0) - returning 'Hombre' as column: Sexo8_0_
+
+2014-01-05 02:39:57,059 [12] ?.lambda_method(:0) - returning '636547424' as column: Telefono4_8_0_
+
+2014-01-05 02:39:57,059 [12] ?.lambda_method(:0) - returning 'felipe.casanova.ua@gmail.com' as column: Email8_0_
+
+2014-01-05 02:39:57,059 [12] ?.lambda_method(:0) - returning '7e04da88cbb8cc933c7b89fbfe121cca' as column: Password8_0_
+
+2014-01-05 02:39:57,061 [12] ?.lambda_method(:0) - returning '17/12/2013 17:23:50' as column: FechaCre7_8_0_
+
+2014-01-05 02:39:57,061 [12] ?.lambda_method(:0) - returning '17/12/2013 17:23:50' as column: FechaMod8_8_0_
+
+2014-01-05 02:39:57,064 [12] ?.lambda_method(:0) - done processing result set (1 rows)
+
+2014-01-05 02:39:57,066 [12] ?.lambda_method(:0) - running NHybridDataReader.Dispose()
+
+2014-01-05 02:39:57,067 [12] ?.lambda_method(:0) - Closed IDataReader, open IDataReaders :0
+
+2014-01-05 02:39:57,067 [12] ?.lambda_method(:0) - DataReader was closed after 39 ms
+
+2014-01-05 02:39:57,069 [12] ?.lambda_method(:0) - Closed IDbCommand, open IDbCommands: 0
+
+2014-01-05 02:39:57,071 [12] ?.lambda_method(:0) - total objects hydrated: 1
+
+2014-01-05 02:39:57,075 [12] ?.lambda_method(:0) - resolving associations for [Padel.Domain.Usuario#1]
+
+2014-01-05 02:39:57,080 [12] ?.lambda_method(:0) - creating collection wrapper:[Padel.Domain.Usuario.Roles#1]
+
+2014-01-05 02:39:57,091 [12] ?.lambda_method(:0) - done materializing entity [Padel.Domain.Usuario#1]
+
+2014-01-05 02:39:57,092 [12] ?.lambda_method(:0) - initializing non-lazy collections
+
+2014-01-05 02:39:57,098 [12] ?.lambda_method(:0) - put criteria=TelefonoMovil = 636547424 alias=this0_
+
+2014-01-05 02:39:57,099 [12] ?.lambda_method(:0) - returning alias=this_ for criteria=TelefonoMovil = 636547424
+
+2014-01-05 02:39:57,102 [12] ?.lambda_method(:0) - flushing session
+
+2014-01-05 02:39:57,103 [12] ?.lambda_method(:0) - processing flush-time cascades
+
+2014-01-05 02:39:57,107 [12] ?.lambda_method(:0) - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Padel.Domain.Usuario
+
+2014-01-05 02:39:57,113 [12] ?.lambda_method(:0) - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Padel.Domain.Usuario.Roles
+
+2014-01-05 02:39:57,116 [12] ?.lambda_method(:0) - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Padel.Domain.Usuario.Roles
+
+2014-01-05 02:39:57,116 [12] ?.lambda_method(:0) - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Padel.Domain.Usuario
+
+2014-01-05 02:39:57,117 [12] ?.lambda_method(:0) - dirty checking collections
+
+2014-01-05 02:39:57,121 [12] ?.lambda_method(:0) - Flushing entities and processing referenced collections
+
+2014-01-05 02:39:57,136 [12] ?.lambda_method(:0) - Collection found: [Padel.Domain.Usuario.Roles#1], was: [Padel.Domain.Usuario.Roles#1] (uninitialized)
+
+2014-01-05 02:39:57,144 [12] ?.lambda_method(:0) - Processing unreferenced collections
+
+2014-01-05 02:39:57,144 [12] ?.lambda_method(:0) - Scheduling collection removes/(re)creates/updates
+
+2014-01-05 02:39:57,145 [12] ?.lambda_method(:0) - Flushed: 0 insertions, 0 updates, 0 deletions to 1 objects
+
+2014-01-05 02:39:57,146 [12] ?.lambda_method(:0) - Flushed: 0 (re)creations, 0 updates, 0 removals to 1 collections
+
+2014-01-05 02:39:57,147 [12] ?.lambda_method(:0) - listing entities:
+
+2014-01-05 02:39:57,150 [12] ?.lambda_method(:0) - Padel.Domain.Usuario{'Id'='1', 'Roles'='<uninitialized>', 'Nombre'='Felipe Casanova', 'Sexo'='Hombre', 'TelefonoMovil'='636547424', 'Email'='felipe.casanova.ua@gmail.com', 'Password'='7e04da88cbb8cc933c7b89fbfe121cca', 'FechaCreacion'='17/12/2013 17:23:50', 'FechaModificacion'='17/12/2013 17:23:50'}
+
+2014-01-05 02:39:57,152 [12] ?.lambda_method(:0) - Dont need to execute flush
+
+2014-01-05 02:39:57,153 [12] ?.lambda_method(:0) - Opened new IDbCommand, open IDbCommands: 1
+
+2014-01-05 02:39:57,154 [12] ?.lambda_method(:0) - Building an IDbCommand object for the SqlString: SELECT this_.UsuarioId as UsuarioId8_0_, this_.Nombre as Nombre8_0_, this_.Sexo as Sexo8_0_, this_.TelefonoMovil as Telefono4_8_0_, this_.Email as Email8_0_, this_.Password as Password8_0_, this_.FechaCreacion as FechaCre7_8_0_, this_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios this_ WHERE this_.TelefonoMovil = ?
+
+2014-01-05 02:39:57,154 [12] ?.lambda_method(:0) - binding '636547424' to parameter: 0
+
+2014-01-05 02:39:57,155 [12] ?.lambda_method(:0) - SELECT this_.UsuarioId as UsuarioId8_0_, this_.Nombre as Nombre8_0_, this_.Sexo as Sexo8_0_, this_.TelefonoMovil as Telefono4_8_0_, this_.Email as Email8_0_, this_.Password as Password8_0_, this_.FechaCreacion as FechaCre7_8_0_, this_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios this_ WHERE this_.TelefonoMovil = @p0
+
+2014-01-05 02:39:57,155 [12] ?.lambda_method(:0) - SELECT this_.UsuarioId as UsuarioId8_0_, this_.Nombre as Nombre8_0_, this_.Sexo as Sexo8_0_, this_.TelefonoMovil as Telefono4_8_0_, this_.Email as Email8_0_, this_.Password as Password8_0_, this_.FechaCreacion as FechaCre7_8_0_, this_.FechaModificacion as FechaMod8_8_0_ FROM Usuarios this_ WHERE this_.TelefonoMovil = @p0;@p0 = 636547424 [Type: Int32 (0)]
+
+2014-01-05 02:39:57,156 [12] ?.lambda_method(:0) - Enlist Command
+
+2014-01-05 02:39:57,187 [12] ?.lambda_method(:0) - ExecuteReader took 30 ms
+
+2014-01-05 02:39:57,188 [12] ?.lambda_method(:0) - Opened IDataReader, open IDataReaders: 1
+
+2014-01-05 02:39:57,189 [12] ?.lambda_method(:0) - processing result set
+
+2014-01-05 02:39:57,189 [12] ?.lambda_method(:0) - result set row: 0
+
+2014-01-05 02:39:57,190 [12] ?.lambda_method(:0) - returning '1' as column: UsuarioId8_0_
+
+2014-01-05 02:39:57,190 [12] ?.lambda_method(:0) - result row: EntityKey[Padel.Domain.Usuario#1]
+
+2014-01-05 02:39:57,192 [12] ?.lambda_method(:0) - done processing result set (1 rows)
+
+2014-01-05 02:39:57,192 [12] ?.lambda_method(:0) - running NHybridDataReader.Dispose()
+
+2014-01-05 02:39:57,192 [12] ?.lambda_method(:0) - Closed IDataReader, open IDataReaders :0
+
+2014-01-05 02:39:57,193 [12] ?.lambda_method(:0) - DataReader was closed after 36 ms
+
+2014-01-05 02:39:57,193 [12] ?.lambda_method(:0) - Closed IDbCommand, open IDbCommands: 0
+
+2014-01-05 02:39:57,193 [12] ?.lambda_method(:0) - total objects hydrated: 0
+
+2014-01-05 02:39:57,193 [12] ?.lambda_method(:0) - initializing non-lazy collections
+
+2014-01-05 02:39:57,200 [12] ?.lambda_method(:0) - initializing collection [Padel.Domain.Usuario.Roles#1]
+
+2014-01-05 02:39:57,207 [12] ?.lambda_method(:0) - checking second-level cache
+
+2014-01-05 02:39:57,209 [12] ?.lambda_method(:0) - collection not cached
+
+2014-01-05 02:39:57,212 [12] ?.lambda_method(:0) - loading collection: [Padel.Domain.Usuario.Roles#1]
+
+2014-01-05 02:39:57,216 [12] ?.lambda_method(:0) - Opened new IDbCommand, open IDbCommands: 1
+
+2014-01-05 02:39:57,217 [12] ?.lambda_method(:0) - Building an IDbCommand object for the SqlString: SELECT roles0_.UsuarioId as UsuarioId1_, roles0_.RoleId as RoleId1_, role1_.RoleId as RoleId0_0_, role1_.Name as Name0_0_ FROM RoleToUsuario roles0_ left outer join Roles role1_ on roles0_.RoleId=role1_.RoleId WHERE roles0_.UsuarioId=?
+
+2014-01-05 02:39:57,219 [12] ?.lambda_method(:0) - binding '1' to parameter: 0
+
+2014-01-05 02:39:57,219 [12] ?.lambda_method(:0) - SELECT roles0_.UsuarioId as UsuarioId1_, roles0_.RoleId as RoleId1_, role1_.RoleId as RoleId0_0_, role1_.Name as Name0_0_ FROM RoleToUsuario roles0_ left outer join Roles role1_ on roles0_.RoleId=role1_.RoleId WHERE roles0_.UsuarioId=@p0
+
+2014-01-05 02:39:57,220 [12] ?.lambda_method(:0) - SELECT roles0_.UsuarioId as UsuarioId1_, roles0_.RoleId as RoleId1_, role1_.RoleId as RoleId0_0_, role1_.Name as Name0_0_ FROM RoleToUsuario roles0_ left outer join Roles role1_ on roles0_.RoleId=role1_.RoleId WHERE roles0_.UsuarioId=@p0;@p0 = 1 [Type: Int32 (0)]
+
+2014-01-05 02:39:57,220 [12] ?.lambda_method(:0) - Enlist Command
+
+2014-01-05 02:39:57,224 [12] ?.lambda_method(:0) - ExecuteReader took 3 ms
+
+2014-01-05 02:39:57,225 [12] ?.lambda_method(:0) - Opened IDataReader, open IDataReaders: 1
+
+2014-01-05 02:39:57,225 [12] ?.lambda_method(:0) - result set contains (possibly empty) collection: [Padel.Domain.Usuario.Roles#1]
+
+2014-01-05 02:39:57,228 [12] ?.lambda_method(:0) - constructing collection load context for result set [NHibernate.Driver.NHybridDataReader]
+
+2014-01-05 02:39:57,231 [12] ?.lambda_method(:0) - starting attempt to find loading collection [[Padel.Domain.Usuario.Roles#1]]
+
+2014-01-05 02:39:57,233 [12] ?.lambda_method(:0) - collection not yet initialized; initializing
+
+2014-01-05 02:39:57,235 [12] ?.lambda_method(:0) - processing result set
+
+2014-01-05 02:39:57,236 [12] ?.lambda_method(:0) - result set row: 0
+
+2014-01-05 02:39:57,236 [12] ?.lambda_method(:0) - returning '1' as column: RoleId0_0_
+
+2014-01-05 02:39:57,236 [12] ?.lambda_method(:0) - result row: EntityKey[Padel.Domain.Role#1]
+
+2014-01-05 02:39:57,237 [12] ?.lambda_method(:0) - Initializing object from DataReader: [Padel.Domain.Role#1]
+
+2014-01-05 02:39:57,237 [12] ?.lambda_method(:0) - Hydrating entity: [Padel.Domain.Role#1]
+
+2014-01-05 02:39:57,237 [12] ?.lambda_method(:0) - returning 'Administrador' as column: Name0_0_
+
+2014-01-05 02:39:57,239 [12] ?.lambda_method(:0) - returning '1' as column: UsuarioId1_
+
+2014-01-05 02:39:57,239 [12] ?.lambda_method(:0) - found row of collection: [Padel.Domain.Usuario.Roles#1]
+
+2014-01-05 02:39:57,240 [12] ?.lambda_method(:0) - starting attempt to find loading collection [[Padel.Domain.Usuario.Roles#1]]
+
+2014-01-05 02:39:57,240 [12] ?.lambda_method(:0) - attempting to locate loading collection entry [CollectionKey[Padel.Domain.Usuario.Roles#1]] in any result-set context
+
+2014-01-05 02:39:57,241 [12] ?.lambda_method(:0) - collection [CollectionKey[Padel.Domain.Usuario.Roles#1]] not located in load context
+
+2014-01-05 02:39:57,241 [12] ?.lambda_method(:0) - found loading collection bound to current result set processing; reading row
+
+2014-01-05 02:39:57,242 [12] ?.lambda_method(:0) - returning '1' as column: RoleId1_
+
+2014-01-05 02:39:57,252 [12] ?.lambda_method(:0) - loading entity: [Padel.Domain.Role#1]
+
+2014-01-05 02:39:57,254 [12] ?.lambda_method(:0) - attempting to resolve: [Padel.Domain.Role#1]
+
+2014-01-05 02:39:57,257 [12] ?.lambda_method(:0) - resolved object in session cache: [Padel.Domain.Role#1]
+
+2014-01-05 02:39:57,258 [12] ?.lambda_method(:0) - done processing result set (1 rows)
+
+2014-01-05 02:39:57,258 [12] ?.lambda_method(:0) - running NHybridDataReader.Dispose()
+
+2014-01-05 02:39:57,259 [12] ?.lambda_method(:0) - Closed IDataReader, open IDataReaders :0
+
+2014-01-05 02:39:57,259 [12] ?.lambda_method(:0) - DataReader was closed after 38 ms
+
+2014-01-05 02:39:57,259 [12] ?.lambda_method(:0) - Closed IDbCommand, open IDbCommands: 0
+
+2014-01-05 02:39:57,260 [12] ?.lambda_method(:0) - total objects hydrated: 1
+
+2014-01-05 02:39:57,260 [12] ?.lambda_method(:0) - resolving associations for [Padel.Domain.Role#1]
+
+2014-01-05 02:39:57,261 [12] ?.lambda_method(:0) - done materializing entity [Padel.Domain.Role#1]
+
+2014-01-05 02:39:57,264 [12] ?.lambda_method(:0) - attempting to locate loading collection entry [CollectionKey[Padel.Domain.Usuario.Roles#1]] in any result-set context
+
+2014-01-05 02:39:57,264 [12] ?.lambda_method(:0) - collection [CollectionKey[Padel.Domain.Usuario.Roles#1]] not located in load context
+
+2014-01-05 02:39:57,265 [12] ?.lambda_method(:0) - removing collection load entry [NHibernate.Engine.Loading.LoadingCollectionEntry<rs=NHibernate.Driver.NHybridDataReader, coll=[Padel.Domain.Usuario.Roles#1]>@12952ed]
+
+2014-01-05 02:39:57,266 [12] ?.lambda_method(:0) - 1 collections were found in result set for role: Padel.Domain.Usuario.Roles
+
+2014-01-05 02:39:57,268 [12] ?.lambda_method(:0) - ending loading collection [NHibernate.Engine.Loading.LoadingCollectionEntry<rs=NHibernate.Driver.NHybridDataReader, coll=[Padel.Domain.Usuario.Roles#1]>@12952ed]
+
+2014-01-05 02:39:57,271 [12] ?.lambda_method(:0) - collection fully initialized: [Padel.Domain.Usuario.Roles#1]
+
+2014-01-05 02:39:57,272 [12] ?.lambda_method(:0) - 1 collections initialized for role: Padel.Domain.Usuario.Roles
+
+2014-01-05 02:39:57,274 [12] ?.lambda_method(:0) - initializing non-lazy collections
+
+2014-01-05 02:39:57,274 [12] ?.lambda_method(:0) - done loading collection
+
+2014-01-05 02:39:57,275 [12] ?.lambda_method(:0) - collection initialized
+
+2014-01-05 02:39:57,284 [12] ?.lambda_method(:0) - Start Commit
+
+2014-01-05 02:39:57,286 [12] ?.lambda_method(:0) - flushing session
+
+2014-01-05 02:39:57,286 [12] ?.lambda_method(:0) - processing flush-time cascades
+
+2014-01-05 02:39:57,286 [12] ?.lambda_method(:0) - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Padel.Domain.Usuario
+
+2014-01-05 02:39:57,286 [12] ?.lambda_method(:0) - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Padel.Domain.Usuario.Roles
+
+2014-01-05 02:39:57,288 [12] ?.lambda_method(:0) - cascading to saveOrUpdate: Padel.Domain.Role
+
+2014-01-05 02:39:57,293 [12] ?.lambda_method(:0) - persistent instance of: Padel.Domain.Role
+
+2014-01-05 02:39:57,294 [12] ?.lambda_method(:0) - ignoring persistent instance
+
+2014-01-05 02:39:57,294 [12] ?.lambda_method(:0) - object already associated with session: [Padel.Domain.Role#1]
+
+2014-01-05 02:39:57,294 [12] ?.lambda_method(:0) - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Padel.Domain.Usuario.Roles
+
+2014-01-05 02:39:57,295 [12] ?.lambda_method(:0) - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Padel.Domain.Usuario
+
+2014-01-05 02:39:57,295 [12] ?.lambda_method(:0) - dirty checking collections
+
+2014-01-05 02:39:57,295 [12] ?.lambda_method(:0) - Flushing entities and processing referenced collections
+
+2014-01-05 02:39:57,295 [12] ?.lambda_method(:0) - Collection found: [Padel.Domain.Usuario.Roles#1], was: [Padel.Domain.Usuario.Roles#1] (initialized)
+
+2014-01-05 02:39:57,296 [12] ?.lambda_method(:0) - Processing unreferenced collections
+
+2014-01-05 02:39:57,296 [12] ?.lambda_method(:0) - Scheduling collection removes/(re)creates/updates
+
+2014-01-05 02:39:57,296 [12] ?.lambda_method(:0) - Flushed: 0 insertions, 0 updates, 0 deletions to 2 objects
+
+2014-01-05 02:39:57,296 [12] ?.lambda_method(:0) - Flushed: 0 (re)creations, 0 updates, 0 removals to 1 collections
+
+2014-01-05 02:39:57,297 [12] ?.lambda_method(:0) - listing entities:
+
+2014-01-05 02:39:57,302 [12] ?.lambda_method(:0) - Padel.Domain.Usuario{'Id'='1', 'Roles'='['Padel.Domain.Role#1']', 'Nombre'='Felipe Casanova', 'Sexo'='Hombre', 'TelefonoMovil'='636547424', 'Email'='felipe.casanova.ua@gmail.com', 'Password'='7e04da88cbb8cc933c7b89fbfe121cca', 'FechaCreacion'='17/12/2013 17:23:50', 'FechaModificacion'='17/12/2013 17:23:50'}
+
+2014-01-05 02:39:57,302 [12] ?.lambda_method(:0) - Padel.Domain.Role{'Id'='1', 'Name'='Administrador'}
+
+2014-01-05 02:39:57,303 [12] ?.lambda_method(:0) - executing flush
+
+2014-01-05 02:39:57,303 [12] ?.lambda_method(:0) - registering flush begin
+
+2014-01-05 02:39:57,305 [12] ?.lambda_method(:0) - registering flush end
+
+2014-01-05 02:39:57,309 [12] ?.lambda_method(:0) - post flush
+
+2014-01-05 02:39:57,312 [12] ?.lambda_method(:0) - before transaction completion
+
+2014-01-05 02:39:57,313 [12] ?.lambda_method(:0) - IDbTransaction Committed
+
+2014-01-05 02:39:57,314 [12] ?.lambda_method(:0) - transaction completion
+
+2014-01-05 02:39:57,315 [12] ?.lambda_method(:0) - aggressively releasing database connection
+
+2014-01-05 02:39:57,316 [12] ?.lambda_method(:0) - Closing connection
+
+2014-01-05 02:39:57,318 [12] ?.lambda_method(:0) - IDbTransaction disposed.
+
+2014-01-05 02:39:57,321 [12] ?.lambda_method(:0) - closing session
+
+2014-01-05 02:39:57,321 [12] ?.lambda_method(:0) - running BatcherImpl.Dispose(true)
+
