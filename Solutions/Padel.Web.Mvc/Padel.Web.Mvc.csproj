@@ -281,7 +281,6 @@
     <Content Include="Areas\Admin\Views\Shared\_SideBar.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Torneos\Index.cshtml" />
-    <Content Include="App_Code\PadelHelper.cshtml" />
     <None Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
