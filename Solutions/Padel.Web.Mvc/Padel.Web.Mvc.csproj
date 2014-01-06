@@ -332,6 +332,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

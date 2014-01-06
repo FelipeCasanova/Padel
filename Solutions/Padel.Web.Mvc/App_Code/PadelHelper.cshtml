@@ -1,4 +1,6 @@
-﻿@helper RenderSideBarMenuItem(Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Menus.SideBarItem item)
+﻿@using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Menus;
+
+@helper RenderSideBarMenuItem(SideBarItem item)
     {
     <li class="@(item.SubMenu != null ? "has_sub" : "")">
     <a href="@item.Url" class="@(item.SubMenu != null && item.IsSelected ? "subdrop" : item.IsSelected ? "open" : "")">
