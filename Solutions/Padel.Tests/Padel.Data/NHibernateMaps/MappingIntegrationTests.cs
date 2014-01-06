@@ -34,7 +34,7 @@
                 new SimpleSessionStorage(),
                 mappingAssemblies,
                 new AutoPersistenceModelGenerator().Generate(),
-                "../../../../Solutions/Padel.Tests/Hibernate.cfg.xml");
+                "./Hibernate.cfg.xml");
         }
 
         [TearDown]
