@@ -47,6 +47,7 @@
         [Test]
         public void CanConfirmDatabaseMatchesMappings()
         {
+            
             //var allClassMetadata = NHibernateSession.GetDefaultSessionFactory().GetAllClassMetadata();
 
             //foreach (var entry in allClassMetadata)
