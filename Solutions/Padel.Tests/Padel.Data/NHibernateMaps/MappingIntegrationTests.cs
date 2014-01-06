@@ -65,7 +65,7 @@
         {
             var session = NHibernateSession.GetDefaultSessionFactory().OpenSession();
 
-            using (TextWriter stringWriter = new StreamWriter("../../../../Database/UnitTestGeneratedSchema.sql"))
+            using (TextWriter stringWriter = new StreamWriter("./UnitTestGeneratedSchema.sql"))
             {
                 new SchemaExport(this.configuration).Execute(true, false, false, session.Connection, stringWriter);
             }
