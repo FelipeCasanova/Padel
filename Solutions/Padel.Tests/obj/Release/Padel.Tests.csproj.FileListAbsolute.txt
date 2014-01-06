@@ -50,3 +50,9 @@ C:\repos\padel\Solutions\Padel.Tests\bin\Release\LowercaseRoutesMVC.xml
 C:\repos\padel\Solutions\Padel.Tests\obj\Release\Padel.Tests.csprojResolveAssemblyReference.cache
 C:\repos\padel\Solutions\Padel.Tests\obj\Release\Padel.Tests.dll
 C:\repos\padel\Solutions\Padel.Tests\obj\Release\Padel.Tests.pdb
+C:\repos\padel\Solutions\Padel.Tests\bin\Release\Gallio.dll
+C:\repos\padel\Solutions\Padel.Tests\bin\Release\Gallio40.dll
+C:\repos\padel\Solutions\Padel.Tests\bin\Release\MbUnit.dll
+C:\repos\padel\Solutions\Padel.Tests\bin\Release\MbUnit40.dll
+C:\repos\padel\Solutions\Padel.Tests\bin\Release\NHamcrest.dll
+C:\repos\padel\Solutions\Padel.Tests\bin\Release\NHamcrest.pdb

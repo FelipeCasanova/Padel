@@ -41,7 +41,9 @@ C:\repos\padel\Solutions\Padel.Web.Mvc\bin\NHibernate.xml
 C:\repos\padel\Solutions\Padel.Web.Mvc\bin\SharpArch.Domain.pdb
 C:\repos\padel\Solutions\Padel.Web.Mvc\bin\SharpArch.NHibernate.pdb
 C:\repos\padel\Solutions\Padel.Web.Mvc\bin\SharpArch.Web.Mvc.pdb
-C:\repos\padel\Solutions\Padel.Web.Mvc\bin\es\Microsoft.IdentityModel.resources.dll
 C:\repos\padel\Solutions\Padel.Web.Mvc\obj\Release\Padel.Web.Mvc.csprojResolveAssemblyReference.cache
 C:\repos\padel\Solutions\Padel.Web.Mvc\obj\Release\Padel.Web.Mvc.dll
 C:\repos\padel\Solutions\Padel.Web.Mvc\obj\Release\Padel.Web.Mvc.pdb
+C:\repos\padel\Solutions\Padel.Web.Mvc\bin\Newtonsoft.Json.dll
+C:\repos\padel\Solutions\Padel.Web.Mvc\bin\Newtonsoft.Json.pdb
+C:\repos\padel\Solutions\Padel.Web.Mvc\bin\Newtonsoft.Json.xml

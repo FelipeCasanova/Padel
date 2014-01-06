@@ -5,11 +5,8 @@ C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Machine.Specifications.Clr
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Machine.Specifications.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Microsoft.Practices.ServiceLocation.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Newtonsoft.Json.dll
-C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\nunit.framework.dll
-C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\nunit.mocks.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Padel.Domain.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Padel.Tasks.dll
-C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\pnunit.framework.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\SharpArch.Domain.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\SharpArch.NHibernate.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Padel.Infrastructure.dll
@@ -23,7 +20,6 @@ C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Microsoft.Practices.Servic
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Microsoft.Practices.ServiceLocation.xml
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Newtonsoft.Json.pdb
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Newtonsoft.Json.xml
-C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\nunit.framework.xml
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\SharpArch.Domain.pdb
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\SharpArch.NHibernate.pdb
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Release\Padel.Infrastructure.pdb

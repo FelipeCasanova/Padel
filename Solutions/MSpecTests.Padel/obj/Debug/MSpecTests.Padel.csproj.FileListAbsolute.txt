@@ -40,11 +40,8 @@ C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Machine.Specifications.Clr4.
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Machine.Specifications.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Newtonsoft.Json.dll
-C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\nunit.framework.dll
-C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\nunit.mocks.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Padel.Domain.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Padel.Tasks.dll
-C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\pnunit.framework.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\SharpArch.Domain.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\SharpArch.NHibernate.dll
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Padel.Infrastructure.dll
@@ -58,7 +55,6 @@ C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Microsoft.Practices.ServiceL
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Newtonsoft.Json.pdb
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Newtonsoft.Json.xml
-C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\nunit.framework.xml
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\SharpArch.Domain.pdb
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\SharpArch.NHibernate.pdb
 C:\repos\padel\Solutions\MSpecTests.Padel\bin\Debug\Padel.Infrastructure.pdb

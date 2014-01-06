@@ -20,7 +20,6 @@ C:\repos\padel\Solutions\Padel.Infrastructure\bin\Release\Newtonsoft.Json.xml
 C:\repos\padel\Solutions\Padel.Infrastructure\bin\Release\NHibernate.xml
 C:\repos\padel\Solutions\Padel.Infrastructure\bin\Release\SharpArch.Domain.pdb
 C:\repos\padel\Solutions\Padel.Infrastructure\bin\Release\SharpArch.NHibernate.pdb
-C:\repos\padel\Solutions\Padel.Infrastructure\bin\Release\es\Microsoft.IdentityModel.resources.dll
 C:\repos\padel\Solutions\Padel.Infrastructure\obj\Release\Padel.Infrastructure.csprojResolveAssemblyReference.cache
 C:\repos\padel\Solutions\Padel.Infrastructure\obj\Release\Padel.Infrastructure.dll
 C:\repos\padel\Solutions\Padel.Infrastructure\obj\Release\Padel.Infrastructure.pdb

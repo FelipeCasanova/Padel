@@ -22,7 +22,6 @@ C:\repos\padel\Solutions\Padel.Tasks\bin\Release\SharpArch.Domain.pdb
 C:\repos\padel\Solutions\Padel.Tasks\bin\Release\SharpArch.NHibernate.pdb
 C:\repos\padel\Solutions\Padel.Tasks\bin\Release\FluentNHibernate.xml
 C:\repos\padel\Solutions\Padel.Tasks\bin\Release\Iesi.Collections.xml
-C:\repos\padel\Solutions\Padel.Tasks\bin\Release\es\Microsoft.IdentityModel.resources.dll
 C:\repos\padel\Solutions\Padel.Tasks\obj\Release\Padel.Tasks.csprojResolveAssemblyReference.cache
 C:\repos\padel\Solutions\Padel.Tasks\obj\Release\Padel.Tasks.dll
 C:\repos\padel\Solutions\Padel.Tasks\obj\Release\Padel.Tasks.pdb

@@ -62,7 +62,6 @@ C:\repos\padel\Solutions\Padel.Tests\bin\Debug\Iesi.Collections.dll
 C:\repos\padel\Solutions\Padel.Tests\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\repos\padel\Solutions\Padel.Tests\bin\Debug\Newtonsoft.Json.dll
 C:\repos\padel\Solutions\Padel.Tests\bin\Debug\NHibernate.dll
-C:\repos\padel\Solutions\Padel.Tests\bin\Debug\nunit.framework.dll
 C:\repos\padel\Solutions\Padel.Tests\bin\Debug\Padel.Domain.dll
 C:\repos\padel\Solutions\Padel.Tests\bin\Debug\Padel.Infrastructure.dll
 C:\repos\padel\Solutions\Padel.Tests\bin\Debug\Padel.Web.Mvc.dll
@@ -102,3 +101,9 @@ C:\repos\padel\Solutions\Padel.Tests\bin\Debug\LowercaseRoutesMVC.xml
 C:\repos\padel\Solutions\Padel.Tests\obj\Debug\Padel.Tests.csprojResolveAssemblyReference.cache
 C:\repos\padel\Solutions\Padel.Tests\obj\Debug\Padel.Tests.dll
 C:\repos\padel\Solutions\Padel.Tests\obj\Debug\Padel.Tests.pdb
+C:\repos\padel\Solutions\Padel.Tests\bin\Debug\Gallio.dll
+C:\repos\padel\Solutions\Padel.Tests\bin\Debug\Gallio40.dll
+C:\repos\padel\Solutions\Padel.Tests\bin\Debug\MbUnit.dll
+C:\repos\padel\Solutions\Padel.Tests\bin\Debug\MbUnit40.dll
+C:\repos\padel\Solutions\Padel.Tests\bin\Debug\NHamcrest.dll
+C:\repos\padel\Solutions\Padel.Tests\bin\Debug\NHamcrest.pdb
