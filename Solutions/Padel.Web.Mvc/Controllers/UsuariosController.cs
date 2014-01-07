@@ -78,8 +78,9 @@ namespace Padel.Web.Mvc.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public virtual ActionResult Entrar()
+        public virtual ActionResult Entrar(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -88,7 +89,7 @@ namespace Padel.Web.Mvc.Controllers
         [Transaction]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public virtual ActionResult _Entrar(UsuarioEntrarModelView usuarioModelView)
+        public virtual ActionResult _Entrar(UsuarioEntrarModelView usuarioModelView, string returnUrl)
         {
             ViewBag.ErrorResult = PartialView(MVC.Shared.Views.Usuarios._Entrar);
 
@@ -105,14 +106,20 @@ namespace Padel.Web.Mvc.Controllers
                         "PadelContext", DateTime.Now, DateTime.Now.AddHours(1), true);
                     FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(token);
 
-
-                    if (User.IsInRole("Administrador"))
+                    if (string.IsNullOrEmpty(returnUrl))
                     {
-                        return JavaScript("window.location = '" + Url.Action(MVC.Admin.HomeAdmin.ActionNames.Index, MVC.Admin.HomeAdmin.Name, new { area = "Admin"}) + "';");
+                        if (User.IsInRole("Administrador"))
+                        {
+                            return JavaScript("window.location = '" + Url.Action(MVC.Admin.HomeAdmin.ActionNames.Index, MVC.Admin.HomeAdmin.Name, new { area = "Admin" }) + "';");
+                        }
+                        else
+                        {
+                            return JavaScript("window.location = '" + Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name) + "';");
+                        }
                     }
                     else
                     {
-                        return JavaScript("window.location = '" + Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name) + "';");
+                        return JavaScript("window.location = '" + returnUrl + "';");
                     }
                 }
                 else

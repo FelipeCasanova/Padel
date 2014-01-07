@@ -49,6 +49,12 @@ namespace Padel.Web.Mvc.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Entrar()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Entrar);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult _Entrar()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Entrar);
@@ -109,6 +115,14 @@ namespace Padel.Web.Mvc.Controllers
         {
             public readonly string usuarioModelView = "usuarioModelView";
         }
+        static readonly ActionParamsClass_Entrar s_params_Entrar = new ActionParamsClass_Entrar();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Entrar EntrarParams { get { return s_params_Entrar; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Entrar
+        {
+            public readonly string returnUrl = "returnUrl";
+        }
         static readonly ActionParamsClass__Entrar s_params__Entrar = new ActionParamsClass__Entrar();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass__Entrar _EntrarParams { get { return s_params__Entrar; } }
@@ -116,6 +130,7 @@ namespace Padel.Web.Mvc.Controllers
         public class ActionParamsClass__Entrar
         {
             public readonly string usuarioModelView = "usuarioModelView";
+            public readonly string returnUrl = "returnUrl";
         }
         static readonly ActionParamsClass_ValidarTelefonoUnico s_params_ValidarTelefonoUnico = new ActionParamsClass_ValidarTelefonoUnico();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -164,22 +179,24 @@ namespace Padel.Web.Mvc.Controllers
             return callInfo;
         }
 
-        partial void EntrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void EntrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string returnUrl);
 
-        public override System.Web.Mvc.ActionResult Entrar()
+        public override System.Web.Mvc.ActionResult Entrar(string returnUrl)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Entrar);
-            EntrarOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            EntrarOverride(callInfo, returnUrl);
             return callInfo;
         }
 
-        partial void _EntrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Padel.Web.Mvc.Controllers.ViewModels.UsuarioEntrarModelView usuarioModelView);
+        partial void _EntrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Padel.Web.Mvc.Controllers.ViewModels.UsuarioEntrarModelView usuarioModelView, string returnUrl);
 
-        public override System.Web.Mvc.ActionResult _Entrar(Padel.Web.Mvc.Controllers.ViewModels.UsuarioEntrarModelView usuarioModelView)
+        public override System.Web.Mvc.ActionResult _Entrar(Padel.Web.Mvc.Controllers.ViewModels.UsuarioEntrarModelView usuarioModelView, string returnUrl)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Entrar);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "usuarioModelView", usuarioModelView);
-            _EntrarOverride(callInfo, usuarioModelView);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            _EntrarOverride(callInfo, usuarioModelView, returnUrl);
             return callInfo;
         }
 
