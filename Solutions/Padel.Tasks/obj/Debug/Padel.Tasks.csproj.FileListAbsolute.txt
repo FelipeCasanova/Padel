@@ -26,6 +26,7 @@ C:\Projects\Padel\Solutions\Padel.Tasks\obj\Debug\Padel.Tasks.dll
 C:\Projects\Padel\Solutions\Padel.Tasks\obj\Debug\Padel.Tasks.pdb
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Padel.Tasks.dll
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Padel.Tasks.pdb
+C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Iesi.Collections.dll
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Microsoft.IdentityModel.dll
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Newtonsoft.Json.dll
@@ -36,9 +37,9 @@ C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\SharpArch.Domain.dll
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\SharpArch.NHibernate.dll
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\FluentNHibernate.dll
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\inflector_extension.dll
-C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Iesi.Collections.dll
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Padel.Domain.pdb
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Padel.Infrastructure.pdb
+C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Iesi.Collections.xml
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Newtonsoft.Json.pdb
@@ -47,7 +48,6 @@ C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\NHibernate.xml
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\SharpArch.Domain.pdb
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\SharpArch.NHibernate.pdb
 C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\FluentNHibernate.xml
-C:\repos\padel\Solutions\Padel.Tasks\bin\Debug\Iesi.Collections.xml
 C:\repos\padel\Solutions\Padel.Tasks\obj\Debug\Padel.Tasks.csprojResolveAssemblyReference.cache
 C:\repos\padel\Solutions\Padel.Tasks\obj\Debug\Padel.Tasks.dll
 C:\repos\padel\Solutions\Padel.Tasks\obj\Debug\Padel.Tasks.pdb

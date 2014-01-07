@@ -55,31 +55,132 @@ IF (DB_ID(N'$(DatabaseName)') IS NOT NULL)
 	END
 
 GO
-
-IF NOT EXISTS (SELECT 1 FROM [master].[dbo].[sysdatabases] WHERE [name] = N'$(DatabaseName)')
+IF (DB_ID(N'$(DatabaseName)') IS NOT NULL) 
 BEGIN
-    RAISERROR(N'You cannot deploy this update script to target FELIPE-PC\SQLEXPRESS. The database for which this script was built, Padel, does not exist on this server.', 16, 127) WITH NOWAIT
-    RETURN
+    ALTER DATABASE [$(DatabaseName)]
+    SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE [$(DatabaseName)];
 END
 
 GO
+PRINT N'Creating $(DatabaseName)...'
+GO
+CREATE DATABASE [$(DatabaseName)]
+    ON 
+    PRIMARY(NAME = [Padel], FILENAME = N'$(DefaultDataPath)Padel.mdf')
+    LOG ON (NAME = [Padel_log], FILENAME = N'$(DefaultLogPath)Padel_log.ldf') COLLATE SQL_Latin1_General_CP1_CI_AS
+GO
+EXECUTE sp_dbcmptlevel [$(DatabaseName)], 100;
 
-IF (@@servername != 'FELIPE-PC\SQLEXPRESS')
-BEGIN
-    RAISERROR(N'The server name in the build script %s does not match the name of the target server %s. Verify whether your database project settings are correct and whether your build script is up to date.', 16, 127,N'FELIPE-PC\SQLEXPRESS',@@servername) WITH NOWAIT
-    RETURN
-END
 
 GO
+IF EXISTS (SELECT 1
+           FROM   [master].[dbo].[sysdatabases]
+           WHERE  [name] = N'$(DatabaseName)')
+    BEGIN
+        ALTER DATABASE [$(DatabaseName)]
+            SET ANSI_NULLS ON,
+                ANSI_PADDING ON,
+                ANSI_WARNINGS ON,
+                ARITHABORT ON,
+                CONCAT_NULL_YIELDS_NULL ON,
+                NUMERIC_ROUNDABORT OFF,
+                QUOTED_IDENTIFIER ON,
+                ANSI_NULL_DEFAULT ON,
+                CURSOR_DEFAULT LOCAL,
+                RECOVERY FULL,
+                CURSOR_CLOSE_ON_COMMIT OFF,
+                AUTO_CREATE_STATISTICS ON,
+                AUTO_SHRINK OFF,
+                AUTO_UPDATE_STATISTICS ON,
+                RECURSIVE_TRIGGERS OFF 
+            WITH ROLLBACK IMMEDIATE;
+        ALTER DATABASE [$(DatabaseName)]
+            SET AUTO_CLOSE OFF 
+            WITH ROLLBACK IMMEDIATE;
+    END
 
-IF CAST(DATABASEPROPERTY(N'$(DatabaseName)','IsReadOnly') as bit) = 1
-BEGIN
-    RAISERROR(N'You cannot deploy this update script because the database for which it was built, %s , is set to READ_ONLY.', 16, 127, N'$(DatabaseName)') WITH NOWAIT
-    RETURN
-END
+
+GO
+IF EXISTS (SELECT 1
+           FROM   [master].[dbo].[sysdatabases]
+           WHERE  [name] = N'$(DatabaseName)')
+    BEGIN
+        ALTER DATABASE [$(DatabaseName)]
+            SET ALLOW_SNAPSHOT_ISOLATION OFF;
+    END
+
+
+GO
+IF EXISTS (SELECT 1
+           FROM   [master].[dbo].[sysdatabases]
+           WHERE  [name] = N'$(DatabaseName)')
+    BEGIN
+        ALTER DATABASE [$(DatabaseName)]
+            SET READ_COMMITTED_SNAPSHOT OFF;
+    END
+
+
+GO
+IF EXISTS (SELECT 1
+           FROM   [master].[dbo].[sysdatabases]
+           WHERE  [name] = N'$(DatabaseName)')
+    BEGIN
+        ALTER DATABASE [$(DatabaseName)]
+            SET AUTO_UPDATE_STATISTICS_ASYNC OFF,
+                PAGE_VERIFY NONE,
+                DATE_CORRELATION_OPTIMIZATION OFF,
+                DISABLE_BROKER,
+                PARAMETERIZATION SIMPLE,
+                SUPPLEMENTAL_LOGGING OFF 
+            WITH ROLLBACK IMMEDIATE;
+    END
+
+
+GO
+IF IS_SRVROLEMEMBER(N'sysadmin') = 1
+    BEGIN
+        IF EXISTS (SELECT 1
+                   FROM   [master].[dbo].[sysdatabases]
+                   WHERE  [name] = N'$(DatabaseName)')
+            BEGIN
+                EXECUTE sp_executesql N'ALTER DATABASE [$(DatabaseName)]
+    SET TRUSTWORTHY OFF,
+        DB_CHAINING OFF 
+    WITH ROLLBACK IMMEDIATE';
+            END
+    END
+ELSE
+    BEGIN
+        PRINT N'The database settings cannot be modified. You must be a SysAdmin to apply these settings.';
+    END
+
+
+GO
+IF IS_SRVROLEMEMBER(N'sysadmin') = 1
+    BEGIN
+        IF EXISTS (SELECT 1
+                   FROM   [master].[dbo].[sysdatabases]
+                   WHERE  [name] = N'$(DatabaseName)')
+            BEGIN
+                EXECUTE sp_executesql N'ALTER DATABASE [$(DatabaseName)]
+    SET HONOR_BROKER_PRIORITY OFF 
+    WITH ROLLBACK IMMEDIATE';
+            END
+    END
+ELSE
+    BEGIN
+        PRINT N'The database settings cannot be modified. You must be a SysAdmin to apply these settings.';
+    END
+
 
 GO
 USE [$(DatabaseName)]
+GO
+IF fulltextserviceproperty(N'IsFulltextInstalled') = 1
+    EXECUTE sp_fulltext_database 'enable';
+
+
 GO
 /*
  Pre-Deployment Script Template							
@@ -171,17 +272,138 @@ alter table RoleToUsuario  drop constraint FK670ADBED108215A5
 
 
 GO
-PRINT N'Starting rebuilding table [dbo].[Torneos]...';
+PRINT N'Creating [dbo].[Categorias]...';
 
 
 GO
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+CREATE TABLE [dbo].[Categorias] (
+    [CategoriaId]       INT      IDENTITY (1, 1) NOT NULL,
+    [FechaInicio]       DATETIME NULL,
+    [FechaFin]          DATETIME NULL,
+    [FechaCreacion]     DATETIME NULL,
+    [FechaModificacion] DATETIME NULL,
+    [TorneoId]          INT      NULL,
+    [GanadorId]         INT      NULL,
+    PRIMARY KEY CLUSTERED ([CategoriaId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
 
-SET XACT_ABORT ON;
 
-BEGIN TRANSACTION;
+GO
+PRINT N'Creating [dbo].[Equipos]...';
 
-CREATE TABLE [dbo].[tmp_ms_xx_Torneos] (
+
+GO
+CREATE TABLE [dbo].[Equipos] (
+    [EquipoId]           INT            IDENTITY (1, 1) NOT NULL,
+    [Nombre]             NVARCHAR (255) NULL,
+    [TipoEquipo]         NVARCHAR (255) NULL,
+    [JugadorAVerificado] BIT            NULL,
+    [JugadorBVerificado] BIT            NULL,
+    [FechaCreacion]      DATETIME       NULL,
+    [FechaModificacion]  DATETIME       NULL,
+    [JugadorAId]         INT            NULL,
+    [JugadorBId]         INT            NULL,
+    PRIMARY KEY CLUSTERED ([EquipoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
+PRINT N'Creating [dbo].[EquipoToCategoria]...';
+
+
+GO
+CREATE TABLE [dbo].[EquipoToCategoria] (
+    [EquipoToCategoriaId] INT            IDENTITY (1, 1) NOT NULL,
+    [JugadorA]            NVARCHAR (255) NULL,
+    [JugadorB]            NVARCHAR (255) NULL,
+    [FechaCreacion]       DATETIME       NULL,
+    [FechaModificacion]   DATETIME       NULL,
+    [EquipoId]            INT            NULL,
+    [CategoriaId]         INT            NULL,
+    PRIMARY KEY CLUSTERED ([EquipoToCategoriaId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
+PRINT N'Creating [dbo].[Grupos]...';
+
+
+GO
+CREATE TABLE [dbo].[Grupos] (
+    [GrupoId]           INT      IDENTITY (1, 1) NOT NULL,
+    [FechaCreacion]     DATETIME NULL,
+    [FechaModificacion] DATETIME NULL,
+    [CategoriaId]       INT      NULL,
+    PRIMARY KEY CLUSTERED ([GrupoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
+PRINT N'Creating [dbo].[Jornadas]...';
+
+
+GO
+CREATE TABLE [dbo].[Jornadas] (
+    [JornadaId]         INT      IDENTITY (1, 1) NOT NULL,
+    [FechaCreacion]     DATETIME NULL,
+    [FechaModificacion] DATETIME NULL,
+    [GrupoId]           INT      NULL,
+    PRIMARY KEY CLUSTERED ([JornadaId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
+PRINT N'Creating [dbo].[Partidos]...';
+
+
+GO
+CREATE TABLE [dbo].[Partidos] (
+    [PartidoId]         INT      IDENTITY (1, 1) NOT NULL,
+    [Set1A]             INT      NULL,
+    [Set2A]             INT      NULL,
+    [Set3A]             INT      NULL,
+    [Set1B]             INT      NULL,
+    [Set2B]             INT      NULL,
+    [Set3B]             INT      NULL,
+    [FechaCreacion]     DATETIME NULL,
+    [FechaModificacion] DATETIME NULL,
+    [JornadaId]         INT      NULL,
+    [EquipoAId]         INT      NULL,
+    [EquipoBId]         INT      NULL,
+    [GanadorId]         INT      NULL,
+    PRIMARY KEY CLUSTERED ([PartidoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
+PRINT N'Creating [dbo].[Roles]...';
+
+
+GO
+CREATE TABLE [dbo].[Roles] (
+    [RoleId] INT            IDENTITY (1, 1) NOT NULL,
+    [Name]   NVARCHAR (255) NULL,
+    PRIMARY KEY CLUSTERED ([RoleId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
+PRINT N'Creating [dbo].[RoleToUsuario]...';
+
+
+GO
+CREATE TABLE [dbo].[RoleToUsuario] (
+    [UsuarioId] INT NOT NULL,
+    [RoleId]    INT NOT NULL
+);
+
+
+GO
+PRINT N'Creating [dbo].[Torneos]...';
+
+
+GO
+CREATE TABLE [dbo].[Torneos] (
     [TorneoId]          INT            IDENTITY (1, 1) NOT NULL,
     [Name]              NVARCHAR (255) NULL,
     [Name2]             NVARCHAR (255) NULL,
@@ -190,27 +412,23 @@ CREATE TABLE [dbo].[tmp_ms_xx_Torneos] (
     PRIMARY KEY CLUSTERED ([TorneoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
 
-IF EXISTS (SELECT TOP 1 1
-           FROM   [dbo].[Torneos])
-    BEGIN
-        SET IDENTITY_INSERT [dbo].[tmp_ms_xx_Torneos] ON;
-        INSERT INTO [dbo].[tmp_ms_xx_Torneos] ([TorneoId], [Name], [FechaCreacion], [FechaModificacion])
-        SELECT   [TorneoId],
-                 [Name],
-                 [FechaCreacion],
-                 [FechaModificacion]
-        FROM     [dbo].[Torneos]
-        ORDER BY [TorneoId] ASC;
-        SET IDENTITY_INSERT [dbo].[tmp_ms_xx_Torneos] OFF;
-    END
 
-DROP TABLE [dbo].[Torneos];
+GO
+PRINT N'Creating [dbo].[Usuarios]...';
 
-EXECUTE sp_rename N'[dbo].[tmp_ms_xx_Torneos]', N'Torneos';
 
-COMMIT TRANSACTION;
-
-SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+GO
+CREATE TABLE [dbo].[Usuarios] (
+    [UsuarioId]         INT            IDENTITY (1, 1) NOT NULL,
+    [Nombre]            NVARCHAR (255) NULL,
+    [Sexo]              NVARCHAR (255) NULL,
+    [TelefonoMovil]     INT            NULL,
+    [Email]             NVARCHAR (255) NULL,
+    [Password]          NVARCHAR (255) NULL,
+    [FechaCreacion]     DATETIME       NULL,
+    [FechaModificacion] DATETIME       NULL,
+    PRIMARY KEY CLUSTERED ([UsuarioId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
 
 
 GO
@@ -250,6 +468,103 @@ ALTER TABLE [dbo].[Equipos] WITH NOCHECK
 
 
 GO
+PRINT N'Creating FK5F6C6AB149E41EB...';
+
+
+GO
+ALTER TABLE [dbo].[EquipoToCategoria] WITH NOCHECK
+    ADD CONSTRAINT [FK5F6C6AB149E41EB] FOREIGN KEY ([EquipoId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating FK5F6C6AB363F8A7F...';
+
+
+GO
+ALTER TABLE [dbo].[EquipoToCategoria] WITH NOCHECK
+    ADD CONSTRAINT [FK5F6C6AB363F8A7F] FOREIGN KEY ([CategoriaId]) REFERENCES [dbo].[Categorias] ([CategoriaId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating FK19033393363F8A7F...';
+
+
+GO
+ALTER TABLE [dbo].[Grupos] WITH NOCHECK
+    ADD CONSTRAINT [FK19033393363F8A7F] FOREIGN KEY ([CategoriaId]) REFERENCES [dbo].[Categorias] ([CategoriaId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating FK3A8C15D498DABC1A...';
+
+
+GO
+ALTER TABLE [dbo].[Jornadas] WITH NOCHECK
+    ADD CONSTRAINT [FK3A8C15D498DABC1A] FOREIGN KEY ([GrupoId]) REFERENCES [dbo].[Grupos] ([GrupoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating FKDAD4D23814375479...';
+
+
+GO
+ALTER TABLE [dbo].[Partidos] WITH NOCHECK
+    ADD CONSTRAINT [FKDAD4D23814375479] FOREIGN KEY ([EquipoAId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating FKDAD4D238B6DC29E2...';
+
+
+GO
+ALTER TABLE [dbo].[Partidos] WITH NOCHECK
+    ADD CONSTRAINT [FKDAD4D238B6DC29E2] FOREIGN KEY ([EquipoBId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating FKDAD4D238CAD1EE9A...';
+
+
+GO
+ALTER TABLE [dbo].[Partidos] WITH NOCHECK
+    ADD CONSTRAINT [FKDAD4D238CAD1EE9A] FOREIGN KEY ([GanadorId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating FKDAD4D238DC753F7D...';
+
+
+GO
+ALTER TABLE [dbo].[Partidos] WITH NOCHECK
+    ADD CONSTRAINT [FKDAD4D238DC753F7D] FOREIGN KEY ([JornadaId]) REFERENCES [dbo].[Jornadas] ([JornadaId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating FK670ADBED108215A5...';
+
+
+GO
+ALTER TABLE [dbo].[RoleToUsuario] WITH NOCHECK
+    ADD CONSTRAINT [FK670ADBED108215A5] FOREIGN KEY ([UsuarioId]) REFERENCES [dbo].[Usuarios] ([UsuarioId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating FK670ADBED3E3915FC...';
+
+
+GO
+ALTER TABLE [dbo].[RoleToUsuario] WITH NOCHECK
+    ADD CONSTRAINT [FK670ADBED3E3915FC] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Roles] ([RoleId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+-- Refactoring step to update target server with deployed transaction logs
+CREATE TABLE  [dbo].[__RefactorLog] (OperationKey UNIQUEIDENTIFIER NOT NULL PRIMARY KEY)
+GO
+sp_addextendedproperty N'microsoft_database_tools_support', N'refactoring log', N'schema', N'dbo', N'table', N'__RefactorLog'
+GO
+
+GO
 /*
 Post-Deployment Script Template							
 --------------------------------------------------------------------------------------
@@ -278,6 +593,46 @@ ALTER TABLE [dbo].[Categorias] WITH CHECK CHECK CONSTRAINT [FK9AD97672CAD1EE9A];
 ALTER TABLE [dbo].[Equipos] WITH CHECK CHECK CONSTRAINT [FKAA629BEFA82D91A];
 
 ALTER TABLE [dbo].[Equipos] WITH CHECK CHECK CONSTRAINT [FKAA629BEFACB3D91A];
+
+ALTER TABLE [dbo].[EquipoToCategoria] WITH CHECK CHECK CONSTRAINT [FK5F6C6AB149E41EB];
+
+ALTER TABLE [dbo].[EquipoToCategoria] WITH CHECK CHECK CONSTRAINT [FK5F6C6AB363F8A7F];
+
+ALTER TABLE [dbo].[Grupos] WITH CHECK CHECK CONSTRAINT [FK19033393363F8A7F];
+
+ALTER TABLE [dbo].[Jornadas] WITH CHECK CHECK CONSTRAINT [FK3A8C15D498DABC1A];
+
+ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [FKDAD4D23814375479];
+
+ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [FKDAD4D238B6DC29E2];
+
+ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [FKDAD4D238CAD1EE9A];
+
+ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [FKDAD4D238DC753F7D];
+
+ALTER TABLE [dbo].[RoleToUsuario] WITH CHECK CHECK CONSTRAINT [FK670ADBED108215A5];
+
+ALTER TABLE [dbo].[RoleToUsuario] WITH CHECK CHECK CONSTRAINT [FK670ADBED3E3915FC];
+
+
+GO
+IF EXISTS (SELECT 1
+           FROM   [master].[dbo].[sysdatabases]
+           WHERE  [name] = N'$(DatabaseName)')
+    BEGIN
+        DECLARE @VarDecimalSupported AS BIT;
+        SELECT @VarDecimalSupported = 0;
+        IF ((ServerProperty(N'EngineEdition') = 3)
+            AND (((@@microsoftversion / power(2, 24) = 9)
+                  AND (@@microsoftversion & 0xffff >= 3024))
+                 OR ((@@microsoftversion / power(2, 24) = 10)
+                     AND (@@microsoftversion & 0xffff >= 1600))))
+            SELECT @VarDecimalSupported = 1;
+        IF (@VarDecimalSupported > 0)
+            BEGIN
+                EXECUTE sp_db_vardecimal_storage_format N'$(DatabaseName)', 'ON';
+            END
+    END
 
 
 GO

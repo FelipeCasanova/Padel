@@ -6,11 +6,19 @@ using System.Web.Mvc;
 using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Menus;
 using Microsoft.Web.Mvc;
 using SharpArch.NHibernate.Web.Mvc;
+using Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Usuarios;
 
 namespace Padel.Web.Mvc.Areas.Admin.Controllers
 {
     public partial class JugadoresController : BaseController
     {
+        private readonly IJugadoresQuery jugadoresQuery;
+
+        public JugadoresController(IJugadoresQuery jugadoresQuery)
+        {
+            this.jugadoresQuery = jugadoresQuery;
+        }
+
         //
         // GET: /Admin/Jugadores/
 
@@ -37,16 +45,10 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
 
         [HttpPost]
         [Transaction]
-        public virtual ActionResult _Listado()
+        public virtual ActionResult _Listado(int? page, int? size)
         {
-            return Json(new List<object> { new { name = "name1", surname = "surname1" }
-                , new { name = "name2", surname = "surname2" }
-                , new { name = "name3", surname = "surname3" }
-            , new { name = "name2", surname = "surname2" }
-            , new { name = "name2", surname = "surname2" }
-            , new { name = "name2", surname = "surname2" }
-            , new { name = "name2", surname = "surname2" }
-            , new { name = "name2", surname = "surname2" }}, JsonRequestBehavior.AllowGet);
+            var viewModel = this.jugadoresQuery.GetJugadoresList(page ?? 1, size ?? int.MaxValue);
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
     }

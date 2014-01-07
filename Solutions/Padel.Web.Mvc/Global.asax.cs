@@ -114,6 +114,8 @@
                 new[] { Server.MapPath("~/bin/Padel.Infrastructure.dll") },
                 new AutoPersistenceModelGenerator().Generate(),
                 Server.MapPath("~/NHibernate.config"));
+
+            NHibernate.Glimpse.Plugin.RegisterSessionFactory(NHibernateSession.GetDefaultSessionFactory());
         }
     }
 }

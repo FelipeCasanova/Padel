@@ -6,3 +6,11 @@ C:\Projects\Padel\Database\PadelDatabase\sql\debug\Padel_Database.sqlcmdvars
 C:\Projects\Padel\Database\PadelDatabase\sql\debug\PadelDatabase.deploymanifest
 C:\Projects\Padel\Database\PadelDatabase\sql\debug\PadelDatabase.dbschema
 C:\Projects\Padel\Database\PadelDatabase\obj\Debug\PadelDatabase.dbschema
+C:\repos\padel\Database\PadelDatabase\sql\debug\Padel_Script.PreDeployment.sql
+C:\repos\padel\Database\PadelDatabase\sql\debug\Padel_Script.PostDeployment.sql
+C:\repos\padel\Database\PadelDatabase\sql\debug\Padel_Database.sqlsettings
+C:\repos\padel\Database\PadelDatabase\sql\debug\Padel_Database.sqldeployment
+C:\repos\padel\Database\PadelDatabase\sql\debug\Padel_Database.sqlcmdvars
+C:\repos\padel\Database\PadelDatabase\sql\debug\PadelDatabase.deploymanifest
+C:\repos\padel\Database\PadelDatabase\sql\debug\PadelDatabase.dbschema
+C:\repos\padel\Database\PadelDatabase\obj\Debug\PadelDatabase.dbschema
