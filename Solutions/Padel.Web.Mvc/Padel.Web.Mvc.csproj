@@ -311,8 +311,8 @@
     <None Include="Content\fuelux\fonts\fuelux-preloader.eot" />
     <None Include="Content\fuelux\fonts\fuelux-preloader.ttf" />
     <None Include="Content\fuelux\fonts\fuelux-preloader.woff" />
-    <None Include="Scripts\angularjs\angular.min.js.map" />
-    <None Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\angularjs\angular.min.js.map" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
