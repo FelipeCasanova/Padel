@@ -19,7 +19,7 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
 
         public override string GetPageTitle()
         {
-            return "Home";
+            return "Dashboard";
         }
 
         public override void SetBreadcrumb(ViewModels.Menus.BreadcrumbModelView breadcrumbModelView)

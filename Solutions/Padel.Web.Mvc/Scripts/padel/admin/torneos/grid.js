@@ -1,5 +1,5 @@
 ﻿var app = angular.module('padelApp', ['ngGrid']);
-app.controller('jugadoresCtrl', function ($scope, $http) {
+app.controller('torneosCtrl', function ($scope, $http) {
     $scope.filterOptions = {
         filterText: "",
         useExternalFilter: true
@@ -23,14 +23,14 @@ app.controller('jugadoresCtrl', function ($scope, $http) {
             var data;
             if (searchText) {
                 var ft = searchText.toLowerCase();
-                $http.post('jugadores/_listado').success(function (largeLoad) {
+                $http.post('torneos/_listado').success(function (largeLoad) {
                     data = largeLoad.filter(function (item) {
                         return JSON.stringify(item).toLowerCase().indexOf(ft) != -1;
                     });
                     $scope.setPagingData(data, page, pageSize);
                 });
             } else {
-                $http.post('jugadores/_listado').success(function (largeLoad) {
+                $http.post('torneos/_listado').success(function (largeLoad) {
                     $scope.setPagingData(largeLoad, page, pageSize);
                 });
             }
@@ -52,12 +52,12 @@ app.controller('jugadoresCtrl', function ($scope, $http) {
 
     $scope.gridOptions = {
         data: 'myData',
-        columnDefs: [{ field: 'Nombre', displayName: 'Nombre' }, { field: 'TelefonoMovil', displayName: 'Móvil' }, { field: 'Email', displayName: 'Email' }, { field: 'Role', displayName: 'Rol'}],
+        columnDefs: [{ field: 'Nombre', displayName: 'Nombre' }, { field: 'TipoStr', displayName: 'Tipo' }, { field: 'Categoria', displayName: 'Categoria' } ],
         enablePaging: true,
         showFooter: true,
         footerTemplate: '<div class="widget-foot">' +
                 '<ul class="pagination pull-left">' +
-                    '<li><span>Número total de usuarios {{totalServerItems}}</span></li>' +
+                    '<li><span>Número total de torneos {{totalServerItems}}</span></li>' +
                 '</ul>' +
                 '<ul class="pagination pull-right">' +
                     '<li><a href="#" ng-click="pageBackward()" ng-disabled="cantPageBackward()">Prev</a></li>' +

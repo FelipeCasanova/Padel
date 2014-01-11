@@ -73,6 +73,11 @@
 
 /******************************** Padel *****************************************/
 
+.all-width
+{
+    width: 100%;
+}
+    
 .carousel-caption
 {
     text-shadow: 0 2px 2px rgba(0,0,0,0.7) !important;

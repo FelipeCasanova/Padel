@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Padel.Domain;
 using MvcContrib.Pagination;
-using Padel.Web.Mvc.Controllers.ViewModels;
+using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels;
 
 namespace Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Usuarios
 {

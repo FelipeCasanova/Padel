@@ -25,9 +25,6 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
     public partial class TorneosController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public TorneosController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected TorneosController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -44,6 +41,12 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _Listado()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Listado);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public TorneosController Actions { get { return MVC.Admin.Torneos; } }
@@ -61,15 +64,26 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string _Listado = "_Listado";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string _Listado = "_Listado";
         }
 
 
+        static readonly ActionParamsClass__Listado s_params__Listado = new ActionParamsClass__Listado();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__Listado _ListadoParams { get { return s_params__Listado; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__Listado
+        {
+            public readonly string page = "page";
+            public readonly string size = "size";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -97,6 +111,17 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void _ListadoOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int? page, int? size);
+
+        public override System.Web.Mvc.ActionResult _Listado(int? page, int? size)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Listado);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "size", size);
+            _ListadoOverride(callInfo, page, size);
             return callInfo;
         }
 

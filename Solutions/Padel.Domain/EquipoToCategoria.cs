@@ -14,10 +14,5 @@ namespace Padel.Domain
         [Required]
         public virtual Categoria Categoria { get; set; }
 
-        [Required]
-        public virtual EstadoUsuarioTorneEnum JugadorA { get; set; }
-
-        [Required]
-        public virtual EstadoUsuarioTorneEnum JugadorB { get; set; }
     }
 }

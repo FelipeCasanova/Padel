@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Padel.Domain;
 using MvcContrib.Pagination;
-using SharpArch.NHibernate;
-using Padel.Web.Mvc.Controllers.ViewModels;
 using NHibernate.Transform;
+using Padel.Domain;
+using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels;
+using SharpArch.NHibernate;
 
 namespace Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Usuarios
 {

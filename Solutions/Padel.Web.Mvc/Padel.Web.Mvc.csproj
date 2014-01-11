@@ -193,9 +193,12 @@
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\JugadoresController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Queries\Torneos\ITorneosQuery.cs" />
+    <Compile Include="Areas\Admin\Controllers\Queries\Torneos\TorneosQuery.cs" />
     <Compile Include="Areas\Admin\Controllers\TorneosController.cs" />
     <Compile Include="Areas\Admin\Controllers\ViewModels\Menus\BreadcrumbModelView.cs" />
     <Compile Include="Areas\Admin\Controllers\ViewModels\Menus\SideBarModelView.cs" />
+    <Compile Include="Areas\Admin\Controllers\ViewModels\TorneoViewModel.cs" />
     <Compile Include="CastleWindsor\ComponentRegistrar.cs" />
     <Compile Include="ContactoController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -204,6 +207,8 @@
     <Compile Include="Controllers\PremiosController.cs" />
     <Compile Include="Areas\Admin\Controllers\Queries\Usuarios\IJugadoresQuery.cs" />
     <Compile Include="Areas\Admin\Controllers\Queries\Usuarios\JugadoresQuery.cs" />
+    <Compile Include="Controllers\Queries\Torneos\ITorneosQuery.cs" />
+    <Compile Include="Controllers\Queries\Torneos\TorneosQuery.cs" />
     <Compile Include="Controllers\ResultadosController.cs" />
     <Compile Include="Controllers\GaleriasController.cs" />
     <Compile Include="Controllers\ContactoController.cs" />
@@ -212,8 +217,9 @@
     <Compile Include="Controllers\RouteRegistrar.cs" />
     <Compile Include="Controllers\TorneosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
-    <Compile Include="Controllers\ViewModels\JugadorViewModel.cs" />
+    <Compile Include="Areas\Admin\Controllers\ViewModels\JugadorViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Menu\MenuModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Torneos\TorneoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\UsuarioEntrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\UsuarioRegistrarModelView.cs" />
     <Compile Include="Filters\ExceptionLoggerFilter.cs" />
@@ -321,6 +327,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\padel\admin\admin.js" />
     <Content Include="Scripts\padel\admin\jugadores\grid.js" />
+    <Content Include="Scripts\padel\admin\torneos\grid.js" />
     <Content Include="Scripts\padel\padel.js" />
     <Content Include="Scripts\slimscroll\jquery.slimscroll.min.js" />
     <None Include="T4MVC.tt.settings.xml" />
@@ -380,7 +387,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

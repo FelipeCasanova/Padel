@@ -13,7 +13,9 @@ namespace Padel.Domain
             Categorias = new List<Categoria>();
         }
 
-        public virtual string Name { get; set; }
+        public virtual string Nombre { get; set; }
+
+        public virtual TipoTorneoEnum Tipo { get; set; }
 
         [Required]
         public virtual IList<Categoria> Categorias { get; set; }

@@ -229,6 +229,54 @@
 					</Element>
 				</Entry>
 				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Categorias].[Nombre]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="255" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Categorias].[Estado]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="255" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Categorias].[TipoEquipo]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="255" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
 					<Element Type="ISql100SimpleColumn" Name="[dbo].[Categorias].[FechaInicio]">
 						<Relationship Name="TypeSpecifier">
 							<Entry>
@@ -489,38 +537,6 @@
 									<Relationship Name="Type">
 										<Entry>
 											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SimpleColumn" Name="[dbo].[EquipoToCategoria].[JugadorA]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="255" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="ISql100SimpleColumn" Name="[dbo].[EquipoToCategoria].[JugadorB]">
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="ISql90TypeSpecifier">
-									<Property Name="Length" Value="255" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
 										</Entry>
 									</Relationship>
 								</Element>
@@ -1365,7 +1381,7 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SimpleColumn" Name="[dbo].[Torneos].[Name]">
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Torneos].[Nombre]">
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">
@@ -1381,7 +1397,7 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SimpleColumn" Name="[dbo].[Torneos].[Name2]">
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Torneos].[Tipo]">
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">

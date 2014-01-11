@@ -19,7 +19,7 @@
     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Dirección de correo electrónico", autocomplete = "off", ng_model = "email" })
     @Html.ValidationMessageFor(m => m.Email)
 </div>
-<div class="input-group well">
+<div class="input-group well all-width">
     <span class="padel-label">@Html.Raw("Indique su sexo")</span>
     @Html.RadioButtonFor(m => m.Usuario.Sexo, "Hombre", new { @class = "padel-radiobutton", popovercontainer = "true" })
     Hombre

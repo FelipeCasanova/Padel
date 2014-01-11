@@ -14,6 +14,15 @@ namespace Padel.Domain
         }
 
         [Required]
+        public virtual string Nombre { get; set; }
+
+        [Required]
+        public virtual EstadoCategoriaEnum Estado { get; set; }
+
+        [Required]
+        public virtual TipoEquipoEnum TipoEquipo { get; set; }
+
+        [Required]
         public virtual DateTime FechaInicio { get; set; }
 
         [Required]

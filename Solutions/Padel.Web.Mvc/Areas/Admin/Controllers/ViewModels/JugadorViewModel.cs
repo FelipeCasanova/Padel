@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Padel.Domain;
 
-namespace Padel.Web.Mvc.Controllers.ViewModels
+namespace Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels
 {
     public class JugadorViewModel
     {

@@ -1,5 +1,25 @@
-﻿@{
-    ViewBag.Title = "Padel";
+﻿@model IList<Padel.Web.Mvc.Controllers.ViewModels.Torneos.TorneoViewModel>
+@{
+    ViewBag.Title = "Torneos";
     Layout = @MVC.Shared.Views._Layout;
 }
-Torneo
+@foreach (var torneo in Model)
+{
+    var index = Model.IndexOf(torneo) ;
+
+    if (index % 4 == 0)
+    {
+    @Html.Raw("<div class='row featurette'>")
+    
+    }
+    
+    <div class="col-md-3">
+        @torneo.Nombre @torneo.TipoStr
+    </div>
+    
+    if ((index + 1) % 4 == 0 || Model.Last() == torneo)
+    {
+    @Html.Raw("</div>")
+    }
+
+}

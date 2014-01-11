@@ -86,6 +86,23 @@ $(document).ready(function () {
             $("#nav .has_sub .pull-right i").addClass("fa-chevron-left").removeClass("fa-chevron-down").removeClass("fa-chevron-right");
             $(".content").removeClass("enlarged");
         }
+
+        var element = angular.element($("[ng-controller=jugadoresCtrl]"));
+        if (element.size() > 0) {
+            var scope = element.scope()
+            scope.$apply(function () {
+                scope.gridOptions.ngGrid.$canvas.resize();
+            })
+        }
+
+        element = angular.element($("[ng-controller=torneosCtrl]"));
+        if (element.size() > 0) {
+            var scope = element.scope()
+            scope.$apply(function () {
+                scope.gridOptions.ngGrid.$canvas.resize();
+            })
+        }
+        
     });
 
     $(".sidebar-dropdown a").on('click', function (e) {

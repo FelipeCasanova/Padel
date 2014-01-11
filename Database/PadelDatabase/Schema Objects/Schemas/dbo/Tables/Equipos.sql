@@ -2,7 +2,7 @@
 -- Script Template
 -- =============================================
 create table Equipos (
-        EquipoId INT IDENTITY NOT NULL,
+       EquipoId INT IDENTITY NOT NULL,
        Nombre NVARCHAR(255) null,
        TipoEquipo NVARCHAR(255) null,
        JugadorAVerificado BIT null,
