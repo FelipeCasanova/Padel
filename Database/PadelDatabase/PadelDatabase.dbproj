@@ -26,8 +26,8 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>.\sql\release\</OutputPath>
     <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
-    <TargetConnectionString>Data Source=a7625145-7608-4204-9d51-a2aa00019676.sqlserver.sequelizer.com;Persist Security Info=True;User ID=ojzqrtngswlvtjji;Pooling=False</TargetConnectionString>
-    <TargetDatabase>dba7625145760842049d51a2aa00019676</TargetDatabase>
+    <TargetConnectionString>Data Source=flipersanvi.no-ip.biz;Persist Security Info=True;User ID=sa;Pooling=False</TargetConnectionString>
+    <TargetDatabase>Padel</TargetDatabase>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <SuppressWarnings>
     </SuppressWarnings>
