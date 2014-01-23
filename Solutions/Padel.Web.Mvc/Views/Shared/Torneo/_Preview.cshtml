@@ -1,0 +1,81 @@
+﻿@model IList<Padel.Web.Mvc.Controllers.ViewModels.Torneos.TorneoViewModel>
+@{
+    var suffix = "";
+    if (Model.Count > 0)
+    {
+        suffix = Model.First().TipoStr + Model.First().EstadoCategoria;
+    }
+}
+<!-- Carousel
+    ================================================== -->
+<div id="myCarousel@(suffix)" class="carousel slide small" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <li data-target="#myCarousel@(suffix)" data-slide-to="@i" class="@(i == 0 ? "active" : "")">
+            </li>
+        }
+    </ol>
+    <div class="carousel-inner">
+        @foreach (var torneo in Model)
+        {
+            <div class="item @(Model.IndexOf(torneo) == 0 ? "active" : "")">
+                <img style="height:auto;" src="@Url.Content(Links.Content.img.torneo_backgroung_jpg)" alt="Regístrate en padel" />
+                <div class="container">
+                    <div class="carousel-caption head">
+                        <h3>
+                            <span class="label label-default">Lv. @torneo.NivelMin
+                                @if (torneo.NivelMin != torneo.NivelMax) { 
+                                    <text>
+                                    -  @torneo.NivelMax
+                                    </text>   
+                                }
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="carousel-caption">
+                        <h2>
+                            Torneo @torneo.Nombre @("-")
+                            @torneo.TipoStr<span class="badge pull-right">@torneo.NumeroEquipos</span></h2>
+                        @if (torneo.EstadoCategoria != Padel.Domain.EstadoCategoriaEnum.Progreso)
+                        {
+                            <h3>
+                                Precio - @(Html.Partial(MVC.Shared.Views.Torneo._Currency, torneo))
+                            </h3>
+
+                        }
+                        <p>
+                            Categoría del torneo - <code>@(torneo.Categoria)
+                                / @(torneo.TipoEquipoStr)</code>
+                        </p>
+                        @if (torneo.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Progreso)
+                        {
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="@Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name)" role="button">
+                                    Ver detalles</a></p>
+                        }
+                        else if (User.Identity.IsAuthenticated)
+                        {
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#" role="button" data-toggle="modal" data-target="#registroModal">
+                                    Apuntaté</a></p>
+                        }
+                        else
+                        { 
+                            <p>
+                                Si quieres participar en el torneo registraté de forma <code>gratuita</code>.</p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#" role="button" data-toggle="modal" data-target="#entrarModal">
+                                    Entra</a></p>
+                        }
+                    </div>
+                </div>
+            </div>   
+        }
+    </div>
+    <a class="left carousel-control" href="#myCarousel@(suffix)" data-slide="prev"><span
+        class="glyphicon glyphicon-chevron-left"></span></a><a class="right carousel-control" href="#myCarousel@(suffix)" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+<!-- /.carousel -->

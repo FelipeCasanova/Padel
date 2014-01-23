@@ -200,16 +200,19 @@ PRINT N'Creating [dbo].[Categorias]...';
 
 GO
 CREATE TABLE [dbo].[Categorias] (
-    [CategoriaId]       INT            IDENTITY (1, 1) NOT NULL,
-    [Nombre]            NVARCHAR (255) NULL,
-    [Estado]            NVARCHAR (255) NULL,
-    [TipoEquipo]        NVARCHAR (255) NULL,
-    [FechaInicio]       DATETIME       NULL,
-    [FechaFin]          DATETIME       NULL,
-    [FechaCreacion]     DATETIME       NULL,
-    [FechaModificacion] DATETIME       NULL,
-    [TorneoId]          INT            NULL,
-    [GanadorId]         INT            NULL,
+    [CategoriaId]       INT             IDENTITY (1, 1) NOT NULL,
+    [Nombre]            NVARCHAR (255)  NULL,
+    [NivelMin]          INT             NOT NULL,
+    [NivelMax]          INT             NOT NULL,
+    [Estado]            NVARCHAR (255)  NOT NULL,
+    [TipoEquipo]        NVARCHAR (255)  NOT NULL,
+    [Precio]            DECIMAL (10, 3) NOT NULL,
+    [FechaInicio]       DATETIME        NOT NULL,
+    [FechaFin]          DATETIME        NULL,
+    [FechaCreacion]     DATETIME        NULL,
+    [FechaModificacion] DATETIME        NULL,
+    [TorneoId]          INT             NULL,
+    [GanadorId]         INT             NULL,
     PRIMARY KEY CLUSTERED ([CategoriaId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
 
@@ -239,12 +242,10 @@ PRINT N'Creating [dbo].[EquipoToCategoria]...';
 
 GO
 CREATE TABLE [dbo].[EquipoToCategoria] (
-    [EquipoToCategoriaId] INT      IDENTITY (1, 1) NOT NULL,
-    [FechaCreacion]       DATETIME NULL,
-    [FechaModificacion]   DATETIME NULL,
-    [EquipoId]            INT      NULL,
-    [CategoriaId]         INT      NULL,
-    PRIMARY KEY CLUSTERED ([EquipoToCategoriaId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+    [FechaCreacion]     DATETIME NULL,
+    [FechaModificacion] DATETIME NULL,
+    [EquipoId]          INT      NOT NULL,
+    [CategoriaId]       INT      NOT NULL
 );
 
 
@@ -343,14 +344,18 @@ PRINT N'Creating [dbo].[Usuarios]...';
 
 GO
 CREATE TABLE [dbo].[Usuarios] (
-    [UsuarioId]         INT            IDENTITY (1, 1) NOT NULL,
-    [Nombre]            NVARCHAR (255) NULL,
-    [Sexo]              NVARCHAR (255) NULL,
-    [TelefonoMovil]     INT            NULL,
-    [Email]             NVARCHAR (255) NULL,
-    [Password]          NVARCHAR (255) NULL,
-    [FechaCreacion]     DATETIME       NULL,
-    [FechaModificacion] DATETIME       NULL,
+    [UsuarioId]             INT             IDENTITY (1, 1) NOT NULL,
+    [Nombre]                NVARCHAR (255)  NULL,
+    [Sexo]                  NVARCHAR (255)  NULL,
+    [TelefonoMovil]         INT             NULL,
+    [Email]                 NVARCHAR (255)  NULL,
+    [Password]              NVARCHAR (255)  NULL,
+    [PuntosExperiencia]     INT             NOT NULL,
+    [Nivel]                 AS              (PuntosExperiencia / 100),
+    [AplicacionExperiencia] INT             NOT NULL,
+    [DineroFicticio]        DECIMAL (10, 3) NOT NULL,
+    [FechaCreacion]         DATETIME        NULL,
+    [FechaModificacion]     DATETIME        NULL,
     PRIMARY KEY CLUSTERED ([UsuarioId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
 
@@ -557,6 +562,12 @@ IF EXISTS (SELECT 1
                 EXECUTE sp_db_vardecimal_storage_format N'$(DatabaseName)', 'ON';
             END
     END
+
+
+GO
+ALTER DATABASE [$(DatabaseName)]
+    SET MULTI_USER 
+    WITH ROLLBACK IMMEDIATE;
 
 
 GO

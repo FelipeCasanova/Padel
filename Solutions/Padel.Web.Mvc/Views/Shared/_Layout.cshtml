@@ -9,11 +9,11 @@
     <link href="@Url.Content(@Links.Content.bootstrap.css.bootstrap_theme_css)" rel="stylesheet" />
     <link href="@Url.Content(@Links.Content.bootstrap.carousel.carousel_css)" rel="stylesheet" />
     <link href="@Url.Content(@Links.Content.Site_css)" rel="stylesheet" type="text/css" />
+    @RenderSection("CSSSection", false)
     <title>@ViewBag.Title</title>
 </head>
 <body>
     @Html.Partial(@MVC.Shared.Views._NavBar)
-    @Html.Partial(@MVC.Shared.Views._Carousel)
     <!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
@@ -33,5 +33,6 @@
     <script src="@Url.Content(@Links.Scripts.bootstrap.holder_js)" type="text/javascript"></script>
     <script src="@Url.Content(@Links.Scripts.angularjs.angular_min_js)" type="text/javascript"></script>
     <script src="@Url.Content(@Links.Scripts.padel.padel_js)" type="text/javascript"></script>
+    @RenderSection("JSSection", false)
 </body>
 </html>

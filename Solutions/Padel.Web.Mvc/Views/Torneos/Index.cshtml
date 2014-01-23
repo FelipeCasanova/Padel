@@ -3,23 +3,182 @@
     ViewBag.Title = "Torneos";
     Layout = @MVC.Shared.Views._Layout;
 }
-@foreach (var torneo in Model)
-{
-    var index = Model.IndexOf(torneo) ;
-
-    if (index % 4 == 0)
-    {
-    @Html.Raw("<div class='row featurette'>")
-    
-    }
-    
-    <div class="col-md-3">
-        @torneo.Nombre @torneo.TipoStr
-    </div>
-    
-    if ((index + 1) % 4 == 0 || Model.Last() == torneo)
-    {
-    @Html.Raw("</div>")
-    }
-
+@section CSSSection{
+    <link href="@Url.Content(@Links.Content.jqtimeto.timeTo_css)" rel="stylesheet" type="text/css" />
 }
+@section JSSection{
+    <script src="@Url.Content(@Links.Scripts.jqtimeto.jquery_timeTo_min_js)" type="text/javascript"></script>
+}
+<div class="container content">
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="well">
+            Por el momento no hay torneos visibles. Inténtelo de nuevo más tarde. Gracias.
+        </div>
+    }
+    else
+    {
+        var torneosEspecial = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Especial && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Pendiente).ToList();
+        var torneosEspecialProgreso = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Especial && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Progreso).ToList();
+        var torneosEstandar = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Estandar && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Pendiente).ToList();
+        var torneosEstandarProgreso = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Estandar && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Progreso).ToList();
+        var torneosMini = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Mini && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Pendiente).ToList();
+        var torneosMiniProgreso = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Mini && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Progreso).ToList();
+
+        if (torneosEspecial.Count() != 0 || torneosEspecialProgreso.Count() != 0)
+        {
+        <div class="well well-sm especial">
+            <div class="row featurette">
+                <div class="col-md-5">
+                    <h2 class="featurette-heading small">
+                        Torneo - <span class="text-muted">@(Padel.Domain.TipoTorneoEnum.Especial).</span></h2>
+                    @if (torneosEspecial.Count() != 0)
+                    {
+                        <div class="especial-pendiente show">
+                            <p class="lead">
+                                Echa un vistazo a los torneos especiales que hay disponibles.</p>
+                            @if (torneosEspecialProgreso.Count() != 0)
+                            {
+                                <p class="center">
+                                    <a class="btn btn-lg btn-primary center" href="javascript:{$('.especial-pendiente').toggleClass('show hidden');$('.especial-progreso').toggleClass('show hidden');}"
+                                        role="button">Ver torneos en progreso</a></p>
+                            }
+                        </div>
+                    }
+                    @if (torneosEspecialProgreso.Count() != 0)
+                    {
+                        <div class="especial-progreso @(torneosEspecial.Count() != 0 ? "hidden" : "")">
+                            <p class="lead">
+                                Aquí te mostramos todos los torneos que hay en <b>progreso</b>.</p>
+                            @if (torneosEspecial.Count() != 0)
+                            {
+                                <p class="center">
+                                    <a class="btn btn-lg btn-primary center" href="javascript:{$('.especial-pendiente').toggleClass('show hidden');$('.especial-progreso').toggleClass('show hidden');}"
+                                        role="button">Ver torneos pendientes</a></p>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="col-md-7">
+                    @if (torneosEspecial.Count() != 0)
+                    {
+                        <div class="especial-pendiente show">
+                            @Html.Partial(MVC.Shared.Views.Torneo._Preview, torneosEspecial)
+                        </div>
+                    }
+                    @if (torneosEspecialProgreso.Count() != 0)
+                    {
+                        <div class="especial-progreso @(torneosEspecial.Count() != 0 ? "hidden" : "")">
+                            @Html.Partial(MVC.Shared.Views.Torneo._Preview, torneosEspecialProgreso)
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        }
+
+        if (torneosEstandar.Count() != 0 || torneosEstandarProgreso.Count() != 0)
+        {
+        <div class="well well-sm estandar">
+            <div class="row featurette">
+                <div class="col-md-5">
+                    <h2 class="featurette-heading small">
+                        Torneo - <span class="text-muted">@(Padel.Domain.TipoTorneoEnum.Estandar).</span></h2>
+                    @if (torneosEstandar.Count() != 0)
+                    {
+                        <div class="estandar-pendiente show">
+                            <p class="lead">
+                                Echa un vistazo a los torneos estándar que hay disponibles.</p>
+                            @if (torneosEstandarProgreso.Count() != 0)
+                            {
+                                <p class="center">
+                                    <a class="btn btn-lg btn-primary center" href="javascript:{$('.estandar-pendiente').toggleClass('show hidden');$('.estandar-progreso').toggleClass('show hidden');}"
+                                        role="button">Ver torneos en progreso</a></p>
+                            }
+                        </div>
+                    }
+                    @if (torneosEstandarProgreso.Count() != 0)
+                    {
+                        <div class="estandar-progreso @(torneosEstandar.Count() != 0 ? "hidden" : "")">
+                            <p class="lead">
+                                Aquí te mostramos todos los torneos que hay en <b>progreso</b>.</p>
+                            @if (torneosEstandar.Count() != 0)
+                            {
+                                <p class="center">
+                                    <a class="btn btn-lg btn-primary center" href="javascript:{$('.estandar-pendiente').toggleClass('show hidden');$('.estandar-progreso').toggleClass('show hidden');}"
+                                        role="button">Ver torneos pendientes</a></p>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="col-md-7">
+                    @if (torneosEstandar.Count() != 0)
+                    {
+                        <div class="estandar-pendiente show">
+                            @Html.Partial(MVC.Shared.Views.Torneo._Preview, torneosEstandar)
+                        </div>
+                    }
+                    @if (torneosEstandarProgreso.Count() != 0)
+                    {
+                        <div class="estandar-progreso @(torneosEstandar.Count() != 0 ? "hidden" : "")">
+                            @Html.Partial(MVC.Shared.Views.Torneo._Preview, torneosEstandarProgreso)
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        }
+
+        if (torneosMini.Count() != 0 || torneosMiniProgreso.Count() != 0)
+        {
+        <div class="well well-sm mini">
+            <div class="row featurette">
+                <div class="col-md-7">
+                    @if (torneosMini.Count() != 0)
+                    {
+                        <div class="mini-pendiente show">
+                            @Html.Partial(MVC.Shared.Views.Torneo._Preview, torneosMini)
+                        </div>
+                    }
+                    @if (torneosMiniProgreso.Count() != 0)
+                    {
+                        <div class="mini-progreso @(torneosEstandar.Count() != 0 ? "hidden" : "")">
+                            @Html.Partial(MVC.Shared.Views.Torneo._Preview, torneosMiniProgreso)
+                        </div>
+                    }
+                </div>
+                <div class="col-md-5">
+                    <h2 class="featurette-heading small">
+                        Torneo - <span class="text-muted">@(Padel.Domain.TipoTorneoEnum.Mini).</span></h2>
+                    @if (torneosMini.Count() != 0)
+                    {
+                        <div class="mini-pendiente show">
+                            <p class="lead">
+                                Echa un vistazo a los torneos mini que hay disponibles.</p>
+                            @if (torneosMiniProgreso.Count() != 0)
+                            {
+                                <p>
+                                    <a class="btn btn-lg btn-primary center" href="javascript:{$('.mini-pendiente').toggleClass('show hidden');$('.mini-progreso').toggleClass('show hidden');}"
+                                        role="button">Ver torneos en progreso</a></p>
+                            }
+                        </div>
+                    }
+                    @if (torneosMiniProgreso.Count() != 0)
+                    {
+                        <div class="mini-progreso @(torneosEstandar.Count() != 0 ? "hidden" : "")">
+                            <p class="lead">
+                                Aquí te mostramos todos los torneos que hay en <b>progreso</b>.</p>
+                            @if (torneosMini.Count() != 0)
+                            {
+                                <p>
+                                    <a class="btn btn-lg btn-primary center" href="javascript:{$('.mini-pendiente').toggleClass('show hidden');$('.mini-progreso').toggleClass('show hidden');}"
+                                        role="button">Ver torneos pendientes</a></p>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        }
+    }
+</div>

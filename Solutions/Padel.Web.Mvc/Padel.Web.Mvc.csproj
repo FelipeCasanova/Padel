@@ -282,6 +282,8 @@
     <Content Include="Content\img\bola_red.jpg" />
     <Content Include="Content\img\chica_padel.jpg" />
     <Content Include="Content\img\competicion_padel.jpg" />
+    <Content Include="Content\img\torneo_backgroung.jpg" />
+    <Content Include="Content\jqtimeto\timeTo.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -297,6 +299,8 @@
     <Content Include="Scripts\bootstrap\holder.js" />
     <Content Include="Scripts\fuelux\loader.js" />
     <Content Include="Scripts\fuelux\loader.min.js" />
+    <Content Include="Scripts\jqtimeto\jquery.timeTo.js" />
+    <Content Include="Scripts\jqtimeto\jquery.timeTo.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Areas\Admin\Views\Web.config" />
@@ -365,6 +369,8 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
     <None Include="T4MVC.tt.hooks.t4" />
+    <Content Include="Views\Shared\Torneo\_Preview.cshtml" />
+    <Content Include="Views\Shared\Torneo\_Currency.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Padel.Domain\Padel.Domain.csproj">
@@ -387,6 +393,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

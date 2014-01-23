@@ -138,6 +138,15 @@ namespace Links
             public static readonly string loader_min_js = Url("loader.min.js");
         }
     
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class jqtimeto {
+            private const string URLPATH = "~/Scripts/jqtimeto";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string jquery_timeTo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.timeTo.min.js") ? Url("jquery.timeTo.min.js") : Url("jquery.timeTo.js");
+            public static readonly string jquery_timeTo_min_js = Url("jquery.timeTo.min.js");
+        }
+    
         public static readonly string jquery_1_9_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.9.1.min.js") ? Url("jquery-1.9.1.min.js") : Url("jquery-1.9.1.js");
         public static readonly string jquery_1_9_1_min_js = Url("jquery-1.9.1.min.js");
         public static readonly string jquery_1_9_1_min_map = Url("jquery-1.9.1.min.map");
@@ -330,6 +339,16 @@ namespace Links
             public static readonly string bola_red_jpg = Url("bola_red.jpg");
             public static readonly string chica_padel_jpg = Url("chica_padel.jpg");
             public static readonly string competicion_padel_jpg = Url("competicion_padel.jpg");
+            public static readonly string torneo_backgroung_jpg = Url("torneo_backgroung.jpg");
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class jqtimeto {
+            private const string URLPATH = "~/Content/jqtimeto";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string timeTo_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/timeTo.min.css") ? Url("timeTo.min.css") : Url("timeTo.css");
+                 
         }
     
         public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");

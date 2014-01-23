@@ -164,7 +164,7 @@ namespace Padel.Web.Mvc.Controllers
         public virtual ActionResult Logout()
         {
             FederatedAuthentication.SessionAuthenticationModule.SignOut();
-            return Redirect(Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name));
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
 
     }

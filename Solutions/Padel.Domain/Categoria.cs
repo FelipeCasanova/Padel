@@ -10,17 +10,28 @@ namespace Padel.Domain
     {
         public Categoria()
         {
-            Grupo = new List<Grupo>();
+            Grupos = new List<Grupo>();
+            Equipos = new List<Equipo>();
         }
 
         [Required]
         public virtual string Nombre { get; set; }
 
         [Required]
+        public virtual int NivelMin { get; set; }
+
+        [Required]
+        public virtual int NivelMax { get; set; }
+
+        [Required]
         public virtual EstadoCategoriaEnum Estado { get; set; }
 
         [Required]
         public virtual TipoEquipoEnum TipoEquipo { get; set; }
+
+        [Required]
+        [Range(5, 100)]
+        public virtual Decimal Precio { get; set; }
 
         [Required]
         public virtual DateTime FechaInicio { get; set; }
@@ -32,8 +43,11 @@ namespace Padel.Domain
         public virtual Torneo Torneo { get; set; }
 
         [Required]
-        public virtual IList<Grupo> Grupo { get; set; }
+        public virtual IList<Grupo> Grupos { get; set; }
 
+        [Required]
+        public virtual IList<Equipo> Equipos { get; set; }
+        
         public virtual Equipo Ganador { get; set; }
     }
 }

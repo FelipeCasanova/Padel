@@ -34,6 +34,22 @@ namespace Padel.Domain
         public virtual string Password { get; set; }
 
         [Required]
+        [Display(Name = "Lv.")]
+        public virtual int Nivel { get; set; }
+
+        [Required]
+        [Display(Name = "Exp.")]
+        public virtual int PuntosExperiencia { get; set; }
+
+        [Required]
+        [Display(Name = "Corazones")]
+        public virtual int AplicacionExperiencia { get; set; }
+
+        [Required]
+        [Display(Name = "Bola/s")]
+        public virtual int DineroFicticio { get; set; }
+
+        [Required]
         public virtual IList<Role> Roles { get; set; }
 
     }

@@ -46,6 +46,17 @@ namespace T4MVC
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _LayoutLogin = "~/Views/Shared/_LayoutLogin.cshtml";
             public readonly string _NavBar = "~/Views/Shared/_NavBar.cshtml";
+            static readonly _DisplayTemplatesClass s_DisplayTemplates = new _DisplayTemplatesClass();
+            public _DisplayTemplatesClass DisplayTemplates { get { return s_DisplayTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _DisplayTemplatesClass
+            {
+                static readonly _ViewNamesClass s_ViewNames = new _ViewNamesClass();
+                public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
+                public class _ViewNamesClass
+                {
+                }
+            }
             static readonly _ErrorsClass s_Errors = new _ErrorsClass();
             public _ErrorsClass Errors { get { return s_Errors; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -60,6 +71,21 @@ namespace T4MVC
                 }
                 public readonly string _Error = "~/Views/Shared/Errors/_Error.cshtml";
                 public readonly string _ModalError = "~/Views/Shared/Errors/_ModalError.cshtml";
+            }
+            static readonly _TorneoClass s_Torneo = new _TorneoClass();
+            public _TorneoClass Torneo { get { return s_Torneo; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _TorneoClass
+            {
+                static readonly _ViewNamesClass s_ViewNames = new _ViewNamesClass();
+                public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
+                public class _ViewNamesClass
+                {
+                    public readonly string _Currency = "_Currency";
+                    public readonly string _Preview = "_Preview";
+                }
+                public readonly string _Currency = "~/Views/Shared/Torneo/_Currency.cshtml";
+                public readonly string _Preview = "~/Views/Shared/Torneo/_Preview.cshtml";
             }
             static readonly _UsuariosClass s_Usuarios = new _UsuariosClass();
             public _UsuariosClass Usuarios { get { return s_Usuarios; } }

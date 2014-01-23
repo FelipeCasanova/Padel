@@ -42,6 +42,12 @@ body {
   height: 400px;
   margin-bottom: 60px;
 }
+.carousel.small
+{
+  margin: 0px auto;
+  height: 350px;
+  margin-bottom: 0px;
+}
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   z-index: 10;
@@ -52,6 +58,11 @@ body {
   height: 400px;
   background-color: #777;
 }
+
+.carousel.small .item {
+  height: 350px;
+  background-color: #777;
+}
 .carousel-inner > .item > img {
   position: absolute;
   top: 0;
@@ -60,6 +71,10 @@ body {
   height: 400px;
 }
 
+.carousel.small .carousel-inner > .item > img
+{
+    height: 350px;
+}
 
 
 /* MARKETING CONTENT
@@ -103,6 +118,15 @@ body {
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
+@media (max-width: 768px) {
+  .carousel-caption.head {
+    margin-top: 10px;
+    margin-bottom: auto;
+    bottom:auto;
+    text-align: left;
+    left: 10px;
+  }
+}
 
 @media (min-width: 768px) {
 
@@ -136,6 +160,14 @@ body {
     font-size: 21px;
     line-height: 1.4;
   }
+  
+  .carousel-caption.head {
+    margin-top: 10px;
+    margin-bottom: auto;
+    bottom:auto;
+    text-align: left;
+    left: 10px;
+  }
 
   .featurette-heading {
     font-size: 50px;
@@ -146,5 +178,9 @@ body {
 @media (min-width: 992px) {
   .featurette-heading {
     margin-top: 120px;
+  }
+  
+  .featurette-heading.small {
+    margin-top: 60px;
   }
 }

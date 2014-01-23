@@ -72,6 +72,15 @@
 
 
 /******************************** Padel *****************************************/
+.center
+{
+    text-align: center;
+}
+
+.content
+{
+    margin: 80px auto;
+}
 
 .all-width
 {

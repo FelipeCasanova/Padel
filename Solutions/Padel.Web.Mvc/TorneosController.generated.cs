@@ -25,9 +25,6 @@ namespace Padel.Web.Mvc.Controllers
     public partial class TorneosController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public TorneosController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected TorneosController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
