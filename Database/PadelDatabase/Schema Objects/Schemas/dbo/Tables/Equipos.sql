@@ -4,6 +4,7 @@
 create table Equipos (
        EquipoId INT IDENTITY NOT NULL,
        Nombre NVARCHAR(255) null,
+	   Estado NVARCHAR(255) not null,
        TipoEquipo NVARCHAR(255) null,
        JugadorAVerificado BIT null,
        JugadorBVerificado BIT null,

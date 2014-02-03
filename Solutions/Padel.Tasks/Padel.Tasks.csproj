@@ -113,7 +113,6 @@
     <Compile Include="Commands\EntrarUsuarioCommand.cs" />
     <Compile Include="Commands\RegistrarUsuarioCommand.cs" />
     <Compile Include="Commands\UsuarioCommandBase.cs" />
-    <Compile Include="PadelPrincipal.cs" />
     <Compile Include="UsuarioTasks.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,10 @@ namespace Padel.Infrastructure.Utilities
             claims.Add(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "padel"));
             claims.Add(new Claim(ClaimTypes.NameIdentifier, usuario.TelefonoMovil.ToString()));
             claims.Add(new Claim(ClaimTypes.Name, usuario.Nombre));
-            claims.Add(new Claim(ClaimTypes.Role, usuario.Roles.First().Name));
+            claims.Add(new Claim(ClaimTypes.Role, usuario.Roles.First().Nombre));
+            claims.Add(new Claim(ClaimTypes.PPID, usuario.Id.ToString()));
+            claims.Add(new Claim(ClaimTypes.Email, usuario.Email));
+            claims.Add(new Claim("http://http://flipersanvi.no-ip.biz//accesscontrolservice/2014/01/claims/creationdate", usuario.FechaCreacion.ToShortDateString()));
 
             // Creando la identidad para el principal
             IList<IClaimsIdentity> identities = new List<IClaimsIdentity>();
@@ -26,7 +29,7 @@ namespace Padel.Infrastructure.Utilities
             identities.Add(identity);
 
             // Creando el principal
-            IClaimsPrincipal principal = new ClaimsPrincipal(identities);
+            IClaimsPrincipal principal = new PadelPrincipal(new ClaimsPrincipal(identities));
             HttpContext.Current.User = Thread.CurrentPrincipal = principal;
 
             return principal;

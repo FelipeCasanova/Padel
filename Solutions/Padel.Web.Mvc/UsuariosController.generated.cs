@@ -71,6 +71,18 @@ namespace Padel.Web.Mvc.Controllers
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.ValidarEmailUnico);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _EquiposPorJugador()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._EquiposPorJugador);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _JugadorPorNombre()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._JugadorPorNombre);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public UsuariosController Actions { get { return MVC.Usuarios; } }
@@ -87,23 +99,29 @@ namespace Padel.Web.Mvc.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string Index = "Index";
             public readonly string _Registrar = "_Registrar";
             public readonly string Entrar = "Entrar";
             public readonly string _Entrar = "_Entrar";
             public readonly string ValidarTelefonoUnico = "ValidarTelefonoUnico";
             public readonly string ValidarEmailUnico = "ValidarEmailUnico";
             public readonly string Logout = "Logout";
+            public readonly string _EquiposPorJugador = "_EquiposPorJugador";
+            public readonly string _JugadorPorNombre = "_JugadorPorNombre";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string Index = "Index";
             public const string _Registrar = "_Registrar";
             public const string Entrar = "Entrar";
             public const string _Entrar = "_Entrar";
             public const string ValidarTelefonoUnico = "ValidarTelefonoUnico";
             public const string ValidarEmailUnico = "ValidarEmailUnico";
             public const string Logout = "Logout";
+            public const string _EquiposPorJugador = "_EquiposPorJugador";
+            public const string _JugadorPorNombre = "_JugadorPorNombre";
         }
 
 
@@ -148,6 +166,22 @@ namespace Padel.Web.Mvc.Controllers
         {
             public readonly string email = "email";
         }
+        static readonly ActionParamsClass__EquiposPorJugador s_params__EquiposPorJugador = new ActionParamsClass__EquiposPorJugador();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__EquiposPorJugador _EquiposPorJugadorParams { get { return s_params__EquiposPorJugador; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__EquiposPorJugador
+        {
+            public readonly string idJugador = "idJugador";
+        }
+        static readonly ActionParamsClass__JugadorPorNombre s_params__JugadorPorNombre = new ActionParamsClass__JugadorPorNombre();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__JugadorPorNombre _JugadorPorNombreParams { get { return s_params__JugadorPorNombre; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__JugadorPorNombre
+        {
+            public readonly string nombreJugador = "nombreJugador";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -159,8 +193,10 @@ namespace Padel.Web.Mvc.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Entrar = "Entrar";
+                public readonly string Index = "Index";
             }
             public readonly string Entrar = "~/Views/Usuarios/Entrar.cshtml";
+            public readonly string Index = "~/Views/Usuarios/Index.cshtml";
         }
     }
 
@@ -168,6 +204,15 @@ namespace Padel.Web.Mvc.Controllers
     public partial class T4MVC_UsuariosController : Padel.Web.Mvc.Controllers.UsuariosController
     {
         public T4MVC_UsuariosController() : base(Dummy.Instance) { }
+
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult Index()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            IndexOverride(callInfo);
+            return callInfo;
+        }
 
         partial void _RegistrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Padel.Web.Mvc.Controllers.ViewModels.UsuarioRegistrarModelView usuarioModelView);
 
@@ -226,6 +271,26 @@ namespace Padel.Web.Mvc.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Logout);
             LogoutOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void _EquiposPorJugadorOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int idJugador);
+
+        public override System.Web.Mvc.ActionResult _EquiposPorJugador(int idJugador)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._EquiposPorJugador);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idJugador", idJugador);
+            _EquiposPorJugadorOverride(callInfo, idJugador);
+            return callInfo;
+        }
+
+        partial void _JugadorPorNombreOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string nombreJugador);
+
+        public override System.Web.Mvc.ActionResult _JugadorPorNombre(string nombreJugador)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._JugadorPorNombre);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "nombreJugador", nombreJugador);
+            _JugadorPorNombreOverride(callInfo, nombreJugador);
             return callInfo;
         }
 

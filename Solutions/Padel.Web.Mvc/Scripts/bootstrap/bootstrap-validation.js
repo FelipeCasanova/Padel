@@ -35,7 +35,7 @@ function bootstrapValidation() {
             }
             error.data("unobtrusiveContainerPopover", popover);
 
-            if (replace &&  error.html() != "") {
+            if (replace && error.html() != "" && $(inputElement).is(":visible")) {
                 container.empty();
                 
                 $(popover).attr('data-container', 'body');

@@ -29,6 +29,8 @@
     using System.ComponentModel.DataAnnotations;
     using Padel.Web.Mvc.Validation;
     using Padel.Web.Mvc.App_Start;
+    using System.Configuration;
+    using Microsoft.IdentityModel.Web;
     
 
     /// <summary>
@@ -84,6 +86,8 @@
             
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteRegistrar.RegisterRoutesTo(RouteTable.Routes);
+
+            Application["NewUserLimitMonths"] = int.Parse(ConfigurationManager.AppSettings["NewUserLimitMonths"]);
         }
 
         /// <summary>
@@ -117,5 +121,34 @@
 
             NHibernate.Glimpse.Plugin.RegisterSessionFactory(NHibernateSession.GetDefaultSessionFactory());
         }
+
+        void SessionAuthenticationModule_SessionSecurityTokenReceived(object sender, SessionSecurityTokenReceivedEventArgs e)
+        {
+            DateTime now = DateTime.UtcNow;
+            DateTime validFrom = e.SessionToken.ValidFrom;
+            DateTime validTo = e.SessionToken.ValidTo;
+            if ((now < validTo) && (new TimeSpan(0,10,0) > (validTo - now)))
+            {
+                SessionAuthenticationModule sam = sender as SessionAuthenticationModule;
+                e.SessionToken = sam.CreateSessionSecurityToken(
+                    e.SessionToken.ClaimsPrincipal,
+                    e.SessionToken.Context,
+                    now,
+                    now.AddMinutes(30),
+                    e.SessionToken.IsPersistent);
+                e.ReissueCookie = true;
+            }
+            else
+            {
+                if (now > validTo)
+                {
+                    var sessionAuthenticationModule = (SessionAuthenticationModule)sender;
+
+                    sessionAuthenticationModule.DeleteSessionTokenCookie();
+
+                    e.Cancel = true;
+                }
+            }
+        } 
     }
 }

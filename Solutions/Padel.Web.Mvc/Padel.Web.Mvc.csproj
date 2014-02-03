@@ -36,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -207,8 +208,12 @@
     <Compile Include="Controllers\PremiosController.cs" />
     <Compile Include="Areas\Admin\Controllers\Queries\Usuarios\IJugadoresQuery.cs" />
     <Compile Include="Areas\Admin\Controllers\Queries\Usuarios\JugadoresQuery.cs" />
+    <Compile Include="Controllers\Queries\Equipos\EquiposQuery.cs" />
+    <Compile Include="Controllers\Queries\Equipos\IEquiposQuery.cs" />
     <Compile Include="Controllers\Queries\Torneos\ITorneosQuery.cs" />
     <Compile Include="Controllers\Queries\Torneos\TorneosQuery.cs" />
+    <Compile Include="Controllers\Queries\Usuarios\JugadoresQuery.cs" />
+    <Compile Include="Controllers\Queries\Usuarios\IJugadoresQuery.cs" />
     <Compile Include="Controllers\ResultadosController.cs" />
     <Compile Include="Controllers\GaleriasController.cs" />
     <Compile Include="Controllers\ContactoController.cs" />
@@ -218,10 +223,12 @@
     <Compile Include="Controllers\TorneosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Areas\Admin\Controllers\ViewModels\JugadorViewModel.cs" />
+    <Compile Include="Controllers\ViewModels\Equipos\EquipoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Menu\MenuModelView.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\TorneoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\UsuarioEntrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\UsuarioRegistrarModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Usuarios\JugadorViewModel.cs" />
     <Compile Include="Filters\ExceptionLoggerFilter.cs" />
     <Compile Include="GaleriasController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -297,8 +304,7 @@
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap\holder.js" />
-    <Content Include="Scripts\fuelux\loader.js" />
-    <Content Include="Scripts\fuelux\loader.min.js" />
+    <Content Include="Scripts\fuelux\wizard.js" />
     <Content Include="Scripts\jqtimeto\jquery.timeTo.js" />
     <Content Include="Scripts\jqtimeto\jquery.timeTo.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -333,6 +339,7 @@
     <Content Include="Scripts\padel\admin\jugadores\grid.js" />
     <Content Include="Scripts\padel\admin\torneos\grid.js" />
     <Content Include="Scripts\padel\padel.js" />
+    <Content Include="Scripts\padel\torneos\apuntate.js" />
     <Content Include="Scripts\slimscroll\jquery.slimscroll.min.js" />
     <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -371,6 +378,8 @@
     <None Include="T4MVC.tt.hooks.t4" />
     <Content Include="Views\Shared\Torneo\_Preview.cshtml" />
     <Content Include="Views\Shared\Torneo\_Currency.cshtml" />
+    <Content Include="Views\Shared\Torneo\_Apuntate.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Padel.Domain\Padel.Domain.csproj">

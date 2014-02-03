@@ -225,6 +225,7 @@ GO
 CREATE TABLE [dbo].[Equipos] (
     [EquipoId]           INT            IDENTITY (1, 1) NOT NULL,
     [Nombre]             NVARCHAR (255) NULL,
+    [Estado]             NVARCHAR (255) NOT NULL,
     [TipoEquipo]         NVARCHAR (255) NULL,
     [JugadorAVerificado] BIT            NULL,
     [JugadorBVerificado] BIT            NULL,
@@ -237,15 +238,17 @@ CREATE TABLE [dbo].[Equipos] (
 
 
 GO
-PRINT N'Creating [dbo].[EquipoToCategoria]...';
+PRINT N'Creating [dbo].[EquipoToCategorias]...';
 
 
 GO
-CREATE TABLE [dbo].[EquipoToCategoria] (
-    [FechaCreacion]     DATETIME NULL,
-    [FechaModificacion] DATETIME NULL,
-    [EquipoId]          INT      NOT NULL,
-    [CategoriaId]       INT      NOT NULL
+CREATE TABLE [dbo].[EquipoToCategorias] (
+    [EquipoToCategoriaId] INT      IDENTITY (1, 1) NOT NULL,
+    [FechaCreacion]       DATETIME NULL,
+    [FechaModificacion]   DATETIME NULL,
+    [EquipoId]            INT      NOT NULL,
+    [CategoriaId]         INT      NOT NULL,
+    PRIMARY KEY CLUSTERED ([EquipoToCategoriaId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
 
 
@@ -307,7 +310,7 @@ PRINT N'Creating [dbo].[Roles]...';
 GO
 CREATE TABLE [dbo].[Roles] (
     [RoleId] INT            IDENTITY (1, 1) NOT NULL,
-    [Name]   NVARCHAR (255) NULL,
+    [Nombre] NVARCHAR (255) NULL,
     PRIMARY KEY CLUSTERED ([RoleId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
 
@@ -401,7 +404,7 @@ PRINT N'Creating FK5F6C6AB149E41EB...';
 
 
 GO
-ALTER TABLE [dbo].[EquipoToCategoria] WITH NOCHECK
+ALTER TABLE [dbo].[EquipoToCategorias] WITH NOCHECK
     ADD CONSTRAINT [FK5F6C6AB149E41EB] FOREIGN KEY ([EquipoId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
@@ -410,7 +413,7 @@ PRINT N'Creating FK5F6C6AB363F8A7F...';
 
 
 GO
-ALTER TABLE [dbo].[EquipoToCategoria] WITH NOCHECK
+ALTER TABLE [dbo].[EquipoToCategorias] WITH NOCHECK
     ADD CONSTRAINT [FK5F6C6AB363F8A7F] FOREIGN KEY ([CategoriaId]) REFERENCES [dbo].[Categorias] ([CategoriaId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
@@ -523,9 +526,9 @@ ALTER TABLE [dbo].[Equipos] WITH CHECK CHECK CONSTRAINT [FKAA629BEFA82D91A];
 
 ALTER TABLE [dbo].[Equipos] WITH CHECK CHECK CONSTRAINT [FKAA629BEFACB3D91A];
 
-ALTER TABLE [dbo].[EquipoToCategoria] WITH CHECK CHECK CONSTRAINT [FK5F6C6AB149E41EB];
+ALTER TABLE [dbo].[EquipoToCategorias] WITH CHECK CHECK CONSTRAINT [FK5F6C6AB149E41EB];
 
-ALTER TABLE [dbo].[EquipoToCategoria] WITH CHECK CHECK CONSTRAINT [FK5F6C6AB363F8A7F];
+ALTER TABLE [dbo].[EquipoToCategorias] WITH CHECK CHECK CONSTRAINT [FK5F6C6AB363F8A7F];
 
 ALTER TABLE [dbo].[Grupos] WITH CHECK CHECK CONSTRAINT [FK19033393363F8A7F];
 

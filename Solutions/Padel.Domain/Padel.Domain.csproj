@@ -95,6 +95,7 @@
     <Compile Include="Contracts\Tasks\IUsuarioTasks.cs" />
     <Compile Include="Enumeraciones.cs" />
     <Compile Include="Equipo.cs" />
+    <Compile Include="EquipoToCategoria.cs" />
     <Compile Include="Grupo.cs" />
     <Compile Include="Jornada.cs" />
     <Compile Include="PadelEntity.cs" />

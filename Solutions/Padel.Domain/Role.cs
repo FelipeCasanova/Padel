@@ -8,6 +8,6 @@ namespace Padel.Domain
 {
     public class Role : Entity
     {
-        public virtual string Name { get; set; }
+        public virtual string Nombre { get; set; }
     }
 }

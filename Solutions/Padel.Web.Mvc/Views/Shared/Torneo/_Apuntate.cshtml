@@ -1,0 +1,93 @@
+﻿@{
+    var user = (Padel.Infrastructure.Utilities.PadelPrincipal)User;
+}
+<div id="apuntateWizard" class="wizard">
+    <ul class="steps">
+        <li data-target="#step1" class="active"><span class="badge badge-info">1</span>Paso
+            1<span class="chevron"></span></li>
+        <li data-target="#step2"><span class="badge">2</span>Paso 2<span class="chevron"></span></li>
+        <li data-target="#step3"><span class="badge">3</span>Paso 3<span class="chevron"></span></li>
+    </ul>
+    <div class="actions">
+        <button type="button" class="btn btn-mini btn-prev">
+            <i class="icon-arrow-left"></i>Anterior</button>
+        <button type="button" class="btn btn-mini btn-next" data-last="Finalizar">
+            Siguiente<i class="icon-arrow-right"></i></button>
+    </div>
+</div>
+<div class="step-content">
+    <div class="step-pane active" id="step1">
+        <div class="alert alert-info">
+            El primer paso es elegir uno de tus equipos o uno de tus amigos para formar un equipo
+            nuevo.</div>
+        <div class="row">
+            <div class="col-md-5">
+                <p>
+                    Selecciona uno de tus equipos</p>
+                <br />
+                <!-- Single button -->
+                <div class="btn-group" ng-controller="BuscarEquiposCtrl">
+                    <input value="@user.Id" type="hidden" ng-init="idJugador=@user.Id"/>
+                    <button type="button" class="btn btn-default btn-lg dropdown-toggle {{status}}" data-toggle="dropdown">
+                        <span class="dropdown-label" style="width: 158px;">{{title}}</span> <span class="caret">
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="team in teams"><a href="" ng-click="selectTeam(team.Id)">{{team.Nombre}}
+                            - {{ ( idJugador == team.JugadorBId ? team.JugadorANombre : team.JugadorBNombre
+                            ) }} </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <p class="lead">
+                    o</p>
+            </div>
+            <div class="col-md-6" ng-controller="BuscarJugadorCtrl">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>
+                            Busca uno de tus amigos escribiendo su nombre</p>
+                        <br />
+                        <div class="btn-group {{status}}">
+                            <div id="MySearch" class="input-append search">
+                                <input type="text" class="input-medium" ng-model="nombreJugador" ng-keyup="search()"
+                                    placeholder="Busca a tu amigo..." />
+                                <button type="button" class="btn" ng-click="search()">
+                                    <i class="icon-search"></i>
+                                </button>
+                            </div>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-repeat="player in players"><a href="" ng-click="selectPlayer(player)">{{player.Nombre}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <span class="label">{{playerSelected.Nombre}}</span>
+                        <button type="button" ng-show="showDelete" ng-click="deleteSelectedPlayer()" class="btn btn-danger">
+                            Elimina</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="step-pane" id="step2">
+        <div class="alert alert-info" ng-controller="AceptarTerminosCtrl">
+            <p>
+                Lee los términos de uso ..link</p>
+            <p>
+                y haz click <strong>aquí</strong> <span>
+                    <input type="checkbox" value="" ng-model="aceptarTerminos" /></span> si estás
+                de acuerdo con los términos.</p>
+        </div>
+    </div>
+    <div class="step-pane" id="step3">
+        <div class="alert alert-info">
+            <p>
+                No olvides hacer la transferencia a nuestra cuenta IBAN: 999 9999 999 9999 para
+                activar el torneo.</p>
+            <p>
+                Haz click en <strong>Finalizar</strong> para registrarte en el torneo.</p>
+        </div>
+    </div>
+</div>

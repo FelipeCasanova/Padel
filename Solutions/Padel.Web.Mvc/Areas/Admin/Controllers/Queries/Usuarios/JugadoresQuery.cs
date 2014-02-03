@@ -34,7 +34,7 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Usuarios
                                          .Select(x => x.Email).WithAlias(() => viewModel.Email)
                                          
                                          // Flattening the object graph
-                                         .Select(x => rol.Name).WithAlias(() => viewModel.Role))
+                                         .Select(x => rol.Nombre).WithAlias(() => viewModel.Role))
                 .TransformUsing(Transformers.AliasToBean(typeof(JugadorViewModel)))
                 .Skip(firstResult)
                 .Take(size)

@@ -134,8 +134,7 @@ namespace Links
             private const string URLPATH = "~/Scripts/fuelux";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string loader_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/loader.min.js") ? Url("loader.min.js") : Url("loader.js");
-            public static readonly string loader_min_js = Url("loader.min.js");
+            public static readonly string wizard_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/wizard.min.js") ? Url("wizard.min.js") : Url("wizard.js");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -186,6 +185,14 @@ namespace Links
             }
         
             public static readonly string padel_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/padel.min.js") ? Url("padel.min.js") : Url("padel.js");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class torneos {
+                private const string URLPATH = "~/Scripts/padel/torneos";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string apuntate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/apuntate.min.js") ? Url("apuntate.min.js") : Url("apuntate.js");
+            }
+        
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -11,7 +11,7 @@ namespace Padel.Domain
         public Categoria()
         {
             Grupos = new List<Grupo>();
-            Equipos = new List<Equipo>();
+            EquiposToCategorias = new List<EquipoToCategoria>();
         }
 
         [Required]
@@ -46,7 +46,7 @@ namespace Padel.Domain
         public virtual IList<Grupo> Grupos { get; set; }
 
         [Required]
-        public virtual IList<Equipo> Equipos { get; set; }
+        public virtual IList<EquipoToCategoria> EquiposToCategorias { get; set; }
         
         public virtual Equipo Ganador { get; set; }
     }

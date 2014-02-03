@@ -81,9 +81,11 @@ namespace T4MVC
                 public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
                 public class _ViewNamesClass
                 {
+                    public readonly string _Apuntate = "_Apuntate";
                     public readonly string _Currency = "_Currency";
                     public readonly string _Preview = "_Preview";
                 }
+                public readonly string _Apuntate = "~/Views/Shared/Torneo/_Apuntate.cshtml";
                 public readonly string _Currency = "~/Views/Shared/Torneo/_Currency.cshtml";
                 public readonly string _Preview = "~/Views/Shared/Torneo/_Preview.cshtml";
             }

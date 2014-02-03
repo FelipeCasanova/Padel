@@ -120,8 +120,11 @@
     <Compile Include="NHibernateMaps\Conventions\TableNameConvention.cs" />
     <Compile Include="NHibernateMaps\AutoPersistenceModelGenerator.cs" />
     <Compile Include="NHibernateMaps\UsuarioMap.cs" />
+    <Compile Include="Utilities\Authentication\CustomClaimsAuthenticationManager.cs" />
+    <Compile Include="Utilities\Authentication\CustomSessionAuthenticationModule.cs" />
     <Compile Include="Utilities\ClaimsPrincipalUtility.cs" />
     <Compile Include="Utilities\MD5Extension.cs" />
+    <Compile Include="Utilities\PadelPrincipal.cs" />
     <Compile Include="Utilities\SessionSecurityToken\MachineKeyProtectionTransform.cs" />
     <Compile Include="Utilities\SessionSecurityToken\MachineKeySessionSecurityTokenHandler.cs" />
     <Compile Include="Utilities\SessionSecurityToken\SymmetricEncryptionFormatter.cs" />

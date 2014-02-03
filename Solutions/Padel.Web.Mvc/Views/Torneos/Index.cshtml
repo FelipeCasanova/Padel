@@ -5,9 +5,12 @@
 }
 @section CSSSection{
     <link href="@Url.Content(@Links.Content.jqtimeto.timeTo_css)" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content(@Links.Content.fuelux.css.fuelux_min_css)" rel="stylesheet" type="text/css" />
 }
 @section JSSection{
     <script src="@Url.Content(@Links.Scripts.jqtimeto.jquery_timeTo_min_js)" type="text/javascript"></script>
+    <script src="@Url.Content(@Links.Scripts.fuelux.wizard_js)" type="text/javascript"></script>
+    <script src="@Url.Content(@Links.Scripts.padel.torneos.apuntate_js)" type="text/javascript"></script>
 }
 <div class="container content">
     @if (Model == null || Model.Count == 0)
@@ -182,3 +185,34 @@
         }
     }
 </div>
+@if (User.Identity.IsAuthenticated)
+{
+    <!-- Modal -->
+    <div class="modal fade fuelux" id="apuntateModal" tabindex="-1" role="dialog" aria-labelledby="apuntateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog large">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;</button>
+                    <h4 class="modal-title" id="apuntateModalLabel">
+                        Apúntate</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div id="apuntateView" class="form apuntate col-md-12 padel-vertical-separator">
+                            @Html.Partial(MVC.Shared.Views.Torneo._Apuntate)
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cerrar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+}

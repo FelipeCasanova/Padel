@@ -10,9 +10,12 @@ namespace Padel.Domain
     {
         public Equipo()
         {
+            EquiposToCategorias = new List<EquipoToCategoria>();
         }
 
         public virtual string Nombre { get; set; }
+
+        public virtual EstadoEquipoEnum Estado { get; set; }
 
         [Required]
         public virtual TipoEquipoEnum TipoEquipo { get; set; }
@@ -26,6 +29,9 @@ namespace Padel.Domain
         public virtual Usuario JugadorB { get; set; }
 
         public virtual bool JugadorBVerificado { get; set; }
+
+        [Required]
+        public virtual IList<EquipoToCategoria> EquiposToCategorias { get; set; }
 
     }
 }

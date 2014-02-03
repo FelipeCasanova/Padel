@@ -11,6 +11,7 @@ using Padel.Infrastructure.Utilities;
 using Padel.Tasks;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands;
+using Padel.Web.Mvc.Controllers.Queries.Equipos;
 using Padel.Web.Mvc.Controllers.ViewModels;
 using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
@@ -18,16 +19,29 @@ using SharpArch.NHibernate.Web.Mvc;
 
 namespace Padel.Web.Mvc.Controllers
 {
+    [Authorize(Roles="Administrador, Jugador")]
     public partial class UsuariosController : BaseController
     {
         private readonly ICommandProcessor commandProcessor;
 
         private readonly IUsuarioTasks usuarioTasks;
 
-        public UsuariosController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks)
+        private readonly IEquiposQuery equiposQuery;
+
+        private readonly IJugadoresQuery jugadoresQuery;
+
+        public UsuariosController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, IEquiposQuery equiposQuery, IJugadoresQuery jugadoresQuery)
         {
             this.commandProcessor = commandProcessor;
             this.usuarioTasks = usuarioTasks;
+            this.equiposQuery = equiposQuery;
+            this.jugadoresQuery = jugadoresQuery;
+        }
+
+        [HttpGet]
+        public virtual ActionResult Index()
+        {
+            return View();
         }
 
         [NonAction]
@@ -110,10 +124,18 @@ namespace Padel.Web.Mvc.Controllers
                     {
                         if (User.IsInRole("Administrador"))
                         {
+                            if (Request.UrlReferrer != null)
+                            {
+                                return JavaScript("window.location = '" + Request.UrlReferrer.AbsoluteUri + "';");
+                            }
                             return JavaScript("window.location = '" + Url.Action(MVC.Admin.HomeAdmin.ActionNames.Index, MVC.Admin.HomeAdmin.Name, new { area = "Admin" }) + "';");
                         }
                         else
                         {
+                            if (Request.UrlReferrer != null)
+                            {
+                                return JavaScript("window.location = '" + Request.UrlReferrer.AbsoluteUri + "';");
+                            }
                             return JavaScript("window.location = '" + Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name) + "';");
                         }
                     }
@@ -165,6 +187,22 @@ namespace Padel.Web.Mvc.Controllers
         {
             FederatedAuthentication.SessionAuthenticationModule.SignOut();
             return Redirect(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        [HttpPost]
+        [Transaction]
+        public virtual ActionResult _EquiposPorJugador(int idJugador)
+        {
+            var viewModel = this.equiposQuery.GetEquiposPorJugadorList(idJugador);
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Transaction]
+        public virtual ActionResult _JugadorPorNombre(string nombreJugador)
+        {
+            var viewModel = this.jugadoresQuery.GetJugadorPorNombreList(nombreJugador).Take(10);
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
     }

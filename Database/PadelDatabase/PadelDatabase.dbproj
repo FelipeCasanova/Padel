@@ -147,7 +147,7 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Equipos.sql">
       <SubType>NotInBuild</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\EquipoToCategoria.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Tables\EquipoToCategorias.sql">
       <SubType>NotInBuild</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Grupos.sql">
@@ -177,10 +177,10 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Equipos.FK_JugadorB.sql">
       <SubType>NotInBuild</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\EquipoToCategoria.FK_Equipos.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\EquipoToCategorias.FK_Equipos.sql">
       <SubType>NotInBuild</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\EquipoToCategoria.FK_Categorias.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\EquipoToCategorias.FK_Categorias.sql">
       <SubType>NotInBuild</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Grupos.FK_Categorias.sql">

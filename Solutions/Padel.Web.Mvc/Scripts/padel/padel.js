@@ -1,4 +1,6 @@
-﻿$(function () {
+﻿var app = angular.module('padelApp', []);
+
+$(function () {
 
     $('span[data-toggle=tooltip]').tooltip({});
 

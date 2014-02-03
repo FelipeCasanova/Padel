@@ -1,5 +1,4 @@
 ﻿/* JS */
-angular.module('padelApp', []);
 
 var debounce = function (func, wait, immediate) {
     var timeout, result;

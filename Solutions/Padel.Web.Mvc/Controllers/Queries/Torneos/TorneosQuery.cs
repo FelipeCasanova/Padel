@@ -7,6 +7,7 @@ using Padel.Domain;
 using Padel.Web.Mvc.Controllers.ViewModels;
 using SharpArch.NHibernate;
 using Padel.Web.Mvc.Controllers.ViewModels.Torneos;
+using NHibernate.Criterion;
 
 namespace Padel.Web.Mvc.Controllers.Queries.Torneos
 {
@@ -14,16 +15,20 @@ namespace Padel.Web.Mvc.Controllers.Queries.Torneos
     {
         public IList<TorneoViewModel> GetTorneosPendientesList()
         {
+            TorneoViewModel viewModel = null;
+            Categoria categoria = null;
+            EquipoToCategoria equiposToCategorias = null;
+
             var query = Session.QueryOver<Torneo>().OrderBy(x => x.Nombre).Asc
                 .Where(t => t.Tipo != TipoTorneoEnum.Privado);
 
-            TorneoViewModel viewModel = null;
-            Categoria categoria = null;
-            Equipo equipo = null;
+            var subQuery = QueryOver.Of<Categoria>()
+                .JoinAlias(c => c.EquiposToCategorias, () => equiposToCategorias)
+                .Where(c => equiposToCategorias.Categoria.Id == categoria.Id)
+                .ToRowCountQuery();
 
             var viewModels =
                query.JoinAlias(x => x.Categorias, () => categoria)
-                    //.JoinAlias(() => categoria.Equipos, () => equipo)
                     .Where(x => categoria.Estado != EstadoCategoriaEnum.Finalizado)
                     .SelectList(list => list
                                          .Select(x => x.Id).WithAlias(() => viewModel.Id)
@@ -38,8 +43,7 @@ namespace Padel.Web.Mvc.Controllers.Queries.Torneos
                                          .Select(x => categoria.NivelMin).WithAlias(() => viewModel.NivelMin)
                                          .Select(x => categoria.NivelMax).WithAlias(() => viewModel.NivelMax)
 
-                                         //.SelectGroup(x => x)
-                                         //.SelectCount(x => equipoToCategoria.Id).WithAlias(() => viewModel.NumeroEquipos)
+                                         .SelectSubQuery(subQuery).WithAlias(() => viewModel.NumeroEquipos)
                                          )
 
                 .TransformUsing(Transformers.AliasToBean(typeof(TorneoViewModel)))
