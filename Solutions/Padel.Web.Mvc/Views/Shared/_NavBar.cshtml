@@ -41,21 +41,21 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="dropdown">
-                        
-                        <a href="#" class="btn-lg" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-user"></span>
+                        <li class="dropdown"><a href="#" class="btn-lg" data-toggle="dropdown"><span class="glyphicon glyphicon-user">
+                        </span>
                             @if (tiempoTicksLimite > tiempoTicksUsuario)
                             {
                                 <span class="label label-info top-right">Nuevo</span>
                             }
                         </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Usuarios.ActionNames.Index, MVC.Usuarios.Name))">Tus torneos</a></li>
-                                <li role="presentation" class="divider"></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Usuarios.ActionNames.Index, MVC.Usuarios.Name))">
+                                    Tus torneos</a></li>
                                 @if (User.Identity.IsAuthenticated && User.IsInRole("Administrador"))
                                 {
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Admin.HomeAdmin.ActionNames.Index, MVC.Admin.HomeAdmin.Name, new { area = "Admin" }))">Administración</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Admin.HomeAdmin.ActionNames.Index, MVC.Admin.HomeAdmin.Name, new { area = "Admin" }))">
+                                        Administración</a></li>
                                 }
                             </ul>
                         </li>

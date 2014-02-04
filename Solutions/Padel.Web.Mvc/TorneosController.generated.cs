@@ -41,6 +41,12 @@ namespace Padel.Web.Mvc.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _CrearEquipoParaTorneo()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._CrearEquipoParaTorneo);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public TorneosController Actions { get { return MVC.Torneos; } }
@@ -58,15 +64,29 @@ namespace Padel.Web.Mvc.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string _CrearEquipoParaTorneo = "_CrearEquipoParaTorneo";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string _CrearEquipoParaTorneo = "_CrearEquipoParaTorneo";
         }
 
 
+        static readonly ActionParamsClass__CrearEquipoParaTorneo s_params__CrearEquipoParaTorneo = new ActionParamsClass__CrearEquipoParaTorneo();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__CrearEquipoParaTorneo _CrearEquipoParaTorneoParams { get { return s_params__CrearEquipoParaTorneo; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__CrearEquipoParaTorneo
+        {
+            public readonly string idEquipo = "idEquipo";
+            public readonly string idJugador = "idJugador";
+            public readonly string idTorneo = "idTorneo";
+            public readonly string idCategoria = "idCategoria";
+            public readonly string terminosAceptados = "terminosAceptados";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -94,6 +114,20 @@ namespace Padel.Web.Mvc.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void _CrearEquipoParaTorneoOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int? idEquipo, int? idJugador, int? idTorneo, int? idCategoria, bool? terminosAceptados);
+
+        public override System.Web.Mvc.ActionResult _CrearEquipoParaTorneo(int? idEquipo, int? idJugador, int? idTorneo, int? idCategoria, bool? terminosAceptados)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._CrearEquipoParaTorneo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idEquipo", idEquipo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idJugador", idJugador);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idTorneo", idTorneo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idCategoria", idCategoria);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "terminosAceptados", terminosAceptados);
+            _CrearEquipoParaTorneoOverride(callInfo, idEquipo, idJugador, idTorneo, idCategoria, terminosAceptados);
             return callInfo;
         }
 

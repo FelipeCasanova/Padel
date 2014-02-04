@@ -36,7 +36,8 @@ namespace Padel.Web.Mvc.Controllers.Queries.Torneos
                                          .Select(x => x.Tipo).WithAlias(() => viewModel.Tipo)
                                          
                                          // Flattening the object graph
-                                         .Select(x => categoria.Nombre).WithAlias(() => viewModel.Categoria)
+                                         .Select(x => categoria.Id).WithAlias(() => viewModel.CategoriaId)
+                                         .Select(x => categoria.Nombre).WithAlias(() => viewModel.CategoriaNombre)
                                          .Select(x => categoria.Estado).WithAlias(() => viewModel.EstadoCategoria)
                                          .Select(x => categoria.Precio).WithAlias(() => viewModel.Precio)
                                          .Select(x => categoria.TipoEquipo).WithAlias(() => viewModel.TipoEquipo)

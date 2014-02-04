@@ -136,7 +136,7 @@ ul.padel-list span
 }
 
 .modal-dialog.large {
-    width: 800px; /* respsonsive width */
+    width: 900px; /* respsonsive width */
 }
 
 /* Label */
@@ -163,6 +163,11 @@ ul.padel-list span
 }
 
 /* Inputs */
+.fuelux .input-append, .fuelux .input-prepend 
+{
+    margin-bottom: 0px;
+}
+
 .fuelux input[type="text"]
 {
     height: auto;
@@ -170,7 +175,14 @@ ul.padel-list span
 
 .fuelux input[type="checkbox"]
 {
-    position: absolute;
+    position: relative;
+    top: -3px;
+}
+
+/* Buttons */
+.fuelux button.btn
+{
+    margin-bottom: 2px;
 }
 
 /* label */

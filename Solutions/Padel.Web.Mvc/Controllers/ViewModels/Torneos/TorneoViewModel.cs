@@ -19,7 +19,9 @@ namespace Padel.Web.Mvc.Controllers.ViewModels.Torneos
 
         public string TipoStr { get { return Tipo.ToString(); } }
 
-        public string Categoria { get; set; }
+        public int CategoriaId { get; set; }
+
+        public string CategoriaNombre { get; set; }
 
         public virtual TipoEquipoEnum TipoEquipo { get; set; }
 

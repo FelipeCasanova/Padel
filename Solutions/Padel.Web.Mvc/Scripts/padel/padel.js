@@ -1,4 +1,41 @@
-﻿var app = angular.module('padelApp', []);
+﻿var app = angular.module('padelApp', ['ngRoute'])
+    .service('searchTeams', ['$http', function ($http) {
+        return {
+
+            search: function (idJugador, callback) {
+                /**
+                * searchTeams service allows te user to select one of their teams
+                */
+                var url = '/usuarios/_equiposporjugador'; // The url of our search
+                $http.post(url, { "idJugador": idJugador }).
+                    success(function (data, status) {
+                        callback(data);
+                    })
+                    .error(function (data, status) {});
+            }
+        }
+
+    } ])
+    .service('searchPlayer', ['$http', function ($http) {
+        return {
+            /**
+            * searchPlayer service allows te user to select one of their teams
+            */
+            search: function (nombreJugador, callback) {
+                // Create the http post request
+                // the data holds the keywords
+                // The request is a JSON request.
+                var url = '/usuarios/_jugadorpornombre'; // The url of our search
+                $http.post(url, { "nombreJugador": nombreJugador }).
+                    success(function (data, status) {
+                        callback(data);
+                    })
+                    .error(function (data, status) { });
+            }
+        }
+
+    } ]);
+
 
 $(function () {
 
@@ -12,6 +49,7 @@ $(function () {
             $(btn).button('reset')
         }, 5000)
     });
+
 });
 
 

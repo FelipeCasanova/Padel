@@ -9,9 +9,12 @@ namespace Padel.Tasks.CommandResults
     {
         public bool Success { get; set; }
 
-        public CommandResult(bool success)
+        public string Message { get; set; }
+
+        public CommandResult(bool success, string message)
         {
             this.Success = success;
+            this.Message = message;
         }
     }
 }

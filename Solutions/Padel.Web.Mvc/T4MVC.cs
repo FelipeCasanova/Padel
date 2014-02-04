@@ -105,6 +105,9 @@ namespace Links
             private const string URLPATH = "~/Scripts/angularjs";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string angular_route_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-route.min.js") ? Url("angular-route.min.js") : Url("angular-route.js");
+            public static readonly string angular_route_min_js = Url("angular-route.min.js");
+            public static readonly string angular_route_min_js_map = Url("angular-route.min.js.map");
             public static readonly string angular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular.min.js") ? Url("angular.min.js") : Url("angular.js");
             public static readonly string angular_min_js = Url("angular.min.js");
             public static readonly string angular_min_js_map = Url("angular.min.js.map");

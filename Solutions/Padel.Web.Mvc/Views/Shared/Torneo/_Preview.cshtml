@@ -6,9 +6,22 @@
         suffix = Model.First().TipoStr + Model.First().EstadoCategoria;
     }
 }
+<script type="text/javascript">
+    function TournamentPreview@(suffix)Ctrl($rootScope, $scope, signUpTournamentService) {
+        $scope.updateTitleTournament = function (categoryId, tournamentId, title, price)
+        {
+            $rootScope.torneoTitle = title;
+            $rootScope.$broadcast('torneoTitle', title);
+            $rootScope.$broadcast('price', price);
+            signUpTournamentService.categoryId = categoryId;
+            signUpTournamentService.tournamentId = tournamentId;
+        };
+    }
+</script>
+
 <!-- Carousel
     ================================================== -->
-<div id="myCarousel@(suffix)" class="carousel slide small" data-ride="carousel">
+<div id="myCarousel@(suffix)" class="carousel slide small" data-ride="carousel" ng-controller="TournamentPreview@(suffix)Ctrl">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         @for (int i = 0; i < Model.Count; i++)
@@ -46,7 +59,7 @@
 
                         }
                         <p>
-                            Categoría del torneo - <code>@(torneo.Categoria)
+                            Categoría del torneo - <code>@(torneo.CategoriaNombre)
                                 / @(torneo.TipoEquipoStr)</code>
                         </p>
                         @if (torneo.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Progreso)
@@ -58,7 +71,9 @@
                         else if (User.Identity.IsAuthenticated)
                         {
                             <p>
-                                <a class="btn btn-lg btn-primary" href="#" role="button" data-toggle="modal" data-target="#apuntateModal">
+                                <a class="btn btn-lg btn-primary" href="#" role="button" data-toggle="modal" data-target="#apuntateModal"
+                                   ng-click="updateTitleTournament(@(torneo.CategoriaId), @(torneo.Id), '@(torneo.Nombre) - @(torneo.TipoStr), @(torneo.CategoriaNombre) / @(torneo.TipoEquipoStr)',
+                                   '@(Html.Partial(MVC.Shared.Views.Torneo._Currency, torneo))')">
                                     Apuntaté</a></p>
                         }
                         else

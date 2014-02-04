@@ -41,11 +41,11 @@ namespace Padel.Tasks.CommandHandlers
             if (usuario.IsValid())
             {
                 this.usuarioTasks.CreateOrUpdate(usuario);
-                return new CommandResult(true);
+                return new CommandResult(true, string.Empty);
             }
             else 
             {
-                return new CommandResult(false);
+                return new CommandResult(false, string.Empty);
             }
         }
     }

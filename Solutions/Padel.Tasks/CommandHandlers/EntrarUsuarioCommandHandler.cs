@@ -26,7 +26,7 @@ namespace Padel.Tasks.CommandHandlers
         public CommandResult Handle(EntrarUsuarioCommand command)
         {
             var password = MD5.Create().GetMd5Hash(command.Password);
-            return new CommandResult(usuarioTasks.ValidateUser(command.EmailOrMovil, password, out command.TelefonoMovil));
+            return new CommandResult(usuarioTasks.ValidateUser(command.EmailOrMovil, password, out command.TelefonoMovil), string.Empty);
         }
     }
     

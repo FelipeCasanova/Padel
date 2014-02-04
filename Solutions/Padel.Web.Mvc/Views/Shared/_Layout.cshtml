@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="robots" content="noindex, nofollow"/>
+    <meta name="robots" content="noindex, nofollow" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="@Url.Content(@Links.Content.bootstrap.css.bootstrap_css)" rel="stylesheet" />
     <link href="@Url.Content(@Links.Content.bootstrap.css.bootstrap_theme_css)" rel="stylesheet" />
@@ -18,8 +18,10 @@
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
     <div class="container marketing">
-        @Html.Partial(MVC.Shared.Views.Errors._Error)
-        @RenderBody()
+        <div class="container content">
+            @Html.Partial(MVC.Shared.Views.Errors._Error)
+            @RenderBody()
+        </div>
         @Html.Partial(@MVC.Shared.Views._Footer)
     </div>
     <!-- /.container -->
@@ -32,6 +34,7 @@
     <script src="@Url.Content(@Links.Scripts.bootstrap.bootstrap_validation_js)" type="text/javascript"></script>
     <script src="@Url.Content(@Links.Scripts.bootstrap.holder_js)" type="text/javascript"></script>
     <script src="@Url.Content(@Links.Scripts.angularjs.angular_min_js)" type="text/javascript"></script>
+    <script src="@Url.Content(@Links.Scripts.angularjs.angular_route_min_js)" type="text/javascript"></script>
     <script src="@Url.Content(@Links.Scripts.padel.padel_js)" type="text/javascript"></script>
     @RenderSection("JSSection", false)
 </body>

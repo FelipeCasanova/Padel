@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Padel.Domain;
 
 namespace Padel.Web.Mvc.Controllers.ViewModels.Equipos
 {
@@ -18,5 +19,7 @@ namespace Padel.Web.Mvc.Controllers.ViewModels.Equipos
         public int JugadorBId { get; set; }
 
         public string JugadorBNombre { get; set; }
+
+        public EstadoEquipoEnum Estado { get; set; }
     }
 }

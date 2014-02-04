@@ -229,6 +229,7 @@
     <Compile Include="Controllers\ViewModels\UsuarioEntrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\UsuarioRegistrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\JugadorViewModel.cs" />
+    <Compile Include="Filters\CustomValidateAntiForgeryTokenAttribute.cs" />
     <Compile Include="Filters\ExceptionLoggerFilter.cs" />
     <Compile Include="GaleriasController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -297,6 +298,8 @@
     <Content Include="robots.txt" />
     <Content Include="Scripts\additional-methods.js" />
     <Content Include="Scripts\additional-methods.min.js" />
+    <Content Include="Scripts\angularjs\angular-route.js" />
+    <Content Include="Scripts\angularjs\angular-route.min.js" />
     <Content Include="Scripts\angularjs\angular.js" />
     <Content Include="Scripts\angularjs\angular.min.js" />
     <Content Include="Scripts\angularjs\grid\ng-grid-2.0.7.min.js" />
@@ -341,6 +344,7 @@
     <Content Include="Scripts\padel\padel.js" />
     <Content Include="Scripts\padel\torneos\apuntate.js" />
     <Content Include="Scripts\slimscroll\jquery.slimscroll.min.js" />
+    <None Include="Scripts\angularjs\angular-route.min.js.map" />
     <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Web.config">
