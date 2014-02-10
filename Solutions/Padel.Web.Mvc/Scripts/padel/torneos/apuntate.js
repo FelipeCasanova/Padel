@@ -9,7 +9,7 @@
 
 });
 
-function SearchTeamsCtrl($scope, searchTeams, signUpTournamentService) {
+function SearchTeamsCtrl($scope, $timeout, searchTeams, signUpTournamentService) {
 
     $scope.title = "No hay equipos";
     $scope.showDelete = false;
@@ -17,6 +17,20 @@ function SearchTeamsCtrl($scope, searchTeams, signUpTournamentService) {
     $scope.teams = [];
     $scope.teamSelected = null;
     $scope.idJugador = 0;
+
+    $scope.searchTeam = function () {
+        searchTeams.search($scope.idJugador, function (data) {
+            $scope.teams = data;
+
+            if ($scope.teams.length > 0) {
+                $scope.title = "Selecciona un equipo";
+                $scope.status = "";
+            }
+            else {
+                $scope.status = "disabled";
+            }
+        })
+    };
 
     $scope.selectTeam = function (team) {
         $scope.teamSelected = team;
@@ -34,24 +48,9 @@ function SearchTeamsCtrl($scope, searchTeams, signUpTournamentService) {
         signUpTournamentService.teamIdBroadCast(0);
     };
 
-    $scope.$watch('idJugador', function (newValue, oldValue) {
-        // Create the http post request
-        // The request is a JSON request.
-
-        searchTeams.search($scope.idJugador, function (data) {
-            $scope.teams = data;
-
-            if ($scope.teams.length > 0) {
-                $scope.title = "Selecciona un equipo";
-                $scope.status = "";
-            }
-            else {
-                $scope.status = "disabled";
-            }
-        })
-
-    });
+    $timeout($scope.searchTeam, 0);
 }
+SearchTeamsCtrl.$inject = ['$scope', '$timeout', 'searchTeams', 'signUpTournamentService'];
 
 function SearchPlayerCtrl($scope, searchPlayer, signUpTournamentService) {
 
@@ -93,6 +92,7 @@ function SearchPlayerCtrl($scope, searchPlayer, signUpTournamentService) {
     };
 
 }
+SearchPlayerCtrl.$inject = ['$scope', 'searchPlayer', 'signUpTournamentService'];
 
 function AcceptTermsCtrl($scope, signUpTournamentService) {
     $scope.acceptedTerms = false;
@@ -100,6 +100,7 @@ function AcceptTermsCtrl($scope, signUpTournamentService) {
         signUpTournamentService.acceptedTermsBroadCast(newValue);
     });
 }
+AcceptTermsCtrl.$inject = ['$scope', 'signUpTournamentService'];
 
 function DetailsPaymentCtrl($scope) {
     $scope.$on('torneoTitle', function (event, title) {
@@ -111,6 +112,7 @@ function DetailsPaymentCtrl($scope) {
     });
 
 }
+DetailsPaymentCtrl.$inject = ['$scope'];
 
 function SignUpCtrl($scope, signUpTournamentService) {
     $scope.signUp = function () {
@@ -130,13 +132,15 @@ function SignUpCtrl($scope, signUpTournamentService) {
     }
 }
 
+SignUpCtrl.$inject = ['$scope', 'signUpTournamentService'];
+
 app.service('signUpTournamentService', ['$rootScope', '$http', function ($rootScope, $http) {
     var signUpService = {};
 
     signUpService.teamId;
     signUpService.playerId;
     signUpService.tournamentId;
-    signUpService.categoryId; 
+    signUpService.categoryId;
     signUpService.acceptedTerms;
     signUpService.antiForgeryToken;
 

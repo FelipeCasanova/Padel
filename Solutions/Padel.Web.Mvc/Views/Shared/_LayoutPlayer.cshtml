@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" ng-app="padelApp">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    @Styles.Render("~/Content/css/base")
+    @RenderSection("CSSSection", false)
+    <link href="@Url.Content(@Links.Content.jugador.sb_admin_css)" rel="stylesheet" type="text/css" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div id="wrapper">
+        @Html.Partial(@MVC.Shared.Views._NavBar)
+        <div class="container content">
+            @Html.Partial(@MVC.Shared.Views.Jugador._NavBarSide)
+            <div id="page-wrapper">
+                @Html.Partial(MVC.Shared.Views.Errors._Error)
+                @RenderBody()
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- Core Scripts - Include with every page -->
+    @Scripts.Render("~/bundles/js/base")
+    @Scripts.Render("~/bundles/js/useradmin")
+    @RenderSection("JSSection", false)
+</body>
+</html>

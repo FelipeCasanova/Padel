@@ -29,11 +29,5 @@ namespace Padel.Web.Mvc.Controllers.ViewModels
         [Remote("ValidarEmailUnico", "Usuarios")]
         public virtual string Email { get; set; }
 
-        //public static UsuarioRegistrarModelView CrearUsuarioModelView(Usuario usuario)
-        //{
-        //    UsuarioRegistrarModelView model = new UsuarioRegistrarModelView();
-        //    model.Usuario = usuario;
-        //    return model;
-        //}
     }
 }

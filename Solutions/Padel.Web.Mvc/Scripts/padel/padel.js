@@ -6,7 +6,7 @@
                 /**
                 * searchTeams service allows te user to select one of their teams
                 */
-                var url = '/usuarios/_equiposporjugador'; // The url of our search
+                var url = '/equipos/_equiposporjugador'; // The url of our search
                 $http.post(url, { "idJugador": idJugador }).
                     success(function (data, status) {
                         callback(data);

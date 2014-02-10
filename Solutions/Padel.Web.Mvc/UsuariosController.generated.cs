@@ -73,12 +73,6 @@ namespace Padel.Web.Mvc.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult _EquiposPorJugador()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._EquiposPorJugador);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult _JugadorPorNombre()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._JugadorPorNombre);
@@ -106,7 +100,6 @@ namespace Padel.Web.Mvc.Controllers
             public readonly string ValidarTelefonoUnico = "ValidarTelefonoUnico";
             public readonly string ValidarEmailUnico = "ValidarEmailUnico";
             public readonly string Logout = "Logout";
-            public readonly string _EquiposPorJugador = "_EquiposPorJugador";
             public readonly string _JugadorPorNombre = "_JugadorPorNombre";
         }
 
@@ -120,7 +113,6 @@ namespace Padel.Web.Mvc.Controllers
             public const string ValidarTelefonoUnico = "ValidarTelefonoUnico";
             public const string ValidarEmailUnico = "ValidarEmailUnico";
             public const string Logout = "Logout";
-            public const string _EquiposPorJugador = "_EquiposPorJugador";
             public const string _JugadorPorNombre = "_JugadorPorNombre";
         }
 
@@ -165,14 +157,6 @@ namespace Padel.Web.Mvc.Controllers
         public class ActionParamsClass_ValidarEmailUnico
         {
             public readonly string email = "email";
-        }
-        static readonly ActionParamsClass__EquiposPorJugador s_params__EquiposPorJugador = new ActionParamsClass__EquiposPorJugador();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass__EquiposPorJugador _EquiposPorJugadorParams { get { return s_params__EquiposPorJugador; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass__EquiposPorJugador
-        {
-            public readonly string idJugador = "idJugador";
         }
         static readonly ActionParamsClass__JugadorPorNombre s_params__JugadorPorNombre = new ActionParamsClass__JugadorPorNombre();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -271,16 +255,6 @@ namespace Padel.Web.Mvc.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Logout);
             LogoutOverride(callInfo);
-            return callInfo;
-        }
-
-        partial void _EquiposPorJugadorOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int idJugador);
-
-        public override System.Web.Mvc.ActionResult _EquiposPorJugador(int idJugador)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._EquiposPorJugador);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idJugador", idJugador);
-            _EquiposPorJugadorOverride(callInfo, idJugador);
             return callInfo;
         }
 

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Padel.Domain;
+using SharpArch.Domain.Commands;
 
 namespace Padel.Tasks.Commands
 {
-    public class UsuarioCommandBase : PadelCommandBase
+    public class UsuarioCommandBase : CommandBase
     {
         public UsuarioCommandBase(string nombre, SexoEnum sexo, int telefonoMovil, string email)
         {

@@ -20,6 +20,7 @@ namespace Padel.Infrastructure.Utilities
             claims.Add(new Claim(ClaimTypes.Name, usuario.Nombre));
             claims.Add(new Claim(ClaimTypes.Role, usuario.Roles.First().Nombre));
             claims.Add(new Claim(ClaimTypes.PPID, usuario.Id.ToString()));
+            claims.Add(new Claim("http://http://flipersanvi.no-ip.biz//accesscontrolservice/2014/01/claims/gender", usuario.Sexo.ToString()));
             if (!string.IsNullOrEmpty(usuario.Email))
             {
                 claims.Add(new Claim(ClaimTypes.Email, usuario.Email));

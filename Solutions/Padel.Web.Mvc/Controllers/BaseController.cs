@@ -24,6 +24,5 @@ namespace Padel.Web.Mvc.Controllers
         }
 
         public abstract void SetTopMenu(MenuModelView modelView);
-        
     }
 }

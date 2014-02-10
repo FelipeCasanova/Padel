@@ -27,8 +27,10 @@ public static class MVC
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
     public static Padel.Web.Mvc.Controllers.ContactoController Contacto = new Padel.Web.Mvc.Controllers.T4MVC_ContactoController();
+    public static Padel.Web.Mvc.Controllers.EquiposController Equipos = new Padel.Web.Mvc.Controllers.T4MVC_EquiposController();
     public static Padel.Web.Mvc.Controllers.GaleriasController Galerias = new Padel.Web.Mvc.Controllers.T4MVC_GaleriasController();
     public static Padel.Web.Mvc.Controllers.HomeController Home = new Padel.Web.Mvc.Controllers.T4MVC_HomeController();
+    public static Padel.Web.Mvc.Controllers.JugadorController Jugador = new Padel.Web.Mvc.Controllers.T4MVC_JugadorController();
     public static Padel.Web.Mvc.Controllers.NormasController Normas = new Padel.Web.Mvc.Controllers.T4MVC_NormasController();
     public static Padel.Web.Mvc.Controllers.PremiosController Premios = new Padel.Web.Mvc.Controllers.T4MVC_PremiosController();
     public static Padel.Web.Mvc.Controllers.ResultadosController Resultados = new Padel.Web.Mvc.Controllers.T4MVC_ResultadosController();
@@ -187,6 +189,77 @@ namespace Links
             
             }
         
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class jugador {
+                private const string URLPATH = "~/Scripts/padel/jugador";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class demo {
+                    private const string URLPATH = "~/Scripts/padel/jugador/demo";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string dashboard_demo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dashboard-demo.min.js") ? Url("dashboard-demo.min.js") : Url("dashboard-demo.js");
+                    public static readonly string flot_demo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/flot-demo.min.js") ? Url("flot-demo.min.js") : Url("flot-demo.js");
+                    public static readonly string morris_demo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/morris-demo.min.js") ? Url("morris-demo.min.js") : Url("morris-demo.js");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class equipos {
+                    private const string URLPATH = "~/Scripts/padel/jugador/equipos";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string crud_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/crud.min.js") ? Url("crud.min.js") : Url("crud.js");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class plugins {
+                    private const string URLPATH = "~/Scripts/padel/jugador/plugins";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class dataTables {
+                        private const string URLPATH = "~/Scripts/padel/jugador/plugins/dataTables";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public static readonly string dataTables_bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dataTables.bootstrap.min.js") ? Url("dataTables.bootstrap.min.js") : Url("dataTables.bootstrap.js");
+                        public static readonly string jquery_dataTables_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.dataTables.min.js") ? Url("jquery.dataTables.min.js") : Url("jquery.dataTables.js");
+                    }
+                
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class flot {
+                        private const string URLPATH = "~/Scripts/padel/jugador/plugins/flot";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public static readonly string excanvas_min_js = Url("excanvas.min.js");
+                        public static readonly string jquery_flot_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.flot.min.js") ? Url("jquery.flot.min.js") : Url("jquery.flot.js");
+                        public static readonly string jquery_flot_pie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.flot.pie.min.js") ? Url("jquery.flot.pie.min.js") : Url("jquery.flot.pie.js");
+                        public static readonly string jquery_flot_resize_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.flot.resize.min.js") ? Url("jquery.flot.resize.min.js") : Url("jquery.flot.resize.js");
+                        public static readonly string jquery_flot_tooltip_min_js = Url("jquery.flot.tooltip.min.js");
+                    }
+                
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class metisMenu {
+                        private const string URLPATH = "~/Scripts/padel/jugador/plugins/metisMenu";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public static readonly string jquery_metisMenu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.metisMenu.min.js") ? Url("jquery.metisMenu.min.js") : Url("jquery.metisMenu.js");
+                    }
+                
+                    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                    public static class morris {
+                        private const string URLPATH = "~/Scripts/padel/jugador/plugins/morris";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public static readonly string morris_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/morris.min.js") ? Url("morris.min.js") : Url("morris.js");
+                        public static readonly string raphael_2_1_0_min_js = Url("raphael-2.1.0.min.js");
+                    }
+                
+                }
+            
+                public static readonly string sb_admin_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/sb-admin.min.js") ? Url("sb-admin.min.js") : Url("sb-admin.js");
+            }
+        
             public static readonly string padel_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/padel.min.js") ? Url("padel.min.js") : Url("padel.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class torneos {
@@ -301,6 +374,26 @@ namespace Links
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class fonts {
+            private const string URLPATH = "~/Content/fonts";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string fontawesome_webfont_eot = Url("fontawesome-webfont.eot");
+            public static readonly string fontawesome_webfont_svg = Url("fontawesome-webfont.svg");
+            public static readonly string fontawesome_webfont_ttf = Url("fontawesome-webfont.ttf");
+            public static readonly string fontawesome_webfont_woff = Url("fontawesome-webfont.woff");
+            public static readonly string FontAwesome_otf = Url("FontAwesome.otf");
+            public static readonly string glyphicons_halflings_regular_eot = Url("glyphicons-halflings-regular.eot");
+            public static readonly string glyphicons_halflings_regular_svg = Url("glyphicons-halflings-regular.svg");
+            public static readonly string glyphicons_halflings_regular_ttf = Url("glyphicons-halflings-regular.ttf");
+            public static readonly string glyphicons_halflings_regular_woff = Url("glyphicons-halflings-regular.woff");
+            public static readonly string ionicons_eot = Url("ionicons.eot");
+            public static readonly string ionicons_svg = Url("ionicons.svg");
+            public static readonly string ionicons_ttf = Url("ionicons.ttf");
+            public static readonly string ionicons_woff = Url("ionicons.woff");
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class fuelux {
             private const string URLPATH = "~/Content/fuelux";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
@@ -316,6 +409,8 @@ namespace Links
                 public static readonly string fuelux_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/fuelux.min.css") ? Url("fuelux.min.css") : Url("fuelux.css");
                      
                 public static readonly string fuelux_min_css = Url("fuelux.min.css");
+                public static readonly string padel_fuelux_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/padel-fuelux.min.css") ? Url("padel-fuelux.min.css") : Url("padel-fuelux.css");
+                     
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -349,7 +444,38 @@ namespace Links
             public static readonly string bola_red_jpg = Url("bola_red.jpg");
             public static readonly string chica_padel_jpg = Url("chica_padel.jpg");
             public static readonly string competicion_padel_jpg = Url("competicion_padel.jpg");
+            public static readonly string form_png = Url("form.png");
+            public static readonly string glyphicons_halflings_white_png = Url("glyphicons-halflings-white.png");
+            public static readonly string glyphicons_halflings_png = Url("glyphicons-halflings.png");
             public static readonly string torneo_backgroung_jpg = Url("torneo_backgroung.jpg");
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class ionicons {
+            private const string URLPATH = "~/Content/ionicons";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class css {
+                private const string URLPATH = "~/Content/ionicons/css";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string ionicons_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ionicons.min.css") ? Url("ionicons.min.css") : Url("ionicons.css");
+                     
+                public static readonly string ionicons_min_css = Url("ionicons.min.css");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class fonts {
+                private const string URLPATH = "~/Content/ionicons/fonts";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string ionicons_eot = Url("ionicons.eot");
+                public static readonly string ionicons_svg = Url("ionicons.svg");
+                public static readonly string ionicons_ttf = Url("ionicons.ttf");
+                public static readonly string ionicons_woff = Url("ionicons.woff");
+            }
+        
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -358,6 +484,57 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string timeTo_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/timeTo.min.css") ? Url("timeTo.min.css") : Url("timeTo.css");
+                 
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class jugador {
+            private const string URLPATH = "~/Content/jugador";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class plugins {
+                private const string URLPATH = "~/Content/jugador/plugins";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class dataTables {
+                    private const string URLPATH = "~/Content/jugador/plugins/dataTables";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string dataTables_bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dataTables.bootstrap.min.css") ? Url("dataTables.bootstrap.min.css") : Url("dataTables.bootstrap.css");
+                         
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class morris {
+                    private const string URLPATH = "~/Content/jugador/plugins/morris";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string morris_0_4_3_min_css = Url("morris-0.4.3.min.css");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class social_buttons {
+                    private const string URLPATH = "~/Content/jugador/plugins/social-buttons";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string social_buttons_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/social-buttons.min.css") ? Url("social-buttons.min.css") : Url("social-buttons.css");
+                         
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class timeline {
+                    private const string URLPATH = "~/Content/jugador/plugins/timeline";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string timeline_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/timeline.min.css") ? Url("timeline.min.css") : Url("timeline.css");
+                         
+                }
+            
+            }
+        
+            public static readonly string sb_admin_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/sb-admin.min.css") ? Url("sb-admin.min.css") : Url("sb-admin.css");
                  
         }
     

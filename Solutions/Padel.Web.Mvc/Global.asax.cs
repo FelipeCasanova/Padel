@@ -31,6 +31,7 @@
     using Padel.Web.Mvc.App_Start;
     using System.Configuration;
     using Microsoft.IdentityModel.Web;
+    using System.Web.Optimization;
     
 
     /// <summary>
@@ -83,6 +84,8 @@
             this.InitializeServiceLocator();
 
             AreaRegistration.RegisterAllAreas();
+
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteRegistrar.RegisterRoutesTo(RouteTable.Routes);

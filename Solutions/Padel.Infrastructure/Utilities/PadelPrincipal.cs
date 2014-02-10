@@ -29,6 +29,14 @@ namespace Padel.Infrastructure.Utilities
             }
         }
 
+        public string Sexo
+        {
+            get
+            {
+                return ((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz//accesscontrolservice/2014/01/claims/gender").Value;
+            }
+        }
+
         public DateTime FechaCreacion
         {
             get

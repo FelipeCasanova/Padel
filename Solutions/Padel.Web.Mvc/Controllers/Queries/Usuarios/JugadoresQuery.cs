@@ -10,6 +10,8 @@ using SharpArch.NHibernate;
 using NHibernate.Transform;
 using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
 using NHibernate.Criterion;
+using System.Threading;
+using Padel.Infrastructure.Utilities;
 
 namespace Padel.Web.Mvc.Controllers.Queries.Equipos
 {
@@ -18,10 +20,13 @@ namespace Padel.Web.Mvc.Controllers.Queries.Equipos
         public IList<JugadorViewModel> GetJugadorPorNombreList(string nombreJugador)
         {
             JugadorViewModel jugadorViewModel = null;
+            var usuario = (PadelPrincipal)Thread.CurrentPrincipal;
 
             var query = Session.QueryOver<Usuario>().OrderBy(x => x.Nombre).Asc;
 
-            var viewModels = query.WhereRestrictionOn(u => u.Nombre)
+            var viewModels = query
+                .WhereNot(u => u.Id == usuario.Id)
+                .WhereRestrictionOn(u => u.Nombre)
                 .IsLike(nombreJugador, MatchMode.Anywhere)
                 .SelectList(list => list
                         .Select(j => j.Id).WithAlias(() => jugadorViewModel.Id)

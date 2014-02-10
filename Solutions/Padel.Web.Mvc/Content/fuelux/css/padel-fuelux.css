@@ -1,0 +1,48 @@
+/*************** Fuelex *************/
+
+/* Modals */
+.fuelux .modal-body 
+{
+    overflow-y: visible;
+}
+
+/* Rows */
+.fuelux .row {
+    margin-left: 0px;
+}
+
+/* Inputs */
+.fuelux .input-append, .fuelux .input-prepend 
+{
+    margin-bottom: 0px;
+}
+
+.fuelux input[type="text"]
+{
+    height: auto;
+}
+
+.fuelux input[type="checkbox"]
+{
+    position: relative;
+    top: -3px;
+}
+
+/* Buttons */
+.fuelux button.btn
+{
+    margin-bottom: 2px;
+}
+
+/* label */
+.fuelux .label
+{
+    font-size: 14px;
+    padding: 10px;
+}
+
+/* Wizard */
+.step-pane.active
+{
+    padding-top: 10px;
+}

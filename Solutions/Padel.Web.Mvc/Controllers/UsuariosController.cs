@@ -26,15 +26,12 @@ namespace Padel.Web.Mvc.Controllers
 
         private readonly IUsuarioTasks usuarioTasks;
 
-        private readonly IEquiposQuery equiposQuery;
-
         private readonly IJugadoresQuery jugadoresQuery;
 
-        public UsuariosController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, IEquiposQuery equiposQuery, IJugadoresQuery jugadoresQuery)
+        public UsuariosController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, IJugadoresQuery jugadoresQuery)
         {
             this.commandProcessor = commandProcessor;
             this.usuarioTasks = usuarioTasks;
-            this.equiposQuery = equiposQuery;
             this.jugadoresQuery = jugadoresQuery;
         }
 
@@ -182,20 +179,13 @@ namespace Padel.Web.Mvc.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public virtual ActionResult Logout()
         {
             FederatedAuthentication.SessionAuthenticationModule.SignOut();
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
 
-        [HttpPost]
-        [Transaction]
-        public virtual ActionResult _EquiposPorJugador(int idJugador)
-        {
-            var viewModel = this.equiposQuery.GetEquiposPorJugadorList(idJugador);
-            return Json(viewModel, JsonRequestBehavior.AllowGet);
-        }
+        
 
         [HttpPost]
         [Transaction]

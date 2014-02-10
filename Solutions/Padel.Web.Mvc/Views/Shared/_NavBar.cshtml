@@ -13,7 +13,7 @@
 }
 <div class="navbar-wrapper">
     <div class="container">
-        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <nav class="navbar navbar-inverse" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -49,7 +49,7 @@
                             }
                         </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Usuarios.ActionNames.Index, MVC.Usuarios.Name))">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Index, MVC.Jugador.Name))">
                                     Tus torneos</a></li>
                                 @if (User.Identity.IsAuthenticated && User.IsInRole("Administrador"))
                                 {

@@ -4,13 +4,10 @@
     Layout = @MVC.Shared.Views._Layout;
 }
 @section CSSSection{
-    <link href="@Url.Content(@Links.Content.jqtimeto.timeTo_css)" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content(@Links.Content.fuelux.css.fuelux_min_css)" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css/torneo")
 }
 @section JSSection{
-    <script src="@Url.Content(@Links.Scripts.jqtimeto.jquery_timeTo_min_js)" type="text/javascript"></script>
-    <script src="@Url.Content(@Links.Scripts.fuelux.wizard_js)" type="text/javascript"></script>
-    <script src="@Url.Content(@Links.Scripts.padel.torneos.apuntate_js)" type="text/javascript"></script>
+    @Scripts.Render("~/bundles/js/torneo")
     <script type="text/javascript">
         $(function () {
             $('#apuntateWizard').wizard();

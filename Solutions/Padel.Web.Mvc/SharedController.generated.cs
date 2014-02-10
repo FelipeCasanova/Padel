@@ -39,12 +39,14 @@ namespace T4MVC
                 public readonly string _Footer = "_Footer";
                 public readonly string _Layout = "_Layout";
                 public readonly string _LayoutLogin = "_LayoutLogin";
+                public readonly string _LayoutPlayer = "_LayoutPlayer";
                 public readonly string _NavBar = "_NavBar";
             }
             public readonly string _Carousel = "~/Views/Shared/_Carousel.cshtml";
             public readonly string _Footer = "~/Views/Shared/_Footer.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _LayoutLogin = "~/Views/Shared/_LayoutLogin.cshtml";
+            public readonly string _LayoutPlayer = "~/Views/Shared/_LayoutPlayer.cshtml";
             public readonly string _NavBar = "~/Views/Shared/_NavBar.cshtml";
             static readonly _DisplayTemplatesClass s_DisplayTemplates = new _DisplayTemplatesClass();
             public _DisplayTemplatesClass DisplayTemplates { get { return s_DisplayTemplates; } }
@@ -71,6 +73,21 @@ namespace T4MVC
                 }
                 public readonly string _Error = "~/Views/Shared/Errors/_Error.cshtml";
                 public readonly string _ModalError = "~/Views/Shared/Errors/_ModalError.cshtml";
+            }
+            static readonly _JugadorClass s_Jugador = new _JugadorClass();
+            public _JugadorClass Jugador { get { return s_Jugador; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _JugadorClass
+            {
+                static readonly _ViewNamesClass s_ViewNames = new _ViewNamesClass();
+                public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
+                public class _ViewNamesClass
+                {
+                    public readonly string _NavBarSide = "_NavBarSide";
+                    public readonly string _NavBarTop = "_NavBarTop";
+                }
+                public readonly string _NavBarSide = "~/Views/Shared/Jugador/_NavBarSide.cshtml";
+                public readonly string _NavBarTop = "~/Views/Shared/Jugador/_NavBarTop.cshtml";
             }
             static readonly _TorneoClass s_Torneo = new _TorneoClass();
             public _TorneoClass Torneo { get { return s_Torneo; } }

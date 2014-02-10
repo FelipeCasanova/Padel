@@ -27,6 +27,7 @@
     <UseIISExpress>false</UseIISExpress>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Solutions\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <WebGreaseLibPath>..\..\Packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -47,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\..\Packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\..\Packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
@@ -106,8 +110,7 @@
       <HintPath>..\..\Packages\StudioDonder.MvcContrib.Mvc4.3.0.0.99\lib\MvcContrib.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Packages\Newtonsoft.Json.4.5.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\..\Packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
@@ -115,7 +118,8 @@
     <Reference Include="NHibernate.Glimpse, Version=3.3.3.4001, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\Packages\NHibernate.Glimpse.3.3.3.4001\lib\net35\NHibernate.Glimpse.dll</HintPath>
     </Reference>
-    <Reference Include="SharpArch.Domain, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SharpArch.Domain, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Packages\SharpArch.Domain.2.0.4\lib\NET40\SharpArch.Domain.dll</HintPath>
     </Reference>
     <Reference Include="SharpArch.NHibernate, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -145,6 +149,9 @@
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\Packages\Microsoft.AspNet.Web.Optimization.1.1.2\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
@@ -169,6 +176,9 @@
     <Reference Include="T4MVCExtensions">
       <HintPath>..\..\Packages\T4MVCExtensions.3.7.4\lib\net40\T4MVCExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\..\Packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\AssemblyVersion.cs">
@@ -190,6 +200,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
@@ -205,6 +216,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\EquiposController.cs" />
+    <Compile Include="Controllers\JugadorController.cs" />
+    <Compile Include="Controllers\Jugadores\BaseJugadorController.cs" />
     <Compile Include="Controllers\PremiosController.cs" />
     <Compile Include="Areas\Admin\Controllers\Queries\Usuarios\IJugadoresQuery.cs" />
     <Compile Include="Areas\Admin\Controllers\Queries\Usuarios\JugadoresQuery.cs" />
@@ -224,11 +238,15 @@
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Areas\Admin\Controllers\ViewModels\JugadorViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Equipos\EquipoViewModel.cs" />
+    <Compile Include="Controllers\ViewModels\Menu\SideMenuJugadorModelView.cs" />
     <Compile Include="Controllers\ViewModels\Menu\MenuModelView.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\TorneoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\UsuarioEntrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\UsuarioRegistrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\JugadorViewModel.cs" />
+    <Compile Include="EquiposController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Filters\CustomValidateAntiForgeryTokenAttribute.cs" />
     <Compile Include="Filters\ExceptionLoggerFilter.cs" />
     <Compile Include="GaleriasController.generated.cs">
@@ -239,6 +257,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HomeController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JugadorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="NormasController.generated.cs">
@@ -279,6 +300,10 @@
     <Content Include="Content\fontawesome\css\font-awesome.css" />
     <Content Include="Content\fontawesome\css\font-awesome.min.css" />
     <Content Include="Content\fontawesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\ionicons.svg" />
+    <Content Include="Content\fuelux\css\padel-fuelux.css" />
     <Content Include="Content\fuelux\css\fuelux-responsive.css" />
     <Content Include="Content\fuelux\css\fuelux-responsive.min.css" />
     <Content Include="Content\fuelux\css\fuelux.css" />
@@ -290,8 +315,19 @@
     <Content Include="Content\img\bola_red.jpg" />
     <Content Include="Content\img\chica_padel.jpg" />
     <Content Include="Content\img\competicion_padel.jpg" />
+    <Content Include="Content\img\form.png" />
+    <Content Include="Content\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\img\glyphicons-halflings.png" />
     <Content Include="Content\img\torneo_backgroung.jpg" />
+    <Content Include="Content\ionicons\css\ionicons.css" />
+    <Content Include="Content\ionicons\css\ionicons.min.css" />
+    <Content Include="Content\ionicons\fonts\ionicons.svg" />
     <Content Include="Content\jqtimeto\timeTo.css" />
+    <Content Include="Content\jugador\plugins\dataTables\dataTables.bootstrap.css" />
+    <Content Include="Content\jugador\plugins\morris\morris-0.4.3.min.css" />
+    <Content Include="Content\jugador\plugins\social-buttons\social-buttons.css" />
+    <Content Include="Content\jugador\plugins\timeline\timeline.css" />
+    <Content Include="Content\jugador\sb-admin.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -341,9 +377,37 @@
     <Content Include="Scripts\padel\admin\admin.js" />
     <Content Include="Scripts\padel\admin\jugadores\grid.js" />
     <Content Include="Scripts\padel\admin\torneos\grid.js" />
+    <Content Include="Scripts\padel\jugador\demo\dashboard-demo.js" />
+    <Content Include="Scripts\padel\jugador\demo\flot-demo.js" />
+    <Content Include="Scripts\padel\jugador\demo\morris-demo.js" />
+    <Content Include="Scripts\padel\jugador\equipos\crud.js" />
+    <Content Include="Scripts\padel\jugador\plugins\dataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\padel\jugador\plugins\dataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\padel\jugador\plugins\flot\excanvas.min.js" />
+    <Content Include="Scripts\padel\jugador\plugins\flot\jquery.flot.js" />
+    <Content Include="Scripts\padel\jugador\plugins\flot\jquery.flot.pie.js" />
+    <Content Include="Scripts\padel\jugador\plugins\flot\jquery.flot.resize.js" />
+    <Content Include="Scripts\padel\jugador\plugins\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Scripts\padel\jugador\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="Scripts\padel\jugador\plugins\morris\morris.js" />
+    <Content Include="Scripts\padel\jugador\plugins\morris\raphael-2.1.0.min.js" />
+    <Content Include="Scripts\padel\jugador\sb-admin.js" />
     <Content Include="Scripts\padel\padel.js" />
     <Content Include="Scripts\padel\torneos\apuntate.js" />
     <Content Include="Scripts\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="Content\fonts\ionicons.eot" />
+    <None Include="Content\fonts\ionicons.ttf" />
+    <None Include="Content\fonts\ionicons.woff" />
+    <None Include="Content\ionicons\fonts\ionicons.eot" />
+    <None Include="Content\ionicons\fonts\ionicons.ttf" />
+    <None Include="Content\ionicons\fonts\ionicons.woff" />
     <None Include="Scripts\angularjs\angular-route.min.js.map" />
     <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -384,6 +448,15 @@
     <Content Include="Views\Shared\Torneo\_Currency.cshtml" />
     <Content Include="Views\Shared\Torneo\_Apuntate.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Jugador\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutPlayer.cshtml" />
+    <Content Include="Views\Shared\Jugador\_NavBarTop.cshtml" />
+    <Content Include="Views\Shared\Jugador\_NavBarSide.cshtml" />
+    <Content Include="Views\Jugador\Datos.cshtml" />
+    <Content Include="Views\Jugador\Torneos.cshtml" />
+    <Content Include="Views\Jugador\Partidos.cshtml" />
+    <Content Include="Views\Jugador\Graficas.cshtml" />
+    <Content Include="Views\Jugador\Equipos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Padel.Domain\Padel.Domain.csproj">

@@ -35,6 +35,11 @@ namespace Padel.Tasks.CommandHandlers
             EquipoToCategoria equipoToCategoria = new EquipoToCategoria();
 
             // Preconditions
+            if (command.UsuarioId == command.ParejaId)
+            {
+                return new CommandResult(false, "No se ha podido registrar el equipo. Inténtalo más tarde.");
+            }
+
             if (command.CategoriaId == 0)
             {
                 return new CommandResult(false, "No se puedo registrar el equipo en la categoría. Inténtalo más tarde.");
@@ -50,6 +55,7 @@ namespace Padel.Tasks.CommandHandlers
                 return new CommandResult(false, "Debes elegir o crear un equipo.");
             }
 
+            // Comprobar que la categoria pertenece al torneo
             var categoria = this.categoriaRepository.Get(command.CategoriaId);
             if (categoria.Torneo.Id != command.TorneoId)
             {
@@ -60,6 +66,27 @@ namespace Padel.Tasks.CommandHandlers
             if (command.EquipoId != 0)
             {
                 var equipo = this.equipoRepository.Get(command.EquipoId);
+
+                // Activar jugador y equipo si se diera el caso
+                if (equipo.JugadorA.Id == command.UsuarioId && !equipo.JugadorAVerificado)
+                {
+                    equipo.JugadorAVerificado = true;
+                    this.equipoRepository.SaveOrUpdate(equipo);
+                }
+
+                if (equipo.JugadorB.Id == command.UsuarioId && !equipo.JugadorBVerificado)
+                {
+                    equipo.JugadorBVerificado = true;
+                    this.equipoRepository.SaveOrUpdate(equipo);
+                }
+
+                if (equipo.JugadorAVerificado && equipo.JugadorBVerificado)
+                {
+                    equipo.Estado = EstadoEquipoEnum.Activado;
+                    this.equipoRepository.SaveOrUpdate(equipo);
+                }
+
+                // Verificar si el equipo está ya registrado
                 if (categoria.EquiposToCategorias.Any(etc => etc.Equipo.Id == command.EquipoId))
                 {
                     return new CommandResult(false, "El equipo seleccionado ya está registrado en este torneo.");
@@ -68,7 +95,7 @@ namespace Padel.Tasks.CommandHandlers
             }
             else
             {
-                if(command.equipos.Any(e => (e.JugadorA.Id == command.UsuarioId || e.JugadorB.Id == command.UsuarioId)
+                if (command.equipos.Any(e => (e.JugadorA.Id == command.UsuarioId || e.JugadorB.Id == command.UsuarioId)
                     && (e.JugadorA.Id == command.ParejaId || e.JugadorB.Id == command.ParejaId) && e.Estado == EstadoEquipoEnum.Activado))
                 {
                     return new CommandResult(false, "El equipo que quieres crear ya esta creado. Selecciona uno de la lista de equipos.");
@@ -116,11 +143,11 @@ namespace Padel.Tasks.CommandHandlers
                 this.equipoToCategoriaRepository.SaveOrUpdate(equipoToCategoria);
                 return new CommandResult(true, "Se ha registrado correctamente en el torneo.");
             }
-            else 
+            else
             {
                 return new CommandResult(false, "No se puedo registrar el equipo en el torneo. Intentelo más tarde.");
             }
         }
     }
-    
+
 }

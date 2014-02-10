@@ -8,8 +8,6 @@
     {
         public static void RegisterRoutesTo(RouteCollection routes) 
         {
-            
-
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
 
