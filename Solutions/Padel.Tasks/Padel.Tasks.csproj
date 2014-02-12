@@ -106,12 +106,14 @@
     <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CommandHandlers\CrearEquipoCommandHandler.cs" />
     <Compile Include="CommandHandlers\EliminarEquipoCommandHandler.cs" />
     <Compile Include="CommandHandlers\CrearEquipoParaTorneoCommandHandler.cs" />
     <Compile Include="CommandHandlers\EntrarUsuarioCommandHandler.cs" />
     <Compile Include="CommandHandlers\RegistrarUsuarioCommandHandler.cs" />
     <Compile Include="CommandHandlers\ValidarJugadorEnEquipoCommandHandler.cs" />
     <Compile Include="CommandResults\CommandResult.cs" />
+    <Compile Include="Commands\CrearEquipoCommand.cs" />
     <Compile Include="Commands\EliminarEquipoCommand.cs" />
     <Compile Include="Commands\CrearEquipoParaTorneoCommand.cs" />
     <Compile Include="Commands\EntrarUsuarioCommand.cs" />

@@ -55,9 +55,12 @@ namespace Padel.Web.Mvc.Controllers
 
             if (ModelState.IsValid)
             {
-                var equipos = this.equipoTasks.GetEquiposPorJugadoresList(((PadelPrincipal)User).Id, idJugador.GetValueOrDefault(), Domain.EstadoEquipoEnum.Activado);
-                var command = new CrearEquipoParaTorneoCommand(idTorneo.GetValueOrDefault(), idCategoria.GetValueOrDefault(), 
-                    ((PadelPrincipal)User).Id, idEquipo.GetValueOrDefault(), idJugador.GetValueOrDefault(), equipos);
+                var command = new CrearEquipoParaTorneoCommand(
+                    idTorneo.GetValueOrDefault(), 
+                    idCategoria.GetValueOrDefault(), 
+                    ((PadelPrincipal)User).Id, 
+                    idEquipo.GetValueOrDefault(), 
+                    idJugador.GetValueOrDefault());
                 var results = this.commandProcessor.Process<CrearEquipoParaTorneoCommand, CommandResult>(command);
                 return Json(results.First(), JsonRequestBehavior.AllowGet);
             }

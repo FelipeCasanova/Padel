@@ -9,26 +9,23 @@ namespace Padel.Tasks.Commands
 {
     public class CrearEquipoParaTorneoCommand : CommandBase
     {
-        public CrearEquipoParaTorneoCommand(int torneoId, int categoriaId, int usuarioId, int equipoId, int parejaId, IList<Equipo> equipos)
+        public CrearEquipoParaTorneoCommand(int torneoId, int categoriaId, int jugador1Id, int equipoId, int jugador2Id)
         {
             this.TorneoId = torneoId;
             this.CategoriaId = categoriaId;
-            this.UsuarioId = usuarioId;
+            this.Jugador1Id = jugador1Id;
             this.EquipoId = equipoId;
-            this.ParejaId = parejaId;
-            this.equipos = equipos;
+            this.Jugador2Id = jugador2Id;
         }
 
         public int TorneoId { get; set; }
 
         public int CategoriaId { get; set; }
 
-        public int UsuarioId { get; set; }
+        public int Jugador1Id { get; set; }
 
         public int EquipoId { get; set; }
 
-        public int ParejaId { get; set; }
-
-        public IList<Equipo> equipos { get; set; }
+        public int Jugador2Id { get; set; }
     }
 }

@@ -16,17 +16,19 @@ namespace Padel.Tasks.CommandHandlers
 {
     public class CrearEquipoParaTorneoCommandHandler : ICommandHandler<CrearEquipoParaTorneoCommand, CommandResult>
     {
-        private readonly IUsuarioTasks usuarioTasks;
-        private readonly IRepository<Equipo> equipoRepository;
+        private readonly IEquipoTasks equipoTasks;
+
+        private readonly IRepository<Usuario> usuarioRepository;
         private readonly IRepository<Categoria> categoriaRepository;
         private readonly IRepository<EquipoToCategoria> equipoToCategoriaRepository;
 
-        public CrearEquipoParaTorneoCommandHandler(IUsuarioTasks usuarioTasks, IRepository<Categoria> categoriaRepository, IRepository<Equipo> equipoRepository,
+        public CrearEquipoParaTorneoCommandHandler(IEquipoTasks equipoTasks, IRepository<Usuario> usuarioRepository, IRepository<Categoria> categoriaRepository, 
             IRepository<EquipoToCategoria> equipoToCategoriaRepository)
         {
-            this.usuarioTasks = usuarioTasks;
+            this.equipoTasks = equipoTasks;
+
+            this.usuarioRepository = usuarioRepository;
             this.categoriaRepository = categoriaRepository;
-            this.equipoRepository = equipoRepository;
             this.equipoToCategoriaRepository = equipoToCategoriaRepository;
         }
 
@@ -35,7 +37,7 @@ namespace Padel.Tasks.CommandHandlers
             EquipoToCategoria equipoToCategoria = new EquipoToCategoria();
 
             // Preconditions
-            if (command.UsuarioId == command.ParejaId)
+            if (command.Jugador1Id == command.Jugador2Id)
             {
                 return new CommandResult(false, "No se ha podido registrar el equipo. Inténtalo más tarde.");
             }
@@ -50,7 +52,7 @@ namespace Padel.Tasks.CommandHandlers
                 return new CommandResult(false, "No se puedo registrar el equipo en el torneo. Inténtalo más tarde.");
             }
 
-            if (command.ParejaId == 0 && command.EquipoId == 0)
+            if (command.Jugador2Id == 0 && command.EquipoId == 0)
             {
                 return new CommandResult(false, "Debes elegir o crear un equipo.");
             }
@@ -65,27 +67,11 @@ namespace Padel.Tasks.CommandHandlers
 
             if (command.EquipoId != 0)
             {
-                var equipo = this.equipoRepository.Get(command.EquipoId);
+                var equipo = this.equipoTasks.Get(command.EquipoId);
 
                 // Activar jugador y equipo si se diera el caso
-                if (equipo.JugadorA.Id == command.UsuarioId && !equipo.JugadorAVerificado)
-                {
-                    equipo.JugadorAVerificado = true;
-                    this.equipoRepository.SaveOrUpdate(equipo);
-                }
-
-                if (equipo.JugadorB.Id == command.UsuarioId && !equipo.JugadorBVerificado)
-                {
-                    equipo.JugadorBVerificado = true;
-                    this.equipoRepository.SaveOrUpdate(equipo);
-                }
-
-                if (equipo.JugadorAVerificado && equipo.JugadorBVerificado)
-                {
-                    equipo.Estado = EstadoEquipoEnum.Activado;
-                    this.equipoRepository.SaveOrUpdate(equipo);
-                }
-
+                this.equipoTasks.CreateOrUpdate(equipo, command.Jugador1Id, command.Jugador2Id);
+                
                 // Verificar si el equipo está ya registrado
                 if (categoria.EquiposToCategorias.Any(etc => etc.Equipo.Id == command.EquipoId))
                 {
@@ -95,43 +81,24 @@ namespace Padel.Tasks.CommandHandlers
             }
             else
             {
-                if (command.equipos.Any(e => (e.JugadorA.Id == command.UsuarioId || e.JugadorB.Id == command.UsuarioId)
-                    && (e.JugadorA.Id == command.ParejaId || e.JugadorB.Id == command.ParejaId) && e.Estado == EstadoEquipoEnum.Activado))
+                var equipos = this.equipoTasks.GetEquiposPorJugadoresList(command.Jugador1Id, command.Jugador2Id);
+
+                if (equipos.Any())
                 {
-                    return new CommandResult(false, "El equipo que quieres crear ya esta creado. Selecciona uno de la lista de equipos.");
+                    var equipoReactivate = equipos.First();
+
+                    // Reactivar el equipo
+                    this.equipoTasks.CreateOrUpdate(equipoReactivate, command.Jugador1Id, command.Jugador2Id);
+                    return new CommandResult(true, "Se ha registrado correctamente en el torneo.");
                 }
 
-                if (categoria.EquiposToCategorias.Any(etc => etc.Equipo.JugadorA.Id == command.UsuarioId || etc.Equipo.JugadorB.Id == command.UsuarioId))
+                if (categoria.EquiposToCategorias.Any(etc => etc.Equipo.JugadorA.Id == command.Jugador1Id || etc.Equipo.JugadorB.Id == command.Jugador1Id))
                 {
                     return new CommandResult(false, "Ya estás registrado en este torneo.");
                 }
 
                 var equipo = new Equipo();
-                equipo.FechaCreacion = DateTime.Now;
-                equipo.FechaModificacion = DateTime.Now;
-                equipo.Estado = EstadoEquipoEnum.Desactivado;
-                equipo.Nombre = null;
-                equipo.JugadorA = this.usuarioTasks.Get(command.UsuarioId);
-                equipo.JugadorB = this.usuarioTasks.Get(command.ParejaId);
-
-                if (equipo.JugadorA.Sexo == SexoEnum.Hombre && equipo.JugadorB.Sexo == SexoEnum.Hombre)
-                {
-                    equipo.TipoEquipo = TipoEquipoEnum.Hombre;
-                }
-                else if (equipo.JugadorA.Sexo == SexoEnum.Mujer && equipo.JugadorB.Sexo == SexoEnum.Mujer)
-                {
-                    equipo.TipoEquipo = TipoEquipoEnum.Mujer;
-                }
-                else
-                {
-                    equipo.TipoEquipo = TipoEquipoEnum.Mixto;
-                }
-
-                equipo.JugadorAVerificado = true;
-                equipo.JugadorBVerificado = false;
-                this.equipoRepository.SaveOrUpdate(equipo);
-
-                equipoToCategoria.Equipo = equipo;
+                equipoToCategoria.Equipo = this.equipoTasks.CreateOrUpdate(equipo, command.Jugador1Id, command.Jugador2Id);
             }
 
             equipoToCategoria.FechaCreacion = DateTime.Now;

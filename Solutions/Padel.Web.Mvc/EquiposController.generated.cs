@@ -55,6 +55,12 @@ namespace Padel.Web.Mvc.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _AddSelectedPlayerToTeam()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._AddSelectedPlayerToTeam);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult _EliminarEquipo()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._EliminarEquipo);
@@ -77,6 +83,7 @@ namespace Padel.Web.Mvc.Controllers
         {
             public readonly string _EquiposPorJugador = "_EquiposPorJugador";
             public readonly string _VerificarJugador = "_VerificarJugador";
+            public readonly string _AddSelectedPlayerToTeam = "_AddSelectedPlayerToTeam";
             public readonly string _EliminarEquipo = "_EliminarEquipo";
         }
 
@@ -85,6 +92,7 @@ namespace Padel.Web.Mvc.Controllers
         {
             public const string _EquiposPorJugador = "_EquiposPorJugador";
             public const string _VerificarJugador = "_VerificarJugador";
+            public const string _AddSelectedPlayerToTeam = "_AddSelectedPlayerToTeam";
             public const string _EliminarEquipo = "_EliminarEquipo";
         }
 
@@ -95,7 +103,6 @@ namespace Padel.Web.Mvc.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass__EquiposPorJugador
         {
-            public readonly string idJugador = "idJugador";
             public readonly string tipo = "tipo";
         }
         static readonly ActionParamsClass__VerificarJugador s_params__VerificarJugador = new ActionParamsClass__VerificarJugador();
@@ -105,6 +112,14 @@ namespace Padel.Web.Mvc.Controllers
         public class ActionParamsClass__VerificarJugador
         {
             public readonly string idEquipo = "idEquipo";
+        }
+        static readonly ActionParamsClass__AddSelectedPlayerToTeam s_params__AddSelectedPlayerToTeam = new ActionParamsClass__AddSelectedPlayerToTeam();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__AddSelectedPlayerToTeam _AddSelectedPlayerToTeamParams { get { return s_params__AddSelectedPlayerToTeam; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__AddSelectedPlayerToTeam
+        {
+            public readonly string idJugador = "idJugador";
         }
         static readonly ActionParamsClass__EliminarEquipo s_params__EliminarEquipo = new ActionParamsClass__EliminarEquipo();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -133,14 +148,13 @@ namespace Padel.Web.Mvc.Controllers
     {
         public T4MVC_EquiposController() : base(Dummy.Instance) { }
 
-        partial void _EquiposPorJugadorOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int idJugador, string tipo);
+        partial void _EquiposPorJugadorOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string tipo);
 
-        public override System.Web.Mvc.ActionResult _EquiposPorJugador(int idJugador, string tipo)
+        public override System.Web.Mvc.ActionResult _EquiposPorJugador(string tipo)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._EquiposPorJugador);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idJugador", idJugador);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tipo", tipo);
-            _EquiposPorJugadorOverride(callInfo, idJugador, tipo);
+            _EquiposPorJugadorOverride(callInfo, tipo);
             return callInfo;
         }
 
@@ -151,6 +165,16 @@ namespace Padel.Web.Mvc.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._VerificarJugador);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idEquipo", idEquipo);
             _VerificarJugadorOverride(callInfo, idEquipo);
+            return callInfo;
+        }
+
+        partial void _AddSelectedPlayerToTeamOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int idJugador);
+
+        public override System.Web.Mvc.ActionResult _AddSelectedPlayerToTeam(int idJugador)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._AddSelectedPlayerToTeam);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idJugador", idJugador);
+            _AddSelectedPlayerToTeamOverride(callInfo, idJugador);
             return callInfo;
         }
 

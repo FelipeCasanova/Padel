@@ -28,9 +28,9 @@ namespace Padel.Web.Mvc.Controllers
 
         [HttpPost]
         [Transaction]
-        public virtual ActionResult _EquiposPorJugador(int idJugador, string tipo)
+        public virtual ActionResult _EquiposPorJugador(string tipo)
         {
-            var viewModel = this.equiposQuery.GetEquiposPorJugadorList(idJugador, tipo);
+            var viewModel = this.equiposQuery.GetEquiposPorJugadorList(((PadelPrincipal)User).Id, tipo);
             return new JsonNetResult(viewModel);
         }
 
@@ -43,6 +43,17 @@ namespace Padel.Web.Mvc.Controllers
             var results = this.commandProcessor.Process<ValidarJugadorEnEquipoCommand, CommandResult>(command);
             return new JsonNetResult(results.First());
             
+        }
+
+        
+            [HttpPost]
+        [Transaction]
+        [CustomValidateAntiForgeryTokenAttribute]
+        public virtual ActionResult _AddSelectedPlayerToTeam(int idJugador)
+        {
+            var command = new CrearEquipoCommand(((PadelPrincipal)User).Id, idJugador);
+            var results = this.commandProcessor.Process<CrearEquipoCommand, CommandResult>(command);
+            return new JsonNetResult(results.First());
         }
 
         [HttpPost]

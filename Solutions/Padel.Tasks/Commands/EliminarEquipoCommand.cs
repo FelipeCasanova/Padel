@@ -10,11 +10,12 @@ namespace Padel.Tasks.Commands
     {
         public EliminarEquipoCommand(int idEquipo, int idJugador)
         {
-            this.IdEquipo = idEquipo;
-            this.IdJugador = idJugador;
+            this.EquipoId = idEquipo;
+            this.JugadorId = idJugador;
         }
 
-        public int IdEquipo { get; set; }
-    
-        public int IdJugador { get; set; }}
+        public int EquipoId { get; set; }
+
+        public int JugadorId { get; set; }
+    }
 }

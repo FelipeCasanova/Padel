@@ -29,7 +29,8 @@
                 $scope.teams = [];
                 $scope.show = false;
 
-                $scope.$on("getAllTeams", function(events, teams){
+                $scope.$on("getTeamsByType", function(events, teams){
+                    $scope.teams = [];
                     angular.forEach(teams, function(t) {
                         if(t.TipoEquipo == '@(tipo)')
                         {
@@ -41,8 +42,8 @@
                     
                 });  
 
-                $scope.refreshTeams = function (playerId, type) {
-                    crudTeamService.getTeams(playerId, type, function (data) {
+                $scope.refreshTeams = function (type) {
+                    crudTeamService.getTeamsByType(type, function (data) {
                         $scope.emptyMessage = "";
                         $scope.teams = data;
                         $scope.show = true;
@@ -67,7 +68,6 @@
                                 t.Estado = "Activado";
                                 t.JugadorAVerificado = true;
                                 t.JugadorBVerificado = true;
-                                handleOk(data.Message);
                             }
                         }); 
                     });
@@ -82,7 +82,6 @@
                                 var index = $scope.teams.indexOf(t);
                                 if (index > -1) {
                                     $scope.teams.splice(index, 1);
-                                    handleOk(data.Message);
                                 }
                             }
                         }); 
@@ -94,7 +93,7 @@
 }
 <div class="row" ng-controller="GetAllTeamsCtrl">
     <div class="col-lg-12">
-        <h1 class="page-header" ng-init="userId=@(user.Id)">
+        <h1 class="page-header">
             Equipos</h1>
     </div>
     <!-- /.col-lg-12 -->
@@ -109,7 +108,7 @@
                 <div class="row row-margin">
                     <div class="col-lg-6">
                         <p>
-                            Busca uno de tus amigos escribiendo su nombre</p>
+                            Busca uno de tus amigos escribiendo su nombre y crea tu equipo</p>
                         <div class="btn-group {{status}}">
                             <div class="input-group">
                                 <input type="text" class="form-control" ng-model="playerName" ng-keyup="search()"
@@ -127,8 +126,10 @@
                     </div>
                 </div>
                 <div class="row row-margin hidden">
-                    <div class="col-md-6" ng-show="showDelete">
+                    <div class="col-md-6" ng-show="showCreateDelete">
                         <span class="label label-default player">{{playerSelected.Nombre}}</span>
+                        <button type="button" ng-click="addSelectedPlayerToTeam()" class="btn btn-primary">
+                            Crea tu equipo</button>
                         <button type="button" ng-click="deleteSelectedPlayer()" class="btn btn-danger">
                             Elimina</button>
                     </div>
@@ -153,8 +154,8 @@
                                 Acciones <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
-                                <li><a href="" ng-click="refreshTeams(@(user.Id),
-    '@(tipo)')"><i class="fa fa-refresh fa-fw"></i>Refrescar</a></li>
+                                <li><a href="" ng-click="refreshTeams('@(tipo)')"><i class="fa fa-refresh fa-fw"></i>
+                                    Refrescar</a></li>
                             </ul>
                         </div>
                     </div>

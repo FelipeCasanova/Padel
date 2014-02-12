@@ -1,8 +1,8 @@
 ﻿function GetAllTeamsCtrl($rootScope, $scope, $timeout, crudTeamService) {
 
     $scope.refreshTeams = function () {
-        crudTeamService.getTeams($scope.userId, null, function (data) {
-            $rootScope.$broadcast("getAllTeams", data);  
+        crudTeamService.getTeamsByType(null, function (data) {
+            $rootScope.$broadcast("getTeamsByType", data);
         })
     };
 
@@ -10,10 +10,10 @@
 
 }
 
-function CreateTeamCtrl($scope, searchPlayer) {
+function CreateTeamCtrl($rootScope, $scope, searchPlayer, crudTeamService) {
 
     $scope.status = "";
-    $scope.showDelete = false;
+    $scope.showCreateDelete = false;
     $scope.players = [];
     $scope.playerSelected = null;
 
@@ -34,12 +34,22 @@ function CreateTeamCtrl($scope, searchPlayer) {
         $scope.playerSelected = player;
         $scope.playerName = player.Nombre;
         $scope.status = "";
-        $scope.showDelete = true;
+        $scope.showCreateDelete = true;
     };
+
+    $scope.addSelectedPlayerToTeam = function () {
+        crudTeamService.antiForgeryToken = $scope.antiForgeryToken;
+        crudTeamService.addSelectedPlayerToTeam($scope.playerSelected.Id, function (data) {
+            $scope.deleteSelectedPlayer();
+            crudTeamService.getTeamsByType(null, function (data) {
+                $rootScope.$broadcast("getTeamsByType", data);
+            })
+        });
+    }
 
     $scope.deleteSelectedPlayer = function () {
         $scope.playerSelected = null;
-        $scope.showDelete = false;
+        $scope.showCreateDelete = false;
         $scope.status = "";
         $scope.playerName = "";
     };
@@ -50,10 +60,10 @@ app.service('crudTeamService', ['$rootScope', '$http', function ($rootScope, $ht
 
     crudTeamService.antiForgeryToken;
 
-    crudTeamService.getTeams = function (playerId, type, callbackOk) {
+    crudTeamService.getTeamsByType = function (type, callbackOk) {
 
         var url = '/equipos/_equiposporjugador';
-        $http.post(url, { "idJugador": playerId, "tipo": type })
+        $http.post(url, { "tipo": type })
                     .success(function (data, status) {
                         if (data.length > 0) {
                             callbackOk(data);
@@ -61,6 +71,26 @@ app.service('crudTeamService', ['$rootScope', '$http', function ($rootScope, $ht
                     })
                     .error(function (data, status) {
                         handleError("Ha ocurrido un error y no se pudo obtener los equipos. Inténtelo más tarde.");
+                    });
+    }
+
+
+    crudTeamService.addSelectedPlayerToTeam = function (playerId, callbackOk) {
+
+        var url = '/equipos/_addSelectedPlayerToTeam';
+        $http.post(url, { "idJugador": playerId }
+        , { headers: { 'RequestVerificationToken': crudTeamService.antiForgeryToken, "X-Requested-With": "XMLHttpRequest"} })
+                    .success(function (data, status) {
+                        if (data.Success) {
+                            callbackOk(data);
+                            handleOk(data.Message);
+                        }
+                        else {
+                            handleError(data.Message);
+                        }
+                    })
+                    .error(function (data, status) {
+                        handleError("Ha ocurrido un error y no se pudo crear el equipo. Inténtelo más tarde.");
                     });
     }
 
@@ -72,6 +102,7 @@ app.service('crudTeamService', ['$rootScope', '$http', function ($rootScope, $ht
                     .success(function (data, status) {
                         if (data.Success) {
                             callbackOk(data);
+                            handleOk(data.Message);
                         }
                         else {
                             handleError(data.Message);
@@ -90,6 +121,7 @@ app.service('crudTeamService', ['$rootScope', '$http', function ($rootScope, $ht
                     .success(function (data, status) {
                         if (data.Success) {
                             callbackOk(data);
+                            handleOk(data.Message);
                         }
                         else {
                             handleError(data.Message);

@@ -9,11 +9,13 @@ namespace Padel.Domain.Contracts.Tasks
     {
         List<Equipo> GetAll();
 
-        List<Equipo> GetEquiposPorJugadoresList(int idJugadorA, int idJugadorB, EstadoEquipoEnum estado);
+        List<Equipo> GetEquiposPorJugadorList(int idJugador, params EstadoEquipoEnum[] estados);
+
+        List<Equipo> GetEquiposPorJugadoresList(int idJugadorA, int idJugadorB, params EstadoEquipoEnum[] estados);
 
         Equipo Get(int id);
 
-        Equipo CreateOrUpdate(Equipo productModel);
+        Equipo CreateOrUpdate(Equipo equipo, int jugador1Id, int jugador2Id);
 
         void Delete(int id);
     }

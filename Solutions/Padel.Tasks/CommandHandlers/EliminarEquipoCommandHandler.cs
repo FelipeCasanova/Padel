@@ -25,14 +25,14 @@ namespace Padel.Tasks.CommandHandlers
 
         public CommandResult Handle(EliminarEquipoCommand command)
         {
-            Equipo equipo = this.equipoRepository.Get(command.IdEquipo);
+            Equipo equipo = this.equipoRepository.Get(command.EquipoId);
             if (equipo.EquiposToCategorias.Any(ec => ec.Categoria.Estado == EstadoCategoriaEnum.Pendiente || ec.Categoria.Estado == EstadoCategoriaEnum.Progreso))
             {
                 return new CommandResult(false, "No se puede eliminar el equipo porque esta apuntado a un torneo.");
             }
 
             PadelPrincipal principal = (PadelPrincipal)Thread.CurrentPrincipal;
-            if (equipo.JugadorA.Id == command.IdJugador || equipo.JugadorB.Id == command.IdJugador || principal.IsInRole("Administrador"))
+            if (equipo.JugadorA.Id == command.JugadorId || equipo.JugadorB.Id == command.JugadorId || principal.IsInRole("Administrador"))
             {   
                 equipo.JugadorAVerificado = false;
                 equipo.JugadorBVerificado = false;
