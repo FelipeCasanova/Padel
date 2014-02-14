@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using Padel.Domain;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Padel.Web.Mvc.Controllers.ViewModels.Torneos
 {
@@ -13,19 +15,18 @@ namespace Padel.Web.Mvc.Controllers.ViewModels.Torneos
 
         public string Nombre { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public EstadoCategoriaEnum EstadoCategoria { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public TipoTorneoEnum Tipo { get; set; }
-
-        public string TipoStr { get { return Tipo.ToString(); } }
 
         public int CategoriaId { get; set; }
 
         public string CategoriaNombre { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public virtual TipoEquipoEnum TipoEquipo { get; set; }
-
-        public string TipoEquipoStr { get { return TipoEquipo.ToString(); } }
 
         [DataType(DataType.Currency)]
         public decimal Precio { get; set; }

@@ -77,7 +77,7 @@ app.service('crudTeamService', ['$rootScope', '$http', function ($rootScope, $ht
 
     crudTeamService.addSelectedPlayerToTeam = function (playerId, callbackOk) {
 
-        var url = '/equipos/_addSelectedPlayerToTeam';
+        var url = '/equipos/_asignarJugadorSeleccionadoAlEquipo';
         $http.post(url, { "idJugador": playerId }
         , { headers: { 'RequestVerificationToken': crudTeamService.antiForgeryToken, "X-Requested-With": "XMLHttpRequest"} })
                     .success(function (data, status) {

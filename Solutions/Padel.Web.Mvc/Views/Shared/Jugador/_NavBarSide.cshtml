@@ -29,12 +29,12 @@
             ? "active" : "")">
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i>Competiciones<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Partidos ? "open" : "")">
-                        <a href="@(Url.Action(MVC.Jugador.ActionNames.Partidos, MVC.Jugador.Name))"><i class="fa fa-table fa-fw">
-                        </i>Tus partidos</a> </li>
                     <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Torneos ? "open" : "")">
                         <a href="@(Url.Action(MVC.Jugador.ActionNames.Torneos, MVC.Jugador.Name))"><i class="fa fa-sitemap fa-fw">
                         </i>Tus torneos</a> </li>
+                    <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Partidos ? "open" : "")">
+                        <a href="@(Url.Action(MVC.Jugador.ActionNames.Partidos, MVC.Jugador.Name))"><i class="fa fa-table fa-fw">
+                        </i>Tus partidos</a> </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

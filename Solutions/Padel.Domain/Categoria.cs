@@ -17,11 +17,15 @@ namespace Padel.Domain
         [Required]
         public virtual string Nombre { get; set; }
 
-        [Required]
         public virtual int NivelMin { get; set; }
 
         [Required]
+        public virtual int NivelMinExp { get; set; }
+
         public virtual int NivelMax { get; set; }
+
+        [Required]
+        public virtual int NivelMaxExp { get; set; }
 
         [Required]
         public virtual EstadoCategoriaEnum Estado { get; set; }

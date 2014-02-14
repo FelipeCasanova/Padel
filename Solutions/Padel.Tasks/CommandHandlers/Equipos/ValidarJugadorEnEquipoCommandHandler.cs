@@ -7,8 +7,9 @@ using Padel.Tasks.Commands;
 using Padel.Tasks.CommandResults;
 using SharpArch.Domain.PersistenceSupport;
 using Padel.Domain;
+using Padel.Tasks.Commands.Equipos;
 
-namespace Padel.Tasks.CommandHandlers
+namespace Padel.Tasks.CommandHandlers.Equipos
 {
     public class ValidarJugadorEnEquipoCommandHandler : ICommandHandler<ValidarJugadorEnEquipoCommand, CommandResult>
     {

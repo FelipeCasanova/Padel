@@ -15,7 +15,9 @@ namespace Padel.Domain.Contracts.Tasks
 
         Equipo Get(int id);
 
-        Equipo CreateOrUpdate(Equipo equipo, int jugador1Id, int jugador2Id);
+        Equipo CreateOrUpdate(Equipo equipo, int userId);
+
+        Equipo CreateOrUpdate(Equipo equipo, int jugador1Id, int jugador2Id, int userId);
 
         void Delete(int id);
     }

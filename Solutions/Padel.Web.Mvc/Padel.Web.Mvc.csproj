@@ -240,6 +240,7 @@
     <Compile Include="Controllers\ViewModels\Equipos\EquipoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Menu\SideMenuJugadorModelView.cs" />
     <Compile Include="Controllers\ViewModels\Menu\MenuModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Torneos\EquipoTorneoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\TorneoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\UsuarioEntrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\UsuarioRegistrarModelView.cs" />
@@ -392,6 +393,7 @@
     <Content Include="Scripts\padel\jugador\plugins\morris\morris.js" />
     <Content Include="Scripts\padel\jugador\plugins\morris\raphael-2.1.0.min.js" />
     <Content Include="Scripts\padel\jugador\sb-admin.js" />
+    <Content Include="Scripts\padel\jugador\torneos\crud.js" />
     <Content Include="Scripts\padel\padel.js" />
     <Content Include="Scripts\padel\torneos\apuntate.js" />
     <Content Include="Scripts\slimscroll\jquery.slimscroll.min.js" />

@@ -49,8 +49,14 @@
                             }
                         </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Index, MVC.Jugador.Name))">
-                                    Tus torneos</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Datos, MVC.Jugador.Name))">
+                                    Tus Perfil</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Equipos, MVC.Jugador.Name))">
+                                    Tus Equipos</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Torneos, MVC.Jugador.Name))">
+                                    Tus Torneos</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Partidos, MVC.Jugador.Name))">
+                                    Tus Partidos</a></li>
                                 @if (User.Identity.IsAuthenticated && User.IsInRole("Administrador"))
                                 {
                                     <li role="presentation" class="divider"></li>

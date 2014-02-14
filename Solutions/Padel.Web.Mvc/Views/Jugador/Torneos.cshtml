@@ -1,4 +1,136 @@
 ﻿@{
-    ViewBag.Title = "Jugador";
-    Layout = @MVC.Shared.Views._LayoutPlayer;    
+    ViewBag.Title = "Torneos";
+    Layout = @MVC.Shared.Views._LayoutPlayer;
+}
+@{
+    var user = (Padel.Infrastructure.Utilities.PadelPrincipal)User;
+}
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;
+    }
+}
+@section JSSection{
+    <script src="@Url.Content(@Links.Scripts.padel.jugador.torneos.crud_js)" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.hidden').removeClass('hidden');
+        });
+    </script>
+    @foreach (var tipo in new[] { "Especial", "Estandar", "Mini", "Privado" })
+    {
+        <script type="text/javascript">
+
+            function CrudTournaments@(tipo)Ctrl($scope, crudTournamentService) {
+                $scope.emptyMessage = "No hay ningún torneo disponible";
+                $scope.tournaments = [];
+                $scope.show = false;
+
+                $scope.$on("getTournamentsByType", function(events, tournaments){
+                    $scope.tournaments = [];
+                    angular.forEach(tournaments, function(t) {
+                        if(t.Tipo == '@(tipo)')
+                        {
+                            $scope.tournaments.push(t);
+                            $scope.emptyMessage = "";
+                            $scope.show = true;
+                        }
+                    });
+                    
+                });  
+
+                $scope.refreshTournaments = function (type) {
+                    crudTournamentService.getTournamentsByType(type, function (data) {
+                        $scope.emptyMessage = "";
+                        $scope.tournaments = data;
+                        $scope.show = true;
+                    })
+                };
+
+                $scope.selectTournament = function (tournament) {
+                    angular.forEach($scope.tournaments, function(t) {
+                        t.selected = "";
+                        t.showEdit = false;
+                    });
+                    tournament.selected = "selected";
+                    tournament.showEdit = true;
+                };
+
+                $scope.unsignupFromTournament = function (teamId, categoryId) {
+                    crudTournamentService.antiForgeryToken = $scope.antiForgeryToken;
+                    crudTournamentService.unsignupFromTournament(teamId, categoryId, function(data){
+                        angular.forEach($scope.tournaments, function(t) {
+                            if(t.EquipoId == teamId && t.CategoriaId == categoryId)
+                            {
+                                var index = $scope.tournaments.indexOf(t);
+                                if (index > -1) {
+                                    $scope.tournaments.splice(index, 1);
+                                }
+                            }
+                        }); 
+                    });
+                };
+            }
+        </script>
+    }
+}
+<div class="row" ng-controller="GetAllTournamentsCtrl">
+    <div class="col-lg-12" ng-init="antiForgeryToken='@GetAntiForgeryToken()'">
+        <h1 class="page-header">
+            Tus Torneos</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+@foreach (var tipo in new[] { "Especial", "Estandar", "Mini", "Privado" })
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default @(tipo)" ng-controller="CrudTournaments@(tipo)Ctrl">
+                <div class="panel-heading" ng-init="antiForgeryToken='@GetAntiForgeryToken()'">
+                    <i class="fa fa-sitemap fa-fw"></i>Torneos - @(tipo)
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn
+    btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                                Acciones <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="" ng-click="refreshTournaments('@(tipo)')"><i class="fa fa-refresh fa-fw">
+                                </i>Refrescar</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body hidden">
+                    {{emptyMessage}}
+                    <div class="group" ng-show="show">
+                        <ul class="group-list">
+                            <li ng-repeat="tournament in tournaments" class="{{tournament.selected}}" ng-click="selectTournament(tournament)">
+                                <button class="btn btn-xs btn-danger" ng-click="unsignupFromTournament(tournament.EquipoId, tournament.CategoriaId)"
+                                    ng-show="tournament.showEdit && tournament.EstadoCategoria == 'Pendiente'">
+                                    Desapúntate</button>
+                                <span><i class="fa fa-sitemap fa-fw"></i>{{tournament.EstadoCategoria}} {{tournament.EquipoNombre
+                                    != null ? ' - ' + tournament.EquipoNombre : '' }} </span>
+                                <div>
+                                    <span class="fa-class">Torneo {{tournament.Nombre}} {{tournament.Tipo}} - {{ tournament.NumeroEquipos
+                                        }} equipo/s apuntados</span>
+                                </div>
+                                <div class="center">
+                                    <div>
+                                        <span class="fa-class"><i class="fa fa-user"></i>{{tournament.JugadorANombre}} </span>
+                                    </div>
+                                    <div>
+                                        <span class="fa-class"><i class="fa fa-user"></i>{{tournament.JugadorBNombre}} </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }

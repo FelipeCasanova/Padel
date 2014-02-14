@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SharpArch.NHibernate.Web.Mvc;
-using Padel.Web.Mvc.Controllers.Queries.Equipos;
-using SharpArch.Domain.Commands;
-using SharpArch.Web.Mvc.JsonNet;
-using Padel.Web.Mvc.Filters;
 using Padel.Infrastructure.Utilities;
-using Padel.Tasks.Commands;
 using Padel.Tasks.CommandResults;
+using Padel.Tasks.Commands;
+using Padel.Tasks.Commands.Equipos;
+using Padel.Web.Mvc.Controllers.Queries.Equipos;
+using Padel.Web.Mvc.Filters;
+using SharpArch.Domain.Commands;
+using SharpArch.NHibernate.Web.Mvc;
+using SharpArch.Web.Mvc.JsonNet;
 
 namespace Padel.Web.Mvc.Controllers
 {
@@ -49,7 +50,7 @@ namespace Padel.Web.Mvc.Controllers
             [HttpPost]
         [Transaction]
         [CustomValidateAntiForgeryTokenAttribute]
-        public virtual ActionResult _AddSelectedPlayerToTeam(int idJugador)
+        public virtual ActionResult _AsignarJugadorSeleccionadoAlEquipo(int idJugador)
         {
             var command = new CrearEquipoCommand(((PadelPrincipal)User).Id, idJugador);
             var results = this.commandProcessor.Process<CrearEquipoCommand, CommandResult>(command);
@@ -61,7 +62,7 @@ namespace Padel.Web.Mvc.Controllers
         [CustomValidateAntiForgeryTokenAttribute]
         public virtual ActionResult _EliminarEquipo(int idEquipo)
         {
-            var command = new EliminarEquipoCommand(idEquipo, ((PadelPrincipal)User).Id);
+            var command = new EliminarEquipoCommand(idEquipo);
             var results = this.commandProcessor.Process<EliminarEquipoCommand, CommandResult>(command);
             return new JsonNetResult(results.First());
 

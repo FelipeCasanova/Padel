@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using SharpArch.Domain.Commands;
 
-namespace Padel.Tasks.Commands
+namespace Padel.Tasks.Commands.Equipos
 {
     public class CrearEquipoCommand : CommandBase
     {

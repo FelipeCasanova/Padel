@@ -258,6 +258,14 @@ namespace Links
                 }
             
                 public static readonly string sb_admin_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/sb-admin.min.js") ? Url("sb-admin.min.js") : Url("sb-admin.js");
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class torneos {
+                    private const string URLPATH = "~/Scripts/padel/jugador/torneos";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string crud_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/crud.min.js") ? Url("crud.min.js") : Url("crud.js");
+                }
+            
             }
         
             public static readonly string padel_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/padel.min.js") ? Url("padel.min.js") : Url("padel.js");

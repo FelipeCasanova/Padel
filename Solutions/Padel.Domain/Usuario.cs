@@ -47,7 +47,7 @@ namespace Padel.Domain
 
         [Required]
         [Display(Name = "Bola/s")]
-        public virtual int DineroFicticio { get; set; }
+        public virtual decimal DineroFicticio { get; set; }
 
         [Required]
         public virtual IList<Role> Roles { get; set; }

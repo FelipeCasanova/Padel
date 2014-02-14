@@ -11,6 +11,8 @@
 
     public enum EstadoEquipoEnum : byte { Desactivado = 0, Activado = 1, Eliminado = 2 }
 
+    public enum EstadoEquipoCategoriaEnum : byte { Pendiente = 0, Pagado = 1, Eliminado = 2 }
+
     public enum TipoTorneoEnum : byte { Estandar = 0, Especial = 1, Mini = 2, Privado = 3 }
 
     public enum EstadoCategoriaEnum : byte { Pendiente = 0, Progreso = 1, Finalizado = 2 }

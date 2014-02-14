@@ -119,7 +119,7 @@
 					<Element Type="ISqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[dbo].[Categorias].[CategoriaId]" />
+								<References Name="[dbo].[Equipos].[EquipoId]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -127,7 +127,7 @@
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[Categorias]" />
+					<References Name="[dbo].[Equipos]" />
 				</Entry>
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
@@ -176,7 +176,7 @@
 					<Element Type="ISqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[dbo].[Equipos].[EquipoId]" />
+								<References Name="[dbo].[Categorias].[CategoriaId]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -184,7 +184,7 @@
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[Equipos]" />
+					<References Name="[dbo].[Categorias]" />
 				</Entry>
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="10" />
@@ -245,7 +245,7 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SimpleColumn" Name="[dbo].[Categorias].[NivelMin]">
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Categorias].[NivelMinExp]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
@@ -261,7 +261,19 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="ISql100SimpleColumn" Name="[dbo].[Categorias].[NivelMax]">
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[Categorias].[NivelMin]">
+						<Property Name="ExpressionScript">
+							<Value><![CDATA[(NivelMinExp / 100)]]></Value>
+						</Property>
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[Categorias].[NivelMinExp]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[Categorias].[NivelMaxExp]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
@@ -272,6 +284,18 @@
 										</Entry>
 									</Relationship>
 								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql90ComputedColumn" Name="[dbo].[Categorias].[NivelMax]">
+						<Property Name="ExpressionScript">
+							<Value><![CDATA[(NivelMaxExp / 100)]]></Value>
+						</Property>
+						<Relationship Name="ExpressionDependencies">
+							<Entry>
+								<References Name="[dbo].[Categorias].[NivelMaxExp]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -425,7 +449,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="7" />
+			<AttachedAnnotation Disambiguator="10" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[Equipos]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -592,7 +616,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="10" />
+			<AttachedAnnotation Disambiguator="7" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[EquipoToCategorias]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -607,6 +631,95 @@
 									<Relationship Name="Type">
 										<Entry>
 											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[EquipoToCategorias].[Estado]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Length" Value="255" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[EquipoToCategorias].[DineroRealJugadorA]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Scale" Value="3" />
+									<Property Name="Precision" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[decimal]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[EquipoToCategorias].[DineroFicticioJugadorA]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Scale" Value="3" />
+									<Property Name="Precision" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[decimal]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[EquipoToCategorias].[DineroRealJugadorB]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Scale" Value="3" />
+									<Property Name="Precision" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[decimal]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISql100SimpleColumn" Name="[dbo].[EquipoToCategorias].[DineroFicticioJugadorB]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="ISql90TypeSpecifier">
+									<Property Name="Scale" Value="3" />
+									<Property Name="Precision" Value="10" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[decimal]" />
 										</Entry>
 									</Relationship>
 								</Element>

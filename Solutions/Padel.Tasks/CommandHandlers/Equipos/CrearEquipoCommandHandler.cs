@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpArch.Domain.Commands;
-using Padel.Tasks.Commands;
-using Padel.Tasks.CommandResults;
-using SharpArch.Domain.PersistenceSupport;
-using Padel.Domain;
 using System.Threading;
-using Padel.Infrastructure.Utilities;
+using Padel.Domain;
 using Padel.Domain.Contracts.Tasks;
+using Padel.Infrastructure.Utilities;
+using Padel.Tasks.CommandResults;
+using Padel.Tasks.Commands;
+using Padel.Tasks.Commands.Equipos;
+using SharpArch.Domain.Commands;
+using SharpArch.Domain.PersistenceSupport;
 
-namespace Padel.Tasks.CommandHandlers
+namespace Padel.Tasks.CommandHandlers.Equipos
 {
     public class CrearEquipoCommandHandler : ICommandHandler<CrearEquipoCommand, CommandResult>
     {
@@ -26,21 +27,22 @@ namespace Padel.Tasks.CommandHandlers
 
         public CommandResult Handle(CrearEquipoCommand command)
         {
+            PadelPrincipal principal = (PadelPrincipal)Thread.CurrentPrincipal;
             var equipos = this.equipoTasks.GetEquiposPorJugadoresList(command.Jugador1Id, command.Jugador2Id);
-
+            
             if (equipos.Any())
             {
                 var equipoReactivate = equipos.First();
 
                 // Reactivar el equipo
-                this.equipoTasks.CreateOrUpdate(equipoReactivate, command.Jugador1Id, command.Jugador2Id);
+                this.equipoTasks.CreateOrUpdate(equipoReactivate, command.Jugador1Id, command.Jugador2Id, principal.Id);
                 return new CommandResult(true, "Se ha creado correctamente el equipo.");
             }
             else
             {
                 // crear equipo nuevo
                 var equipo = new Equipo();
-                this.equipoTasks.CreateOrUpdate(equipo, command.Jugador1Id, command.Jugador2Id);
+                this.equipoTasks.CreateOrUpdate(equipo, command.Jugador1Id, command.Jugador2Id, principal.Id);
                 return new CommandResult(true, "Se ha creado correctamente el equipo.");
             }
         }

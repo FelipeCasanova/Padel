@@ -5,7 +5,7 @@ using System.Text;
 using Padel.Domain;
 using SharpArch.Domain.Commands;
 
-namespace Padel.Tasks.Commands
+namespace Padel.Tasks.Commands.Torneos
 {
     public class CrearEquipoParaTorneoCommand : CommandBase
     {

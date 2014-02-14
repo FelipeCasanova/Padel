@@ -410,8 +410,10 @@ table.dataTable thead .sorting:after
     margin: 15px 0;
 }
 
+
 /* navbar */
-.navbar-default .nav>li>a {
+.navbar-default .nav > li > a
+{
     color: #999;
 }
 
@@ -426,7 +428,6 @@ table.dataTable thead .sorting:after
 
 .group
 {
-    margin: 0 -19px 20px -16px;
     overflow: hidden;
 }
 
@@ -440,13 +441,22 @@ table.dataTable thead .sorting:after
 {
     float: left;
     width: 25%;
-    height: 115px;
+    height: 150px;
     padding: 10px;
     font-size: 10px;
     line-height: 1.4;
     text-align: center;
     border: 1px solid #fff;
     background-color: #E4E4E4;
+}
+
+@media (max-width:768px)
+{
+    .group li
+    {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 .group li i
@@ -457,40 +467,73 @@ table.dataTable thead .sorting:after
 .group li.selected
 {
     width: 50%;
-    max-width: 50%; 
+    max-width: 50%;
 }
 
-.group li.selected, .group li:hover {
+@media (max-width:768px)
+{
+    .group li.selected
+    {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+.group li.selected, .group li:hover
+{
     color: #fff;
     cursor: pointer;
 }
 
-.Hombre .group li.selected, .Hombre .group li:hover 
+.Hombre .group li.selected, .Hombre .group li:hover
 {
     background-color: #5E91C9;
 }
 
-.Mujer .group li.selected, .Mujer .group li:hover 
+.Mujer .group li.selected, .Mujer .group li:hover
 {
     cursor: pointer;
     background-color: #BB7996;
 }
 
-.Mixto .group li.selected, .Mixto .group li:hover 
+.Mixto .group li.selected, .Mixto .group li:hover
 {
     cursor: pointer;
     background-color: #5EC95E;
 }
 
+.Especial .group li.selected, .Especial .group li:hover
+{
+    cursor: pointer;
+    background-color: #D3CB15;
+}
+
+.Estandar .group li.selected, .Estandar .group li:hover
+{
+    cursor: pointer;
+    background-color: #5E91C9;
+}
+
+.Mini .group li.selected, .Mini .group li:hover
+{
+    cursor: pointer;
+    background-color: #15D359;
+}
+
+.Privado .group li.selected, .Privado .group li:hover
+{
+    cursor: pointer;
+    background-color: #B42A2A;
+}
+
 .group .fa
 {
     padding-right: 5px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    font-size: 18px;
+    margin: 5px;
 }
 
-.group .fa-class {
+.group .fa-class
+{
     display: block;
     text-align: center;
     word-wrap: break-word;
@@ -510,5 +553,5 @@ table.dataTable thead .sorting:after
         max-width: 25%;
         font-size: 14px;
     }
-    
+
 }

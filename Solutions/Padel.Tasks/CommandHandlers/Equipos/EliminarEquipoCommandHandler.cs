@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpArch.Domain.Commands;
-using Padel.Tasks.Commands;
-using Padel.Tasks.CommandResults;
-using SharpArch.Domain.PersistenceSupport;
-using Padel.Domain;
 using System.Threading;
+using Padel.Domain;
 using Padel.Infrastructure.Utilities;
+using Padel.Tasks.CommandResults;
+using Padel.Tasks.Commands;
+using Padel.Tasks.Commands.Equipos;
+using SharpArch.Domain.Commands;
+using SharpArch.Domain.PersistenceSupport;
 
-namespace Padel.Tasks.CommandHandlers
+namespace Padel.Tasks.CommandHandlers.Equipos
 {
     public class EliminarEquipoCommandHandler : ICommandHandler<EliminarEquipoCommand, CommandResult>
     {
@@ -32,15 +33,18 @@ namespace Padel.Tasks.CommandHandlers
             }
 
             PadelPrincipal principal = (PadelPrincipal)Thread.CurrentPrincipal;
-            if (equipo.JugadorA.Id == command.JugadorId || equipo.JugadorB.Id == command.JugadorId || principal.IsInRole("Administrador"))
-            {   
+            if (equipo.JugadorA.Id == principal.Id || equipo.JugadorB.Id == principal.Id || principal.IsInRole("Administrador"))
+            {
                 equipo.JugadorAVerificado = false;
                 equipo.JugadorBVerificado = false;
                 equipo.Estado = EstadoEquipoEnum.Eliminado;
+                this.equipoRepository.SaveOrUpdate(equipo);
+                return new CommandResult(true, "Se ha eliminado correctamente el equipo.");
             }
-            
-            this.equipoRepository.SaveOrUpdate(equipo);
-            return new CommandResult(true, "Se ha eliminado correctamente el equipo.");
+            else
+            {
+                return new CommandResult(false, "No se puede eliminar el equipo. Intentelo más tarde.");
+            }
         }
     }
 }

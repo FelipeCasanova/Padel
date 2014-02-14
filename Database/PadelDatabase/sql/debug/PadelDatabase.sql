@@ -202,8 +202,10 @@ GO
 CREATE TABLE [dbo].[Categorias] (
     [CategoriaId]       INT             IDENTITY (1, 1) NOT NULL,
     [Nombre]            NVARCHAR (255)  NULL,
-    [NivelMin]          INT             NOT NULL,
-    [NivelMax]          INT             NOT NULL,
+    [NivelMinExp]       INT             NOT NULL,
+    [NivelMin]          AS              (NivelMinExp / 100),
+    [NivelMaxExp]       INT             NOT NULL,
+    [NivelMax]          AS              (NivelMaxExp / 100),
     [Estado]            NVARCHAR (255)  NOT NULL,
     [TipoEquipo]        NVARCHAR (255)  NOT NULL,
     [Precio]            DECIMAL (10, 3) NOT NULL,
@@ -243,11 +245,16 @@ PRINT N'Creating [dbo].[EquipoToCategorias]...';
 
 GO
 CREATE TABLE [dbo].[EquipoToCategorias] (
-    [EquipoToCategoriaId] INT      IDENTITY (1, 1) NOT NULL,
-    [FechaCreacion]       DATETIME NULL,
-    [FechaModificacion]   DATETIME NULL,
-    [EquipoId]            INT      NOT NULL,
-    [CategoriaId]         INT      NOT NULL,
+    [EquipoToCategoriaId]    INT             IDENTITY (1, 1) NOT NULL,
+    [Estado]                 NVARCHAR (255)  NOT NULL,
+    [DineroRealJugadorA]     DECIMAL (10, 3) NOT NULL,
+    [DineroFicticioJugadorA] DECIMAL (10, 3) NOT NULL,
+    [DineroRealJugadorB]     DECIMAL (10, 3) NOT NULL,
+    [DineroFicticioJugadorB] DECIMAL (10, 3) NOT NULL,
+    [FechaCreacion]          DATETIME        NULL,
+    [FechaModificacion]      DATETIME        NULL,
+    [EquipoId]               INT             NOT NULL,
+    [CategoriaId]            INT             NOT NULL,
     PRIMARY KEY CLUSTERED ([EquipoToCategoriaId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
 

@@ -13,6 +13,7 @@ namespace Padel.Infrastructure.NHibernateMaps
     {
         public void Override(AutoMapping<Usuario> mapping)
         {
+            mapping.Not.LazyLoad();
             mapping.Map(u => u.Nivel).ReadOnly();
             mapping.HasManyToMany<Role>(u => u.Roles).Cascade.All();
         }

@@ -31,37 +31,21 @@ namespace Padel.Tasks
             return this.equipoRepository.Get(id);
         }
 
-        public Equipo CreateOrUpdate(Equipo equipo, int jugador1Id, int jugador2Id)
+        public Equipo CreateOrUpdate(Equipo equipo, int userId)
+        {
+            return CreateOrUpdate(equipo, 0, 0, userId);
+        }
+
+        public Equipo CreateOrUpdate(Equipo equipo, int jugador1Id, int jugador2Id, int userId)
         {
             if (equipo.Id != 0)
             {
-                // Activar jugador y equipo si se diera el caso
-                if (equipo.JugadorA.Id == jugador1Id && !equipo.JugadorAVerificado)
-                {
-                    equipo.JugadorAVerificado = true;
-                }
-
-                if (equipo.JugadorB.Id == jugador1Id && !equipo.JugadorBVerificado)
-                {
-                    equipo.JugadorBVerificado = true;
-                }
-
-                if (equipo.JugadorAVerificado && equipo.JugadorBVerificado)
-                {
-                    equipo.Estado = EstadoEquipoEnum.Activado;
-                }
-                else
-                {
-                    equipo.Estado = EstadoEquipoEnum.Desactivado;
-                }
-
                 equipo.FechaModificacion = DateTime.Now;
             }
             else
             {
                 equipo.FechaCreacion = DateTime.Now;
                 equipo.FechaModificacion = equipo.FechaCreacion;
-                equipo.Estado = EstadoEquipoEnum.Desactivado;
                 equipo.Nombre = null;
                 equipo.JugadorA = this.usuarioRepository.Get(jugador1Id);
                 equipo.JugadorB = this.usuarioRepository.Get(jugador2Id);
@@ -79,8 +63,28 @@ namespace Padel.Tasks
                     equipo.TipoEquipo = TipoEquipoEnum.Mixto;
                 }
 
-                equipo.JugadorAVerificado = true;
+                equipo.JugadorAVerificado = false;
                 equipo.JugadorBVerificado = false;
+            }
+
+            // Activar usuario y equipo si se diera el caso
+            if (equipo.JugadorA.Id == userId && !equipo.JugadorAVerificado)
+            {
+                equipo.JugadorAVerificado = true;
+            }
+
+            if (equipo.JugadorB.Id == userId && !equipo.JugadorBVerificado)
+            {
+                equipo.JugadorBVerificado = true;
+            }
+
+            if (equipo.JugadorAVerificado && equipo.JugadorBVerificado)
+            {
+                equipo.Estado = EstadoEquipoEnum.Activado;
+            }
+            else
+            {
+                equipo.Estado = EstadoEquipoEnum.Desactivado;
             }
 
             this.CreateOrUpdate(equipo);

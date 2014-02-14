@@ -11,6 +11,5 @@ namespace Padel.Web.Mvc.Controllers.Queries.Equipos
     public interface IEquiposQuery
     {
         IList<EquipoViewModel> GetEquiposPorJugadorList(int idJugador, string tipo);
-        IList<EquipoViewModel> GetEquiposPorJugadoresList(int idJugadorA, int idJugadorB);
     }
 }
