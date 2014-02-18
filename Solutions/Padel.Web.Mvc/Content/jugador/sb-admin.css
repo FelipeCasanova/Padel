@@ -441,13 +441,13 @@ table.dataTable thead .sorting:after
 {
     float: left;
     width: 25%;
-    height: 150px;
-    padding: 10px;
+    height: 180px;
+    padding: 20px 10px;
     font-size: 10px;
     line-height: 1.4;
     text-align: center;
     border: 1px solid #fff;
-    background-color: #E4E4E4;
+    background-color: #E4E4E4; 
 }
 
 @media (max-width:768px)

@@ -31,10 +31,29 @@ app.service('crudTournamentService', ['$rootScope', '$http', function ($rootScop
                     });
     };
 
-    crudTournamentService.unsignupFromTournament = function (teamId, categoryId, callbackOk) {
+    crudTournamentService.unsignupFromTournament = function (teamCategoryId, callbackOk) {
 
         var url = '/torneos/_desapuntanteDelTorneo';
-        $http.post(url, { "idEquipo": teamId, "idCategoria": categoryId }
+        $http.post(url, { "idEquipoCategoria": teamCategoryId }
+        , { headers: { 'RequestVerificationToken': crudTournamentService.antiForgeryToken, "X-Requested-With": "XMLHttpRequest"} })
+                    .success(function (data, status) {
+                        if (data.Success) {
+                            callbackOk(data.Result);
+                            handleOk(data.Message);
+                        }
+                        else {
+                            handleError(data.Message);
+                        }
+                    })
+                    .error(function (data, status) {
+                        handleError("Ha ocurrido un error y no se pudo eliminar el equipo. Inténtelo más tarde.");
+                    });
+    };
+
+    crudTournamentService.payTournamentWithPoints = function (teamCategoryId, type, callbackOk) {
+
+        var url = '/torneos/_pagaElTorneoConPuntos';
+        $http.post(url, { "idEquipoCategoria": teamCategoryId, "tipo" : type }
         , { headers: { 'RequestVerificationToken': crudTournamentService.antiForgeryToken, "X-Requested-With": "XMLHttpRequest"} })
                     .success(function (data, status) {
                         if (data.Success) {
@@ -46,9 +65,10 @@ app.service('crudTournamentService', ['$rootScope', '$http', function ($rootScop
                         }
                     })
                     .error(function (data, status) {
-                        handleError("Ha ocurrido un error y no se pudo eliminar el equipo. Inténtelo más tarde.");
+                        handleError("Ha ocurrido un error y no se pudo pagar el torneo. Inténtelo más tarde.");
                     });
     };
+
 
     return crudTournamentService;
 

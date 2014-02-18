@@ -288,6 +288,23 @@ CREATE TABLE [dbo].[Jornadas] (
 
 
 GO
+PRINT N'Creating [dbo].[Operacions]...';
+
+
+GO
+CREATE TABLE [dbo].[Operacions] (
+    [OperacionId]       INT            IDENTITY (1, 1) NOT NULL,
+    [Mensaje]           NVARCHAR (255) NULL,
+    [Accion]            NVARCHAR (255) NOT NULL,
+    [OperacionTipo]     NVARCHAR (255) NOT NULL,
+    [FechaCreacion]     DATETIME       NULL,
+    [FechaModificacion] DATETIME       NULL,
+    [UsuarioId]         INT            NULL,
+    PRIMARY KEY CLUSTERED ([OperacionId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
 PRINT N'Creating [dbo].[Partidos]...';
 
 
@@ -443,6 +460,15 @@ ALTER TABLE [dbo].[Jornadas] WITH NOCHECK
 
 
 GO
+PRINT N'Creating Operacions_Usuario_FK...';
+
+
+GO
+ALTER TABLE [dbo].[Operacions] WITH NOCHECK
+    ADD CONSTRAINT [Operacions_Usuario_FK] FOREIGN KEY ([UsuarioId]) REFERENCES [dbo].[Usuarios] ([UsuarioId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
 PRINT N'Creating FKDAD4D23814375479...';
 
 
@@ -540,6 +566,8 @@ ALTER TABLE [dbo].[EquipoToCategorias] WITH CHECK CHECK CONSTRAINT [FK5F6C6AB363
 ALTER TABLE [dbo].[Grupos] WITH CHECK CHECK CONSTRAINT [FK19033393363F8A7F];
 
 ALTER TABLE [dbo].[Jornadas] WITH CHECK CHECK CONSTRAINT [FK3A8C15D498DABC1A];
+
+ALTER TABLE [dbo].[Operacions] WITH CHECK CHECK CONSTRAINT [Operacions_Usuario_FK];
 
 ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [FKDAD4D23814375479];
 

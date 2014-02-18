@@ -12,7 +12,7 @@ using Padel.Infrastructure.Utilities;
 using Padel.Domain.Contracts.Tasks;
 using Padel.Tasks.CommandResults;
 
-namespace Padel.Tasks.CommandHandlers
+namespace Padel.Tasks.CommandHandlers.Usuarios
 {
     public class EntrarUsuarioCommandHandler : ICommandHandler<EntrarUsuarioCommand, CommandResult>
     {

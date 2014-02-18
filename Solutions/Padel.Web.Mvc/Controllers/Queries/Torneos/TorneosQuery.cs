@@ -59,14 +59,19 @@ namespace Padel.Web.Mvc.Controllers.Queries.Torneos
             }
 
             // Solo para el jugador y para equipocategorias no eliminadas
-            query = query.Where(x => equipo.JugadorA.Id == idJugador && equipoToCategoria.Estado != EstadoEquipoCategoriaEnum.Eliminado);
+            query = query.Where(x => (equipo.JugadorA.Id == idJugador || equipo.JugadorB.Id == idJugador) && equipoToCategoria.Estado != EstadoEquipoCategoriaEnum.Eliminado);
 
             var viewModels = query.SelectList(list => list
                                     .Select(x => x.Id).WithAlias(() => viewModel.Id)
                                     .Select(x => x.Nombre).WithAlias(() => viewModel.Nombre)
                                     .Select(x => x.Tipo).WithAlias(() => viewModel.Tipo)
 
-                                    // Flattening the object graph
+                                    .Select(x => equipoToCategoria.Id).WithAlias(() => viewModel.EquipoCategoriaId)
+                                    .Select(x => equipoToCategoria.DineroFicticioJugadorA).WithAlias(() => viewModel.DineroFicticioJugadorA)
+                                    .Select(x => equipoToCategoria.DineroRealJugadorA).WithAlias(() => viewModel.DineroRealJugadorA)
+                                    .Select(x => equipoToCategoria.DineroFicticioJugadorB).WithAlias(() => viewModel.DineroFicticioJugadorB)
+                                    .Select(x => equipoToCategoria.DineroRealJugadorB).WithAlias(() => viewModel.DineroRealJugadorB)
+
                                     .Select(x => categoria.Id).WithAlias(() => viewModel.CategoriaId)
                                     .Select(x => categoria.Nombre).WithAlias(() => viewModel.CategoriaNombre)
                                     .Select(x => categoria.Estado).WithAlias(() => viewModel.EstadoCategoria)
@@ -75,10 +80,12 @@ namespace Padel.Web.Mvc.Controllers.Queries.Torneos
                                     .Select(x => categoria.NivelMin).WithAlias(() => viewModel.NivelMin)
                                     .Select(x => categoria.NivelMax).WithAlias(() => viewModel.NivelMax)
 
-                                    .SelectSubQuery(subQuery).WithAlias(() => viewModel.NumeroEquipos)
-
                                     .Select(x => equipo.Id).WithAlias(() => viewModel.EquipoId)
                                     .Select(x => equipo.Nombre).WithAlias(() => viewModel.EquipoNombre)
+                                    .Select(x => equipo.JugadorA.Id).WithAlias(() => viewModel.JugadorAId)
+                                    .Select(x => equipo.JugadorB.Id).WithAlias(() => viewModel.JugadorBId)
+
+                                    .SelectSubQuery(subQuery).WithAlias(() => viewModel.NumeroEquipos)
                                     .SelectSubQuery(subQueryJugadorA).WithAlias(() => viewModel.JugadorANombre)
                                     .SelectSubQuery(subQueryJugadorB).WithAlias(() => viewModel.JugadorBNombre)
                                     )

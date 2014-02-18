@@ -15,16 +15,11 @@
 }
 @section JSSection{
     <script src="@Url.Content(@Links.Scripts.padel.jugador.torneos.crud_js)" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('.hidden').removeClass('hidden');
-        });
-    </script>
     @foreach (var tipo in new[] { "Especial", "Estandar", "Mini", "Privado" })
     {
         <script type="text/javascript">
 
-            function CrudTournaments@(tipo)Ctrl($scope, crudTournamentService) {
+            function CrudTournaments@(tipo)Ctrl($rootScope, $scope, crudTournamentService) {
                 $scope.emptyMessage = "No hay ningún torneo disponible";
                 $scope.tournaments = [];
                 $scope.show = false;
@@ -34,6 +29,10 @@
                     angular.forEach(tournaments, function(t) {
                         if(t.Tipo == '@(tipo)')
                         {
+                            if(t.JugadorAPagado || t.JugadorBPagado)
+                            {
+                                t.UnPagoHecho = true;
+                            }
                             $scope.tournaments.push(t);
                             $scope.emptyMessage = "";
                             $scope.show = true;
@@ -47,6 +46,12 @@
                         $scope.emptyMessage = "";
                         $scope.tournaments = data;
                         $scope.show = true;
+                        angular.forEach(tournaments, function(t) {
+                            if(t.JugadorAPagado || t.JugadorBPagado)
+                            {
+                                t.UnPagoHecho = true;
+                            }
+                        });
                     })
                 };
 
@@ -59,11 +64,15 @@
                     tournament.showEdit = true;
                 };
 
-                $scope.unsignupFromTournament = function (teamId, categoryId) {
+                $scope.unsignupFromTournament = function (teamCategoryId) {
                     crudTournamentService.antiForgeryToken = $scope.antiForgeryToken;
-                    crudTournamentService.unsignupFromTournament(teamId, categoryId, function(data){
+                    crudTournamentService.unsignupFromTournament(teamCategoryId, function(result){
+                        
+                        $scope.points = $scope.points + result.Precio;
+                        $rootScope.$broadcast("userPoints", $scope.points);
+
                         angular.forEach($scope.tournaments, function(t) {
-                            if(t.EquipoId == teamId && t.CategoriaId == categoryId)
+                            if(t.EquipoCategoriaId == teamCategoryId)
                             {
                                 var index = $scope.tournaments.indexOf(t);
                                 if (index > -1) {
@@ -71,6 +80,38 @@
                                 }
                             }
                         }); 
+                    });
+                };
+                
+                $scope.payTournamentWithPoints = function (tournament, type) {
+                    crudTournamentService.antiForgeryToken = $scope.antiForgeryToken;
+                    crudTournamentService.payTournamentWithPoints(tournament.EquipoCategoriaId, type, function(data){
+                        if(type == 1)
+                        {
+                            if(tournament.JugadorAPagado || tournament.JugadorBPagado)
+                            {
+                                tournament.JugadorAPagado = true;
+                                tournament.JugadorBPagado = true;
+                            }
+                            else
+                            {
+                                if(@(user.Id) == tournament.JugadorAId)
+                                {
+                                    tournament.JugadorAPagado = true;
+                                }
+                                if(@(user.Id) == tournament.JugadorBId)
+                                {
+                                    tournament.JugadorBPagado = true;
+                                }
+                            }
+                        }
+                        if(type == 2)
+                        {
+                            tournament.JugadorAPagado = true;
+                            tournament.JugadorBPagado = true;
+                        }
+                        $scope.points = $scope.points - (tournament.Precio * type);
+                        $rootScope.$broadcast("userPoints", $scope.points);
                     });
                 };
             }
@@ -104,26 +145,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-body hidden">
+                <div class="panel-body hidden till-loaded">
                     {{emptyMessage}}
-                    <div class="group" ng-show="show">
+                    <div class="group" ng-show="show" ng-init="points='@user.Puntos.ToString().Replace(',', '.')'">
                         <ul class="group-list">
                             <li ng-repeat="tournament in tournaments" class="{{tournament.selected}}" ng-click="selectTournament(tournament)">
-                                <button class="btn btn-xs btn-danger" ng-click="unsignupFromTournament(tournament.EquipoId, tournament.CategoriaId)"
-                                    ng-show="tournament.showEdit && tournament.EstadoCategoria == 'Pendiente'">
-                                    Desapúntate</button>
-                                <span><i class="fa fa-sitemap fa-fw"></i>{{tournament.EstadoCategoria}} {{tournament.EquipoNombre
-                                    != null ? ' - ' + tournament.EquipoNombre : '' }} </span>
+                                <span><i class="fa fa-sitemap fa-fw"></i>Torneo {{tournament.Nombre}} {{tournament.Tipo}}
+                                    - {{tournament.CategoriaNombre}} {{tournament.TipoEquipo}}</span>
                                 <div>
-                                    <span class="fa-class">Torneo {{tournament.Nombre}} {{tournament.Tipo}} - {{ tournament.NumeroEquipos
-                                        }} equipo/s apuntados</span>
+                                    <span class="fa-class">Torneo estado: {{tournament.EstadoCategoria}}, {{ tournament.NumeroEquipos
+                                        }} equipo/s apuntados </span>
                                 </div>
                                 <div class="center">
+                                    {{tournament.EquipoNombre != null ? 'Equipo - ' + tournament.EquipoNombre : '' }}
                                     <div>
-                                        <span class="fa-class"><i class="fa fa-user"></i>{{tournament.JugadorANombre}} </span>
+                                        <span class="fa-class"><i class="fa fa-user"></i>{{tournament.JugadorANombre}} <i
+                                            ng-show="tournament.JugadorAPagado && tournament.showEdit" class="ionicons ion-checkmark-circled">
+                                        </i></span>
                                     </div>
                                     <div>
-                                        <span class="fa-class"><i class="fa fa-user"></i>{{tournament.JugadorBNombre}} </span>
+                                        <span class="fa-class"><i class="fa fa-user"></i>{{tournament.JugadorBNombre}} <i
+                                            ng-show="tournament.JugadorBPagado && tournament.showEdit" class="ionicons ion-checkmark-circled">
+                                        </i></span>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-xs btn-primary" ng-disabled="tournament.Precio > puntos || (tournament.JugadorAPagado && tournament.JugadorBPagado)"
+                                            ng-show="tournament.showEdit" ng-click="payTournamentWithPoints(tournament, 1)">
+                                            Pagar / {{tournament.Precio}} puntos</button>
+                                        <button class="btn btn-xs btn-primary" ng-disabled="(tournament.Precio * 2) > puntos || tournament.JugadorAPagado || tournament.JugadorBPagado"
+                                            ng-show="tournament.showEdit" ng-click="payTournamentWithPoints(tournament, 2)">
+                                            Pagar todo / {{tournament.Precio * 2}} puntos</button>
+                                        <button class="btn btn-xs btn-danger" ng-click="unsignupFromTournament(tournament.EquipoCategoriaId)"
+                                            ng-show="tournament.showEdit && tournament.EstadoCategoria == 'Pendiente'">
+                                            Desapúntate</button>
                                     </div>
                                 </div>
                             </li>

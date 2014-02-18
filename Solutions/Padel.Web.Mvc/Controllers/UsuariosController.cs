@@ -12,7 +12,7 @@ using Padel.Tasks;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands;
 using Padel.Web.Mvc.Controllers.Queries.Equipos;
-using Padel.Web.Mvc.Controllers.ViewModels;
+using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
 using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
 using SharpArch.NHibernate.Web.Mvc;
@@ -33,12 +33,6 @@ namespace Padel.Web.Mvc.Controllers
             this.commandProcessor = commandProcessor;
             this.usuarioTasks = usuarioTasks;
             this.jugadoresQuery = jugadoresQuery;
-        }
-
-        [HttpGet]
-        public virtual ActionResult Index()
-        {
-            return View();
         }
 
         [NonAction]

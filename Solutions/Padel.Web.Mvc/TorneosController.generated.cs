@@ -43,9 +43,27 @@ namespace Padel.Web.Mvc.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _TorneosPorJugador()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._TorneosPorJugador);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult _CrearEquipoParaTorneo()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._CrearEquipoParaTorneo);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _DesapuntanteDelTorneo()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._DesapuntanteDelTorneo);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _PagaElTorneoConPuntos()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._PagaElTorneoConPuntos);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -64,17 +82,31 @@ namespace Padel.Web.Mvc.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string _TorneosPorJugador = "_TorneosPorJugador";
             public readonly string _CrearEquipoParaTorneo = "_CrearEquipoParaTorneo";
+            public readonly string _DesapuntanteDelTorneo = "_DesapuntanteDelTorneo";
+            public readonly string _PagaElTorneoConPuntos = "_PagaElTorneoConPuntos";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string _TorneosPorJugador = "_TorneosPorJugador";
             public const string _CrearEquipoParaTorneo = "_CrearEquipoParaTorneo";
+            public const string _DesapuntanteDelTorneo = "_DesapuntanteDelTorneo";
+            public const string _PagaElTorneoConPuntos = "_PagaElTorneoConPuntos";
         }
 
 
+        static readonly ActionParamsClass__TorneosPorJugador s_params__TorneosPorJugador = new ActionParamsClass__TorneosPorJugador();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__TorneosPorJugador _TorneosPorJugadorParams { get { return s_params__TorneosPorJugador; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__TorneosPorJugador
+        {
+            public readonly string tipo = "tipo";
+        }
         static readonly ActionParamsClass__CrearEquipoParaTorneo s_params__CrearEquipoParaTorneo = new ActionParamsClass__CrearEquipoParaTorneo();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass__CrearEquipoParaTorneo _CrearEquipoParaTorneoParams { get { return s_params__CrearEquipoParaTorneo; } }
@@ -86,6 +118,23 @@ namespace Padel.Web.Mvc.Controllers
             public readonly string idTorneo = "idTorneo";
             public readonly string idCategoria = "idCategoria";
             public readonly string terminosAceptados = "terminosAceptados";
+        }
+        static readonly ActionParamsClass__DesapuntanteDelTorneo s_params__DesapuntanteDelTorneo = new ActionParamsClass__DesapuntanteDelTorneo();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__DesapuntanteDelTorneo _DesapuntanteDelTorneoParams { get { return s_params__DesapuntanteDelTorneo; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__DesapuntanteDelTorneo
+        {
+            public readonly string idEquipoCategoria = "idEquipoCategoria";
+        }
+        static readonly ActionParamsClass__PagaElTorneoConPuntos s_params__PagaElTorneoConPuntos = new ActionParamsClass__PagaElTorneoConPuntos();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__PagaElTorneoConPuntos _PagaElTorneoConPuntosParams { get { return s_params__PagaElTorneoConPuntos; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__PagaElTorneoConPuntos
+        {
+            public readonly string idEquipoCategoria = "idEquipoCategoria";
+            public readonly string tipo = "tipo";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -117,6 +166,16 @@ namespace Padel.Web.Mvc.Controllers
             return callInfo;
         }
 
+        partial void _TorneosPorJugadorOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string tipo);
+
+        public override System.Web.Mvc.ActionResult _TorneosPorJugador(string tipo)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._TorneosPorJugador);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tipo", tipo);
+            _TorneosPorJugadorOverride(callInfo, tipo);
+            return callInfo;
+        }
+
         partial void _CrearEquipoParaTorneoOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int? idEquipo, int? idJugador, int? idTorneo, int? idCategoria, bool? terminosAceptados);
 
         public override System.Web.Mvc.ActionResult _CrearEquipoParaTorneo(int? idEquipo, int? idJugador, int? idTorneo, int? idCategoria, bool? terminosAceptados)
@@ -128,6 +187,27 @@ namespace Padel.Web.Mvc.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idCategoria", idCategoria);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "terminosAceptados", terminosAceptados);
             _CrearEquipoParaTorneoOverride(callInfo, idEquipo, idJugador, idTorneo, idCategoria, terminosAceptados);
+            return callInfo;
+        }
+
+        partial void _DesapuntanteDelTorneoOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int idEquipoCategoria);
+
+        public override System.Web.Mvc.ActionResult _DesapuntanteDelTorneo(int idEquipoCategoria)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._DesapuntanteDelTorneo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idEquipoCategoria", idEquipoCategoria);
+            _DesapuntanteDelTorneoOverride(callInfo, idEquipoCategoria);
+            return callInfo;
+        }
+
+        partial void _PagaElTorneoConPuntosOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int idEquipoCategoria, int tipo);
+
+        public override System.Web.Mvc.ActionResult _PagaElTorneoConPuntos(int idEquipoCategoria, int tipo)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._PagaElTorneoConPuntos);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idEquipoCategoria", idEquipoCategoria);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "tipo", tipo);
+            _PagaElTorneoConPuntosOverride(callInfo, idEquipoCategoria, tipo);
             return callInfo;
         }
 

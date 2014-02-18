@@ -41,6 +41,8 @@ namespace T4MVC
                 public readonly string _LayoutLogin = "_LayoutLogin";
                 public readonly string _LayoutPlayer = "_LayoutPlayer";
                 public readonly string _NavBar = "_NavBar";
+                public readonly string Currency = "Currency";
+                public readonly string GameCurrency = "GameCurrency";
             }
             public readonly string _Carousel = "~/Views/Shared/_Carousel.cshtml";
             public readonly string _Footer = "~/Views/Shared/_Footer.cshtml";
@@ -48,6 +50,8 @@ namespace T4MVC
             public readonly string _LayoutLogin = "~/Views/Shared/_LayoutLogin.cshtml";
             public readonly string _LayoutPlayer = "~/Views/Shared/_LayoutPlayer.cshtml";
             public readonly string _NavBar = "~/Views/Shared/_NavBar.cshtml";
+            public readonly string Currency = "~/Views/Shared/Currency.cshtml";
+            public readonly string GameCurrency = "~/Views/Shared/GameCurrency.cshtml";
             static readonly _DisplayTemplatesClass s_DisplayTemplates = new _DisplayTemplatesClass();
             public _DisplayTemplatesClass DisplayTemplates { get { return s_DisplayTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -99,11 +103,9 @@ namespace T4MVC
                 public class _ViewNamesClass
                 {
                     public readonly string _Apuntate = "_Apuntate";
-                    public readonly string _Currency = "_Currency";
                     public readonly string _Preview = "_Preview";
                 }
                 public readonly string _Apuntate = "~/Views/Shared/Torneo/_Apuntate.cshtml";
-                public readonly string _Currency = "~/Views/Shared/Torneo/_Currency.cshtml";
                 public readonly string _Preview = "~/Views/Shared/Torneo/_Preview.cshtml";
             }
             static readonly _UsuariosClass s_Usuarios = new _UsuariosClass();

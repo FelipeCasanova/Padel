@@ -24,5 +24,10 @@
     <!-- /.container -->
     @Scripts.Render("~/bundles/js/base")
     @RenderSection("JSSection", false)
+    <script type="text/javascript">
+        $(function () {
+            $('.hidden.till-loaded').removeClass('hidden');
+        });
+    </script>
 </body>
 </html>

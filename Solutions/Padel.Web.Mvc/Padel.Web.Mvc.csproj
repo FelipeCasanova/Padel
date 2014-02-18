@@ -238,12 +238,13 @@
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Areas\Admin\Controllers\ViewModels\JugadorViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Equipos\EquipoViewModel.cs" />
+    <Compile Include="Controllers\ViewModels\IPrecio.cs" />
     <Compile Include="Controllers\ViewModels\Menu\SideMenuJugadorModelView.cs" />
     <Compile Include="Controllers\ViewModels\Menu\MenuModelView.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\EquipoTorneoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\TorneoViewModel.cs" />
-    <Compile Include="Controllers\ViewModels\UsuarioEntrarModelView.cs" />
-    <Compile Include="Controllers\ViewModels\UsuarioRegistrarModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Usuarios\UsuarioEntrarModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Usuarios\UsuarioRegistrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\JugadorViewModel.cs" />
     <Compile Include="EquiposController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -447,9 +448,7 @@
     </None>
     <None Include="T4MVC.tt.hooks.t4" />
     <Content Include="Views\Shared\Torneo\_Preview.cshtml" />
-    <Content Include="Views\Shared\Torneo\_Currency.cshtml" />
     <Content Include="Views\Shared\Torneo\_Apuntate.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Jugador\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPlayer.cshtml" />
     <Content Include="Views\Shared\Jugador\_NavBarTop.cshtml" />
@@ -459,6 +458,8 @@
     <Content Include="Views\Jugador\Partidos.cshtml" />
     <Content Include="Views\Jugador\Graficas.cshtml" />
     <Content Include="Views\Jugador\Equipos.cshtml" />
+    <Content Include="Views\Shared\Currency.cshtml" />
+    <Content Include="Views\Shared\GameCurrency.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Padel.Domain\Padel.Domain.csproj">

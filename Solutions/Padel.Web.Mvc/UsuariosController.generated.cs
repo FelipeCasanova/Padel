@@ -93,7 +93,6 @@ namespace Padel.Web.Mvc.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
             public readonly string _Registrar = "_Registrar";
             public readonly string Entrar = "Entrar";
             public readonly string _Entrar = "_Entrar";
@@ -106,7 +105,6 @@ namespace Padel.Web.Mvc.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Index = "Index";
             public const string _Registrar = "_Registrar";
             public const string Entrar = "Entrar";
             public const string _Entrar = "_Entrar";
@@ -177,10 +175,8 @@ namespace Padel.Web.Mvc.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Entrar = "Entrar";
-                public readonly string Index = "Index";
             }
             public readonly string Entrar = "~/Views/Usuarios/Entrar.cshtml";
-            public readonly string Index = "~/Views/Usuarios/Index.cshtml";
         }
     }
 
@@ -189,18 +185,9 @@ namespace Padel.Web.Mvc.Controllers
     {
         public T4MVC_UsuariosController() : base(Dummy.Instance) { }
 
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void _RegistrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioRegistrarModelView usuarioModelView);
 
-        public override System.Web.Mvc.ActionResult Index()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
-            return callInfo;
-        }
-
-        partial void _RegistrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Padel.Web.Mvc.Controllers.ViewModels.UsuarioRegistrarModelView usuarioModelView);
-
-        public override System.Web.Mvc.ActionResult _Registrar(Padel.Web.Mvc.Controllers.ViewModels.UsuarioRegistrarModelView usuarioModelView)
+        public override System.Web.Mvc.ActionResult _Registrar(Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioRegistrarModelView usuarioModelView)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Registrar);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "usuarioModelView", usuarioModelView);
@@ -218,9 +205,9 @@ namespace Padel.Web.Mvc.Controllers
             return callInfo;
         }
 
-        partial void _EntrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Padel.Web.Mvc.Controllers.ViewModels.UsuarioEntrarModelView usuarioModelView, string returnUrl);
+        partial void _EntrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioEntrarModelView usuarioModelView, string returnUrl);
 
-        public override System.Web.Mvc.ActionResult _Entrar(Padel.Web.Mvc.Controllers.ViewModels.UsuarioEntrarModelView usuarioModelView, string returnUrl)
+        public override System.Web.Mvc.ActionResult _Entrar(Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioEntrarModelView usuarioModelView, string returnUrl)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Entrar);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "usuarioModelView", usuarioModelView);

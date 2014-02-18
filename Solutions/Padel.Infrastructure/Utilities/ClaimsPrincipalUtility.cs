@@ -20,12 +20,17 @@ namespace Padel.Infrastructure.Utilities
             claims.Add(new Claim(ClaimTypes.Name, usuario.Nombre));
             claims.Add(new Claim(ClaimTypes.Role, usuario.Roles.First().Nombre));
             claims.Add(new Claim(ClaimTypes.PPID, usuario.Id.ToString()));
-            claims.Add(new Claim("http://http://flipersanvi.no-ip.biz//accesscontrolservice/2014/01/claims/gender", usuario.Sexo.ToString()));
+            claims.Add(new Claim("http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/gender", usuario.Sexo.ToString()));
+            claims.Add(new Claim("http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/exp", usuario.PuntosExperiencia.ToString()));
+            claims.Add(new Claim("http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/level", usuario.Nivel.ToString()));
+            claims.Add(new Claim("http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/hearts", usuario.AplicacionExperiencia.ToString()));
+            claims.Add(new Claim("http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/points", usuario.DineroFicticio.ToString()));
+
             if (!string.IsNullOrEmpty(usuario.Email))
             {
                 claims.Add(new Claim(ClaimTypes.Email, usuario.Email));
             }
-            claims.Add(new Claim("http://http://flipersanvi.no-ip.biz//accesscontrolservice/2014/01/claims/creationdate", usuario.FechaCreacion.ToShortDateString()));
+            claims.Add(new Claim("http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/creationdate", usuario.FechaCreacion.ToShortDateString()));
 
             // Creando la identidad para el principal
             IList<IClaimsIdentity> identities = new List<IClaimsIdentity>();

@@ -10,6 +10,7 @@ using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands;
 using Padel.Tasks.Commands.Torneos;
+using Padel.Tasks.Commands.Usuarios;
 using Padel.Web.Mvc.Controllers.Queries.Torneos;
 using Padel.Web.Mvc.Filters;
 using SharpArch.Domain.Commands;
@@ -85,12 +86,34 @@ namespace Padel.Web.Mvc.Controllers
         [HttpPost]
         [Transaction]
         [CustomValidateAntiForgeryTokenAttribute]
-        public virtual ActionResult _DesapuntanteDelTorneo(int idEquipo, int idCategoria)
+        public virtual ActionResult _DesapuntanteDelTorneo(int idEquipoCategoria)
         {
-            var command = new EliminarEquipoDeTorneoCommand(idEquipo, idCategoria);
-            var results = this.commandProcessor.Process<EliminarEquipoDeTorneoCommand, CommandResult>(command);
-            return new JsonNetResult(results.First());
+            var command = new EliminarEquipoDeTorneoCommand(idEquipoCategoria);
+            var result = this.commandProcessor.Process<EliminarEquipoDeTorneoCommand, CommandResult>(command).First();
+            if (result.Success)
+            {
+                var command2 = new RefrescarUsuarioCommand();
+                var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
+            }
+            return new JsonNetResult(result);
 
         }
+
+        [AjaxOnly]
+        [HttpPost]
+        [Transaction]
+        [CustomValidateAntiForgeryTokenAttribute]
+        public virtual ActionResult _PagaElTorneoConPuntos(int idEquipoCategoria, int tipo)
+        {
+            var command = new PagarJugadorConPuntosEnTorneoCommand(idEquipoCategoria, tipo);
+            var result = this.commandProcessor.Process<PagarJugadorConPuntosEnTorneoCommand, CommandResult>(command).First();
+            if (result.Success)
+            {
+                var command2 = new RefrescarUsuarioCommand();
+                var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
+            }
+            return new JsonNetResult(result);
+        }
+        
     }
 }

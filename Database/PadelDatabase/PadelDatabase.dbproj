@@ -210,5 +210,11 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Jornadas.sql">
       <SubType>NotInBuild</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Operacions.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Operacions.FK_Usuario.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
   </ItemGroup>
 </Project>

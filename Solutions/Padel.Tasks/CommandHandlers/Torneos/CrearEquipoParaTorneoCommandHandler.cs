@@ -45,6 +45,10 @@ namespace Padel.Tasks.CommandHandlers.Torneos
                 {
                     this.equipoTasks.CreateOrUpdate(equiposJugador.First().Equipo, principal.Id);
                 }
+                else
+                {
+                    this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
+                }
                 return new CommandResult(success, mensaje);
             }
             return null;
@@ -55,6 +59,7 @@ namespace Padel.Tasks.CommandHandlers.Torneos
             var jugador = this.usuarioRepository.Get(jugadorId);
             if (jugador.PuntosExperiencia < categoria.NivelMinExp || jugador.PuntosExperiencia > categoria.NivelMaxExp)
             {
+                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "Lo sentimos mucho pero este torneo solo admite jugadores entre " + categoria.NivelMinExp
                     + " Exp y " + categoria.NivelMaxExp + "Exp.");
             }
@@ -78,11 +83,11 @@ namespace Padel.Tasks.CommandHandlers.Torneos
         {
             if (categoria.TipoEquipo != equipo.TipoEquipo)
             {
+                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "El equipo seleccionado debe ser de tipo '" + categoria.TipoEquipo.ToString() + "'.");
             }
             return null;
         }
-
 
         public CommandResult Handle(CrearEquipoParaTorneoCommand command)
         {
@@ -94,24 +99,28 @@ namespace Padel.Tasks.CommandHandlers.Torneos
             // Preconditions
             if (command.Jugador1Id == command.Jugador2Id)
             {
+                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se ha podido registrar el equipo. Inténtalo más tarde.");
             }
 
             // La categoria existe
             if (command.CategoriaId == 0)
             {
+                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se puedo registrar el equipo en la categoría. Inténtalo más tarde.");
             }
 
             // El torneo existe
             if (command.TorneoId == 0)
             {
+                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se puedo registrar el equipo en el torneo. Inténtalo más tarde.");
             }
 
             // Se ha elegido un compañero o un equipo
             if (command.Jugador2Id == 0 && command.EquipoId == 0)
             {
+                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "Debes elegir o crear un equipo.");
             }
 
@@ -119,6 +128,7 @@ namespace Padel.Tasks.CommandHandlers.Torneos
             var categoria = this.categoriaRepository.Get(command.CategoriaId);
             if (categoria.Torneo.Id != command.TorneoId)
             {
+                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se puedo registrar el equipo en el torneo. Inténtalo más tarde.");
             }
 
@@ -203,6 +213,7 @@ namespace Padel.Tasks.CommandHandlers.Torneos
             }
             else
             {
+                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se puedo registrar el equipo en el torneo. Intentelo más tarde.");
             }
         }

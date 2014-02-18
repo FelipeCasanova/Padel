@@ -9,7 +9,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Padel.Web.Mvc.Controllers.ViewModels.Torneos
 {
-    public class TorneoViewModel
+    public class TorneoViewModel : IPrecio
     {
         public int Id { get; set; }
 

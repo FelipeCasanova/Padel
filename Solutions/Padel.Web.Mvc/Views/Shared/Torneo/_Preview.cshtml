@@ -54,7 +54,7 @@
                         @if (torneo.EstadoCategoria != Padel.Domain.EstadoCategoriaEnum.Progreso)
                         {
                             <h3>
-                                Precio - @(Html.Partial(MVC.Shared.Views.Torneo._Currency, torneo))
+                                Precio - @(Html.Partial(MVC.Shared.Views.Currency, torneo))
                             </h3>
 
                         }
@@ -73,7 +73,7 @@
                             <p>
                                 <a class="btn btn-lg btn-primary" href="#" role="button" data-toggle="modal" data-target="#apuntateModal"
                                    ng-click="updateTitleTournament(@(torneo.CategoriaId), @(torneo.Id), '@(torneo.Nombre) - @(torneo.Tipo.ToString()), @(torneo.CategoriaNombre) / @(torneo.TipoEquipo.ToString())',
-                                   '@(Html.Partial(MVC.Shared.Views.Torneo._Currency, torneo))')">
+                                   '@(Html.Partial(MVC.Shared.Views.Currency, torneo))')">
                                     Apuntaté</a></p>
                         }
                         else

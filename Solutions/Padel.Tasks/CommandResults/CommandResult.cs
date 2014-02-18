@@ -11,10 +11,13 @@ namespace Padel.Tasks.CommandResults
 
         public string Message { get; set; }
 
-        public CommandResult(bool success, string message)
+        public object Result { get; set; }
+
+        public CommandResult(bool success, string message, object result = null)
         {
             this.Success = success;
             this.Message = message;
+            this.Result = result;
         }
     }
 }

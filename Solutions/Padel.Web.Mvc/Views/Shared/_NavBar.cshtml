@@ -1,17 +1,26 @@
 ﻿@using Padel.Web.Mvc.Controllers.ViewModels.Menu;
 @{
+    Padel.Infrastructure.Utilities.PadelPrincipal user = null;
     MenuModelView MenuModelView = (MenuModelView)ViewBag.MenuModelView;
 
     DateTime tiempoTicksUsuario = DateTime.MinValue;
     DateTime tiempoTicksLimite = DateTime.MinValue;
     if (User.Identity.IsAuthenticated)
     {
-        var user = (Padel.Infrastructure.Utilities.PadelPrincipal)User;
+        user = (Padel.Infrastructure.Utilities.PadelPrincipal)User;
         tiempoTicksUsuario = new DateTime(DateTime.Today.Ticks - user.FechaCreacion.Ticks);
         tiempoTicksLimite = user.FechaCreacion.AddMonths((int)ApplicationInstance.Application["NewUserLimitMonths"]);
     }
 }
-<div class="navbar-wrapper">
+<script type="text/javascript">
+    function NavBarCtrl($scope) {
+
+        $scope.$on("userPoints", function (events, points) {
+            $scope.points = points;
+        });
+    }
+</script>
+<div class="navbar-wrapper" ng-controller="NavBarCtrl">
     <div class="container">
         <nav class="navbar navbar-inverse" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -31,8 +40,8 @@
                         @(Html.ActionLink<NormasController>(m => m.Index(), "Normas Torneos"))</li>
                     <li class="@(MenuModelView.TopMenu == TopMenu.Premios ? "active" : "")">
                         @(Html.ActionLink<PremiosController>(m => m.Index(), "Premios"))</li>
-                    <li class="@(MenuModelView.TopMenu == TopMenu.Resultados ? "active" : "")">
-                        @(Html.ActionLink<ResultadosController>(m => m.Index(), "Resultados"))</li>
+                    @*<li class="@(MenuModelView.TopMenu == TopMenu.Resultados ? "active" : "")">
+                        @(Html.ActionLink<ResultadosController>(m => m.Index(), "Resultados"))</li>*@
                     <li class="@(MenuModelView.TopMenu == TopMenu.Galeria ? "active" : "")">
                         @(Html.ActionLink<GaleriasController>(m => m.Index(), "Galería"))</li>
                     <li class="@(MenuModelView.TopMenu == TopMenu.Contacto ? "active" : "")">
@@ -41,6 +50,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
+                        <li class="hidden till-loaded"><a href="#">@(Html.Partial(MVC.Shared.Views.GameCurrency, user.Puntos))</a></li>
+                        <li><a href="#">@user.Corazones corazones</a></li>
+                        <li><a href="#">@user.Experiencia Exp.</a></li>
+                        <li><a href="#">L.V. @user.Nivel </a></li>
                         <li class="dropdown"><a href="#" class="btn-lg" data-toggle="dropdown"><span class="glyphicon glyphicon-user">
                         </span>
                             @if (tiempoTicksLimite > tiempoTicksUsuario)
@@ -49,6 +62,8 @@
                             }
                         </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">@User.Identity.Name</a></li>
+                                <li role="presentation" class="divider"></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Datos, MVC.Jugador.Name))">
                                     Tus Perfil</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Equipos, MVC.Jugador.Name))">
@@ -73,7 +88,6 @@
                     }
                     else
                     {
-                        <li><a href="#">@User.Identity.Name</a></li>
                         <li>@(Html.ActionLink<UsuariosController>(m => m.Logout(), "Salir"))</li>
                     }
                 </ul>
@@ -104,7 +118,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div id="entrarView" class="form entrar col-md-8 padel-vertical-separator">
-                            @Html.Partial(MVC.Shared.Views.Usuarios._Entrar, new UsuarioEntrarModelView())
+                            @Html.Partial(MVC.Shared.Views.Usuarios._Entrar, new Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioEntrarModelView())
                         </div>
                         <div class="col-md-4">
                             <ul class="padel-list">
@@ -150,7 +164,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div id="registroView" class="form registrar col-md-8 padel-vertical-separator">
-                            @Html.Partial(MVC.Shared.Views.Usuarios._Registrar, new UsuarioRegistrarModelView())
+                            @Html.Partial(MVC.Shared.Views.Usuarios._Registrar, new Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioRegistrarModelView())
                         </div>
                         <div class="col-md-4">
                             <ul class="padel-list">

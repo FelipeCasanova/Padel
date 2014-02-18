@@ -6,7 +6,7 @@ using Padel.Domain;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace Padel.Web.Mvc.Controllers.ViewModels
+namespace Padel.Web.Mvc.Controllers.ViewModels.Usuarios
 {
     public class UsuarioRegistrarModelView
     {

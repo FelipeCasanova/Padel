@@ -11,8 +11,10 @@ using Microsoft.IdentityModel.Web;
 using Padel.Infrastructure.Utilities;
 using Padel.Domain.Contracts.Tasks;
 using Padel.Tasks.CommandResults;
+using SharpArch.Domain.Events;
+using Padel.Tasks.Events;
 
-namespace Padel.Tasks.CommandHandlers
+namespace Padel.Tasks.CommandHandlers.Usuarios
 {
     public class RegistrarUsuarioCommandHandler : ICommandHandler<RegistrarUsuarioCommand, CommandResult>
     {
@@ -41,6 +43,7 @@ namespace Padel.Tasks.CommandHandlers
             if (usuario.IsValid())
             {
                 this.usuarioTasks.CreateOrUpdate(usuario);
+                DomainEvents.Raise<RegistroEvent>(new RegistroEvent(usuario.Id));
                 return new CommandResult(true, string.Empty);
             }
             else 
