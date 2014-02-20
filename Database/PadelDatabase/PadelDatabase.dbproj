@@ -216,5 +216,14 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Operacions.FK_Usuario.sql">
       <SubType>NotInBuild</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Usuarios.IX_Email.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Usuarios.IX_TelefonoMovil.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Operacions.IX_Cluster.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
   </ItemGroup>
 </Project>

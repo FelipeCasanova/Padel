@@ -11,6 +11,8 @@ using Padel.Tasks.Commands;
 using Padel.Tasks.Commands.Equipos;
 using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
+using Padel.Tasks.Events.Equipos;
+using SharpArch.Domain.Events;
 
 namespace Padel.Tasks.CommandHandlers.Equipos
 {
@@ -36,6 +38,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
 
                 // Reactivar el equipo
                 this.equipoTasks.CreateOrUpdate(equipoReactivate, command.Jugador1Id, command.Jugador2Id, principal.Id);
+                DomainEvents.Raise<CrearEquipoEvent>(new CrearEquipoEvent(principal.Id, equipoReactivate.Id, command.Jugador2Id));
                 return new CommandResult(true, "Se ha creado correctamente el equipo.");
             }
             else
@@ -43,6 +46,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
                 // crear equipo nuevo
                 var equipo = new Equipo();
                 this.equipoTasks.CreateOrUpdate(equipo, command.Jugador1Id, command.Jugador2Id, principal.Id);
+                DomainEvents.Raise<CrearEquipoEvent>(new CrearEquipoEvent(principal.Id, equipo.Id, command.Jugador2Id));
                 return new CommandResult(true, "Se ha creado correctamente el equipo.");
             }
         }

@@ -294,14 +294,23 @@ PRINT N'Creating [dbo].[Operacions]...';
 GO
 CREATE TABLE [dbo].[Operacions] (
     [OperacionId]       INT            IDENTITY (1, 1) NOT NULL,
-    [Mensaje]           NVARCHAR (255) NULL,
+    [Mensaje]           NVARCHAR (255) NOT NULL,
     [Accion]            NVARCHAR (255) NOT NULL,
     [OperacionTipo]     NVARCHAR (255) NOT NULL,
-    [FechaCreacion]     DATETIME       NULL,
-    [FechaModificacion] DATETIME       NULL,
-    [UsuarioId]         INT            NULL,
-    PRIMARY KEY CLUSTERED ([OperacionId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+    [FechaCreacion]     DATETIME       NOT NULL,
+    [FechaModificacion] DATETIME       NOT NULL,
+    [UsuarioId]         INT            NOT NULL,
+    PRIMARY KEY NONCLUSTERED ([OperacionId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
+
+
+GO
+PRINT N'Creating [dbo].[Operacions].[Operacions_Cluster_IX]...';
+
+
+GO
+CREATE UNIQUE CLUSTERED INDEX [Operacions_Cluster_IX]
+    ON [dbo].[Operacions]([UsuarioId] ASC, [FechaCreacion] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
 
 
 GO
@@ -385,6 +394,24 @@ CREATE TABLE [dbo].[Usuarios] (
     [FechaModificacion]     DATETIME        NULL,
     PRIMARY KEY CLUSTERED ([UsuarioId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
+
+
+GO
+PRINT N'Creating [dbo].[Usuarios].[Usuarios_Email_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Usuarios_Email_IX]
+    ON [dbo].[Usuarios]([Email] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
+PRINT N'Creating [dbo].[Usuarios].[Usuarios_TelefonoMovil_IX]...';
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [Usuarios_TelefonoMovil_IX]
+    ON [dbo].[Usuarios]([TelefonoMovil] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
 
 
 GO

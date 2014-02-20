@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Padel.Domain;
 
-namespace Padel.Tasks.Commands
+namespace Padel.Tasks.Commands.Usuarios
 {
     public class RegistrarUsuarioCommand : UsuarioCommandBase
     {

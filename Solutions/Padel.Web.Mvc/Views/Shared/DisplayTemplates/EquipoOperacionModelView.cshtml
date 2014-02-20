@@ -1,0 +1,23 @@
+﻿@model Padel.Web.Mvc.Controllers.ViewModels.Operaciones.EquipoOperacionModelView
+@{
+    TempData["Index"] = ((int)TempData["Index"]) + 1;
+    
+}
+<li class="@(((int)TempData["Index"]) % 2 == 1 ? "timeline-inverted" : "")">
+    <div class="timeline-badge @(Model.Accion == Padel.Domain.Operaciones.EquipoOperacion.AccionEnum.CrearEquipo.ToString() ? "success" : "danger")">
+        <i class="fa fa-users"></i>
+    </div>
+    <div class="timeline-panel">
+        <div class="timeline-heading">
+            <h4 class="timeline-title">
+                Evento @(Model.Accion == Padel.Domain.Operaciones.EquipoOperacion.AccionEnum.CrearEquipo.ToString() ? "Crear Equipo" : "Eliminar Equipo")</h4>
+            <p>
+                <small class="text-muted"><i class="fa fa-time"></i>@Model.FechaCreacion.ToLongDateString()</small>
+            </p>
+        </div>
+        <div class="timeline-body">
+            <p>
+                @Model.Mensaje</p>
+        </div>
+    </div>
+</li>

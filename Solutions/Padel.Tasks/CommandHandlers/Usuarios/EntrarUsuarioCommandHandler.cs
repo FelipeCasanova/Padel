@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Padel.Domain;
-using Padel.Tasks.Commands;
-using SharpArch.Domain.Commands;
-using SharpArch.Domain.PersistenceSupport;
 using System.Security.Cryptography;
+using System.Text;
 using Microsoft.IdentityModel.Web;
-using Padel.Infrastructure.Utilities;
+using Padel.Domain;
 using Padel.Domain.Contracts.Tasks;
+using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
+using Padel.Tasks.Commands;
+using Padel.Tasks.Commands.Usuarios;
+using Padel.Tasks.Events.Usuarios;
+using SharpArch.Domain.Commands;
+using SharpArch.Domain.Events;
+using SharpArch.Domain.PersistenceSupport;
 
 namespace Padel.Tasks.CommandHandlers.Usuarios
 {
@@ -26,8 +29,13 @@ namespace Padel.Tasks.CommandHandlers.Usuarios
         public CommandResult Handle(EntrarUsuarioCommand command)
         {
             var password = MD5.Create().GetMd5Hash(command.Password);
-            return new CommandResult(usuarioTasks.ValidateUser(command.EmailOrMovil, password, out command.TelefonoMovil), string.Empty);
+            var result = usuarioTasks.ValidateUser(command.EmailOrMovil, password, out command.TelefonoMovil);
+            if (result)
+            {
+                DomainEvents.Raise<EntrarEvent>(new EntrarEvent(command.EmailOrMovil));
+            }
+            return new CommandResult(result, string.Empty);
         }
     }
-    
+
 }

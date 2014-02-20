@@ -22,20 +22,20 @@ SET IDENTITY_INSERT [dbo].[Usuarios] ON;
 
 BEGIN TRANSACTION;
 INSERT INTO [dbo].[Usuarios]([UsuarioId], [Nombre], [Sexo], [TelefonoMovil], [Email], [Password], [PuntosExperiencia], [AplicacionExperiencia], [DineroFicticio], [FechaCreacion], [FechaModificacion])
-SELECT 1, N'Felipe Casanova', N'Hombre', 636547424, N'felipe.casanova.ua@gmail.com', N'7e04da88cbb8cc933c7b89fbfe121cca', 10, 12, 67, '20131217 17:23:50.000', '20131217 17:23:50.000' UNION ALL
-SELECT 2, N'Alfonso Juan Grueso', N'Hombre', 635560144, N'alfonsoalicante@gmail.com', N'3f128e570b3a9009d7b52a0523af43dd', 10, 12, 65, '20131217 17:31:18.000', '20131217 17:31:18.000' UNION ALL
+SELECT 1, N'Felipe Casanova', N'Hombre', 636547424, N'felipe.casanova.ua@gmail.com', N'7e04da88cbb8cc933c7b89fbfe121cca', 10, 12, 67.000, '20131217 17:23:50.000', '20131217 17:23:50.000' UNION ALL
+SELECT 2, N'Alfonso Juan Grueso', N'Hombre', 635560144, N'alfonsoalicante@gmail.com', N'3f128e570b3a9009d7b52a0523af43dd', 10, 12, 65.000, '20131217 17:31:18.000', '20131217 17:31:18.000' UNION ALL
 SELECT 3, N'Alberto Juan', N'Hombre', 646205244, N'albertojuan@gmail.com', N'1bbd886460827015e5d605ed44252251', 0, 0, 0.000, '20140128 17:08:13.000', '20140128 17:08:13.000' UNION ALL
-SELECT 4, N'Hombre1', N'Hombre', 111111111, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 1, 0, 0, '20131217 17:36:14.000', '20131217 17:36:14.000' UNION ALL
-SELECT 5, N'Mujer1', N'Mujer', 111111112, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 2, 0, 0, '20131217 17:42:25.000', '20131217 17:42:25.000' UNION ALL
-SELECT 6, N'Hombre2', N'Hombre', 222222221, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 3, 0, 0, '20131217 17:44:06.000', '20131217 17:44:06.000' UNION ALL
-SELECT 7, N'Mujer2', N'Mujer', 222222222, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 4, 0, 0, '20131217 17:45:02.000', '20131217 17:45:02.000' UNION ALL
-SELECT 8, N'Hombre3', N'Hombre', 333333331, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 5, 0, 0, '20131217 17:49:07.000', '20131217 17:49:07.000' UNION ALL
-SELECT 9, N'Mujer3', N'Mujer', 333333332, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 6, 0, 0, '20131217 17:57:46.000', '20131217 17:57:46.000' UNION ALL
-SELECT 10, N'Hombre4', N'Hombre', 444444441, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 7, 0, 0, '20131217 17:58:29.000', '20131217 17:58:29.000' UNION ALL
-SELECT 11, N'Mujer4', N'Mujer', 444444442, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 8, 0, 0, '20131217 18:03:56.000', '20131217 18:03:56.000' UNION ALL
-SELECT 12, N'Hombre5', N'Hombre', 555555551, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 9, 0, 0, '20131217 18:04:25.000', '20131217 18:04:25.000' UNION ALL
-SELECT 13, N'Mujer5', N'Mujer', 555555525, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 9, 0, 0, '20131217 18:04:25.000', '20131217 18:04:25.000'
-
+SELECT 4, N'Hombre1', N'Hombre', 111111111, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 1, 0, 0.000, '20131217 17:36:14.000', '20131217 17:36:14.000' UNION ALL
+SELECT 5, N'Mujer1', N'Mujer', 111111112, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 2, 0, 0.000, '20131217 17:42:25.000', '20131217 17:42:25.000' UNION ALL
+SELECT 6, N'Hombre2', N'Hombre', 222222221, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 3, 0, 0.000, '20131217 17:44:06.000', '20131217 17:44:06.000' UNION ALL
+SELECT 7, N'Mujer2', N'Mujer', 222222222, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 4, 0, 0.000, '20131217 17:45:02.000', '20131217 17:45:02.000' UNION ALL
+SELECT 8, N'Hombre3', N'Hombre', 333333331, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 5, 0, 0.000, '20131217 17:49:07.000', '20131217 17:49:07.000' UNION ALL
+SELECT 9, N'Mujer3', N'Mujer', 333333332, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 6, 0, 0.000, '20131217 17:57:46.000', '20131217 17:57:46.000' UNION ALL
+SELECT 10, N'Hombre4', N'Hombre', 444444441, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 7, 0, 0.000, '20131217 17:58:29.000', '20131217 17:58:29.000' UNION ALL
+SELECT 11, N'Mujer4', N'Mujer', 444444442, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 8, 0, 0.000, '20131217 18:03:56.000', '20131217 18:03:56.000' UNION ALL
+SELECT 12, N'Hombre5', N'Hombre', 555555551, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 9, 0, 0.000, '20131217 18:04:25.000', '20131217 18:04:25.000' UNION ALL
+SELECT 13, N'Mujer5', N'Mujer', 555555525, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 9, 0, 0.000, '20131217 18:04:25.000', '20131217 18:04:25.000' UNION ALL
+SELECT 14, N'Hombre uno', N'Hombre', 100000001, NULL, N'7e04da88cbb8cc933c7b89fbfe121cca', 0, 0, 0.000, '20140219 14:32:29.000', '20140219 14:32:29.000'
 COMMIT;
 RAISERROR (N'[dbo].[Usuarios]: Insert Batch: 1.....Done!', 10, 1) WITH NOWAIT;
 GO
@@ -57,7 +57,8 @@ SELECT 9, 2 UNION ALL
 SELECT 10, 2 UNION ALL
 SELECT 11, 2 UNION ALL
 SELECT 12, 2 UNION ALL
-SELECT 13, 2
+SELECT 13, 2 UNION ALL
+SELECT 14, 2
 COMMIT;
 RAISERROR (N'[dbo].[RoleToUsuario]: Insert Batch: 1.....Done!', 10, 1) WITH NOWAIT;
 GO
@@ -96,3 +97,31 @@ RAISERROR (N'[dbo].[Categorias]: Insert Batch: 1.....Done!', 10, 1) WITH NOWAIT;
 GO
 
 SET IDENTITY_INSERT [dbo].[Categorias] OFF;
+
+
+SET IDENTITY_INSERT [dbo].[Operacions] ON;
+
+BEGIN TRANSACTION;
+INSERT INTO [dbo].[Operacions]([OperacionId], [Mensaje], [Accion], [OperacionTipo], [FechaCreacion], [FechaModificacion], [UsuarioId])
+SELECT 1, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 1 UNION ALL
+SELECT 2, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 2 UNION ALL
+SELECT 3, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 3 UNION ALL
+SELECT 4, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 4 UNION ALL
+SELECT 5, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 5 UNION ALL
+SELECT 6, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 6 UNION ALL
+SELECT 7, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 7 UNION ALL
+SELECT 8, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 8 UNION ALL
+SELECT 9, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 9 UNION ALL
+SELECT 10, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 10 UNION ALL
+SELECT 11, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 11 UNION ALL
+SELECT 12, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 12 UNION ALL
+SELECT 13, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 13 UNION ALL
+SELECT 14, N'Garcias por su registro.', N'Registrar', N'UsuarioOperacion', '20140218 15:44:54.000', '20140218 15:44:54.000', 14 UNION ALL
+SELECT 15, N'Has entrado por última vez el miércoles, 19 de febrero de 2014', N'Entrar', N'UsuarioOperacion', '20140219 14:34:11.000', '20140219 14:34:11.000', 1
+COMMIT;
+RAISERROR (N'[dbo].[Operacions]: Insert Batch: 1.....Done!', 10, 1) WITH NOWAIT;
+GO
+
+SET IDENTITY_INSERT [dbo].[Operacions] OFF;
+
+

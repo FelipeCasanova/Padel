@@ -12,5 +12,7 @@ namespace Padel.Domain.Operaciones
         public virtual string Mensaje { get; set; }
 
         public virtual string Accion { get; set; }
+
+        public virtual Usuario Usuario { get; set; }
     }
 }

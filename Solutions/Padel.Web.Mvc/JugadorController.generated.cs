@@ -25,9 +25,6 @@ namespace Padel.Web.Mvc.Controllers
     public partial class JugadorController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public JugadorController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected JugadorController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -61,6 +58,7 @@ namespace Padel.Web.Mvc.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string GetOperacionesPorUsuario = "GetOperacionesPorUsuario";
             public readonly string Datos = "Datos";
             public readonly string Equipos = "Equipos";
             public readonly string Partidos = "Partidos";
@@ -72,6 +70,7 @@ namespace Padel.Web.Mvc.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string GetOperacionesPorUsuario = "GetOperacionesPorUsuario";
             public const string Datos = "Datos";
             public const string Equipos = "Equipos";
             public const string Partidos = "Partidos";
@@ -117,6 +116,15 @@ namespace Padel.Web.Mvc.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void GetOperacionesPorUsuarioOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        public override System.Web.Mvc.PartialViewResult GetOperacionesPorUsuario()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.GetOperacionesPorUsuario);
+            GetOperacionesPorUsuarioOverride(callInfo);
             return callInfo;
         }
 

@@ -146,6 +146,16 @@ ul.padel-list span
     padding: 10px;
 }
 
+/* nav bar */
+.navbar-collapse {
+    max-height: 100%;
+}
+
+.nav li.display-flex
+{
+    display: flex;
+}
+
 /* grid */
 .row-margin {
     margin-bottom: 10px;

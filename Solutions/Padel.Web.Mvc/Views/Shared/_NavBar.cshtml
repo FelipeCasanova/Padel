@@ -50,10 +50,9 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="hidden till-loaded"><a href="#">@(Html.Partial(MVC.Shared.Views.GameCurrency, user.Puntos))</a></li>
-                        <li><a href="#">@user.Corazones corazones</a></li>
-                        <li><a href="#">@user.Experiencia Exp.</a></li>
-                        <li><a href="#">L.V. @user.Nivel </a></li>
+                        <li class="hidden till-loaded display-flex"><a href="#">@(Html.Partial(MVC.Shared.Views.GameCurrency, user.Puntos))</a>
+                            <a href="#">@user.Corazones corazones</a> </li>
+                        <li class="display-flex"><a href="#">@user.Experiencia Exp.</a><a href="#">L.V. @user.Nivel </a></li>
                         <li class="dropdown"><a href="#" class="btn-lg" data-toggle="dropdown"><span class="glyphicon glyphicon-user">
                         </span>
                             @if (tiempoTicksLimite > tiempoTicksUsuario)

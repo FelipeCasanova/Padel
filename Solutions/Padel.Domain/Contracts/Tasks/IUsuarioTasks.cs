@@ -17,6 +17,8 @@ namespace Padel.Domain.Contracts.Tasks
 
         bool ValidateUser(string emailOrMovil, string password, out int telefonoMovilOut);
 
+        Usuario GetByEmail(string email);
+
         Usuario GetByMovil(int telefonoMovil);
 
         int GetNumeroUsuariosByMovil(int telefonoMovil);

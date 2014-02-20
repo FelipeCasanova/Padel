@@ -102,8 +102,8 @@ namespace Padel.Tasks
 
         public void Delete(int id)
         {
-            var usuario = this.equipoRepository.Get(id);
-            this.equipoRepository.Delete(usuario);
+            var equipo = this.equipoRepository.Get(id);
+            this.equipoRepository.Delete(equipo);
         }
 
         public List<Equipo> GetEquiposPorJugadorList(int idJugador, params EstadoEquipoEnum[] estados)
@@ -118,11 +118,11 @@ namespace Padel.Tasks
             return query.Future().ToList();
         }
 
-        public List<Equipo> GetEquiposPorJugadoresList(int idJugadorA, int idJugadorB, params EstadoEquipoEnum[] estados)
+        public List<Equipo> GetEquiposPorJugadoresList(int idJugador1, int idJugador2, params EstadoEquipoEnum[] estados)
         {
             var query = Session.QueryOver<Equipo>().OrderBy(x => x.Nombre).Asc;
-            query = query.Where(e => (e.JugadorA.Id == idJugadorA || e.JugadorB.Id == idJugadorA)
-                && (e.JugadorA.Id == idJugadorB || e.JugadorB.Id == idJugadorB));
+            query = query.Where(e => (e.JugadorA.Id == idJugador1 || e.JugadorB.Id == idJugador1)
+                && (e.JugadorA.Id == idJugador2 || e.JugadorB.Id == idJugador2));
 
             foreach (var estado in estados)
             {

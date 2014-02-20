@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Padel.Domain;
-using Padel.Tasks.Commands;
-using SharpArch.Domain.Commands;
-using SharpArch.Domain.PersistenceSupport;
 using System.Security.Cryptography;
+using System.Text;
 using Microsoft.IdentityModel.Web;
-using Padel.Infrastructure.Utilities;
+using Padel.Domain;
 using Padel.Domain.Contracts.Tasks;
+using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
+using Padel.Tasks.Commands;
+using Padel.Tasks.Commands.Usuarios;
+using Padel.Tasks.Events.Usuarios;
+using SharpArch.Domain.Commands;
 using SharpArch.Domain.Events;
-using Padel.Tasks.Events;
+using SharpArch.Domain.PersistenceSupport;
 
 namespace Padel.Tasks.CommandHandlers.Usuarios
 {
@@ -43,7 +44,7 @@ namespace Padel.Tasks.CommandHandlers.Usuarios
             if (usuario.IsValid())
             {
                 this.usuarioTasks.CreateOrUpdate(usuario);
-                DomainEvents.Raise<RegistroEvent>(new RegistroEvent(usuario.Id));
+                DomainEvents.Raise<RegistrarEvent>(new RegistrarEvent(usuario.Id));
                 return new CommandResult(true, string.Empty);
             }
             else 

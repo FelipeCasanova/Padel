@@ -12,11 +12,24 @@ using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
 using NHibernate.Criterion;
 using System.Threading;
 using Padel.Infrastructure.Utilities;
+using Padel.Web.Mvc.Controllers.ViewModels.Operaciones;
+using Padel.Domain.Operaciones;
 
-namespace Padel.Web.Mvc.Controllers.Queries.Usuarios
+namespace Padel.Web.Mvc.Controllers.Queries.Operaciones
 {
-    public class JugadoresQuery : NHibernateQuery, IJugadoresQuery
+    public class OperacionesQuery : NHibernateQuery, IOperacionesQuery
     {
+        public IList<OperacionModelView> GetOperacionesPorUsuario(int usuarioId)
+        {
+            var query = Session.QueryOver<Operacion>().OrderBy(x => x.FechaCreacion).Desc;
+
+            var models = query
+                .Where(o => o.Usuario.Id == usuarioId)
+                .Future<Operacion>();
+
+            return models.ToList().Select<Operacion, OperacionModelView>(o => OperacionModelView.Crear(o)).ToList();
+        }
+
         public IList<JugadorViewModel> GetJugadorPorNombreList(string nombreJugador)
         {
             JugadorViewModel jugadorViewModel = null;

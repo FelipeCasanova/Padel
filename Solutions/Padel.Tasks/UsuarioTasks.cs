@@ -41,6 +41,12 @@ namespace Padel.Tasks
             this.usuarioRepository.Delete(usuario);
         }
 
+        public Domain.Usuario GetByEmail(string email)
+        {
+            var query = Session.QueryOver<Usuario>();
+            return query.Where(u => u.Email == email).SingleOrDefault();
+        }
+
         public Domain.Usuario GetByMovil(int telefonoMovil)
         {
             var query = Session.QueryOver<Usuario>();

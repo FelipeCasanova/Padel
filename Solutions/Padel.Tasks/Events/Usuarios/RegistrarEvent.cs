@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using SharpArch.Domain.Events;
 
-namespace Padel.Tasks.Events
+namespace Padel.Tasks.Events.Usuarios
 {
-    public class RegistroEvent : IDomainEvent
+    public class RegistrarEvent : IDomainEvent
     {
-        public RegistroEvent(int usuarioId)
+        public RegistrarEvent(int usuarioId)
         {
             this.UsuarioId = usuarioId;
         }

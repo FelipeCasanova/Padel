@@ -121,15 +121,20 @@
     <Compile Include="Commands\Equipos\CrearEquipoCommand.cs" />
     <Compile Include="Commands\Equipos\EliminarEquipoCommand.cs" />
     <Compile Include="Commands\Torneos\CrearEquipoParaTorneoCommand.cs" />
-    <Compile Include="Commands\EntrarUsuarioCommand.cs" />
-    <Compile Include="Commands\RegistrarUsuarioCommand.cs" />
+    <Compile Include="Commands\Usuarios\EntrarUsuarioCommand.cs" />
+    <Compile Include="Commands\Usuarios\RegistrarUsuarioCommand.cs" />
     <Compile Include="Commands\Torneos\EliminarEquipoDeTorneoCommand.cs" />
-    <Compile Include="Commands\UsuarioCommandBase.cs" />
+    <Compile Include="Commands\Usuarios\UsuarioCommandBase.cs" />
     <Compile Include="Commands\Equipos\ValidarJugadorEnEquipoCommand.cs" />
     <Compile Include="Commands\Usuarios\RefrescarUsuarioCommand.cs" />
     <Compile Include="EquipoTasks.cs" />
-    <Compile Include="EventHandles\RegistroEventHandle.cs" />
-    <Compile Include="Events\RegistroEvent.cs" />
+    <Compile Include="EventHandles\Equipos\CrearEquipoEventHandle.cs" />
+    <Compile Include="EventHandles\Usuarios\EntrarEventHandle.cs" />
+    <Compile Include="EventHandles\Usuarios\RegistrarEventHandle.cs" />
+    <Compile Include="Events\Equipos\CrearEquipoEvent.cs" />
+    <Compile Include="Events\Usuarios\EntrarEvent.cs" />
+    <Compile Include="Events\Usuarios\RegistrarEvent.cs" />
+    <Compile Include="OperacionTasks.cs" />
     <Compile Include="UsuarioTasks.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -57,11 +57,8 @@ namespace T4MVC
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _DisplayTemplatesClass
             {
-                static readonly _ViewNamesClass s_ViewNames = new _ViewNamesClass();
-                public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
-                public class _ViewNamesClass
-                {
-                }
+                public readonly string EquipoOperacionModelView = "EquipoOperacionModelView";
+                public readonly string UsuarioOperacionModelView = "UsuarioOperacionModelView";
             }
             static readonly _ErrorsClass s_Errors = new _ErrorsClass();
             public _ErrorsClass Errors { get { return s_Errors; } }
@@ -89,9 +86,11 @@ namespace T4MVC
                 {
                     public readonly string _NavBarSide = "_NavBarSide";
                     public readonly string _NavBarTop = "_NavBarTop";
+                    public readonly string _OperacionModelView = "_OperacionModelView";
                 }
                 public readonly string _NavBarSide = "~/Views/Shared/Jugador/_NavBarSide.cshtml";
                 public readonly string _NavBarTop = "~/Views/Shared/Jugador/_NavBarTop.cshtml";
+                public readonly string _OperacionModelView = "~/Views/Shared/Jugador/_OperacionModelView.cshtml";
             }
             static readonly _TorneoClass s_Torneo = new _TorneoClass();
             public _TorneoClass Torneo { get { return s_Torneo; } }

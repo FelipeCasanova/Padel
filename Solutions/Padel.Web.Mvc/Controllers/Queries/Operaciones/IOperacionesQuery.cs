@@ -5,11 +5,12 @@ using System.Web;
 using MvcContrib.Pagination;
 using Padel.Web.Mvc.Controllers.ViewModels.Equipos;
 using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
+using Padel.Web.Mvc.Controllers.ViewModels.Operaciones;
 
-namespace Padel.Web.Mvc.Controllers.Queries.Usuarios
+namespace Padel.Web.Mvc.Controllers.Queries.Operaciones
 {
-    public interface IJugadoresQuery
+    public interface IOperacionesQuery
     {
-        IList<JugadorViewModel> GetJugadorPorNombreList(string nombreJugador);
+        IList<OperacionModelView> GetOperacionesPorUsuario(int usuarioId);
     }
 }

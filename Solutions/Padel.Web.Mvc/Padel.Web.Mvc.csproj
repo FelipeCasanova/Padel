@@ -224,6 +224,8 @@
     <Compile Include="Areas\Admin\Controllers\Queries\Usuarios\JugadoresQuery.cs" />
     <Compile Include="Controllers\Queries\Equipos\EquiposQuery.cs" />
     <Compile Include="Controllers\Queries\Equipos\IEquiposQuery.cs" />
+    <Compile Include="Controllers\Queries\Operaciones\IOperacionesQuery.cs" />
+    <Compile Include="Controllers\Queries\Operaciones\OperacionesQuery.cs" />
     <Compile Include="Controllers\Queries\Torneos\ITorneosQuery.cs" />
     <Compile Include="Controllers\Queries\Torneos\TorneosQuery.cs" />
     <Compile Include="Controllers\Queries\Usuarios\JugadoresQuery.cs" />
@@ -241,6 +243,9 @@
     <Compile Include="Controllers\ViewModels\IPrecio.cs" />
     <Compile Include="Controllers\ViewModels\Menu\SideMenuJugadorModelView.cs" />
     <Compile Include="Controllers\ViewModels\Menu\MenuModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Operaciones\EquipoOperacionModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Operaciones\OperacionModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Operaciones\UsuarioOperacionModelView.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\EquipoTorneoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\TorneoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\UsuarioEntrarModelView.cs" />
@@ -460,6 +465,9 @@
     <Content Include="Views\Jugador\Equipos.cshtml" />
     <Content Include="Views\Shared\Currency.cshtml" />
     <Content Include="Views\Shared\GameCurrency.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\UsuarioOperacionModelView.cshtml" />
+    <Content Include="Views\Shared\Jugador\_OperacionModelView.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EquipoOperacionModelView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Padel.Domain\Padel.Domain.csproj">
@@ -482,7 +490,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

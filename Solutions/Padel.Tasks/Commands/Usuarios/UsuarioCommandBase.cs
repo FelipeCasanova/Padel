@@ -5,7 +5,7 @@ using System.Text;
 using Padel.Domain;
 using SharpArch.Domain.Commands;
 
-namespace Padel.Tasks.Commands
+namespace Padel.Tasks.Commands.Usuarios
 {
     public class UsuarioCommandBase : CommandBase
     {

@@ -119,6 +119,25 @@
 					<Element Type="ISqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
+								<References Name="[dbo].[EquipoToCategorias].[EquipoToCategoriaId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[EquipoToCategorias]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
 								<References Name="[dbo].[Equipos].[EquipoId]" />
 							</Entry>
 						</Relationship>
@@ -130,45 +149,7 @@
 					<References Name="[dbo].[Equipos]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
-		</Element>
-		<Element Type="ISql100PrimaryKeyConstraint">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="ISqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[dbo].[Roles].[RoleId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[Roles]" />
-				</Entry>
-			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="8" />
-		</Element>
-		<Element Type="ISql100PrimaryKeyConstraint">
-			<Relationship Name="ColumnSpecifications">
-				<Entry>
-					<Element Type="ISqlIndexedColumnSpecification">
-						<Relationship Name="Column">
-							<Entry>
-								<References Name="[dbo].[Jornadas].[JornadaId]" />
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-			</Relationship>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[Jornadas]" />
-				</Entry>
-			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="9" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -187,7 +168,7 @@
 					<References Name="[dbo].[Categorias]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="10" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="9" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint">
 			<Relationship Name="ColumnSpecifications">
@@ -195,7 +176,7 @@
 					<Element Type="ISqlIndexedColumnSpecification">
 						<Relationship Name="Column">
 							<Entry>
-								<References Name="[dbo].[EquipoToCategorias].[EquipoToCategoriaId]" />
+								<References Name="[dbo].[Roles].[RoleId]" />
 							</Entry>
 						</Relationship>
 					</Element>
@@ -203,12 +184,13 @@
 			</Relationship>
 			<Relationship Name="DefiningTable">
 				<Entry>
-					<References Name="[dbo].[EquipoToCategorias]" />
+					<References Name="[dbo].[Roles]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="11" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="10" />
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint">
+			<Property Name="IsClustered" Value="False" />
 			<Relationship Name="ColumnSpecifications">
 				<Entry>
 					<Element Type="ISqlIndexedColumnSpecification">
@@ -223,6 +205,25 @@
 			<Relationship Name="DefiningTable">
 				<Entry>
 					<References Name="[dbo].[Operacions]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="11" />
+		</Element>
+		<Element Type="ISql100PrimaryKeyConstraint">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Jornadas].[JornadaId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Jornadas]" />
 				</Entry>
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="12" />
@@ -468,7 +469,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="10" />
+			<AttachedAnnotation Disambiguator="9" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[Equipos]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -635,7 +636,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="7" />
+			<AttachedAnnotation Disambiguator="8" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[EquipoToCategorias]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -814,7 +815,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="11" />
+			<AttachedAnnotation Disambiguator="7" />
 		</Element>
 		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[FK19033393363F8A7F]">
 			<Relationship Name="Columns">
@@ -1268,7 +1269,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="9" />
+			<AttachedAnnotation Disambiguator="12" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[Operacions]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -1292,6 +1293,7 @@
 				</Entry>
 				<Entry>
 					<Element Type="ISql100SimpleColumn" Name="[dbo].[Operacions].[Mensaje]">
+						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">
@@ -1342,6 +1344,7 @@
 				</Entry>
 				<Entry>
 					<Element Type="ISql100SimpleColumn" Name="[dbo].[Operacions].[FechaCreacion]">
+						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">
@@ -1357,6 +1360,7 @@
 				</Entry>
 				<Entry>
 					<Element Type="ISql100SimpleColumn" Name="[dbo].[Operacions].[FechaModificacion]">
+						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">
@@ -1372,6 +1376,7 @@
 				</Entry>
 				<Entry>
 					<Element Type="ISql100SimpleColumn" Name="[dbo].[Operacions].[UsuarioId]">
+						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="ISql90TypeSpecifier">
@@ -1391,7 +1396,36 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="12" />
+			<AttachedAnnotation Disambiguator="11" />
+		</Element>
+		<Element Type="ISql100Index" Name="[dbo].[Operacions].[Operacions_Cluster_IX]">
+			<Property Name="IsUnique" Value="True" />
+			<Property Name="IsClustered" Value="True" />
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Operacions].[UsuarioId]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Operacions].[FechaCreacion]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
+				<Entry>
+					<References Name="[dbo].[Operacions]" />
+				</Entry>
+			</Relationship>
 		</Element>
 		<Element Type="ISql90ForeignKeyConstraint" Name="[dbo].[Operacions_Usuario_FK]">
 			<Relationship Name="Columns">
@@ -1665,7 +1699,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="8" />
+			<AttachedAnnotation Disambiguator="10" />
 		</Element>
 		<Element Type="ISql100Table" Name="[dbo].[RoleToUsuario]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -1997,6 +2031,43 @@
 				</Entry>
 			</Relationship>
 			<AttachedAnnotation Disambiguator="3" />
+		</Element>
+		<Element Type="ISql100Index" Name="[dbo].[Usuarios].[Usuarios_Email_IX]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Usuarios].[Email]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
+				<Entry>
+					<References Name="[dbo].[Usuarios]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="ISql100Index" Name="[dbo].[Usuarios].[Usuarios_TelefonoMovil_IX]">
+			<Property Name="IsUnique" Value="True" />
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="ISqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Usuarios].[TelefonoMovil]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="IndexedObject">
+				<Entry>
+					<References Name="[dbo].[Usuarios]" />
+				</Entry>
+			</Relationship>
 		</Element>
 	</Model>
 </DataSchemaModel>
