@@ -50,21 +50,29 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="hidden till-loaded display-flex"><a href="#">@(Html.Partial(MVC.Shared.Views.GameCurrency, user.Puntos))</a>
-                            <a href="#">@user.Corazones corazones</a> </li>
-                        <li class="display-flex"><a href="#">@user.Experiencia Exp.</a><a href="#">L.V. @user.Nivel </a></li>
+                        <li class="hidden till-loaded display-flex"><a href="#">@Html.DisplayFor(m => user.Puntos)</a>
+                            <a href="#">@Html.DisplayFor(m => user.Corazones)</a> </li>
+                        <li class="display-flex"><a href="#">@Html.DisplayFor(m => user.Experiencia)</a><a
+                            href="#">@Html.DisplayFor(m => user.Nivel)</a></li>
+                        <li class="dropdown"><a href="@(Url.Action(MVC.Jugador.ActionNames.Index, MVC.Jugador.Name))">
+                            <span class="fa fa-bell fa-fw"></span>
+                            @if (tiempoTicksLimite > tiempoTicksUsuario)
+                            {
+                                <span class="label label-info top-right">New</span>
+                            }
+                        </a></li>
                         <li class="dropdown"><a href="#" class="btn-lg" data-toggle="dropdown"><span class="glyphicon glyphicon-user">
                         </span>
                             @if (tiempoTicksLimite > tiempoTicksUsuario)
                             {
-                                <span class="label label-info top-right">Nuevo</span>
+                                <span class="label label-info top-right">New</span>
                             }
                         </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">@User.Identity.Name</a></li>
+                                <li><a href="@(Url.Action(MVC.Jugador.ActionNames.Index, MVC.Jugador.Name))">@User.Identity.Name</a></li>
                                 <li role="presentation" class="divider"></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Datos, MVC.Jugador.Name))">
-                                    Tus Perfil</a></li>
+                                    Tus Datos</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Equipos, MVC.Jugador.Name))">
                                     Tus Equipos</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="@(Url.Action(MVC.Jugador.ActionNames.Torneos, MVC.Jugador.Name))">
@@ -171,6 +179,13 @@
                                 <li><span>Olvídate de buscar oponente.</span></li>
                                 <li><span>Preocúpate de lo realmente importante. ¡Ganar el torneo ;-)!</span></li>
                             </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group" style="width: 100%;">
+                                @Html.Raw(Html.GenerateCaptcha())
+                            </div>
                         </div>
                     </div>
                 </div>

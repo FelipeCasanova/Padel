@@ -2,6 +2,6 @@
 -- Script Template
 -- =============================================
 alter table EquipoToCategorias 
-        add constraint FK5F6C6AB363F8A7F 
+        add constraint EquipoToCategorias_Categoria_FK 
         foreign key (CategoriaId) 
         references Categorias

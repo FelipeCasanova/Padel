@@ -17,17 +17,17 @@
                 <!-- /input-group -->
             </li>*@
             <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Dashboard ? "open" : "")">
-                <a href="@(Url.Action(MVC.Jugador.ActionNames.Index, MVC.Jugador.Name))"><i class="fa fa-dashboard fa-fw">
-                </i>Dashboard</a> </li>
+                <a href="@(Url.Action(MVC.Jugador.ActionNames.Index, MVC.Jugador.Name))"><i class="fa fa-bell fa-fw">
+                </i>Tus notificaciones</a> </li>
             <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Datos ? "open" : "")">
                 <a href="@(Url.Action(MVC.Jugador.ActionNames.Datos, MVC.Jugador.Name))"><i class="fa fa-edit fa-fw">
                 </i>Tus datos</a> </li>
             <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Equipos ? "open" : "")">
                 <a href="@(Url.Action(MVC.Jugador.ActionNames.Equipos, MVC.Jugador.Name))"><i class="fa fa-user fa-fw">
                 </i>Tus equipos</a> </li>
-            <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Torneos || SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Partidos 
-            ? "active" : "")">
-                <a href="#"><i class="fa fa-sitemap fa-fw"></i>Competiciones<span class="fa arrow"></span></a>
+            <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Torneos || SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Partidos
+            ? "active" : "")"><a href="#"><i class="fa fa-sitemap fa-fw"></i>Competiciones<span
+                class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Torneos ? "open" : "")">
                         <a href="@(Url.Action(MVC.Jugador.ActionNames.Torneos, MVC.Jugador.Name))"><i class="fa fa-sitemap fa-fw">
@@ -38,14 +38,9 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Graficas ? "active" : "")">
-                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Gráficas<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Graficas ? "open" : "")"><a href="@(Url.Action(MVC.Jugador.ActionNames.Graficas, MVC.Jugador.Name))">Tus
-                        resultados</a> </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
+            <li class="@(SideMenuJugadorModelView.SideMenuJugador == SideMenuJugadorEnum.Graficas ? "open" : "")">
+                <a href="@(Url.Action(MVC.Jugador.ActionNames.Graficas, MVC.Jugador.Name))"><i class="fa fa-bar-chart-o fa-fw">
+                </i>Tus Gráficas</a> </li>
         </ul>
         <!-- /#side-menu -->
     </div>

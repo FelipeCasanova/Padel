@@ -198,7 +198,7 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Partidos.FK_EquipoA.sql">
       <SubType>NotInBuild</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Partidos.FK_Ganador.sql">
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Partidos.FK_Resultado.sql">
       <SubType>NotInBuild</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\RoleToUsuario.FK_Roles.sql">
@@ -223,6 +223,51 @@
       <SubType>NotInBuild</SubType>
     </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Operacions.IX_Cluster.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Resultados.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Resultados.FK_Ganador.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Categorias.IX_Ganador.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Categorias.IX_Torneo.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Equipos.IX_JugadorA.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Equipos.IX_JugadorB.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\EquipoToCategorias.IX_Categoria.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\EquipoToCategorias.IX_Equipo.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Grupos.IX_Categoria.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Jornadas.IX_Grupo.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Partidos.IX_EquipoA.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Partidos.IX_EquipoB.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Partidos.IX_Jornada.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Partidos.IX_Resultado.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Resultados.IX_Ganador.sql">
       <SubType>NotInBuild</SubType>
     </Build>
   </ItemGroup>

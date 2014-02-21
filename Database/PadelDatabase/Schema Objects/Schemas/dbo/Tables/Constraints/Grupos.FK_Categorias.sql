@@ -2,6 +2,6 @@
 -- Script Template
 -- =============================================
 alter table Grupos 
-        add constraint FK19033393363F8A7F 
+        add constraint Grupos_Categoria_FK 
         foreign key (CategoriaId) 
         references Categorias

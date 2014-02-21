@@ -2,6 +2,6 @@
 -- Script Template
 -- =============================================
 alter table Partidos 
-        add constraint FKDAD4D238DC753F7D 
+        add constraint Partidos_Jornada_FK 
         foreign key (JornadaId) 
         references Jornadas

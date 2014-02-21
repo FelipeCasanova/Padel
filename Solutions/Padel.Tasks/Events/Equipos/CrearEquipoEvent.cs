@@ -8,16 +8,16 @@ namespace Padel.Tasks.Events.Equipos
 {
     public class CrearEquipoEvent : IDomainEvent
     {
-        public CrearEquipoEvent(int usuarioId, int equipoId, int jugador2Id)
+        public CrearEquipoEvent(int equipoId, int jugador1Id, int jugador2Id)   
         {
-            this.UsuarioId = usuarioId;
             this.EquipoId = equipoId;
+            this.Jugador1Id = jugador1Id;
             this.Jugador2Id = jugador2Id;
         }
-
-        public int UsuarioId { get; set; }
-
+        
         public int EquipoId { get; set; }
+
+        public int Jugador1Id { get; set; }
 
         public int Jugador2Id { get; set; }
     }

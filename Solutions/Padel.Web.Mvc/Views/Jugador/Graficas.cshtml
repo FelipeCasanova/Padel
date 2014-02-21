@@ -1,4 +1,62 @@
 ﻿@{
-    ViewBag.Title = "Jugador";
+    ViewBag.Title = "Jugador - Gráficas";
     Layout = @MVC.Shared.Views._LayoutPlayer;
 }
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;
+    }
+}
+@section CSSSection{
+    <link href="@Url.Content(@Links.Content.jugador.plugins.morris.morris_0_4_3_min_css)" rel="stylesheet" type="text/css" />
+}
+@section JSSection{
+    <script src="@Url.Content(@Links.Scripts.padel.jugador.plugins.morris.raphael_2_1_0_min_js)" type="text/javascript"></script>
+    <script src="@Url.Content(@Links.Scripts.padel.jugador.plugins.morris.morris_js)" type="text/javascript"></script>
+    <script src="@Url.Content(@Links.Scripts.padel.jugador.graficas.datos_js)" type="text/javascript"></script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Tus Gráficas</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-8">
+        <!-- /.panel -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-clock-o fa-fw"></i>Gráfica Puntos de Exp.
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+            <div id="morris-area-chart">
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-8 -->
+    <div class="col-lg-4">
+        <div class="panel panel-default" ng-controller="GetTournamentsResumeByPlayerCtrl">
+            <div class="panel-heading" ng-init="antiForgeryToken='@GetAntiForgeryToken()'">
+                <i class="fa fa-bar-chart-o fa-fw"></i>Gráfica torneos
+            </div>
+            <div class="panel-body">
+                <div id="morris-donut-chart">
+                </div>
+                <a href="@(Url.Action(MVC.Jugador.ActionNames.Torneos, MVC.Jugador.Name))" class="btn btn-default btn-block">Ver Detalles</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-4 -->
+</div>
+<!-- /.row -->

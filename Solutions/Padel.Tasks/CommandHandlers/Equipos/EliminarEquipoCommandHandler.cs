@@ -10,6 +10,8 @@ using Padel.Tasks.Commands;
 using Padel.Tasks.Commands.Equipos;
 using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
+using SharpArch.Domain.Events;
+using Padel.Tasks.Events.Equipos;
 
 namespace Padel.Tasks.CommandHandlers.Equipos
 {
@@ -39,6 +41,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
                 equipo.JugadorBVerificado = false;
                 equipo.Estado = EstadoEquipoEnum.Eliminado;
                 this.equipoRepository.SaveOrUpdate(equipo);
+                DomainEvents.Raise<EliminarEquipoEvent>(new EliminarEquipoEvent(equipo.Id, equipo.JugadorA.Id, equipo.JugadorB.Id));
                 return new CommandResult(true, "Se ha eliminado correctamente el equipo.");
             }
             else

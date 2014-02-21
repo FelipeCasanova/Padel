@@ -9,5 +9,9 @@ create table Operacions (
        FechaCreacion DATETIME not null,
        FechaModificacion DATETIME not null,
 	   UsuarioId INT not null,
+	   EquipoId INT null,
+	   TorneoId INT null,
+	   PartidoId INT null,
+	   ResultadoId INT null,
        primary key NONCLUSTERED (OperacionId)
     )

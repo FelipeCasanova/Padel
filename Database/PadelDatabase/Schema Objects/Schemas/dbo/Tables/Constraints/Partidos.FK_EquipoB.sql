@@ -2,6 +2,6 @@
 -- Script Template
 -- =============================================
 alter table Partidos 
-        add constraint FKDAD4D238B6DC29E2 
+        add constraint Partidos_EquipoB_FK 
         foreign key (EquipoBId) 
         references Equipos

@@ -4,7 +4,7 @@
     
 }
 <li class="@(((int)TempData["Index"]) % 2 == 1 ? "timeline-inverted" : "")">
-    <div class="timeline-badge @(Model.Accion == Padel.Domain.Operaciones.UsuarioOperacion.AccionEnum.Entrar.ToString() ? "success" : "")">
+    <div class="timeline-badge @(Model.Accion == Padel.Domain.Operaciones.UsuarioOperacion.AccionEnum.Entrar.ToString() ? "info" : "")">
         @if(@Model.Accion == Padel.Domain.Operaciones.UsuarioOperacion.AccionEnum.Entrar.ToString())
         {
             <i class="fa fa-thumbs-up"></i>

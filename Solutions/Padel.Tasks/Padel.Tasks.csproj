@@ -128,9 +128,13 @@
     <Compile Include="Commands\Equipos\ValidarJugadorEnEquipoCommand.cs" />
     <Compile Include="Commands\Usuarios\RefrescarUsuarioCommand.cs" />
     <Compile Include="EquipoTasks.cs" />
+    <Compile Include="EventHandles\Equipos\ValidarJugadorEnEquipoEventHandle.cs" />
+    <Compile Include="EventHandles\Equipos\EliminarEquipoEventHandle.cs" />
     <Compile Include="EventHandles\Equipos\CrearEquipoEventHandle.cs" />
     <Compile Include="EventHandles\Usuarios\EntrarEventHandle.cs" />
     <Compile Include="EventHandles\Usuarios\RegistrarEventHandle.cs" />
+    <Compile Include="Events\Equipos\ValidarJugadorEnEquipoEvent.cs" />
+    <Compile Include="Events\Equipos\EliminarEquipoEvent.cs" />
     <Compile Include="Events\Equipos\CrearEquipoEvent.cs" />
     <Compile Include="Events\Usuarios\EntrarEvent.cs" />
     <Compile Include="Events\Usuarios\RegistrarEvent.cs" />

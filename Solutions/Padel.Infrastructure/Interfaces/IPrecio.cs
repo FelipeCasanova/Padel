@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace Padel.Web.Mvc.Controllers.ViewModels
+namespace Padel.Infrastructure.Interfaces
 {
     public interface IPrecio
     {

@@ -113,6 +113,8 @@
     <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Interfaces\IPrecio.cs" />
+    <Compile Include="Interfaces\IPuntos.cs" />
     <Compile Include="NHibernateMaps\AutomappingConfiguration.cs" />
     <Compile Include="NHibernateMaps\Conventions\CustomForeignKeyConvention.cs" />
     <Compile Include="NHibernateMaps\Conventions\HasManyConvention.cs" />

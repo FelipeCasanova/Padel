@@ -11,6 +11,16 @@
     background-color: #ffeeee;
 }
 
+#recaptcha_table
+{
+    width: 100%;
+}
+
+.recaptchatable #recaptcha_response_field {
+    font-size: 11pt;
+    padding: 5px;
+    height: 34px;
+}
 
 /* uploadify
 ----------------------------------------------------------*/
@@ -125,6 +135,12 @@ ul.padel-list span
     color: #000000;
 }
 
+.puntuaciones
+{
+    font-size: 30px;
+}
+
+/* Popover */
 .popover
 {
     z-index: 9999;
@@ -175,4 +191,9 @@ ul.padel-list span
 /* Alerts */
 .alert {    
     margin-bottom: 5px;
+}
+
+/* Icons */
+.glyphicon {
+    position: initial;
 }

@@ -109,6 +109,9 @@
     <Reference Include="MvcContrib">
       <HintPath>..\..\Packages\StudioDonder.MvcContrib.Mvc4.3.0.0.99\lib\MvcContrib.dll</HintPath>
     </Reference>
+    <Reference Include="MvcReCaptcha">
+      <HintPath>..\..\Packages\MvcReCaptchaRelease\MvcReCaptcha.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\Packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -240,14 +243,15 @@
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Areas\Admin\Controllers\ViewModels\JugadorViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Equipos\EquipoViewModel.cs" />
-    <Compile Include="Controllers\ViewModels\IPrecio.cs" />
     <Compile Include="Controllers\ViewModels\Menu\SideMenuJugadorModelView.cs" />
     <Compile Include="Controllers\ViewModels\Menu\MenuModelView.cs" />
     <Compile Include="Controllers\ViewModels\Operaciones\EquipoOperacionModelView.cs" />
     <Compile Include="Controllers\ViewModels\Operaciones\OperacionModelView.cs" />
     <Compile Include="Controllers\ViewModels\Operaciones\UsuarioOperacionModelView.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\EquipoTorneoViewModel.cs" />
+    <Compile Include="Controllers\ViewModels\Torneos\TorneoResumenViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\TorneoViewModel.cs" />
+    <Compile Include="Controllers\ViewModels\Usuarios\UsuarioDatosModelView.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\UsuarioEntrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\UsuarioRegistrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\JugadorViewModel.cs" />
@@ -388,6 +392,7 @@
     <Content Include="Scripts\padel\jugador\demo\flot-demo.js" />
     <Content Include="Scripts\padel\jugador\demo\morris-demo.js" />
     <Content Include="Scripts\padel\jugador\equipos\crud.js" />
+    <Content Include="Scripts\padel\jugador\graficas\datos.js" />
     <Content Include="Scripts\padel\jugador\plugins\dataTables\dataTables.bootstrap.js" />
     <Content Include="Scripts\padel\jugador\plugins\dataTables\jquery.dataTables.js" />
     <Content Include="Scripts\padel\jugador\plugins\flot\excanvas.min.js" />
@@ -463,11 +468,15 @@
     <Content Include="Views\Jugador\Partidos.cshtml" />
     <Content Include="Views\Jugador\Graficas.cshtml" />
     <Content Include="Views\Jugador\Equipos.cshtml" />
-    <Content Include="Views\Shared\Currency.cshtml" />
-    <Content Include="Views\Shared\GameCurrency.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\UsuarioOperacionModelView.cshtml" />
     <Content Include="Views\Shared\Jugador\_OperacionModelView.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EquipoOperacionModelView.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\UsuarioDatosModelView.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\GameCurrency.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\GameHearts.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\GameExp.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\GameLevel.cshtml" />
+    <Content Include="Views\Shared\Usuarios\_Modificar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Padel.Domain\Padel.Domain.csproj">

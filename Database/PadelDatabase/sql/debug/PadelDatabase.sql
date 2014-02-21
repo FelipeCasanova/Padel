@@ -220,6 +220,24 @@ CREATE TABLE [dbo].[Categorias] (
 
 
 GO
+PRINT N'Creating [dbo].[Categorias].[Categorias_Ganador_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Categorias_Ganador_IX]
+    ON [dbo].[Categorias]([GanadorId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
+PRINT N'Creating [dbo].[Categorias].[Categorias_Torneo_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Categorias_Torneo_IX]
+    ON [dbo].[Categorias]([TorneoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
 PRINT N'Creating [dbo].[Equipos]...';
 
 
@@ -237,6 +255,24 @@ CREATE TABLE [dbo].[Equipos] (
     [JugadorBId]         INT            NULL,
     PRIMARY KEY CLUSTERED ([EquipoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
+
+
+GO
+PRINT N'Creating [dbo].[Equipos].[Equipos_JugadorA_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Equipos_JugadorA_IX]
+    ON [dbo].[Equipos]([JugadorAId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
+PRINT N'Creating [dbo].[Equipos].[Equipos_JugadorB_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Equipos_JugadorB_IX]
+    ON [dbo].[Equipos]([JugadorBId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
 
 
 GO
@@ -260,6 +296,24 @@ CREATE TABLE [dbo].[EquipoToCategorias] (
 
 
 GO
+PRINT N'Creating [dbo].[EquipoToCategorias].[EquipoToCategorias_Categoria_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [EquipoToCategorias_Categoria_IX]
+    ON [dbo].[EquipoToCategorias]([CategoriaId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
+PRINT N'Creating [dbo].[EquipoToCategorias].[EquipoToCategorias_Equipo_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [EquipoToCategorias_Equipo_IX]
+    ON [dbo].[EquipoToCategorias]([EquipoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
 PRINT N'Creating [dbo].[Grupos]...';
 
 
@@ -271,6 +325,15 @@ CREATE TABLE [dbo].[Grupos] (
     [CategoriaId]       INT      NULL,
     PRIMARY KEY CLUSTERED ([GrupoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
+
+
+GO
+PRINT N'Creating [dbo].[Grupos].[Grupos_Categoria_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Grupos_Categoria_IX]
+    ON [dbo].[Grupos]([CategoriaId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
 
 
 GO
@@ -288,6 +351,15 @@ CREATE TABLE [dbo].[Jornadas] (
 
 
 GO
+PRINT N'Creating [dbo].[Jornadas].[Jornadas_Grupo_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Jornadas_Grupo_IX]
+    ON [dbo].[Jornadas]([GrupoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
 PRINT N'Creating [dbo].[Operacions]...';
 
 
@@ -300,6 +372,10 @@ CREATE TABLE [dbo].[Operacions] (
     [FechaCreacion]     DATETIME       NOT NULL,
     [FechaModificacion] DATETIME       NOT NULL,
     [UsuarioId]         INT            NOT NULL,
+    [EquipoId]          INT            NULL,
+    [TorneoId]          INT            NULL,
+    [PartidoId]         INT            NULL,
+    [ResultadoId]       INT            NULL,
     PRIMARY KEY NONCLUSTERED ([OperacionId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
 
@@ -320,6 +396,59 @@ PRINT N'Creating [dbo].[Partidos]...';
 GO
 CREATE TABLE [dbo].[Partidos] (
     [PartidoId]         INT      IDENTITY (1, 1) NOT NULL,
+    [FechaCreacion]     DATETIME NULL,
+    [FechaModificacion] DATETIME NULL,
+    [JornadaId]         INT      NULL,
+    [EquipoAId]         INT      NULL,
+    [EquipoBId]         INT      NULL,
+    [ResultadoId]       INT      NULL,
+    PRIMARY KEY CLUSTERED ([PartidoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
+PRINT N'Creating [dbo].[Partidos].[Partidos_EquipoA_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Partidos_EquipoA_IX]
+    ON [dbo].[Partidos]([EquipoAId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
+PRINT N'Creating [dbo].[Partidos].[Partidos_EquipoB_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Partidos_EquipoB_IX]
+    ON [dbo].[Partidos]([EquipoBId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
+PRINT N'Creating [dbo].[Partidos].[Partidos_Jornada_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Partidos_Jornada_IX]
+    ON [dbo].[Partidos]([JornadaId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
+PRINT N'Creating [dbo].[Partidos].[Partidos_Resultado_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Partidos_Resultado_IX]
+    ON [dbo].[Partidos]([ResultadoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
+PRINT N'Creating [dbo].[Resultados]...';
+
+
+GO
+CREATE TABLE [dbo].[Resultados] (
+    [ResultadoId]       INT      IDENTITY (1, 1) NOT NULL,
     [Set1A]             INT      NULL,
     [Set2A]             INT      NULL,
     [Set3A]             INT      NULL,
@@ -328,12 +457,18 @@ CREATE TABLE [dbo].[Partidos] (
     [Set3B]             INT      NULL,
     [FechaCreacion]     DATETIME NULL,
     [FechaModificacion] DATETIME NULL,
-    [JornadaId]         INT      NULL,
-    [EquipoAId]         INT      NULL,
-    [EquipoBId]         INT      NULL,
     [GanadorId]         INT      NULL,
-    PRIMARY KEY CLUSTERED ([PartidoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+    PRIMARY KEY CLUSTERED ([ResultadoId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
+
+
+GO
+PRINT N'Creating [dbo].[Resultados].[Resultados_Ganador_IX]...';
+
+
+GO
+CREATE NONCLUSTERED INDEX [Resultados_Ganador_IX]
+    ON [dbo].[Resultados]([GanadorId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
 
 
 GO
@@ -390,6 +525,7 @@ CREATE TABLE [dbo].[Usuarios] (
     [Nivel]                 AS              (PuntosExperiencia / 100),
     [AplicacionExperiencia] INT             NOT NULL,
     [DineroFicticio]        DECIMAL (10, 3) NOT NULL,
+    [Ip]                    NVARCHAR (20)   NULL,
     [FechaCreacion]         DATETIME        NULL,
     [FechaModificacion]     DATETIME        NULL,
     PRIMARY KEY CLUSTERED ([UsuarioId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
@@ -415,75 +551,75 @@ CREATE UNIQUE NONCLUSTERED INDEX [Usuarios_TelefonoMovil_IX]
 
 
 GO
-PRINT N'Creating FK9AD976725A0103E1...';
+PRINT N'Creating Categorias_Ganador_FK...';
 
 
 GO
 ALTER TABLE [dbo].[Categorias] WITH NOCHECK
-    ADD CONSTRAINT [FK9AD976725A0103E1] FOREIGN KEY ([TorneoId]) REFERENCES [dbo].[Torneos] ([TorneoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [Categorias_Ganador_FK] FOREIGN KEY ([GanadorId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
-PRINT N'Creating FK9AD97672CAD1EE9A...';
+PRINT N'Creating Categorias_Torneo_FK...';
 
 
 GO
 ALTER TABLE [dbo].[Categorias] WITH NOCHECK
-    ADD CONSTRAINT [FK9AD97672CAD1EE9A] FOREIGN KEY ([GanadorId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [Categorias_Torneo_FK] FOREIGN KEY ([TorneoId]) REFERENCES [dbo].[Torneos] ([TorneoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
-PRINT N'Creating FKAA629BEFA82D91A...';
-
-
-GO
-ALTER TABLE [dbo].[Equipos] WITH NOCHECK
-    ADD CONSTRAINT [FKAA629BEFA82D91A] FOREIGN KEY ([JugadorBId]) REFERENCES [dbo].[Usuarios] ([UsuarioId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-
-GO
-PRINT N'Creating FKAA629BEFACB3D91A...';
+PRINT N'Creating Equipos_JugadorA_FK...';
 
 
 GO
 ALTER TABLE [dbo].[Equipos] WITH NOCHECK
-    ADD CONSTRAINT [FKAA629BEFACB3D91A] FOREIGN KEY ([JugadorAId]) REFERENCES [dbo].[Usuarios] ([UsuarioId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [Equipos_JugadorA_FK] FOREIGN KEY ([JugadorAId]) REFERENCES [dbo].[Usuarios] ([UsuarioId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
-PRINT N'Creating FK5F6C6AB149E41EB...';
+PRINT N'Creating Equipos_JugadorB_FK...';
+
+
+GO
+ALTER TABLE [dbo].[Equipos] WITH NOCHECK
+    ADD CONSTRAINT [Equipos_JugadorB_FK] FOREIGN KEY ([JugadorBId]) REFERENCES [dbo].[Usuarios] ([UsuarioId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating EquipoToCategorias_Categoria_FK...';
 
 
 GO
 ALTER TABLE [dbo].[EquipoToCategorias] WITH NOCHECK
-    ADD CONSTRAINT [FK5F6C6AB149E41EB] FOREIGN KEY ([EquipoId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [EquipoToCategorias_Categoria_FK] FOREIGN KEY ([CategoriaId]) REFERENCES [dbo].[Categorias] ([CategoriaId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
-PRINT N'Creating FK5F6C6AB363F8A7F...';
+PRINT N'Creating EquipoToCategorias_Equipo_FK...';
 
 
 GO
 ALTER TABLE [dbo].[EquipoToCategorias] WITH NOCHECK
-    ADD CONSTRAINT [FK5F6C6AB363F8A7F] FOREIGN KEY ([CategoriaId]) REFERENCES [dbo].[Categorias] ([CategoriaId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [EquipoToCategorias_Equipo_FK] FOREIGN KEY ([EquipoId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
-PRINT N'Creating FK19033393363F8A7F...';
+PRINT N'Creating Grupos_Categoria_FK...';
 
 
 GO
 ALTER TABLE [dbo].[Grupos] WITH NOCHECK
-    ADD CONSTRAINT [FK19033393363F8A7F] FOREIGN KEY ([CategoriaId]) REFERENCES [dbo].[Categorias] ([CategoriaId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [Grupos_Categoria_FK] FOREIGN KEY ([CategoriaId]) REFERENCES [dbo].[Categorias] ([CategoriaId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
-PRINT N'Creating FK3A8C15D498DABC1A...';
+PRINT N'Creating Jornadas_Grupo_FK...';
 
 
 GO
 ALTER TABLE [dbo].[Jornadas] WITH NOCHECK
-    ADD CONSTRAINT [FK3A8C15D498DABC1A] FOREIGN KEY ([GrupoId]) REFERENCES [dbo].[Grupos] ([GrupoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [Jornadas_Grupo_FK] FOREIGN KEY ([GrupoId]) REFERENCES [dbo].[Grupos] ([GrupoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
@@ -496,39 +632,48 @@ ALTER TABLE [dbo].[Operacions] WITH NOCHECK
 
 
 GO
-PRINT N'Creating FKDAD4D23814375479...';
+PRINT N'Creating Partidos_EquipoA_FK...';
 
 
 GO
 ALTER TABLE [dbo].[Partidos] WITH NOCHECK
-    ADD CONSTRAINT [FKDAD4D23814375479] FOREIGN KEY ([EquipoAId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [Partidos_EquipoA_FK] FOREIGN KEY ([EquipoAId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
-PRINT N'Creating FKDAD4D238B6DC29E2...';
-
-
-GO
-ALTER TABLE [dbo].[Partidos] WITH NOCHECK
-    ADD CONSTRAINT [FKDAD4D238B6DC29E2] FOREIGN KEY ([EquipoBId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-
-GO
-PRINT N'Creating FKDAD4D238CAD1EE9A...';
+PRINT N'Creating Partidos_EquipoB_FK...';
 
 
 GO
 ALTER TABLE [dbo].[Partidos] WITH NOCHECK
-    ADD CONSTRAINT [FKDAD4D238CAD1EE9A] FOREIGN KEY ([GanadorId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [Partidos_EquipoB_FK] FOREIGN KEY ([EquipoBId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
-PRINT N'Creating FKDAD4D238DC753F7D...';
+PRINT N'Creating Partidos_Jornada_FK...';
 
 
 GO
 ALTER TABLE [dbo].[Partidos] WITH NOCHECK
-    ADD CONSTRAINT [FKDAD4D238DC753F7D] FOREIGN KEY ([JornadaId]) REFERENCES [dbo].[Jornadas] ([JornadaId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT [Partidos_Jornada_FK] FOREIGN KEY ([JornadaId]) REFERENCES [dbo].[Jornadas] ([JornadaId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating Partidos_Resultado_FK...';
+
+
+GO
+ALTER TABLE [dbo].[Partidos] WITH NOCHECK
+    ADD CONSTRAINT [Partidos_Resultado_FK] FOREIGN KEY ([ResultadoId]) REFERENCES [dbo].[Resultados] ([ResultadoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
+PRINT N'Creating Resultados_Ganador_FK...';
+
+
+GO
+ALTER TABLE [dbo].[Resultados] WITH NOCHECK
+    ADD CONSTRAINT [Resultados_Ganador_FK] FOREIGN KEY ([GanadorId]) REFERENCES [dbo].[Equipos] ([EquipoId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 GO
@@ -578,31 +723,33 @@ USE [$(DatabaseName)];
 
 
 GO
-ALTER TABLE [dbo].[Categorias] WITH CHECK CHECK CONSTRAINT [FK9AD976725A0103E1];
+ALTER TABLE [dbo].[Categorias] WITH CHECK CHECK CONSTRAINT [Categorias_Ganador_FK];
 
-ALTER TABLE [dbo].[Categorias] WITH CHECK CHECK CONSTRAINT [FK9AD97672CAD1EE9A];
+ALTER TABLE [dbo].[Categorias] WITH CHECK CHECK CONSTRAINT [Categorias_Torneo_FK];
 
-ALTER TABLE [dbo].[Equipos] WITH CHECK CHECK CONSTRAINT [FKAA629BEFA82D91A];
+ALTER TABLE [dbo].[Equipos] WITH CHECK CHECK CONSTRAINT [Equipos_JugadorA_FK];
 
-ALTER TABLE [dbo].[Equipos] WITH CHECK CHECK CONSTRAINT [FKAA629BEFACB3D91A];
+ALTER TABLE [dbo].[Equipos] WITH CHECK CHECK CONSTRAINT [Equipos_JugadorB_FK];
 
-ALTER TABLE [dbo].[EquipoToCategorias] WITH CHECK CHECK CONSTRAINT [FK5F6C6AB149E41EB];
+ALTER TABLE [dbo].[EquipoToCategorias] WITH CHECK CHECK CONSTRAINT [EquipoToCategorias_Categoria_FK];
 
-ALTER TABLE [dbo].[EquipoToCategorias] WITH CHECK CHECK CONSTRAINT [FK5F6C6AB363F8A7F];
+ALTER TABLE [dbo].[EquipoToCategorias] WITH CHECK CHECK CONSTRAINT [EquipoToCategorias_Equipo_FK];
 
-ALTER TABLE [dbo].[Grupos] WITH CHECK CHECK CONSTRAINT [FK19033393363F8A7F];
+ALTER TABLE [dbo].[Grupos] WITH CHECK CHECK CONSTRAINT [Grupos_Categoria_FK];
 
-ALTER TABLE [dbo].[Jornadas] WITH CHECK CHECK CONSTRAINT [FK3A8C15D498DABC1A];
+ALTER TABLE [dbo].[Jornadas] WITH CHECK CHECK CONSTRAINT [Jornadas_Grupo_FK];
 
 ALTER TABLE [dbo].[Operacions] WITH CHECK CHECK CONSTRAINT [Operacions_Usuario_FK];
 
-ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [FKDAD4D23814375479];
+ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [Partidos_EquipoA_FK];
 
-ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [FKDAD4D238B6DC29E2];
+ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [Partidos_EquipoB_FK];
 
-ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [FKDAD4D238CAD1EE9A];
+ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [Partidos_Jornada_FK];
 
-ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [FKDAD4D238DC753F7D];
+ALTER TABLE [dbo].[Partidos] WITH CHECK CHECK CONSTRAINT [Partidos_Resultado_FK];
+
+ALTER TABLE [dbo].[Resultados] WITH CHECK CHECK CONSTRAINT [Resultados_Ganador_FK];
 
 ALTER TABLE [dbo].[RoleToUsuario] WITH CHECK CHECK CONSTRAINT [FK670ADBED108215A5];
 

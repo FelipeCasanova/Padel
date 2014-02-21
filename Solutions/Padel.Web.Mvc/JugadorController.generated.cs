@@ -64,6 +64,7 @@ namespace Padel.Web.Mvc.Controllers
             public readonly string Partidos = "Partidos";
             public readonly string Torneos = "Torneos";
             public readonly string Graficas = "Graficas";
+            public readonly string _TorneosResumenPorJugador = "_TorneosResumenPorJugador";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -76,6 +77,7 @@ namespace Padel.Web.Mvc.Controllers
             public const string Partidos = "Partidos";
             public const string Torneos = "Torneos";
             public const string Graficas = "Graficas";
+            public const string _TorneosResumenPorJugador = "_TorneosResumenPorJugador";
         }
 
 
@@ -170,6 +172,15 @@ namespace Padel.Web.Mvc.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Graficas);
             GraficasOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void _TorneosResumenPorJugadorOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult _TorneosResumenPorJugador()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._TorneosResumenPorJugador);
+            _TorneosResumenPorJugadorOverride(callInfo);
             return callInfo;
         }
 

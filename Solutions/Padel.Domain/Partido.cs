@@ -14,17 +14,9 @@ namespace Padel.Domain
         [Required]
         public virtual Equipo EquipoA { get; set; }
 
-        public virtual int? Set1A { get; set; }
-        public virtual int? Set2A { get; set; }
-        public virtual int? Set3A { get; set; }
-
         [Required]
         public virtual Equipo EquipoB { get; set; }
 
-        public virtual int? Set1B { get; set; }
-        public virtual int? Set2B { get; set; }
-        public virtual int? Set3B { get; set; }
-
-        public virtual Equipo Ganador { get; set; }
+        public virtual Resultado Resultado { get; set; }
     }
 }

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpArch.Domain.Commands;
-using Padel.Tasks.Commands;
-using Padel.Tasks.CommandResults;
-using SharpArch.Domain.PersistenceSupport;
 using Padel.Domain;
+using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands.Equipos;
+using Padel.Tasks.Events.Equipos;
+using SharpArch.Domain.Commands;
+using SharpArch.Domain.Events;
+using SharpArch.Domain.PersistenceSupport;
 
 namespace Padel.Tasks.CommandHandlers.Equipos
 {
@@ -37,6 +38,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
                 equipo.Estado = EstadoEquipoEnum.Activado;
             }
             this.equipoRepository.SaveOrUpdate(equipo);
+            DomainEvents.Raise<ValidarJugadorEnEquipoEvent>(new ValidarJugadorEnEquipoEvent(command.IdEquipo, command.IdJugador));
             return new CommandResult(true, "Se ha activado correctamente el jugador.");
         }
     }

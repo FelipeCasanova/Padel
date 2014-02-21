@@ -39,6 +39,7 @@ namespace Padel.Tasks.CommandHandlers.Usuarios
             usuario.Password = MD5.Create().GetMd5Hash(command.Password);
             usuario.FechaCreacion = DateTime.Now;
             usuario.FechaModificacion = DateTime.Now;
+            usuario.Ip = command.IP;
             usuario.Roles.Add(roleRepository.Get(2));
 
             if (usuario.IsValid())

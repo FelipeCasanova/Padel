@@ -2,6 +2,6 @@
 -- Script Template
 -- =============================================
 alter table Equipos 
-        add constraint FKAA629BEFA82D91A 
+        add constraint Equipos_JugadorB_FK 
         foreign key (JugadorBId) 
         references Usuarios

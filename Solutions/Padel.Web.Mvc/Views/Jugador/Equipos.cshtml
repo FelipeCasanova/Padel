@@ -15,11 +15,6 @@
 }
 @section JSSection{
     <script src="@Url.Content(@Links.Scripts.padel.jugador.equipos.crud_js)" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('.hidden').removeClass('hidden');
-        });
-    </script>
     @foreach (var tipo in new[] { "Hombre", "Mujer", "Mixto" })
     {
         <script type="text/javascript">
@@ -125,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row row-margin hidden">
+                <div class="row row-margin hidden till-loaded ">
                     <div class="col-md-6" ng-show="showCreateDelete">
                         <span class="label label-default player">{{playerSelected.Nombre}}</span>
                         <button type="button" ng-click="addSelectedPlayerToTeam()" class="btn btn-primary">
@@ -160,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-body hidden">
+                <div class="panel-body hidden till-loaded ">
                     {{emptyMessage}}
                     <div class="group" ng-show="show">
                         <ul class="group-list">

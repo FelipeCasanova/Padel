@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.IdentityModel.Claims;
+using Padel.Infrastructure.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Padel.Infrastructure.Utilities
 {
-    public class PadelPrincipal : ClaimsPrincipal
+    public class PadelPrincipal : ClaimsPrincipal, IPuntos
     {
         public PadelPrincipal(IClaimsPrincipal principal)
             : base(principal)
@@ -37,30 +39,34 @@ namespace Padel.Infrastructure.Utilities
             }
         }
 
-        public string Experiencia
+        [UIHint("GameExp")]
+        public int Experiencia
         {
             get
             {
-                return ((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/exp").Value;
+                return int.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/exp").Value);
             }
         }
 
-        public string Nivel
+        [UIHint("GameLevel")]
+        public int Nivel
         {
             get
             {
-                return ((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/level").Value;
+                return int.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/level").Value);
             }
         }
 
-        public string Corazones
+        [UIHint("GameHearts")]
+        public int Corazones
         {
             get
             {
-                return ((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/hearts").Value;
+                return int.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/hearts").Value);
             }
         }
 
+        [UIHint("GameCurrency")]
         public decimal Puntos
         {
             get

@@ -8,6 +8,12 @@ using System.Threading;
 using Padel.Web.Mvc.Controllers.Queries.Operaciones;
 using Padel.Domain.Contracts.Tasks;
 using SharpArch.Domain.Commands;
+using SharpArch.Web.Mvc.JsonNet;
+using Microsoft.Web.Mvc;
+using SharpArch.NHibernate.Web.Mvc;
+using Padel.Web.Mvc.Filters;
+using Padel.Web.Mvc.Controllers.Queries.Torneos;
+using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
 
 namespace Padel.Web.Mvc.Controllers
 {
@@ -15,15 +21,15 @@ namespace Padel.Web.Mvc.Controllers
     public partial class JugadorController : BaseJugadorController
     {
         private readonly ICommandProcessor commandProcessor;
-
         private readonly IUsuarioTasks usuarioTasks;
-
+        private readonly ITorneosQuery torneosQuery;
         private readonly IOperacionesQuery operacionesQuery;
 
-        public JugadorController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, IOperacionesQuery operacionesQuery)
+        public JugadorController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, ITorneosQuery torneosQuery, IOperacionesQuery operacionesQuery)
         {
             this.commandProcessor = commandProcessor;
             this.usuarioTasks = usuarioTasks;
+            this.torneosQuery = torneosQuery;
             this.operacionesQuery = operacionesQuery;
         }
 
@@ -55,7 +61,7 @@ namespace Padel.Web.Mvc.Controllers
         public virtual ActionResult Datos()
         {
             SideMenuJugadorModelView.SideMenuJugador = ViewModels.Menu.SideMenuJugadorEnum.Datos;
-            return View();
+            return View(new UsuarioDatosModelView { Usuario = this.usuarioTasks.Get(((PadelPrincipal)User).Id)});
         }
 
         public virtual ActionResult Equipos()
@@ -82,7 +88,15 @@ namespace Padel.Web.Mvc.Controllers
             return View();
         }
 
-
+        [AjaxOnly]
+        [HttpPost]
+        [Transaction]
+        [CustomValidateAntiForgeryTokenAttribute]
+        public virtual ActionResult _TorneosResumenPorJugador()
+        {
+            var modelView = this.torneosQuery.GetTorneosResumenPorJugador(((PadelPrincipal)User).Id);
+            return new JsonNetResult(modelView);
+        }
         
     }
 }

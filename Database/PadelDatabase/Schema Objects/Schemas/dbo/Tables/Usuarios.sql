@@ -12,6 +12,7 @@ create table Usuarios (
 	   Nivel as (PuntosExperiencia / 100),
 	   AplicacionExperiencia INT not null,
 	   DineroFicticio DECIMAL(10,3) not null,
+	   Ip NVARCHAR(20) null,
        FechaCreacion DATETIME null,
        FechaModificacion DATETIME null,
        primary key (UsuarioId)

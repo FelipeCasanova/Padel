@@ -33,5 +33,14 @@ namespace Padel.Domain
         [Required]
         public virtual IList<EquipoToCategoria> EquiposToCategorias { get; set; }
 
+        public override string ToString()
+        {
+            var result = new StringBuilder(this.JugadorA.Nombre).Append(" - ").Append(this.JugadorB.Nombre);
+            if (!string.IsNullOrEmpty(this.Nombre))
+            {
+                result.Append("(").Append(this.Nombre).Append(")");
+            }
+            return  result .ToString();
+        }
     }
 }

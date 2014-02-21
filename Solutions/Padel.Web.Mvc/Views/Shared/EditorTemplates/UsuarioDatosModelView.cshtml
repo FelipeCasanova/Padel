@@ -1,0 +1,19 @@
+﻿@model Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioDatosModelView
+@Html.Partial(MVC.Shared.Views.Errors._ModalError)
+@Html.ValidationSummary(true, "Ha habido un error al modificar el usuario.", new { @class = "alert alert-danger" })
+@Html.AntiForgeryToken()
+<div class="input-group">
+    <span class="input-group-addon glyphicon glyphicon-user">@Html.Raw(" ")</span>
+    @Html.TextBoxFor(m => m.Usuario.Nombre, new { @class = "form-control", placeholder = "Introduzca su nombre" })
+    @Html.ValidationMessageFor(m => m.Usuario.Nombre)
+</div>
+<div class="input-group">
+    <span class="input-group-addon glyphicon glyphicon-phone">@Html.Raw(" ")</span>
+    @Html.TextBoxFor(m => m.Usuario.TelefonoMovil, new { @class = "form-control", placeholder = "Introduzca su teléfono móvil" })
+    @Html.ValidationMessageFor(m => m.Usuario.TelefonoMovil)
+</div>
+<div class="input-group">
+    <span class="input-group-addon">@Html.Raw("@")</span>
+    @Html.TextBoxFor(m => m.Usuario.Email, new { @class = "form-control", placeholder = "Dirección de correo electrónico", autocomplete = "off" })
+    @Html.ValidationMessageFor(m => m.Usuario.Email)
+</div>

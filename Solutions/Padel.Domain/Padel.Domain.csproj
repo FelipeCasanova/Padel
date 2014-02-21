@@ -95,6 +95,7 @@
     <Compile Include="Contracts\Tasks\IEquipoTasks.cs" />
     <Compile Include="Contracts\Tasks\IOperacionTasks.cs" />
     <Compile Include="Contracts\Tasks\IUsuarioTasks.cs" />
+    <Compile Include="Resultado.cs" />
     <Compile Include="Enumeraciones.cs" />
     <Compile Include="Equipo.cs" />
     <Compile Include="EquipoToCategoria.cs" />

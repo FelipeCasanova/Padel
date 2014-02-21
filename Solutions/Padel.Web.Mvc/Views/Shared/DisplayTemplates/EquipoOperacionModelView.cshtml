@@ -4,13 +4,15 @@
     
 }
 <li class="@(((int)TempData["Index"]) % 2 == 1 ? "timeline-inverted" : "")">
-    <div class="timeline-badge @(Model.Accion == Padel.Domain.Operaciones.EquipoOperacion.AccionEnum.CrearEquipo.ToString() ? "success" : "danger")">
+    <div class="timeline-badge @(Model.Accion == Padel.Domain.Operaciones.EquipoOperacion.AccionEnum.CrearEquipo.ToString() ? "success" :
+                Model.Accion == Padel.Domain.Operaciones.EquipoOperacion.AccionEnum.ValidarJugadorEnEquipo.ToString() ? "info" : "danger")">
         <i class="fa fa-users"></i>
     </div>
     <div class="timeline-panel">
         <div class="timeline-heading">
             <h4 class="timeline-title">
-                Evento @(Model.Accion == Padel.Domain.Operaciones.EquipoOperacion.AccionEnum.CrearEquipo.ToString() ? "Crear Equipo" : "Eliminar Equipo")</h4>
+                Evento @(Model.Accion == Padel.Domain.Operaciones.EquipoOperacion.AccionEnum.CrearEquipo.ToString() ? "Crear Equipo" :
+                 Model.Accion == Padel.Domain.Operaciones.EquipoOperacion.AccionEnum.ValidarJugadorEnEquipo.ToString() ? "Validar Jugador" : "Eliminar Equipo")</h4>
             <p>
                 <small class="text-muted"><i class="fa fa-time"></i>@Model.FechaCreacion.ToLongDateString()</small>
             </p>

@@ -41,8 +41,6 @@ namespace T4MVC
                 public readonly string _LayoutLogin = "_LayoutLogin";
                 public readonly string _LayoutPlayer = "_LayoutPlayer";
                 public readonly string _NavBar = "_NavBar";
-                public readonly string Currency = "Currency";
-                public readonly string GameCurrency = "GameCurrency";
             }
             public readonly string _Carousel = "~/Views/Shared/_Carousel.cshtml";
             public readonly string _Footer = "~/Views/Shared/_Footer.cshtml";
@@ -50,15 +48,24 @@ namespace T4MVC
             public readonly string _LayoutLogin = "~/Views/Shared/_LayoutLogin.cshtml";
             public readonly string _LayoutPlayer = "~/Views/Shared/_LayoutPlayer.cshtml";
             public readonly string _NavBar = "~/Views/Shared/_NavBar.cshtml";
-            public readonly string Currency = "~/Views/Shared/Currency.cshtml";
-            public readonly string GameCurrency = "~/Views/Shared/GameCurrency.cshtml";
             static readonly _DisplayTemplatesClass s_DisplayTemplates = new _DisplayTemplatesClass();
             public _DisplayTemplatesClass DisplayTemplates { get { return s_DisplayTemplates; } }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _DisplayTemplatesClass
             {
                 public readonly string EquipoOperacionModelView = "EquipoOperacionModelView";
+                public readonly string GameCurrency = "GameCurrency";
+                public readonly string GameExp = "GameExp";
+                public readonly string GameHearts = "GameHearts";
+                public readonly string GameLevel = "GameLevel";
                 public readonly string UsuarioOperacionModelView = "UsuarioOperacionModelView";
+            }
+            static readonly _EditorTemplatesClass s_EditorTemplates = new _EditorTemplatesClass();
+            public _EditorTemplatesClass EditorTemplates { get { return s_EditorTemplates; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _EditorTemplatesClass
+            {
+                public readonly string UsuarioDatosModelView = "UsuarioDatosModelView";
             }
             static readonly _ErrorsClass s_Errors = new _ErrorsClass();
             public _ErrorsClass Errors { get { return s_Errors; } }
@@ -117,9 +124,11 @@ namespace T4MVC
                 public class _ViewNamesClass
                 {
                     public readonly string _Entrar = "_Entrar";
+                    public readonly string _Modificar = "_Modificar";
                     public readonly string _Registrar = "_Registrar";
                 }
                 public readonly string _Entrar = "~/Views/Shared/Usuarios/_Entrar.cshtml";
+                public readonly string _Modificar = "~/Views/Shared/Usuarios/_Modificar.cshtml";
                 public readonly string _Registrar = "~/Views/Shared/Usuarios/_Registrar.cshtml";
             }
         }

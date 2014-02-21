@@ -43,6 +43,12 @@ namespace Padel.Web.Mvc.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _Modificar()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Modificar);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult _Registrar()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Registrar);
@@ -93,6 +99,7 @@ namespace Padel.Web.Mvc.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string _Modificar = "_Modificar";
             public readonly string _Registrar = "_Registrar";
             public readonly string Entrar = "Entrar";
             public readonly string _Entrar = "_Entrar";
@@ -105,6 +112,7 @@ namespace Padel.Web.Mvc.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string _Modificar = "_Modificar";
             public const string _Registrar = "_Registrar";
             public const string Entrar = "Entrar";
             public const string _Entrar = "_Entrar";
@@ -115,6 +123,14 @@ namespace Padel.Web.Mvc.Controllers
         }
 
 
+        static readonly ActionParamsClass__Modificar s_params__Modificar = new ActionParamsClass__Modificar();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__Modificar _ModificarParams { get { return s_params__Modificar; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__Modificar
+        {
+            public readonly string usuarioModelView = "usuarioModelView";
+        }
         static readonly ActionParamsClass__Registrar s_params__Registrar = new ActionParamsClass__Registrar();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass__Registrar _RegistrarParams { get { return s_params__Registrar; } }
@@ -122,6 +138,7 @@ namespace Padel.Web.Mvc.Controllers
         public class ActionParamsClass__Registrar
         {
             public readonly string usuarioModelView = "usuarioModelView";
+            public readonly string captchaValid = "captchaValid";
         }
         static readonly ActionParamsClass_Entrar s_params_Entrar = new ActionParamsClass_Entrar();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -185,13 +202,24 @@ namespace Padel.Web.Mvc.Controllers
     {
         public T4MVC_UsuariosController() : base(Dummy.Instance) { }
 
-        partial void _RegistrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioRegistrarModelView usuarioModelView);
+        partial void _ModificarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioDatosModelView usuarioModelView);
 
-        public override System.Web.Mvc.ActionResult _Registrar(Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioRegistrarModelView usuarioModelView)
+        public override System.Web.Mvc.ActionResult _Modificar(Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioDatosModelView usuarioModelView)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Modificar);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "usuarioModelView", usuarioModelView);
+            _ModificarOverride(callInfo, usuarioModelView);
+            return callInfo;
+        }
+
+        partial void _RegistrarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioRegistrarModelView usuarioModelView, bool captchaValid);
+
+        public override System.Web.Mvc.ActionResult _Registrar(Padel.Web.Mvc.Controllers.ViewModels.Usuarios.UsuarioRegistrarModelView usuarioModelView, bool captchaValid)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Registrar);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "usuarioModelView", usuarioModelView);
-            _RegistrarOverride(callInfo, usuarioModelView);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "captchaValid", captchaValid);
+            _RegistrarOverride(callInfo, usuarioModelView, captchaValid);
             return callInfo;
         }
 

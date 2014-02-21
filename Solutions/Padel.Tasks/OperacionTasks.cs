@@ -26,7 +26,7 @@ namespace Padel.Tasks
 
         public UsuarioOperacion GetOperacionEntrarByUsuario(int usuarioId)
         {
-            return Session.QueryOver<UsuarioOperacion>().Where(o => o.Usuario.Id == usuarioId && o.Accion == UsuarioOperacion.AccionEnum.Entrar.ToString()).Future().First();
+            return Session.QueryOver<UsuarioOperacion>().Where(o => o.Usuario.Id == usuarioId && o.Accion == UsuarioOperacion.AccionEnum.Entrar.ToString()).Future().FirstOrDefault();
         }
 
         public Operacion Get(int id)

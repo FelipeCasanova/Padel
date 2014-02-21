@@ -12,5 +12,7 @@ namespace Padel.Web.Mvc.Controllers.Queries.Torneos
         IList<EquipoTorneoViewModel> GetTorneosPorJugadorNotStatusList(int idJugador, string tipo, params EstadoCategoriaEnum[] estados);
 
         IList<TorneoViewModel> GetPublicTorneosNotStatusList(params EstadoCategoriaEnum[] estados);
+
+        TorneoResumenViewModel GetTorneosResumenPorJugador(int idJugador);
     }
 }

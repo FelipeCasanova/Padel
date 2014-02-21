@@ -111,7 +111,7 @@ namespace Padel.Web.Mvc.Controllers.Queries.Torneos
                 .Where(c => equipoToCategoria.Categoria.Id == categoria.Id && equipoToCategoria.Estado != EstadoEquipoCategoriaEnum.Eliminado)
                 .ToRowCountQuery();
 
-            query = query.JoinAlias(x => x.Categorias, () => categoria);
+            query = query.JoinAlias(t => t.Categorias, () => categoria);
             foreach (var estado in estados)
             {
                 query = query.Where(x => categoria.Estado != estado);
@@ -140,6 +140,55 @@ namespace Padel.Web.Mvc.Controllers.Queries.Torneos
             return new List<TorneoViewModel>(viewModels);
         }
 
+        public TorneoResumenViewModel GetTorneosResumenPorJugador(int idJugador)
+        {
+            TorneoResumenViewModel viewModel = null;
+            EquipoToCategoria equipoToCategoria = null;
+            Equipo equipo = null;
+            Equipo ganador = null;
 
+            var subQuery1 = QueryOver.Of<Categoria>()
+                .JoinAlias(c => c.EquiposToCategorias, () => equipoToCategoria)
+                .JoinAlias(c => equipoToCategoria.Equipo, () => equipo)
+                .Where(x => (equipo.JugadorA.Id == idJugador || equipo.JugadorB.Id == idJugador) && equipoToCategoria.Estado != EstadoEquipoCategoriaEnum.Eliminado)
+                .Where(c => c.Estado == EstadoCategoriaEnum.Pendiente)
+                .ToRowCountQuery();
+
+            var subQuery2 = QueryOver.Of<Categoria>()
+                .JoinAlias(c => c.EquiposToCategorias, () => equipoToCategoria)
+                .JoinAlias(c => equipoToCategoria.Equipo, () => equipo)
+                .Where(c => (equipo.JugadorA.Id == idJugador || equipo.JugadorB.Id == idJugador) && equipoToCategoria.Estado != EstadoEquipoCategoriaEnum.Eliminado)
+                .Where(c => c.Estado == EstadoCategoriaEnum.Progreso)
+                .ToRowCountQuery();
+
+            var subQuery3 = QueryOver.Of<Categoria>()
+                .JoinAlias(c => c.Ganador, () => ganador, NHibernate.SqlCommand.JoinType.FullJoin)
+                .JoinAlias(c => c.EquiposToCategorias, () => equipoToCategoria)
+                .JoinAlias(c => equipoToCategoria.Equipo, () => equipo)
+                .Where(c => (equipo.JugadorA.Id == idJugador || equipo.JugadorB.Id == idJugador) && equipoToCategoria.Estado != EstadoEquipoCategoriaEnum.Eliminado)
+                .Where(c => c.Estado == EstadoCategoriaEnum.Finalizado && (ganador.JugadorA.Id == idJugador || ganador.JugadorB.Id == idJugador))
+                .ToRowCountQuery();
+
+            var subQuery4 = QueryOver.Of<Categoria>()
+                .JoinAlias(c => c.EquiposToCategorias, () => equipoToCategoria)
+                .JoinAlias(c => c.Ganador, () => ganador, NHibernate.SqlCommand.JoinType.FullJoin)
+                .JoinAlias(c => equipoToCategoria.Equipo, () => equipo)
+                .Where(c => (equipo.JugadorA.Id == idJugador || equipo.JugadorB.Id == idJugador) && equipoToCategoria.Estado != EstadoEquipoCategoriaEnum.Eliminado)
+                .Where(c => c.Estado == EstadoCategoriaEnum.Finalizado && (ganador.JugadorA.Id != idJugador && ganador.JugadorB.Id != idJugador))
+                .ToRowCountQuery();
+
+            var query = Session.QueryOver<Categoria>();
+            var viewModels = query
+                .SelectList(list => list
+                .SelectSubQuery(subQuery1).WithAlias(() => viewModel.TorneosPendientes)
+                .SelectSubQuery(subQuery2).WithAlias(() => viewModel.TorneosProgreso)
+                .SelectSubQuery(subQuery3).WithAlias(() => viewModel.TorneosGanados)
+                .SelectSubQuery(subQuery4).WithAlias(() => viewModel.TorneosPerdidos)
+                )
+                .TransformUsing(Transformers.AliasToBean(typeof(TorneoResumenViewModel)))
+                .Future<TorneoResumenViewModel>().First();
+
+            return viewModels;
+        }
     }
 }

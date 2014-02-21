@@ -29,28 +29,32 @@ namespace Padel.Domain
         [DataType(DataType.EmailAddress, ErrorMessage = "Introduzca una cuenta de correo correcta.")]        
         public virtual string Email { get; set; }
 
-        [Required]
         [Display(Name = "Password")]
         public virtual string Password { get; set; }
 
         [Required]
         [Display(Name = "Lv.")]
+        [UIHint("GameLevel")]
         public virtual int Nivel { get; set; }
 
         [Required]
         [Display(Name = "Exp.")]
+        [UIHint("GameExp")]
         public virtual int PuntosExperiencia { get; set; }
 
         [Required]
         [Display(Name = "Corazones")]
+        [UIHint("GameHearts")]
         public virtual int AplicacionExperiencia { get; set; }
 
         [Required]
         [Display(Name = "Bola/s")]
+        [UIHint("GameCurrency")]
         public virtual decimal DineroFicticio { get; set; }
 
         [Required]
         public virtual IList<Role> Roles { get; set; }
 
+        public virtual string Ip { get; set; }
     }
 }
