@@ -19,10 +19,11 @@ using SharpArch.Domain.PersistenceSupport;
 using SharpArch.NHibernate.Web.Mvc;
 using MvcReCaptcha;
 using System.Net;
+using System.Configuration;
 
 namespace Padel.Web.Mvc.Controllers
 {
-    [Authorize(Roles="Administrador, Jugador")]
+    [Authorize(Roles = "Administrador, Jugador")]
     public partial class UsuariosController : BaseController
     {
         private readonly ICommandProcessor commandProcessor;
@@ -92,20 +93,29 @@ namespace Padel.Web.Mvc.Controllers
             {
                 var command = new RegistrarUsuarioCommand(usuarioModelView.Usuario.Nombre, usuarioModelView.Usuario.Sexo,
                     usuarioModelView.TelefonoMovil, usuarioModelView.Email, usuarioModelView.Password, GetVisitorIpAddress());
-                var results = this.commandProcessor.Process<RegistrarUsuarioCommand, CommandResult>(command);
+                var result = this.commandProcessor.Process<RegistrarUsuarioCommand, CommandResult>(command).First();
 
-                if (results.First().Success)
+                if (result.Success)
                 {
-                    var usuarioDB = usuarioTasks.GetByMovil(usuarioModelView.TelefonoMovil);
-                    var token = FederatedAuthentication.SessionAuthenticationModule.CreateSessionSecurityToken(ClaimsPrincipalUtility.CreatePrincipal(usuarioDB),
-                        "PadelContext", DateTime.Now, DateTime.Now.AddHours(1), true);
-                    FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(token);
-                    return JavaScript("window.location = '" + Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name) +"';");
+                    var command2 = new RefrescarUsuarioCommand(usuarioModelView.TelefonoMovil);
+                    var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
+
+                    if (bool.Parse(ConfigurationManager.AppSettings["Dar5puntosAlRegistrar"]) == true)
+                    {
+                        var command3 = new IngresarPuntosAUsuarioCommand(5, ((PadelPrincipal)User).Id);
+                        var result3 = this.commandProcessor.Process<IngresarPuntosAUsuarioCommand, CommandResult>(command3).First();
+                        if (result3.Success)
+                        {
+                            this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(new RefrescarUsuarioCommand()).First();
+                        }
+                    }
+
+                    return JavaScript("window.location = '" + Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name) + "';");
                 }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "El usuario no se pudo crear. Inténtelo más tarde.");
-                }   
+                }
             }
             else if (!captchaValid)
             {
@@ -166,11 +176,8 @@ namespace Padel.Web.Mvc.Controllers
 
                 if (results.First().Success)
                 {
-                    var usuarioDB = usuarioTasks.GetByMovil(command.TelefonoMovil);
-
-                    var token = FederatedAuthentication.SessionAuthenticationModule.CreateSessionSecurityToken(ClaimsPrincipalUtility.CreatePrincipal(usuarioDB),
-                        "PadelContext", DateTime.Now, DateTime.Now.AddHours(1), true);
-                    FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(token);
+                    var command2 = new RefrescarUsuarioCommand(command.TelefonoMovil);
+                    var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
 
                     if (string.IsNullOrEmpty(returnUrl))
                     {
@@ -240,7 +247,7 @@ namespace Padel.Web.Mvc.Controllers
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
 
-        
+
 
         [HttpPost]
         [Transaction]

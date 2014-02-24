@@ -112,6 +112,7 @@
     <Compile Include="CommandHandlers\Torneos\PagarJugadorConPuntosEnTorneoCommandHandler.cs" />
     <Compile Include="CommandHandlers\Torneos\CrearEquipoParaTorneoCommandHandler.cs" />
     <Compile Include="CommandHandlers\Usuarios\EntrarUsuarioCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Usuarios\IngresarPuntosAUsuarioCommandHandler.cs" />
     <Compile Include="CommandHandlers\Usuarios\RegistrarUsuarioCommandHandler.cs" />
     <Compile Include="CommandHandlers\Equipos\ValidarJugadorEnEquipoCommandHandler.cs" />
     <Compile Include="CommandHandlers\Torneos\EliminarEquipoDeTorneoCommandHandler.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Commands\Equipos\EliminarEquipoCommand.cs" />
     <Compile Include="Commands\Torneos\CrearEquipoParaTorneoCommand.cs" />
     <Compile Include="Commands\Usuarios\EntrarUsuarioCommand.cs" />
+    <Compile Include="Commands\Usuarios\IngresarPuntosAUsuarioCommand.cs" />
     <Compile Include="Commands\Usuarios\RegistrarUsuarioCommand.cs" />
     <Compile Include="Commands\Torneos\EliminarEquipoDeTorneoCommand.cs" />
     <Compile Include="Commands\Usuarios\UsuarioCommandBase.cs" />
@@ -132,11 +134,13 @@
     <Compile Include="EventHandles\Equipos\EliminarEquipoEventHandle.cs" />
     <Compile Include="EventHandles\Equipos\CrearEquipoEventHandle.cs" />
     <Compile Include="EventHandles\Usuarios\EntrarEventHandle.cs" />
+    <Compile Include="EventHandles\Usuarios\IngresarDineroFicticioEventHandle.cs" />
     <Compile Include="EventHandles\Usuarios\RegistrarEventHandle.cs" />
     <Compile Include="Events\Equipos\ValidarJugadorEnEquipoEvent.cs" />
     <Compile Include="Events\Equipos\EliminarEquipoEvent.cs" />
     <Compile Include="Events\Equipos\CrearEquipoEvent.cs" />
     <Compile Include="Events\Usuarios\EntrarEvent.cs" />
+    <Compile Include="Events\Usuarios\IngresarDineroFicticioEvent.cs" />
     <Compile Include="Events\Usuarios\RegistrarEvent.cs" />
     <Compile Include="OperacionTasks.cs" />
     <Compile Include="UsuarioTasks.cs" />

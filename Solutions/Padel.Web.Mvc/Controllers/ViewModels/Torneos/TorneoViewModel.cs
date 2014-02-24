@@ -6,11 +6,10 @@ using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Padel.Domain;
-using Padel.Infrastructure.Interfaces;
 
 namespace Padel.Web.Mvc.Controllers.ViewModels.Torneos
 {
-    public class TorneoViewModel : IPrecio
+    public class TorneoViewModel
     {
         public int Id { get; set; }
 

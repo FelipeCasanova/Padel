@@ -113,8 +113,6 @@
     <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Interfaces\IPrecio.cs" />
-    <Compile Include="Interfaces\IPuntos.cs" />
     <Compile Include="NHibernateMaps\AutomappingConfiguration.cs" />
     <Compile Include="NHibernateMaps\Conventions\CustomForeignKeyConvention.cs" />
     <Compile Include="NHibernateMaps\Conventions\HasManyConvention.cs" />
@@ -122,6 +120,7 @@
     <Compile Include="NHibernateMaps\Conventions\SubclassConvention.cs" />
     <Compile Include="NHibernateMaps\Conventions\TableNameConvention.cs" />
     <Compile Include="NHibernateMaps\AutoPersistenceModelGenerator.cs" />
+    <Compile Include="NHibernateMaps\NotificacionMap.cs" />
     <Compile Include="NHibernateMaps\OperationMap.cs" />
     <Compile Include="NHibernateMaps\UsuarioMap.cs" />
     <Compile Include="Utilities\Authentication\CustomClaimsAuthenticationManager.cs" />
@@ -160,7 +159,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

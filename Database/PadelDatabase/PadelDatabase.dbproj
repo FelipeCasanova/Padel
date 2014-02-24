@@ -270,5 +270,14 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Resultados.IX_Ganador.sql">
       <SubType>NotInBuild</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Notificacions.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Notificacions.FK_Usuario.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Notificacions.IX_Cluster.sql">
+      <SubType>NotInBuild</SubType>
+    </Build>
   </ItemGroup>
 </Project>

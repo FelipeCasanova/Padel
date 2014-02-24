@@ -227,6 +227,8 @@
     <Compile Include="Areas\Admin\Controllers\Queries\Usuarios\JugadoresQuery.cs" />
     <Compile Include="Controllers\Queries\Equipos\EquiposQuery.cs" />
     <Compile Include="Controllers\Queries\Equipos\IEquiposQuery.cs" />
+    <Compile Include="Controllers\Queries\Notificaciones\INotificacionesQuery.cs" />
+    <Compile Include="Controllers\Queries\Notificaciones\NotificacionesQuery.cs" />
     <Compile Include="Controllers\Queries\Operaciones\IOperacionesQuery.cs" />
     <Compile Include="Controllers\Queries\Operaciones\OperacionesQuery.cs" />
     <Compile Include="Controllers\Queries\Torneos\ITorneosQuery.cs" />
@@ -245,6 +247,8 @@
     <Compile Include="Controllers\ViewModels\Equipos\EquipoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Menu\SideMenuJugadorModelView.cs" />
     <Compile Include="Controllers\ViewModels\Menu\MenuModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Notificaciones\DineroNotificacionModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Notificaciones\NotificacionModelView.cs" />
     <Compile Include="Controllers\ViewModels\Operaciones\EquipoOperacionModelView.cs" />
     <Compile Include="Controllers\ViewModels\Operaciones\OperacionModelView.cs" />
     <Compile Include="Controllers\ViewModels\Operaciones\UsuarioOperacionModelView.cs" />
@@ -477,6 +481,8 @@
     <Content Include="Views\Shared\DisplayTemplates\GameExp.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\GameLevel.cshtml" />
     <Content Include="Views\Shared\Usuarios\_Modificar.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DineroNotificacionModelView.cshtml" />
+    <Content Include="Views\Shared\Jugador\_NotificacionModelView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Padel.Domain\Padel.Domain.csproj">

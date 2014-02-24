@@ -53,6 +53,7 @@ namespace T4MVC
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _DisplayTemplatesClass
             {
+                public readonly string Copy_of_EquipoOperacionModelView = "Copy of EquipoOperacionModelView";
                 public readonly string EquipoOperacionModelView = "EquipoOperacionModelView";
                 public readonly string GameCurrency = "GameCurrency";
                 public readonly string GameExp = "GameExp";
@@ -93,10 +94,12 @@ namespace T4MVC
                 {
                     public readonly string _NavBarSide = "_NavBarSide";
                     public readonly string _NavBarTop = "_NavBarTop";
+                    public readonly string _NotificacionModelView = "_NotificacionModelView";
                     public readonly string _OperacionModelView = "_OperacionModelView";
                 }
                 public readonly string _NavBarSide = "~/Views/Shared/Jugador/_NavBarSide.cshtml";
                 public readonly string _NavBarTop = "~/Views/Shared/Jugador/_NavBarTop.cshtml";
+                public readonly string _NotificacionModelView = "~/Views/Shared/Jugador/_NotificacionModelView.cshtml";
                 public readonly string _OperacionModelView = "~/Views/Shared/Jugador/_OperacionModelView.cshtml";
             }
             static readonly _TorneoClass s_Torneo = new _TorneoClass();

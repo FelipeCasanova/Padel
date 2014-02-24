@@ -13,20 +13,22 @@ using Padel.Web.Mvc.Controllers.ViewModels.Equipos;
 using Padel.Web.Mvc.Controllers.ViewModels.Operaciones;
 using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
 using SharpArch.NHibernate;
+using Padel.Web.Mvc.Controllers.ViewModels.Notificaciones;
+using Padel.Domain.Notificaciones;
 
-namespace Padel.Web.Mvc.Controllers.Queries.Operaciones
+namespace Padel.Web.Mvc.Controllers.Queries.Notificaciones
 {
-    public class OperacionesQuery : NHibernateQuery, IOperacionesQuery
+    public class NotificacionesQuery : NHibernateQuery, INotificacionesQuery
     {
-        public IList<OperacionModelView> GetOperacionesPorUsuario(int usuarioId)
+        public IList<NotificacionModelView> GetNotificacionesPorUsuario(int usuarioId)
         {
-            var query = Session.QueryOver<Operacion>().OrderBy(x => x.FechaCreacion).Desc;
+            var query = Session.QueryOver<Notificacion>().OrderBy(x => x.FechaCreacion).Desc;
 
             var models = query
                 .Where(o => o.Usuario.Id == usuarioId)
-                .Future<Operacion>();
+                .Future<Notificacion>();
 
-            return models.ToList().Select<Operacion, OperacionModelView>(o => OperacionModelView.Crear(o)).ToList();
+            return models.ToList().Select<Notificacion, NotificacionModelView>(o => NotificacionModelView.Crear(o)).ToList();
         }
 
     }

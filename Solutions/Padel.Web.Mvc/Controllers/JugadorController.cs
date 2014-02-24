@@ -14,6 +14,7 @@ using SharpArch.NHibernate.Web.Mvc;
 using Padel.Web.Mvc.Filters;
 using Padel.Web.Mvc.Controllers.Queries.Torneos;
 using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
+using Padel.Web.Mvc.Controllers.Queries.Notificaciones;
 
 namespace Padel.Web.Mvc.Controllers
 {
@@ -24,13 +25,16 @@ namespace Padel.Web.Mvc.Controllers
         private readonly IUsuarioTasks usuarioTasks;
         private readonly ITorneosQuery torneosQuery;
         private readonly IOperacionesQuery operacionesQuery;
+        private readonly INotificacionesQuery notificacionesQuery;
 
-        public JugadorController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, ITorneosQuery torneosQuery, IOperacionesQuery operacionesQuery)
+        public JugadorController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, ITorneosQuery torneosQuery, IOperacionesQuery operacionesQuery
+            , INotificacionesQuery notificacionesQuery)
         {
             this.commandProcessor = commandProcessor;
             this.usuarioTasks = usuarioTasks;
             this.torneosQuery = torneosQuery;
             this.operacionesQuery = operacionesQuery;
+            this.notificacionesQuery = notificacionesQuery;
         }
 
         [NonAction]
@@ -56,6 +60,12 @@ namespace Padel.Web.Mvc.Controllers
         {
             var usuario = (PadelPrincipal)Thread.CurrentPrincipal;
             return PartialView(MVC.Shared.Views.Jugador._OperacionModelView, this.operacionesQuery.GetOperacionesPorUsuario(usuario.Id));
+        }
+
+        public virtual PartialViewResult GetNotificacionesPorUsuario()
+        {
+            var usuario = (PadelPrincipal)Thread.CurrentPrincipal;
+            return PartialView(MVC.Shared.Views.Jugador._NotificacionModelView, this.notificacionesQuery.GetNotificacionesPorUsuario(usuario.Id));
         }
 
         public virtual ActionResult Datos()

@@ -6,6 +6,7 @@ using FluentNHibernate.Automapping;
 using SharpArch.Domain.DomainModel;
 using Padel.Domain;
 using Padel.Domain.Operaciones;
+using Padel.Domain.Notificaciones;
 
 namespace Padel.Infrastructure.NHibernateMaps
 {
@@ -35,7 +36,7 @@ namespace Padel.Infrastructure.NHibernateMaps
 
         public override bool IsDiscriminated(Type type)
         {
-            return type.IsSubclassOf(typeof(Partido)) || type.IsSubclassOf(typeof(Operacion));
+            return type.IsSubclassOf(typeof(Partido)) || type.IsSubclassOf(typeof(Operacion)) || type.IsSubclassOf(typeof(Notificacion));
         } 
     }
 }

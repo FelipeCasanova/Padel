@@ -9,6 +9,7 @@ using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands.Usuarios;
 using SharpArch.Domain.Commands;
+using Padel.Domain;
 
 namespace Padel.Tasks.CommandHandlers.Usuarios
 {
@@ -23,8 +24,17 @@ namespace Padel.Tasks.CommandHandlers.Usuarios
 
         public CommandResult Handle(RefrescarUsuarioCommand command)
         {
-            PadelPrincipal principal = (PadelPrincipal)Thread.CurrentPrincipal;
-            var usuarioDB = usuarioTasks.Get(principal.Id);
+            Usuario usuarioDB = null;
+            if (command.TelefonoMovil != null)
+            {
+                usuarioDB = usuarioTasks.GetByMovil(command.TelefonoMovil.GetValueOrDefault());
+            }
+            else
+            {
+                PadelPrincipal principal = (PadelPrincipal)Thread.CurrentPrincipal;
+                usuarioDB = usuarioTasks.Get(principal.Id);
+            }
+
             var token = FederatedAuthentication.SessionAuthenticationModule.CreateSessionSecurityToken(ClaimsPrincipalUtility.CreatePrincipal(usuarioDB),
                 "PadelContext", DateTime.Now, DateTime.Now.AddHours(1), true);
             FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(token);

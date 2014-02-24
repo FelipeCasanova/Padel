@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.IdentityModel.Claims;
-using Padel.Infrastructure.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
 namespace Padel.Infrastructure.Utilities
 {
-    public class PadelPrincipal : ClaimsPrincipal, IPuntos
+    public class PadelPrincipal : ClaimsPrincipal
     {
         public PadelPrincipal(IClaimsPrincipal principal)
             : base(principal)

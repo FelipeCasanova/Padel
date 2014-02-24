@@ -1,7 +1,7 @@
 ﻿-- =============================================
 -- Script Template
 -- =============================================
-alter table Notificacions 
-        add constraint Notificacions_Usuario_FK 
+alter table Operacions 
+        add constraint Operacions_Usuario_FK 
         foreign key (UsuarioId) 
         references Usuarios

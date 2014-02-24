@@ -59,6 +59,7 @@ namespace Padel.Web.Mvc.Controllers
         {
             public readonly string Index = "Index";
             public readonly string GetOperacionesPorUsuario = "GetOperacionesPorUsuario";
+            public readonly string GetNotificacionesPorUsuario = "GetNotificacionesPorUsuario";
             public readonly string Datos = "Datos";
             public readonly string Equipos = "Equipos";
             public readonly string Partidos = "Partidos";
@@ -72,6 +73,7 @@ namespace Padel.Web.Mvc.Controllers
         {
             public const string Index = "Index";
             public const string GetOperacionesPorUsuario = "GetOperacionesPorUsuario";
+            public const string GetNotificacionesPorUsuario = "GetNotificacionesPorUsuario";
             public const string Datos = "Datos";
             public const string Equipos = "Equipos";
             public const string Partidos = "Partidos";
@@ -127,6 +129,15 @@ namespace Padel.Web.Mvc.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.GetOperacionesPorUsuario);
             GetOperacionesPorUsuarioOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void GetNotificacionesPorUsuarioOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        public override System.Web.Mvc.PartialViewResult GetNotificacionesPorUsuario()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.GetNotificacionesPorUsuario);
+            GetNotificacionesPorUsuarioOverride(callInfo);
             return callInfo;
         }
 

@@ -360,6 +360,36 @@ CREATE NONCLUSTERED INDEX [Jornadas_Grupo_IX]
 
 
 GO
+PRINT N'Creating [dbo].[Notificacions]...';
+
+
+GO
+CREATE TABLE [dbo].[Notificacions] (
+    [NotificacionId]    INT            IDENTITY (1, 1) NOT NULL,
+    [Mensaje]           NVARCHAR (255) NOT NULL,
+    [Accion]            NVARCHAR (255) NOT NULL,
+    [NotificacionTipo]  NVARCHAR (255) NOT NULL,
+    [FechaCreacion]     DATETIME       NOT NULL,
+    [FechaModificacion] DATETIME       NOT NULL,
+    [UsuarioId]         INT            NOT NULL,
+    [EquipoId]          INT            NULL,
+    [TorneoId]          INT            NULL,
+    [PartidoId]         INT            NULL,
+    [ResultadoId]       INT            NULL,
+    PRIMARY KEY NONCLUSTERED ([NotificacionId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
+);
+
+
+GO
+PRINT N'Creating [dbo].[Notificacions].[Notificacions_Cluster_IX]...';
+
+
+GO
+CREATE UNIQUE CLUSTERED INDEX [Notificacions_Cluster_IX]
+    ON [dbo].[Notificacions]([UsuarioId] ASC, [FechaCreacion] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+
+
+GO
 PRINT N'Creating [dbo].[Operacions]...';
 
 
@@ -623,6 +653,15 @@ ALTER TABLE [dbo].[Jornadas] WITH NOCHECK
 
 
 GO
+PRINT N'Creating Notificacions_Usuario_FK...';
+
+
+GO
+ALTER TABLE [dbo].[Notificacions] WITH NOCHECK
+    ADD CONSTRAINT [Notificacions_Usuario_FK] FOREIGN KEY ([UsuarioId]) REFERENCES [dbo].[Usuarios] ([UsuarioId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+GO
 PRINT N'Creating Operacions_Usuario_FK...';
 
 
@@ -738,6 +777,8 @@ ALTER TABLE [dbo].[EquipoToCategorias] WITH CHECK CHECK CONSTRAINT [EquipoToCate
 ALTER TABLE [dbo].[Grupos] WITH CHECK CHECK CONSTRAINT [Grupos_Categoria_FK];
 
 ALTER TABLE [dbo].[Jornadas] WITH CHECK CHECK CONSTRAINT [Jornadas_Grupo_FK];
+
+ALTER TABLE [dbo].[Notificacions] WITH CHECK CHECK CONSTRAINT [Notificacions_Usuario_FK];
 
 ALTER TABLE [dbo].[Operacions] WITH CHECK CHECK CONSTRAINT [Operacions_Usuario_FK];
 
