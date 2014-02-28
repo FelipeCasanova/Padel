@@ -27,6 +27,7 @@ namespace Padel.Web.Mvc.Controllers.ViewModels.Usuarios
 
         [DataType(DataType.EmailAddress, ErrorMessage = "Introduzca una cuenta de correo correcta.")]
         [Remote("ValidarEmailUnico", "Usuarios")]
+        [Required]
         public virtual string Email { get; set; }
 
     }

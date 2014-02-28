@@ -1,0 +1,33 @@
+﻿@model Padel.Web.Mvc.Controllers.ViewModels.Usuarios.RegistroEmailModelView
+@{
+    Layout = null;
+    String raiz = System.Web.Configuration.WebConfigurationManager.AppSettings["RaizPadelApp"];
+    String name = System.Web.Configuration.WebConfigurationManager.AppSettings["NombreApp"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Bookea.me - @ViewData["Title"]</title>
+    @Html.Partial(MVC.Emails.Views._Estilo)
+</head>
+<body>
+    <div>
+        <h2>
+            BIENVENIDO A @name.ToUpper()</h2>
+        <br />
+        Hola <b>@Model.Nombre</b>,
+        <br />
+        <br />
+        Se ha registrado en @name con la cuenta <b>@Model.Email</b>. Su password es
+        el siguiente:
+        <br />
+        <br />
+        <b>@Model.Password</b>
+        <br />
+        <br />
+        Esperamos que disfrute de los torneos,<br /><br />
+        <i>@name</i>
+    </div>
+</body>
+</html>

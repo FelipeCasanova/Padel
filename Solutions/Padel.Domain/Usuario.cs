@@ -25,8 +25,9 @@ namespace Padel.Domain
         [RegularExpression("\\d{9}", ErrorMessage="Introduzca un número de móvil correcto.")]
         public virtual int TelefonoMovil { get; set; }
 
+        [Required]
         [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Introduzca una cuenta de correo correcta.")]        
+        [DataType(DataType.EmailAddress, ErrorMessage = "Introduzca una cuenta de correo correcta.")]
         public virtual string Email { get; set; }
 
         [Display(Name = "Password")]

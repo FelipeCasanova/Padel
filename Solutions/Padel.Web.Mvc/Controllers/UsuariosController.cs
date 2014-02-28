@@ -20,6 +20,7 @@ using SharpArch.NHibernate.Web.Mvc;
 using MvcReCaptcha;
 using System.Net;
 using System.Configuration;
+using Padel.Infrastructure.Utilities.Emails;
 
 namespace Padel.Web.Mvc.Controllers
 {
@@ -30,12 +31,15 @@ namespace Padel.Web.Mvc.Controllers
 
         private readonly IUsuarioTasks usuarioTasks;
 
+        private readonly IEmailTasks emailTasks;
+
         private readonly IJugadoresQuery jugadoresQuery;
 
-        public UsuariosController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, IJugadoresQuery jugadoresQuery)
+        public UsuariosController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, IEmailTasks emailTasks, IJugadoresQuery jugadoresQuery)
         {
             this.commandProcessor = commandProcessor;
             this.usuarioTasks = usuarioTasks;
+            this.emailTasks = emailTasks;
             this.jugadoresQuery = jugadoresQuery;
         }
 
@@ -57,7 +61,7 @@ namespace Padel.Web.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public virtual ActionResult _Modificar(UsuarioDatosModelView usuarioModelView)
         {
-            ViewBag.ErrorResult = PartialView(MVC.Shared.Views.Usuarios._Modificar);
+            ViewBag.ErrorResult = PartialView(MVC.Shared.Views.Usuarios._Modificar, usuarioModelView);
 
             usuarioModelView.Usuario = this.usuarioTasks.Get(((PadelPrincipal)User).Id);
             this.TryUpdateModel(usuarioModelView);
@@ -84,7 +88,7 @@ namespace Padel.Web.Mvc.Controllers
         [CaptchaValidator()]
         public virtual ActionResult _Registrar(UsuarioRegistrarModelView usuarioModelView, bool captchaValid)
         {
-            ViewBag.ErrorResult = PartialView(MVC.Shared.Views.Usuarios._Registrar);
+            ViewBag.ErrorResult = PartialView(MVC.Shared.Views.Usuarios._Registrar, usuarioModelView);
 
             // No queremos validar aquí los roles
             ModelState.Remove("usuario.Roles");
@@ -97,9 +101,22 @@ namespace Padel.Web.Mvc.Controllers
 
                 if (result.Success)
                 {
+                    // Enviar email
+                    // Generamos el html del email
+                    RegistroEmailModelView modelview = new RegistroEmailModelView()
+                    {
+                        Nombre = usuarioModelView.Usuario.Nombre,
+                        Email = usuarioModelView.Usuario.Email,
+                        Password = usuarioModelView.Password
+                    };
+                    var viewString = View(MVC.Emails.Views.Registro, modelview).Capture(ControllerContext);
+                    emailTasks.EnviarNotificacion("Padel - Registro", viewString, usuarioModelView.Email);
+
+                    // Refrescar usuario
                     var command2 = new RefrescarUsuarioCommand(usuarioModelView.TelefonoMovil);
                     var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
 
+                    // Dar cinco puntos y refrescar usuario
                     if (bool.Parse(ConfigurationManager.AppSettings["Dar5puntosAlRegistrar"]) == true)
                     {
                         var command3 = new IngresarPuntosAUsuarioCommand(5, ((PadelPrincipal)User).Id);
@@ -167,7 +184,7 @@ namespace Padel.Web.Mvc.Controllers
         [ValidateAntiForgeryToken]
         public virtual ActionResult _Entrar(UsuarioEntrarModelView usuarioModelView, string returnUrl)
         {
-            ViewBag.ErrorResult = PartialView(MVC.Shared.Views.Usuarios._Entrar);
+            ViewBag.ErrorResult = PartialView(MVC.Shared.Views.Usuarios._Entrar, usuarioModelView);
 
             if (ModelState.IsValid)
             {

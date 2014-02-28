@@ -104,6 +104,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +130,8 @@
     <Compile Include="Utilities\Authentication\CustomClaimsAuthenticationManager.cs" />
     <Compile Include="Utilities\Authentication\CustomSessionAuthenticationModule.cs" />
     <Compile Include="Utilities\ClaimsPrincipalUtility.cs" />
+    <Compile Include="Utilities\Emails\EnviarEmail.cs" />
+    <Compile Include="Utilities\Emails\ResponseCapture.cs" />
     <Compile Include="Utilities\MD5Extension.cs" />
     <Compile Include="Utilities\PadelPrincipal.cs" />
     <Compile Include="Utilities\SessionSecurityToken\MachineKeyProtectionTransform.cs" />
@@ -159,9 +165,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

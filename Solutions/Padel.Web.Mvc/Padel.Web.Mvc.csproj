@@ -255,10 +255,14 @@
     <Compile Include="Controllers\ViewModels\Torneos\EquipoTorneoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\TorneoResumenViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Torneos\TorneoViewModel.cs" />
+    <Compile Include="Controllers\ViewModels\Usuarios\RegistroEmailModelView.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\UsuarioDatosModelView.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\UsuarioEntrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\UsuarioRegistrarModelView.cs" />
     <Compile Include="Controllers\ViewModels\Usuarios\JugadorViewModel.cs" />
+    <Compile Include="EmailsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="EquiposController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -483,6 +487,8 @@
     <Content Include="Views\Shared\Usuarios\_Modificar.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DineroNotificacionModelView.cshtml" />
     <Content Include="Views\Shared\Jugador\_NotificacionModelView.cshtml" />
+    <Content Include="Views\Emails\Registro.cshtml" />
+    <Content Include="Views\Emails\_Estilo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Padel.Domain\Padel.Domain.csproj">

@@ -36,6 +36,7 @@ public static class MVC
     public static Padel.Web.Mvc.Controllers.ResultadosController Resultados = new Padel.Web.Mvc.Controllers.T4MVC_ResultadosController();
     public static Padel.Web.Mvc.Controllers.TorneosController Torneos = new Padel.Web.Mvc.Controllers.T4MVC_TorneosController();
     public static Padel.Web.Mvc.Controllers.UsuariosController Usuarios = new Padel.Web.Mvc.Controllers.T4MVC_UsuariosController();
+    public static T4MVC.EmailsController Emails = new T4MVC.EmailsController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 

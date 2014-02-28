@@ -53,7 +53,7 @@ namespace T4MVC
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public partial class _DisplayTemplatesClass
             {
-                public readonly string Copy_of_EquipoOperacionModelView = "Copy of EquipoOperacionModelView";
+                public readonly string DineroNotificacionModelView = "DineroNotificacionModelView";
                 public readonly string EquipoOperacionModelView = "EquipoOperacionModelView";
                 public readonly string GameCurrency = "GameCurrency";
                 public readonly string GameExp = "GameExp";
