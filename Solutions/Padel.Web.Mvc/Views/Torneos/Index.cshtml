@@ -32,11 +32,11 @@
 }
 else
 {
-    var torneosEspecial = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Especial && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Pendiente).ToList();
+    var torneosEspecial = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Especial && (t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Pendiente || t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Verificado)).ToList();
     var torneosEspecialProgreso = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Especial && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Progreso).ToList();
-    var torneosEstandar = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Estandar && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Pendiente).ToList();
+    var torneosEstandar = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Estandar && (t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Pendiente || t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Verificado)).ToList();
     var torneosEstandarProgreso = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Estandar && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Progreso).ToList();
-    var torneosMini = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Mini && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Pendiente).ToList();
+    var torneosMini = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Mini && (t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Pendiente || t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Verificado)).ToList();
     var torneosMiniProgreso = Model.Where(t => t.Tipo == Padel.Domain.TipoTorneoEnum.Mini && t.EstadoCategoria == Padel.Domain.EstadoCategoriaEnum.Progreso).ToList();
 
     if (torneosEspecial.Count() != 0 || torneosEspecialProgreso.Count() != 0)
