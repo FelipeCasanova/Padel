@@ -49,6 +49,7 @@ namespace T4MVC
         public Padel.Web.Mvc.Areas.Admin.Controllers.HomeAdminController HomeAdmin = new Padel.Web.Mvc.Areas.Admin.Controllers.T4MVC_HomeAdminController();
         public Padel.Web.Mvc.Areas.Admin.Controllers.JugadoresController Jugadores = new Padel.Web.Mvc.Areas.Admin.Controllers.T4MVC_JugadoresController();
         public Padel.Web.Mvc.Areas.Admin.Controllers.TorneosController Torneos = new Padel.Web.Mvc.Areas.Admin.Controllers.T4MVC_TorneosController();
+        public T4MVC.Admin.EmailsController Emails = new T4MVC.Admin.EmailsController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
     }
 }
@@ -199,6 +200,7 @@ namespace Links
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                     public static readonly string grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/grid.min.js") ? Url("grid.min.js") : Url("grid.js");
+                    public static readonly string verify_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/verify.min.js") ? Url("verify.min.js") : Url("verify.js");
                 }
             
             }

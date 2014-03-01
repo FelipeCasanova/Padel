@@ -44,6 +44,21 @@ namespace T4MVC.Admin
             public readonly string _Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
             public readonly string _PageHead = "~/Areas/Admin/Views/Shared/_PageHead.cshtml";
             public readonly string _SideBar = "~/Areas/Admin/Views/Shared/_SideBar.cshtml";
+            static readonly _ErrorsClass s_Errors = new _ErrorsClass();
+            public _ErrorsClass Errors { get { return s_Errors; } }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public partial class _ErrorsClass
+            {
+                static readonly _ViewNamesClass s_ViewNames = new _ViewNamesClass();
+                public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
+                public class _ViewNamesClass
+                {
+                    public readonly string _Error = "_Error";
+                    public readonly string _ModalError = "_ModalError";
+                }
+                public readonly string _Error = "~/Areas/Admin/Views/Shared/Errors/_Error.cshtml";
+                public readonly string _ModalError = "~/Areas/Admin/Views/Shared/Errors/_ModalError.cshtml";
+            }
         }
     }
 

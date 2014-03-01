@@ -32,10 +32,10 @@ namespace Padel.Web.Mvc.Controllers.ViewModels.Torneos
             }
         }
 
-        //[JsonIgnore]
+        [JsonIgnore]
         public decimal DineroFicticioJugadorA { get; set; }
 
-        //[JsonIgnore]
+        [JsonIgnore]
         public decimal DineroRealJugadorA { get; set; }
 
         public int JugadorBId { get; set; }

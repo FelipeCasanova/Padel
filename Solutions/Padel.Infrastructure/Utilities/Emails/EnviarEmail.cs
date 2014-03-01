@@ -61,7 +61,8 @@ namespace Padel.Infrastructure.Utilities.Emails
                 for (num = 0; num < strArray4.Length; num = (int)(num + 1))
                 {
                     str = strArray4[num];
-                    message.To.Add(str);
+                    if (!string.IsNullOrEmpty(str))
+                        message.To.Add(str);
                 }
             }
             if (strArray2 != null)
@@ -70,7 +71,8 @@ namespace Padel.Infrastructure.Utilities.Emails
                 for (num = 0; num < strArray4.Length; num = (int)(num + 1))
                 {
                     str = strArray4[num];
-                    message.CC.Add(str);
+                    if (!string.IsNullOrEmpty(str))
+                        message.CC.Add(str);
                 }
             }
             if (strArray3 != null)
@@ -79,7 +81,8 @@ namespace Padel.Infrastructure.Utilities.Emails
                 for (num = 0; num < strArray4.Length; num = (int)(num + 1))
                 {
                     str = strArray4[num];
-                    message.Bcc.Add(str);
+                    if (!string.IsNullOrEmpty(str))
+                        message.Bcc.Add(str);
                 }
             }
             message.Subject = asunto;
@@ -95,7 +98,6 @@ namespace Padel.Infrastructure.Utilities.Emails
                 }
             }
             SmtpClient client = new SmtpClient();
-            //client.set_Credentials(new NetworkCredential(ConfigurationManager.AppSettings["SmtpServerUserName"], ConfigurationManager.AppSettings["SmtpServerPassword"]));
             client.EnableSsl = false;
             try
             {

@@ -41,6 +41,10 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
                     new SideBarItem() { 
                         Name = "Gestionar Torneos",
                         Url = Url.Action(MVC.Admin.Torneos.Actions.ActionNames.Index, MVC.Admin.Torneos.Name)
+                    },
+                    new SideBarItem() { 
+                        Name = "Verificar Torneos",
+                        Url = Url.Action(MVC.Admin.Torneos.Actions.ActionNames.Verificar, MVC.Admin.Torneos.Name)
                     }
                 }
             });
@@ -57,6 +61,11 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
             SetBreadcrumb(BreadcrumbModelView);
 
             base.OnActionExecuting(filterContext);
+        }
+
+        protected void AddBreadScrum(BreadcrumbItem item)
+        {
+            BreadcrumbModelView.Add(item);
         }
 
         public abstract string GetPageTitle();

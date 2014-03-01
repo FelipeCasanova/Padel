@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.IdentityModel.Web;
 using Microsoft.Web.Mvc;
+using MvcReCaptcha;
 using Padel.Domain;
 using Padel.Domain.Contracts.Tasks;
 using Padel.Infrastructure.Utilities;
+using Padel.Infrastructure.Utilities.Emails;
 using Padel.Tasks;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands;
@@ -17,10 +21,6 @@ using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
 using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
 using SharpArch.NHibernate.Web.Mvc;
-using MvcReCaptcha;
-using System.Net;
-using System.Configuration;
-using Padel.Infrastructure.Utilities.Emails;
 
 namespace Padel.Web.Mvc.Controllers
 {
@@ -228,6 +228,7 @@ namespace Padel.Web.Mvc.Controllers
 
             return PartialView(MVC.Shared.Views.Usuarios._Entrar);
         }
+
 
         [AllowAnonymous]
         public virtual JsonResult ValidarTelefonoUnico(int? telefonoMovil)

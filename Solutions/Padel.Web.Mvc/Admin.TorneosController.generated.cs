@@ -47,6 +47,18 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Listado);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _Verificar()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Verificar);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _ListadoPendientes()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._ListadoPendientes);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public TorneosController Actions { get { return MVC.Admin.Torneos; } }
@@ -65,6 +77,9 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         {
             public readonly string Index = "Index";
             public readonly string _Listado = "_Listado";
+            public readonly string Verificar = "Verificar";
+            public readonly string _Verificar = "_Verificar";
+            public readonly string _ListadoPendientes = "_ListadoPendientes";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -72,6 +87,9 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         {
             public const string Index = "Index";
             public const string _Listado = "_Listado";
+            public const string Verificar = "Verificar";
+            public const string _Verificar = "_Verificar";
+            public const string _ListadoPendientes = "_ListadoPendientes";
         }
 
 
@@ -80,6 +98,23 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         public ActionParamsClass__Listado _ListadoParams { get { return s_params__Listado; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass__Listado
+        {
+            public readonly string page = "page";
+            public readonly string size = "size";
+        }
+        static readonly ActionParamsClass__Verificar s_params__Verificar = new ActionParamsClass__Verificar();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__Verificar _VerificarParams { get { return s_params__Verificar; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__Verificar
+        {
+            public readonly string idCategoria = "idCategoria";
+        }
+        static readonly ActionParamsClass__ListadoPendientes s_params__ListadoPendientes = new ActionParamsClass__ListadoPendientes();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__ListadoPendientes _ListadoPendientesParams { get { return s_params__ListadoPendientes; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__ListadoPendientes
         {
             public readonly string page = "page";
             public readonly string size = "size";
@@ -95,8 +130,10 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Index = "Index";
+                public readonly string Verificar = "Verificar";
             }
             public readonly string Index = "~/Areas/Admin/Views/Torneos/Index.cshtml";
+            public readonly string Verificar = "~/Areas/Admin/Views/Torneos/Verificar.cshtml";
         }
     }
 
@@ -122,6 +159,36 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "size", size);
             _ListadoOverride(callInfo, page, size);
+            return callInfo;
+        }
+
+        partial void VerificarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult Verificar()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Verificar);
+            VerificarOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void _VerificarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int idCategoria);
+
+        public override System.Web.Mvc.ActionResult _Verificar(int idCategoria)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Verificar);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "idCategoria", idCategoria);
+            _VerificarOverride(callInfo, idCategoria);
+            return callInfo;
+        }
+
+        partial void _ListadoPendientesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int? page, int? size);
+
+        public override System.Web.Mvc.ActionResult _ListadoPendientes(int? page, int? size)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._ListadoPendientes);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "size", size);
+            _ListadoPendientesOverride(callInfo, page, size);
             return callInfo;
         }
 

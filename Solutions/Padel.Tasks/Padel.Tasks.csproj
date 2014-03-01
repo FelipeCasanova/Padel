@@ -112,12 +112,14 @@
     <Compile Include="CommandHandlers\Equipos\EliminarEquipoCommandHandler.cs" />
     <Compile Include="CommandHandlers\Torneos\PagarJugadorConPuntosEnTorneoCommandHandler.cs" />
     <Compile Include="CommandHandlers\Torneos\CrearEquipoParaTorneoCommandHandler.cs" />
+    <Compile Include="CommandHandlers\Torneos\VerificarTorneoCommandHandler.cs" />
     <Compile Include="CommandHandlers\Usuarios\EntrarUsuarioCommandHandler.cs" />
     <Compile Include="CommandHandlers\Usuarios\IngresarPuntosAUsuarioCommandHandler.cs" />
     <Compile Include="CommandHandlers\Usuarios\RegistrarUsuarioCommandHandler.cs" />
     <Compile Include="CommandHandlers\Equipos\ValidarJugadorEnEquipoCommandHandler.cs" />
     <Compile Include="CommandHandlers\Torneos\EliminarEquipoDeTorneoCommandHandler.cs" />
     <Compile Include="CommandHandlers\Usuarios\RefrescarUsuarioCommandHandler.cs" />
+    <Compile Include="Commands\Torneos\VerificarTorneoCommand.cs" />
     <Compile Include="Commands\Torneos\PagarJugadorConPuntosEnTorneoCommand.cs" />
     <Compile Include="CommandResults\CommandResult.cs" />
     <Compile Include="Commands\Equipos\CrearEquipoCommand.cs" />

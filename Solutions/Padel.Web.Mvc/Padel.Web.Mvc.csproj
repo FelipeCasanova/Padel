@@ -190,6 +190,9 @@
     <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Admin.EmailsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Admin.HomeAdminController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -213,7 +216,8 @@
     <Compile Include="Areas\Admin\Controllers\TorneosController.cs" />
     <Compile Include="Areas\Admin\Controllers\ViewModels\Menus\BreadcrumbModelView.cs" />
     <Compile Include="Areas\Admin\Controllers\ViewModels\Menus\SideBarModelView.cs" />
-    <Compile Include="Areas\Admin\Controllers\ViewModels\TorneoViewModel.cs" />
+    <Compile Include="Areas\Admin\Controllers\ViewModels\Torneos\TorneoViewModel.cs" />
+    <Compile Include="Areas\Admin\Controllers\ViewModels\Torneos\VerificarTorneoEmailModelView.cs" />
     <Compile Include="CastleWindsor\ComponentRegistrar.cs" />
     <Compile Include="ContactoController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -395,6 +399,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\padel\admin\admin.js" />
     <Content Include="Scripts\padel\admin\jugadores\grid.js" />
+    <Content Include="Scripts\padel\admin\torneos\verify.js" />
     <Content Include="Scripts\padel\admin\torneos\grid.js" />
     <Content Include="Scripts\padel\jugador\demo\dashboard-demo.js" />
     <Content Include="Scripts\padel\jugador\demo\flot-demo.js" />
@@ -423,6 +428,11 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Admin\Views\Torneos\Verificar.cshtml" />
+    <Content Include="Areas\Admin\Views\Emails\_Estilo.cshtml" />
+    <Content Include="Areas\Admin\Views\Emails\VerificarTorneo.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Errors\_Error.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Errors\_ModalError.cshtml" />
     <None Include="Content\fonts\ionicons.eot" />
     <None Include="Content\fonts\ionicons.ttf" />
     <None Include="Content\fonts\ionicons.woff" />

@@ -23,14 +23,14 @@ app.controller('torneosCtrl', function ($scope, $http) {
             var data;
             if (searchText) {
                 var ft = searchText.toLowerCase();
-                $http.post('torneos/_listado').success(function (largeLoad) {
+                $http.post('/admin/torneos/_listado').success(function (largeLoad) {
                     data = largeLoad.filter(function (item) {
                         return JSON.stringify(item).toLowerCase().indexOf(ft) != -1;
                     });
                     $scope.setPagingData(data, page, pageSize);
                 });
             } else {
-                $http.post('torneos/_listado').success(function (largeLoad) {
+                $http.post('/admin/torneos/_listado').success(function (largeLoad) {
                     $scope.setPagingData(largeLoad, page, pageSize);
                 });
             }
@@ -52,7 +52,7 @@ app.controller('torneosCtrl', function ($scope, $http) {
 
     $scope.gridOptions = {
         data: 'myData',
-        columnDefs: [{ field: 'Nombre', displayName: 'Nombre' }, { field: 'TipoStr', displayName: 'Tipo' }, { field: 'Categoria', displayName: 'Categoria' } ],
+        columnDefs: [{ field: 'Nombre', displayName: 'Nombre' }, { field: 'Tipo', displayName: 'Tipo' }, { field: 'Categoria', displayName: 'Categoria' } ],
         enablePaging: true,
         showFooter: true,
         footerTemplate: '<div class="widget-foot">' +
@@ -66,6 +66,7 @@ app.controller('torneosCtrl', function ($scope, $http) {
                 '<div class="clearfix">' +
                 '</div>' +
             '</div>',
+        enableRowSelection: false,
         enableColumnResize: true,
         totalServerItems: 'totalServerItems',
         pagingOptions: $scope.pagingOptions,

@@ -124,6 +124,7 @@
     <Compile Include="NHibernateMaps\Conventions\SubclassConvention.cs" />
     <Compile Include="NHibernateMaps\Conventions\TableNameConvention.cs" />
     <Compile Include="NHibernateMaps\AutoPersistenceModelGenerator.cs" />
+    <Compile Include="NHibernateMaps\CategoriaMap.cs" />
     <Compile Include="NHibernateMaps\NotificacionMap.cs" />
     <Compile Include="NHibernateMaps\OperationMap.cs" />
     <Compile Include="NHibernateMaps\UsuarioMap.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Utilities\ClaimsPrincipalUtility.cs" />
     <Compile Include="Utilities\Emails\EnviarEmail.cs" />
     <Compile Include="Utilities\Emails\ResponseCapture.cs" />
+    <Compile Include="Utilities\Extensions\IQueryOverExtensions.cs" />
     <Compile Include="Utilities\MD5Extension.cs" />
     <Compile Include="Utilities\PadelPrincipal.cs" />
     <Compile Include="Utilities\SessionSecurityToken\MachineKeyProtectionTransform.cs" />

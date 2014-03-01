@@ -1,4 +1,4 @@
-﻿@model Padel.Web.Mvc.Controllers.ViewModels.Usuarios.RegistroEmailModelView
+﻿@model Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Torneos.VerificarTorneoEmailModelView
 @{
     Layout = null;
     String raiz = System.Web.Configuration.WebConfigurationManager.AppSettings["RaizPadelApp"];
@@ -8,25 +8,21 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title> @name - Registro</title>
+    <title>@name - Verificar Torneo</title>
     @Html.Partial(MVC.Emails.Views._Estilo)
 </head>
 <body>
     <div>
         <h2>
-            BIENVENIDO A @name.ToUpper()</h2>
+            @name - Verificar Torneo</h2>
         <br />
-        Hola <b>@Model.Nombre</b>,
-        <br />
-        <br />
-        Se ha registrado en @name con la cuenta <b>@Model.Email</b>. Su password es
-        el siguiente:
+        Usted está registrado en el torneo <b>@Model.NombreTorneo - @Model.NombreCategoria</b> con el equipo <b>@Model.NombreEquipo.</b>
         <br />
         <br />
-        <b>@Model.Password</b>
+        No olvide pagar la entrada al torneo antes de su comienzo.
         <br />
         <br />
-        Esperamos que disfrute de los torneos,<br /><br />
+        Esperamos que disfrute del torneo,<br /><br />
         <i>@name</i>
     </div>
 </body>
