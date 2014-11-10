@@ -6,9 +6,9 @@ using Padel.Domain.Notificaciones;
 
 namespace Padel.Web.Mvc.Controllers.ViewModels.Notificaciones
 {
-    public class DineroNotificacionModelView : NotificacionModelView
+    public class CorazonNotificacionModelView : NotificacionModelView
     {
-        public  DineroNotificacionModelView(DineroNotificacion model)
+        public CorazonNotificacionModelView(CorazonNotificacion model)
             : base(model)
         {
         }

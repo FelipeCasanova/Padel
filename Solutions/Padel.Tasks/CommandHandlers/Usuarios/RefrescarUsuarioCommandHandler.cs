@@ -24,20 +24,7 @@ namespace Padel.Tasks.CommandHandlers.Usuarios
 
         public CommandResult Handle(RefrescarUsuarioCommand command)
         {
-            Usuario usuarioDB = null;
-            if (command.TelefonoMovil != null)
-            {
-                usuarioDB = usuarioTasks.GetByMovil(command.TelefonoMovil.GetValueOrDefault());
-            }
-            else
-            {
-                PadelPrincipal principal = (PadelPrincipal)Thread.CurrentPrincipal;
-                usuarioDB = usuarioTasks.Get(principal.Id);
-            }
-
-            var token = FederatedAuthentication.SessionAuthenticationModule.CreateSessionSecurityToken(ClaimsPrincipalUtility.CreatePrincipal(usuarioDB),
-                "PadelContext", DateTime.Now, DateTime.Now.AddHours(1), true);
-            FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(token);
+            usuarioTasks.RefreshUser(command.TelefonoMovil);
             return new CommandResult(true, string.Empty);
         }
     }

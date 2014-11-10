@@ -14,6 +14,7 @@ using Padel.Tasks.Events.Usuarios;
 using SharpArch.Domain.Commands;
 using SharpArch.Domain.Events;
 using SharpArch.Domain.PersistenceSupport;
+using Padel.Domain.Notificaciones;
 
 namespace Padel.Tasks.CommandHandlers.Usuarios
 {
@@ -46,6 +47,7 @@ namespace Padel.Tasks.CommandHandlers.Usuarios
             {
                 this.usuarioTasks.CreateOrUpdate(usuario);
                 DomainEvents.Raise<RegistrarEvent>(new RegistrarEvent(usuario.Id));
+                DomainEvents.Raise<IngresarCorazonesEvent>(new IngresarCorazonesEvent(usuario.Id, 3, CorazonNotificacion.AccionEnum.IngresoCorazonesRegistro.ToString()));
                 return new CommandResult(true, string.Empty);
             }
             else 

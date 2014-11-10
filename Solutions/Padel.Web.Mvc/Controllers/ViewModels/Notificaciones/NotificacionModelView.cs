@@ -18,12 +18,18 @@ namespace Padel.Web.Mvc.Controllers.ViewModels.Notificaciones
 
         public static NotificacionModelView Crear(Notificacion model)
         {
-            if (model is DineroNotificacion)
-                return DineroNotificacionModelView.Crear((DineroNotificacion)model);
-
             return new NotificacionModelView(model);
         }
 
+        public static NotificacionModelView Crear(DineroNotificacion model)
+        {
+            return new DineroNotificacionModelView(model);
+        }
+
+        public static NotificacionModelView Crear(CorazonNotificacion model)
+        {
+            return new CorazonNotificacionModelView(model);
+        }
 
         public string Accion { get; set; }
 

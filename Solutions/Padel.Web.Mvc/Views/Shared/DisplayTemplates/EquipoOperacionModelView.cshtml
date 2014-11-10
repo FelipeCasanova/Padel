@@ -1,7 +1,6 @@
 ﻿@model Padel.Web.Mvc.Controllers.ViewModels.Operaciones.EquipoOperacionModelView
 @{
-    TempData["Index"] = ((int)TempData["Index"]) + 1;
-    
+    TempData["Index"] = ((int)TempData["Index"]) + 1;    
 }
 <li class="@(((int)TempData["Index"]) % 2 == 1 ? "timeline-inverted" : "")">
     <div class="timeline-badge @(Model.Accion == Padel.Domain.Operaciones.EquipoOperacion.AccionEnum.CrearEquipo.ToString() ? "success" :

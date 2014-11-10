@@ -9,6 +9,8 @@ namespace Padel.Infrastructure.Utilities
 {
     public class PadelPrincipal : ClaimsPrincipal
     {
+        private static readonly string raiz = System.Web.Configuration.WebConfigurationManager.AppSettings["RaizPadelApp"];
+
         public PadelPrincipal(IClaimsPrincipal principal)
             : base(principal)
         {
@@ -34,7 +36,7 @@ namespace Padel.Infrastructure.Utilities
         {
             get
             {
-                return ((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/gender").Value;
+                return ((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://" + raiz + "/accesscontrolservice/2014/01/claims/gender").Value;
             }
         }
 
@@ -43,7 +45,7 @@ namespace Padel.Infrastructure.Utilities
         {
             get
             {
-                return int.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/exp").Value);
+                return int.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://" + raiz + "/accesscontrolservice/2014/01/claims/exp").Value);
             }
         }
 
@@ -52,7 +54,7 @@ namespace Padel.Infrastructure.Utilities
         {
             get
             {
-                return int.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/level").Value);
+                return int.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://" + raiz + "/accesscontrolservice/2014/01/claims/level").Value);
             }
         }
 
@@ -61,7 +63,7 @@ namespace Padel.Infrastructure.Utilities
         {
             get
             {
-                return int.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/hearts").Value);
+                return int.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://" + raiz + "/accesscontrolservice/2014/01/claims/hearts").Value);
             }
         }
 
@@ -70,7 +72,7 @@ namespace Padel.Infrastructure.Utilities
         {
             get
             {
-                return decimal.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/points").Value);
+                return decimal.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://" + raiz + "/accesscontrolservice/2014/01/claims/points").Value);
             }
         }
 
@@ -78,7 +80,7 @@ namespace Padel.Infrastructure.Utilities
         {
             get
             {
-                return DateTime.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://http://flipersanvi.no-ip.biz/accesscontrolservice/2014/01/claims/creationdate").Value);
+                return DateTime.Parse(((IClaimsIdentity)Identity).Claims.First(c => c.ClaimType == "http://" + raiz + "/accesscontrolservice/2014/01/claims/creationdate").Value);
             }
         }
 

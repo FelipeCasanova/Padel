@@ -1,0 +1,4 @@
+﻿@model Padel.Web.Mvc.Controllers.ViewModels.Notificaciones.CorazonNotificacionModelView
+<a href="@(Url.Action(MVC.Jugador.ActionNames.Datos, MVC.Jugador.Name))" class="list-group-item"><i class="fa fa-heart fa-fw"></i>@Model.Mensaje
+<span class="pull-right text-muted small"><em>@Model.FechaCreacion.ToShortDateString()</em>
+</span></a>

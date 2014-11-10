@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>NHibernate.Caches.MemCache</id>
+    <version>3.2.0.4000</version>
+    <title />
+    <authors>NHibernate community</authors>
+    <owners>NHibernate community</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Uses memcached as the cache provider for NHibernate..</description>
+    <summary>Uses memcached as the cache provider for NHibernate.</summary>
+    <tags>ORM DataBase DAL ObjectRelationalMapping</tags>
+    <dependencies>
+      <dependency id="NHibernate" version="3.2.0.4000" />
+      <dependency id="Memcached.ClientLibrary" version="1.0" />
+    </dependencies>
+  </metadata>
+</package>

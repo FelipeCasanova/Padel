@@ -6,16 +6,25 @@ using Padel.Domain;
 using Padel.Domain.Contracts.Tasks;
 using SharpArch.Domain.PersistenceSupport;
 using SharpArch.NHibernate;
+using Padel.Infrastructure.Utilities;
+using System.Threading;
+using Microsoft.IdentityModel.Web;
+using SharpArch.Domain.Events;
+using Padel.Tasks.Events.Usuarios;
+using Padel.Tasks.Commands.Usuarios;
+using Padel.Domain.Notificaciones;
 
 namespace Padel.Tasks
 {
     public class UsuarioTasks : NHibernateQuery, IUsuarioTasks
     {
         private readonly IRepository<Usuario> usuarioRepository;
+        private readonly IRepository<Notificacion> notificacionRepository;
 
-        public UsuarioTasks(IRepository<Usuario> usuarioRepository)
+        public UsuarioTasks(IRepository<Usuario> usuarioRepository, IRepository<Notificacion> notificacionRepository)
         {
             this.usuarioRepository = usuarioRepository;
+            this.notificacionRepository = notificacionRepository;
         }
 
         public List<Domain.Usuario> GetAll()
@@ -66,6 +75,23 @@ namespace Padel.Tasks
             return query.Where(u => u.Email == email).RowCount();
         }
 
+        public void RefreshUser(int? TelefonoMovil = null)
+        {
+            Usuario usuarioDB = null;
+            if (TelefonoMovil != null)
+            {
+                usuarioDB = GetByMovil(TelefonoMovil.GetValueOrDefault());
+            }
+            else
+            {
+                PadelPrincipal principal = (PadelPrincipal)Thread.CurrentPrincipal;
+                usuarioDB = Get(principal.Id);
+            }
+
+            var token = FederatedAuthentication.SessionAuthenticationModule.CreateSessionSecurityToken(ClaimsPrincipalUtility.CreatePrincipal(usuarioDB),
+                "PadelContext", DateTime.Now, DateTime.Now.AddHours(1), true);
+            FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(token);
+        }
 
         public bool ValidateUser(string emailOrMovil, string password, out int telefonoMovilOut)
         {

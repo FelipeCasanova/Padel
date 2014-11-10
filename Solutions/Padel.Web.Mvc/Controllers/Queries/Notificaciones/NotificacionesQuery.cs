@@ -28,7 +28,7 @@ namespace Padel.Web.Mvc.Controllers.Queries.Notificaciones
                 .Where(o => o.Usuario.Id == usuarioId)
                 .Future<Notificacion>();
 
-            return models.ToList().Select<Notificacion, NotificacionModelView>(o => NotificacionModelView.Crear(o)).ToList();
+            return models.ToList().Select<dynamic, NotificacionModelView>(o => NotificacionModelView.Crear(o)).ToList();
         }
 
     }

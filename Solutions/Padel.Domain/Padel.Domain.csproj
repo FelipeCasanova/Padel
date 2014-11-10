@@ -96,6 +96,7 @@
     <Compile Include="Contracts\Tasks\IEquipoTasks.cs" />
     <Compile Include="Contracts\Tasks\IOperacionTasks.cs" />
     <Compile Include="Contracts\Tasks\IUsuarioTasks.cs" />
+    <Compile Include="Notificaciones\CorazonNotificacion.cs" />
     <Compile Include="Notificaciones\DineroNotificacion.cs" />
     <Compile Include="Notificaciones\Notificacion.cs" />
     <Compile Include="Resultado.cs" />

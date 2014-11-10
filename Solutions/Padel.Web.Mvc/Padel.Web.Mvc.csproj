@@ -147,10 +147,9 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>False</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\..\Packages\Microsoft.AspNet.Web.Optimization.1.1.2\lib\net40\System.Web.Optimization.dll</HintPath>
@@ -251,6 +250,7 @@
     <Compile Include="Controllers\ViewModels\Equipos\EquipoViewModel.cs" />
     <Compile Include="Controllers\ViewModels\Menu\SideMenuJugadorModelView.cs" />
     <Compile Include="Controllers\ViewModels\Menu\MenuModelView.cs" />
+    <Compile Include="Controllers\ViewModels\Notificaciones\CorazonNotificacionModelView.cs" />
     <Compile Include="Controllers\ViewModels\Notificaciones\DineroNotificacionModelView.cs" />
     <Compile Include="Controllers\ViewModels\Notificaciones\NotificacionModelView.cs" />
     <Compile Include="Controllers\ViewModels\Operaciones\EquipoOperacionModelView.cs" />
@@ -499,6 +499,7 @@
     <Content Include="Views\Shared\Jugador\_NotificacionModelView.cshtml" />
     <Content Include="Views\Emails\Registro.cshtml" />
     <Content Include="Views\Emails\_Estilo.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CorazonNotificacionModelView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Padel.Domain\Padel.Domain.csproj">
@@ -546,9 +547,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51949</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://www.padel.es</IISUrl>
+          <IISUrl>http://www.padelpro.es</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://www.padel.es</IISAppRootUrl>
+          <IISAppRootUrl>http://www.padelpro.es</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,8 +1,4 @@
 ﻿@model Padel.Web.Mvc.Controllers.ViewModels.Notificaciones.DineroNotificacionModelView
-@{
-    TempData["Index"] = ((int)TempData["Index"]) + 1;
-    
-}
 <a href="@(Url.Action(MVC.Jugador.ActionNames.Datos, MVC.Jugador.Name))" class="list-group-item"><i class="fa fa-money fa-fw"></i>@Model.Mensaje
 <span class="pull-right text-muted small"><em>@Model.FechaCreacion.ToShortDateString()</em>
 </span></a>

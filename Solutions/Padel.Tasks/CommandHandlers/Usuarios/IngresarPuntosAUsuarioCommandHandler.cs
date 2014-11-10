@@ -24,11 +24,12 @@ namespace Padel.Tasks.CommandHandlers.Usuarios
         public CommandResult Handle(IngresarPuntosAUsuarioCommand command)
         {
             Usuario usuario = this.usuarioTasks.Get(command.UsuarioId);
-            if (command.IsValid())
+            if (usuario.IsValid())
             {
                 usuario.DineroFicticio += command.CantidadPuntos;
                 this.usuarioTasks.CreateOrUpdate(usuario);
                 DomainEvents.Raise<IngresarDineroFicticioEvent>(new IngresarDineroFicticioEvent(usuario.Id, command.CantidadPuntos));
+                DomainEvents.Raise<RefrescarUsuarioEvent>(new RefrescarUsuarioEvent());
                 return new CommandResult(true, string.Empty);
             }
             return new CommandResult(false, string.Empty);

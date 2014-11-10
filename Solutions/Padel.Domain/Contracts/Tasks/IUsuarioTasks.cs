@@ -15,6 +15,8 @@ namespace Padel.Domain.Contracts.Tasks
 
         void Delete(int id);
 
+        void RefreshUser(int? TelefonoMovil = null);
+
         bool ValidateUser(string emailOrMovil, string password, out int telefonoMovilOut);
 
         Usuario GetByEmail(string email);

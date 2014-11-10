@@ -21,6 +21,10 @@ using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
 using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
 using SharpArch.NHibernate.Web.Mvc;
+using SharpArch.Domain.Events;
+using Padel.Tasks.Events.Usuarios;
+using System.Threading;
+using Padel.Domain.Notificaciones;
 
 namespace Padel.Web.Mvc.Controllers
 {
@@ -31,14 +35,17 @@ namespace Padel.Web.Mvc.Controllers
 
         private readonly IUsuarioTasks usuarioTasks;
 
+        private readonly IRepository<Notificacion> notificacionRepository;
+
         private readonly IEmailTasks emailTasks;
 
         private readonly IJugadoresQuery jugadoresQuery;
 
-        public UsuariosController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, IEmailTasks emailTasks, IJugadoresQuery jugadoresQuery)
+        public UsuariosController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks,  IRepository<Notificacion> notificacionRepository, IEmailTasks emailTasks, IJugadoresQuery jugadoresQuery)
         {
             this.commandProcessor = commandProcessor;
             this.usuarioTasks = usuarioTasks;
+            this.notificacionRepository = notificacionRepository;
             this.emailTasks = emailTasks;
             this.jugadoresQuery = jugadoresQuery;
         }
@@ -68,8 +75,13 @@ namespace Padel.Web.Mvc.Controllers
             if (ModelState.IsValid)
             {
                 this.usuarioTasks.CreateOrUpdate(usuarioModelView.Usuario);
-                var command2 = new RefrescarUsuarioCommand();
-                var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
+                PadelPrincipal principal = (PadelPrincipal)Thread.CurrentPrincipal;
+                if (principal.Identity.IsAuthenticated && principal.Id == usuarioModelView.Usuario.Id &&
+                !notificacionRepository.GetAll().Any(n => n.Usuario.Id == usuarioModelView.Usuario.Id && n.Accion == CorazonNotificacion.AccionEnum.IngresoCorazonesActualizado.ToString()))
+                {
+                    DomainEvents.Raise<IngresarCorazonesEvent>(new IngresarCorazonesEvent(usuarioModelView.Usuario.Id, 3, CorazonNotificacion.AccionEnum.IngresoCorazonesActualizado.ToString()));
+                }
+                DomainEvents.Raise<RefrescarUsuarioEvent>(new RefrescarUsuarioEvent());
             }
 
             return PartialView(MVC.Shared.Views.Usuarios._Modificar, usuarioModelView);
@@ -112,7 +124,7 @@ namespace Padel.Web.Mvc.Controllers
                     var viewString = View(MVC.Emails.Views.Registro, modelview).Capture(ControllerContext);
                     emailTasks.EnviarNotificacion("Padel - Registro", viewString, usuarioModelView.Email);
 
-                    // Refrescar usuario
+                    // Refrescar usuario. (Inicialize el principal con los datos del usuario)
                     var command2 = new RefrescarUsuarioCommand(usuarioModelView.TelefonoMovil);
                     var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
 
@@ -121,10 +133,6 @@ namespace Padel.Web.Mvc.Controllers
                     {
                         var command3 = new IngresarPuntosAUsuarioCommand(5, ((PadelPrincipal)User).Id);
                         var result3 = this.commandProcessor.Process<IngresarPuntosAUsuarioCommand, CommandResult>(command3).First();
-                        if (result3.Success)
-                        {
-                            this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(new RefrescarUsuarioCommand()).First();
-                        }
                     }
 
                     return JavaScript("window.location = '" + Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name) + "';");

@@ -41,7 +41,7 @@ namespace Padel.Web.Mvc.Filters
                     AntiForgery.Validate();
                 }
             }
-            catch (HttpAntiForgeryException e)
+            catch (HttpAntiForgeryException)
             {
                 throw new HttpAntiForgeryException("Anti forgery token cookie not found");
             }
