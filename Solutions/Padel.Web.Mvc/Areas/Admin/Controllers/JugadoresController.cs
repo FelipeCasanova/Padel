@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Menus;
 using Microsoft.Web.Mvc;
-using SharpArch.NHibernate.Web.Mvc;
 using Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Usuarios;
+using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Jugadores;
+using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Menus;
+using Padel.Web.Mvc.Filters;
+using SharpArch.NHibernate.Web.Mvc;
+using SharpArch.Web.Mvc.JsonNet;
+using Padel.Tasks.Commands.Admin.Jugadores;
+using Padel.Tasks.CommandResults;
+using SharpArch.Domain.Commands;
 
 namespace Padel.Web.Mvc.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public partial class JugadoresController : BaseController
     {
+        private readonly ICommandProcessor commandProcessor;
+
         private readonly IJugadoresQuery jugadoresQuery;
 
-        public JugadoresController(IJugadoresQuery jugadoresQuery)
+        public JugadoresController(ICommandProcessor commandProcessor, IJugadoresQuery jugadoresQuery)
         {
             this.jugadoresQuery = jugadoresQuery;
         }
@@ -48,8 +57,35 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         public virtual ActionResult _Listado(int? page, int? size)
         {
             var viewModel = this.jugadoresQuery.GetJugadoresList(page ?? 1, size ?? int.MaxValue);
-            return Json(viewModel, JsonRequestBehavior.AllowGet);
+            return new JsonNetResult(viewModel);
         }
 
+
+        /// <summary>
+        /// Modificar jugadores
+        /// </summary>
+        /// <param name="jugadoresModelView">Lista de entidades JugadorViewModel.</param>
+        /// <returns>Devuelve el resultado de la operacion.</returns>
+        [AjaxOnly]
+        [HttpPost]
+        [Transaction]
+        [AllowAnonymous]
+        [CustomValidateAntiForgeryTokenAttribute]
+        public virtual ActionResult _Modificar(List<JugadorViewModel> jugadoresModelView)
+        {
+            List<object> results = new List<object>();
+
+            foreach (var jugador in jugadoresModelView)
+            {
+                var command = new ModificarJugadorCommand(jugador.Id, jugador.Nombre, jugador.Sexo, jugador.TelefonoMovil, jugador.Email);
+                var result = this.commandProcessor.Process<ModificarJugadorCommand, CommandResult>(command).First();
+                if (result != null) 
+                {
+                    results.Add(result);
+                }
+            }
+            
+            return new JsonNetResult(results);
+        }
     }
 }

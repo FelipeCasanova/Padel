@@ -20,6 +20,7 @@ using SharpArch.Web.Mvc.JsonNet;
 
 namespace Padel.Web.Mvc.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public partial class TorneosController : BaseController
     {
         private readonly ICommandProcessor commandProcessor;

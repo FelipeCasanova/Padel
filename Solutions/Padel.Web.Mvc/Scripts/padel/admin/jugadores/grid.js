@@ -1,5 +1,7 @@
-﻿var app = angular.module('padelApp', ['ngGrid']);
-app.controller('jugadoresCtrl', function ($scope, $http) {
+﻿/* Jugadores Controller */
+
+function PlayersCtrl($scope, $http, savePlayersService) {
+
     $scope.filterOptions = {
         filterText: "",
         useExternalFilter: true
@@ -52,7 +54,9 @@ app.controller('jugadoresCtrl', function ($scope, $http) {
 
     $scope.gridOptions = {
         data: 'myData',
-        columnDefs: [{ field: 'Nombre', displayName: 'Nombre' }, { field: 'TelefonoMovil', displayName: 'Móvil' }, { field: 'Email', displayName: 'Email' }, { field: 'Role', displayName: 'Rol'}],
+        columnDefs: [{ field: 'Nombre', displayName: 'Nombre', enableCellEdit: true }, { field: 'Sexo', displayName: 'Sexo', enableCellEdit: true }
+                    , { field: 'TelefonoMovil', displayName: 'Móvil', enableCellEdit: true }, { field: 'Email', displayName: 'Email', enableCellEdit: true }
+                    , { field: 'Role', displayName: 'Rol'}],
         enablePaging: true,
         showFooter: true,
         footerTemplate: '<div class="widget-foot">' +
@@ -71,4 +75,55 @@ app.controller('jugadoresCtrl', function ($scope, $http) {
         pagingOptions: $scope.pagingOptions,
         filterOptions: $scope.filterOptions
     };
-});
+
+    $scope.save = function () {
+        
+        savePlayersService.antiForgeryToken = $scope.antiForgeryToken;
+        savePlayersService.data = $scope.myData;
+        savePlayersService.save(function (data) {
+            //$rootScope.$broadcast("getTournamentsByType", data);
+        });
+    };
+};
+
+PlayersCtrl.$inject = ['$scope', '$http', 'savePlayersService'];
+
+/********************************/
+
+/* Sign Up Service */
+
+app.service('savePlayersService', ['$rootScope', '$http', function ($rootScope, $http) {
+
+    var savePlayersService = {};
+
+    savePlayersService.data;
+    savePlayersService.antiForgeryToken;
+
+    savePlayersService.save = function (callbackOk) {
+        // Create the http post request
+        // the data holds the keywords
+        // The request is a JSON request.
+        var url = 'jugadores/_modificar';
+
+        $http.post(url, savePlayersService.data, 
+        {
+            headers: { 'RequestVerificationToken': savePlayersService.antiForgeryToken, "X-Requested-With": "XMLHttpRequest" }
+        })
+        .success(function (data, status) {
+            if (data.Success) {
+                callbackOk(data);
+            }
+            else {
+                handleError(data.Message);
+            }
+        })
+        .error(function (data, status) {
+            handleError("Ha ocurrido un error y no se pudo guardar a los jugadores. Inténtelo más tarde.");
+        });
+    }
+
+    return savePlayersService;
+
+} ]);
+
+/********************************/

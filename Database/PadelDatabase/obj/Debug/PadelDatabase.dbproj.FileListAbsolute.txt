@@ -14,3 +14,11 @@ C:\repos\padel\Database\PadelDatabase\sql\debug\Padel_Database.sqlcmdvars
 C:\repos\padel\Database\PadelDatabase\sql\debug\PadelDatabase.deploymanifest
 C:\repos\padel\Database\PadelDatabase\sql\debug\PadelDatabase.dbschema
 C:\repos\padel\Database\PadelDatabase\obj\Debug\PadelDatabase.dbschema
+C:\Projects\BitBucket\Database\PadelDatabase\sql\debug\Padel_Script.PreDeployment.sql
+C:\Projects\BitBucket\Database\PadelDatabase\sql\debug\Padel_Script.PostDeployment.sql
+C:\Projects\BitBucket\Database\PadelDatabase\sql\debug\Padel_Database.sqlsettings
+C:\Projects\BitBucket\Database\PadelDatabase\sql\debug\Padel_Database.sqldeployment
+C:\Projects\BitBucket\Database\PadelDatabase\sql\debug\Padel_Database.sqlcmdvars
+C:\Projects\BitBucket\Database\PadelDatabase\sql\debug\PadelDatabase.deploymanifest
+C:\Projects\BitBucket\Database\PadelDatabase\sql\debug\PadelDatabase.dbschema
+C:\Projects\BitBucket\Database\PadelDatabase\obj\Debug\PadelDatabase.dbschema

@@ -1,4 +1,5 @@
 ﻿/* JS */
+app.requires = ['ngGrid'];
 
 var debounce = function (func, wait, immediate) {
     var timeout, result;

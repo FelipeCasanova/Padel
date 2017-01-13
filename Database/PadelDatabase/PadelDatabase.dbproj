@@ -38,7 +38,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>.\sql\debug\</OutputPath>
     <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
-    <TargetConnectionString>Data Source=.\SQLEXPRESS;User ID=padel;Pooling=False</TargetConnectionString>
+    <TargetConnectionString>Data Source=Localhost;Persist Security Info=True;User ID=padel;Pooling=False</TargetConnectionString>
     <TargetDatabase>Padel</TargetDatabase>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <SuppressWarnings>
@@ -279,5 +279,8 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Indexes\Notificacions.IX_Cluster.sql">
       <SubType>NotInBuild</SubType>
     </Build>
+    <NotInBuild Include="Schema Objects\Database Level Objects\Security\Users\padelUser.sql">
+      <SubType>NotInBuild</SubType>
+    </NotInBuild>
   </ItemGroup>
 </Project>

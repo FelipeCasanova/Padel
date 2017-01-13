@@ -2,4 +2,9 @@
     ViewBag.Title = "Padel";
     Layout = @MVC.Shared.Views._Layout;
 }
-Contacto
+@if (Model == null || Model.Count == 0)
+{
+    <div class="well">
+        Contacto
+    </div>
+}

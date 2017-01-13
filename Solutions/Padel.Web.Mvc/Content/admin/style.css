@@ -7,6 +7,12 @@
     }
 }
 
+.gridStyle
+{
+    width: auto;
+    min-height: 300px;
+}
+
 .glimpse-nowrap
 {
     z-index: 1000;

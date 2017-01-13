@@ -85,6 +85,7 @@ namespace Padel.Web.Mvc.Controllers
         [AjaxOnly]
         [HttpPost]
         [Transaction]
+        [Authorize(Roles = "Administrador, Jugador")]
         [CustomValidateAntiForgeryTokenAttribute]
         public virtual ActionResult _DesapuntanteDelTorneo(int idEquipoCategoria)
         {
@@ -102,6 +103,7 @@ namespace Padel.Web.Mvc.Controllers
         [AjaxOnly]
         [HttpPost]
         [Transaction]
+        [Authorize(Roles = "Administrador, Jugador")]
         [CustomValidateAntiForgeryTokenAttribute]
         public virtual ActionResult _PagaElTorneoConPuntos(int idEquipoCategoria, int tipo)
         {

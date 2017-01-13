@@ -1,4 +1,6 @@
-﻿$(function () {
+﻿/* Visual Components */
+
+$(function () {
 
     $('#apuntateWizard').wizard();
     var wizard = $('#apuntateWizard').data("wizard");
@@ -8,6 +10,10 @@
     });
 
 });
+
+/********************************/
+
+/* Search Teams Controller */
 
 function SearchTeamsCtrl($scope, $timeout, searchTeams, signUpTournamentService) {
 
@@ -50,7 +56,12 @@ function SearchTeamsCtrl($scope, $timeout, searchTeams, signUpTournamentService)
 
     $timeout($scope.searchTeam, 0);
 }
+
 SearchTeamsCtrl.$inject = ['$scope', '$timeout', 'searchTeams', 'signUpTournamentService'];
+
+/********************************/
+
+/* Search Player Controller */
 
 function SearchPlayerCtrl($scope, searchPlayer, signUpTournamentService) {
 
@@ -92,7 +103,13 @@ function SearchPlayerCtrl($scope, searchPlayer, signUpTournamentService) {
     };
 
 }
+
 SearchPlayerCtrl.$inject = ['$scope', 'searchPlayer', 'signUpTournamentService'];
+
+/********************************/
+
+
+/* Accept Terms Controller */
 
 function AcceptTermsCtrl($scope, signUpTournamentService) {
     $scope.acceptedTerms = false;
@@ -101,6 +118,11 @@ function AcceptTermsCtrl($scope, signUpTournamentService) {
     });
 }
 AcceptTermsCtrl.$inject = ['$scope', 'signUpTournamentService'];
+
+/********************************/
+
+
+/* Details Payment Controller */
 
 function DetailsPaymentCtrl($scope) {
     $scope.$on('torneoTitle', function (event, title) {
@@ -112,7 +134,12 @@ function DetailsPaymentCtrl($scope) {
     });
 
 }
+
 DetailsPaymentCtrl.$inject = ['$scope'];
+
+/********************************/
+
+/* Sign Up Controller */
 
 function SignUpCtrl($scope, signUpTournamentService) {
     $scope.signUp = function () {
@@ -133,6 +160,11 @@ function SignUpCtrl($scope, signUpTournamentService) {
 }
 
 SignUpCtrl.$inject = ['$scope', 'signUpTournamentService'];
+
+/********************************/
+
+
+/* Sign Up Service */
 
 app.service('signUpTournamentService', ['$rootScope', '$http', function ($rootScope, $http) {
     var signUpService = {};
@@ -189,3 +221,5 @@ app.service('signUpTournamentService', ['$rootScope', '$http', function ($rootSc
     return signUpService;
 
 } ]);
+
+/********************************/

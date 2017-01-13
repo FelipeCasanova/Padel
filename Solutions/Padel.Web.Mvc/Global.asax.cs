@@ -32,6 +32,8 @@
     using System.Configuration;
     using Microsoft.IdentityModel.Web;
     using System.Web.Optimization;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
     
 
     /// <summary>
@@ -89,6 +91,13 @@
             
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteRegistrar.RegisterRoutesTo(RouteTable.Routes);
+
+            /*JsonConvert.DefaultSettings = (() =>
+            {
+                var settings = new JsonSerializerSettings();
+                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                return settings;
+            });*/
 
             Application["NewUserLimitMonths"] = int.Parse(ConfigurationManager.AppSettings["NewUserLimitMonths"]);
         }

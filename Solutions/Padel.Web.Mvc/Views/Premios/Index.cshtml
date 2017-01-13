@@ -2,4 +2,9 @@
     ViewBag.Title = "Padel";
     Layout = @MVC.Shared.Views._Layout;
 }
-Premios
+@if (Model == null || Model.Count == 0)
+{
+    <div class="well">
+        Los premios serán publicados muy pronto!
+    </div>
+}

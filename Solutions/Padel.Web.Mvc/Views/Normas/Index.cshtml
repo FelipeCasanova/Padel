@@ -2,4 +2,9 @@
     ViewBag.Title = "Padel";
     Layout = @MVC.Shared.Views._Layout;
 }
-Normas
+@if (Model == null || Model.Count == 0)
+{
+    <div class="well">
+        Las normas serán publicadas muy pronto!
+    </div>
+}

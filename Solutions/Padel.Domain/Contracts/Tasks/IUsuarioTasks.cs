@@ -11,7 +11,7 @@ namespace Padel.Domain.Contracts.Tasks
 
         Usuario Get(int id);
 
-        Usuario CreateOrUpdate(Usuario productModel);
+        Usuario CreateOrUpdate(Usuario usuario);
 
         void Delete(int id);
 

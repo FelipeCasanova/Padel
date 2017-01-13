@@ -10,8 +10,8 @@ SET NUMERIC_ROUNDABORT OFF;
 
 GO
 :setvar DatabaseName "Padel"
-:setvar DefaultDataPath "C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
-:setvar DefaultLogPath "C:\Program Files\Microsoft SQL Server\MSSQL10.SQLEXPRESS\MSSQL\DATA\"
+:setvar DefaultDataPath "C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\"
+:setvar DefaultLogPath "C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\"
 
 GO
 :on error exit
@@ -376,6 +376,7 @@ CREATE TABLE [dbo].[Notificacions] (
     [TorneoId]          INT            NULL,
     [PartidoId]         INT            NULL,
     [ResultadoId]       INT            NULL,
+    [CantidadPuntos]    INT            NULL,
     PRIMARY KEY NONCLUSTERED ([NotificacionId] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF)
 );
 
@@ -386,7 +387,7 @@ PRINT N'Creating [dbo].[Notificacions].[Notificacions_Cluster_IX]...';
 
 GO
 CREATE UNIQUE CLUSTERED INDEX [Notificacions_Cluster_IX]
-    ON [dbo].[Notificacions]([UsuarioId] ASC, [FechaCreacion] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
+    ON [dbo].[Notificacions]([UsuarioId] ASC, [FechaCreacion] ASC, [NotificacionTipo] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
 
 
 GO
@@ -548,8 +549,8 @@ CREATE TABLE [dbo].[Usuarios] (
     [UsuarioId]             INT             IDENTITY (1, 1) NOT NULL,
     [Nombre]                NVARCHAR (255)  NULL,
     [Sexo]                  NVARCHAR (255)  NULL,
-    [TelefonoMovil]         INT             NULL,
-    [Email]                 NVARCHAR (255)  NULL,
+    [TelefonoMovil]         INT             NOT NULL,
+    [Email]                 NVARCHAR (255)  NOT NULL,
     [Password]              NVARCHAR (255)  NULL,
     [PuntosExperiencia]     INT             NOT NULL,
     [Nivel]                 AS              (PuntosExperiencia / 100),
@@ -567,7 +568,7 @@ PRINT N'Creating [dbo].[Usuarios].[Usuarios_Email_IX]...';
 
 
 GO
-CREATE NONCLUSTERED INDEX [Usuarios_Email_IX]
+CREATE UNIQUE NONCLUSTERED INDEX [Usuarios_Email_IX]
     ON [dbo].[Usuarios]([Email] ASC) WITH (ALLOW_PAGE_LOCKS = ON, ALLOW_ROW_LOCKS = ON, PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, IGNORE_DUP_KEY = OFF, STATISTICS_NORECOMPUTE = OFF, ONLINE = OFF, MAXDOP = 0);
 
 

@@ -2,4 +2,9 @@
     ViewBag.Title = "Padel";
     Layout = @MVC.Shared.Views._Layout;
 }
-Galería
+@if (Model == null || Model.Count == 0)
+{
+    <div class="well">
+        La Galería será publicada muy pronto!
+    </div>
+}

@@ -5,7 +5,7 @@ using System.Web;
 using MvcContrib.Pagination;
 using NHibernate.Transform;
 using Padel.Domain;
-using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels;
+using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Jugadores;
 using SharpArch.NHibernate;
 
 namespace Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Usuarios
@@ -32,7 +32,6 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Usuarios
                                          .Select(x => x.Sexo).WithAlias(() => viewModel.Sexo)
                                          .Select(x => x.TelefonoMovil).WithAlias(() => viewModel.TelefonoMovil)
                                          .Select(x => x.Email).WithAlias(() => viewModel.Email)
-                                         
                                          // Flattening the object graph
                                          .Select(x => rol.Nombre).WithAlias(() => viewModel.Role))
                 .TransformUsing(Transformers.AliasToBean(typeof(JugadorViewModel)))

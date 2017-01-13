@@ -24,6 +24,12 @@ namespace Padel.Web.Mvc.App_Start
                          "~/" + Links.Scripts.padel.padel_js
                          ));
 
+            bundles.Add(new ScriptBundle("~/bundles/js/adminbase").Include(
+                         "~/" + Links.Scripts.angularjs.grid.ng_grid_min_js,
+                         "~/" + Links.Scripts.slimscroll.jquery_slimscroll_min_js,
+                         "~/" + Links.Scripts.padel.admin.admin_js
+                         ));
+
             bundles.Add(new ScriptBundle("~/bundles/js/torneo").Include(
                          "~/" + Links.Scripts.jqtimeto.jquery_timeTo_min_js,
                          "~/" + Links.Scripts.fuelux.wizard_js,
@@ -42,6 +48,13 @@ namespace Padel.Web.Mvc.App_Start
                         "~/" + Links.Content.ionicons.css.ionicons_min_css,
                         "~/" + Links.Content.bootstrap.carousel.carousel_css,
                         "~/" + Links.Content.Site_css
+                        ));
+
+            bundles.Add(new StyleBundle("~/Content/css/adminbase").Include(
+                        "~/" + Links.Content.bootstrap.css.bootstrap_min_css,
+                        "~/" + Links.Content.fontawesome.css.font_awesome_css,
+                        "~/" + Links.Content.admin.grid.ng_grid_css,
+                        "~/" + Links.Content.admin.style_css
                         ));
 
             bundles.Add(new StyleBundle("~/Content/css/torneo").Include(
