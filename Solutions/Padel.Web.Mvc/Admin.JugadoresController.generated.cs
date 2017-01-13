@@ -47,6 +47,12 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Listado);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult _Modificar()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Modificar);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public JugadoresController Actions { get { return MVC.Admin.Jugadores; } }
@@ -65,6 +71,7 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         {
             public readonly string Index = "Index";
             public readonly string _Listado = "_Listado";
+            public readonly string _Modificar = "_Modificar";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -72,6 +79,7 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         {
             public const string Index = "Index";
             public const string _Listado = "_Listado";
+            public const string _Modificar = "_Modificar";
         }
 
 
@@ -83,6 +91,14 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         {
             public readonly string page = "page";
             public readonly string size = "size";
+        }
+        static readonly ActionParamsClass__Modificar s_params__Modificar = new ActionParamsClass__Modificar();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass__Modificar _ModificarParams { get { return s_params__Modificar; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass__Modificar
+        {
+            public readonly string jugadoresModelView = "jugadoresModelView";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -124,6 +140,16 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "size", size);
             _ListadoOverride(callInfo, page, size);
+            return callInfo;
+        }
+
+        partial void _ModificarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Collections.Generic.List<Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Jugadores.JugadorViewModel> jugadoresModelView);
+
+        public override System.Web.Mvc.ActionResult _Modificar(System.Collections.Generic.List<Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Jugadores.JugadorViewModel> jugadoresModelView)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._Modificar);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "jugadoresModelView", jugadoresModelView);
+            _ModificarOverride(callInfo, jugadoresModelView);
             return callInfo;
         }
 

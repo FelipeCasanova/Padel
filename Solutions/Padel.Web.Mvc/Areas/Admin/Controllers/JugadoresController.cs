@@ -25,6 +25,7 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
 
         public JugadoresController(ICommandProcessor commandProcessor, IJugadoresQuery jugadoresQuery)
         {
+            this.commandProcessor = commandProcessor;
             this.jugadoresQuery = jugadoresQuery;
         }
 
