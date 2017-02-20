@@ -8,24 +8,24 @@ using Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Usuarios;
 using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Jugadores;
 using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Menus;
 using Padel.Web.Mvc.Filters;
-using SharpArch.NHibernate.Web.Mvc;
 using SharpArch.Web.Mvc.JsonNet;
 using Padel.Tasks.Commands.Admin.Jugadores;
 using Padel.Tasks.CommandResults;
-using SharpArch.Domain.Commands;
+using MediatR;
+using SharpArch.Web.Mvc;
 
 namespace Padel.Web.Mvc.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Administrador")]
     public partial class JugadoresController : BaseController
     {
-        private readonly ICommandProcessor commandProcessor;
+        private readonly IMediator mediator;
 
         private readonly IJugadoresQuery jugadoresQuery;
 
-        public JugadoresController(ICommandProcessor commandProcessor, IJugadoresQuery jugadoresQuery)
+        public JugadoresController(IMediator mediator, IJugadoresQuery jugadoresQuery)
         {
-            this.commandProcessor = commandProcessor;
+            this.mediator = mediator;
             this.jugadoresQuery = jugadoresQuery;
         }
 
@@ -79,7 +79,7 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
             foreach (var jugador in jugadoresModelView)
             {
                 var command = new ModificarJugadorCommand(jugador.Id, jugador.Nombre, jugador.Sexo, jugador.TelefonoMovil, jugador.Email);
-                var result = this.commandProcessor.Process<ModificarJugadorCommand, CommandResult>(command).First();
+                var result = this.mediator.Send<CommandResult>(command).Result;
                 if (result != null) 
                 {
                     results.Add(result);

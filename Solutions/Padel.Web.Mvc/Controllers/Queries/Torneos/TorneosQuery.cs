@@ -14,6 +14,9 @@ namespace Padel.Web.Mvc.Controllers.Queries.Torneos
 {
     public class TorneosQuery : NHibernateQuery, ITorneosQuery
     {
+        public TorneosQuery(ISession session) : base(session)
+        {
+        }
 
         public IList<EquipoTorneoViewModel> GetTorneosPorJugadorNotStatusList(int idJugador, string tipo, params EstadoCategoriaEnum[] estados)
         {

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Padel.Domain;
-using SharpArch.Domain.Commands;
+using MediatR;
+using Padel.Tasks.CommandResults;
 
 namespace Padel.Tasks.Commands.Torneos
 {
-    public class CrearEquipoParaTorneoCommand : CommandBase
+    public class CrearEquipoParaTorneoCommand : IRequest<CommandResult>
     {
         public CrearEquipoParaTorneoCommand(int torneoId, int categoriaId, int jugador1Id, int equipoId, int jugador2Id)
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using MvcContrib.Pagination;
+using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Transform;
 using Padel.Domain;
@@ -18,6 +19,10 @@ namespace Padel.Web.Mvc.Controllers.Queries.Operaciones
 {
     public class OperacionesQuery : NHibernateQuery, IOperacionesQuery
     {
+        public OperacionesQuery(ISession session) : base(session)
+        {
+        }
+
         public IList<OperacionModelView> GetOperacionesPorUsuario(int usuarioId)
         {
             var query = Session.QueryOver<Operacion>().OrderBy(x => x.FechaCreacion).Desc;

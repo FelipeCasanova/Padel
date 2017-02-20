@@ -1,26 +1,26 @@
-﻿using System;
+﻿using MediatR;
+using Padel.Domain;
+using Padel.Domain.Events.Equipos;
+using Padel.Tasks.CommandResults;
+using Padel.Tasks.Commands.Equipos;
+using SharpArch.Domain.PersistenceSupport;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Padel.Domain;
-using Padel.Tasks.CommandResults;
-using Padel.Tasks.Commands.Equipos;
-using Padel.Tasks.Events.Equipos;
-using SharpArch.Domain.Commands;
-using SharpArch.Domain.Events;
-using SharpArch.Domain.PersistenceSupport;
 
 namespace Padel.Tasks.CommandHandlers.Equipos
 {
-    public class ValidarJugadorEnEquipoCommandHandler : ICommandHandler<ValidarJugadorEnEquipoCommand, CommandResult>
+    public class ValidarJugadorEnEquipoCommandHandler : IRequestHandler<ValidarJugadorEnEquipoCommand, CommandResult>
     {
         private readonly IRepository<Equipo> equipoRepository;
+        private readonly IMediator mediator;
 
-        public ValidarJugadorEnEquipoCommandHandler(IRepository<Equipo> equipoRepository)
+        public ValidarJugadorEnEquipoCommandHandler(IRepository<Equipo> equipoRepository, IMediator mediator)
         {
             this.equipoRepository = equipoRepository;
+            this.mediator = mediator;
         }
-
 
         public CommandResult Handle(ValidarJugadorEnEquipoCommand command)
         {
@@ -38,7 +38,8 @@ namespace Padel.Tasks.CommandHandlers.Equipos
                 equipo.Estado = EstadoEquipoEnum.Activado;
             }
             this.equipoRepository.SaveOrUpdate(equipo);
-            DomainEvents.Raise<ValidarJugadorEnEquipoEvent>(new ValidarJugadorEnEquipoEvent(command.IdEquipo, command.IdJugador));
+            mediator.Publish(new ValidarJugadorEnEquipoEvent(command.IdEquipo, command.IdJugador));
+            
             return new CommandResult(true, "Se ha activado correctamente el jugador.");
         }
     }

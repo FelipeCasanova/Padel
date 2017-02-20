@@ -7,12 +7,13 @@ using Padel.Domain;
 using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands.Torneos;
-using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
+using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace Padel.Tasks.CommandHandlers.Equipos
 {
-    public class PagarJugadorConPuntosEnTorneoCommandHandler : ICommandHandler<PagarJugadorConPuntosEnTorneoCommand, CommandResult>
+    public class PagarJugadorConPuntosEnTorneoCommandHandler : IRequestHandler<PagarJugadorConPuntosEnTorneoCommand, CommandResult>
     {
         private readonly IRepository<EquipoToCategoria> equipoToCategoriaRepository;
         private readonly IRepository<Usuario> usuarioRepository;
@@ -32,14 +33,14 @@ namespace Padel.Tasks.CommandHandlers.Equipos
             // Tipo debe ser 1: se paga un jugador | 2: Pagamos todo
             if (command.Tipo != 1 && command.Tipo != 2)
             {
-                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
+                //this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se ha podido pagar el torneo.");
             }
 
             // No hay puntos suficientes para pagar
             if (equiposToCategoria.Categoria.Precio * (command.Tipo == 1 ? 1 : 2) > usuario.DineroFicticio)
             {
-                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
+                //this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se ha podido pagar el torneo porque no tienes suficientes puntos.");
             }
 
@@ -47,7 +48,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
             if (equiposToCategoria.Categoria.Precio * 2 <= (equiposToCategoria.DineroFicticioJugadorA + equiposToCategoria.DineroRealJugadorA +
                                                             equiposToCategoria.DineroFicticioJugadorB + equiposToCategoria.DineroRealJugadorB))
             {   
-                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
+                //this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "El torneo ya ha sido pagado.");
             }
 
@@ -72,14 +73,15 @@ namespace Padel.Tasks.CommandHandlers.Equipos
                 equiposToCategoria.Estado = EstadoEquipoCategoriaEnum.Pagado;
             }
 
-            if (equiposToCategoria.IsValid())
+            var validatorCtx = new ValidationContext(usuario);
+            if (equiposToCategoria.IsValid(validatorCtx))
             {
                 this.equipoToCategoriaRepository.SaveOrUpdate(equiposToCategoria);
                 return new CommandResult(true, (equiposToCategoria.Estado != EstadoEquipoCategoriaEnum.Pagado ? "Se ha pagado correctamente uno de los miembros del equipo." : "Se ha pagado correctamente el torneo."));
             }
             else
             {
-                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
+                //this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se ha podido pagar el torneo. Intentelo más tarde.");
             }
 

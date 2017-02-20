@@ -2,23 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpArch.Domain.Commands;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands.Admin.Jugadores;
 using Padel.Domain.Contracts.Tasks;
 using Padel.Domain;
-using SharpArch.Domain.Events;
-using Padel.Tasks.Events.Admin.Jugadores;
+using MediatR;
+using Padel.Domain.Events.Admin.Jugadores;
+using System.ComponentModel.DataAnnotations;
 
 namespace Padel.Tasks.CommandHandlers.Admin.Jugadores
 {
-    public class ModificarJugadorCommandHandler : ICommandHandler<ModificarJugadorCommand, CommandResult>
+    public class ModificarJugadorCommandHandler : IRequestHandler<ModificarJugadorCommand, CommandResult>
     {
         private readonly IUsuarioTasks usuarioTasks;
+        private readonly IMediator mediator;
 
-        public ModificarJugadorCommandHandler(IUsuarioTasks usuarioTasks)
+        public ModificarJugadorCommandHandler(IUsuarioTasks usuarioTasks, IMediator mediator)
         {
-            this.usuarioTasks = usuarioTasks;   
+            this.usuarioTasks = usuarioTasks;
+            this.mediator = mediator;
         }
 
 
@@ -29,10 +31,11 @@ namespace Padel.Tasks.CommandHandlers.Admin.Jugadores
             usuario.Sexo = command.Sexo;
             usuario.TelefonoMovil = command.TelefonoMovil;
             usuario.Email = command.Email;
-            if (usuario.IsValid())
+            var validatorCtx = new ValidationContext(usuario);
+            if (usuario.IsValid(validatorCtx))
             {
                 this.usuarioTasks.CreateOrUpdate(usuario);
-                DomainEvents.Raise<ModificarJugadorEvent>(new ModificarJugadorEvent(usuario.Id, usuario.Nombre, usuario.Sexo, usuario.TelefonoMovil, usuario.Email));
+                mediator.Publish(new ModificarJugadorEvent(usuario.Id, usuario.Nombre, usuario.Sexo, usuario.TelefonoMovil, usuario.Email));
                 return new CommandResult(true, "El usuario " + usuario.Nombre + " ha sido modificado correctamente.");
             }
             else

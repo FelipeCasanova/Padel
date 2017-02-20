@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Padel.Domain;
-using SharpArch.Domain.Commands;
+using MediatR;
+using Padel.Tasks.CommandResults;
 
 namespace Padel.Tasks.Commands.Torneos
 {
-    public class VerificarTorneoCommand : CommandBase
+    public class VerificarTorneoCommand : IRequest<CommandResult>
     {
         public VerificarTorneoCommand(int categoriaId)
         {

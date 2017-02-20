@@ -13,21 +13,21 @@ using Padel.Tasks.Commands.Torneos;
 using Padel.Tasks.Commands.Usuarios;
 using Padel.Web.Mvc.Controllers.Queries.Torneos;
 using Padel.Web.Mvc.Filters;
-using SharpArch.Domain.Commands;
-using SharpArch.NHibernate.Web.Mvc;
 using SharpArch.Web.Mvc.JsonNet;
+using MediatR;
+using SharpArch.Web.Mvc;
 
 namespace Padel.Web.Mvc.Controllers
 {
     public partial class TorneosController : BaseController
     {
-        private readonly ICommandProcessor commandProcessor;
+        private readonly IMediator mediator;
         private readonly ITorneosQuery torneosQuery;
         private readonly IEquipoTasks equipoTasks;
 
-        public TorneosController(ICommandProcessor commandProcessor, ITorneosQuery torneosQuery, IEquipoTasks equipoTasks)
+        public TorneosController(IMediator mediator, ITorneosQuery torneosQuery, IEquipoTasks equipoTasks)
         {
-            this.commandProcessor = commandProcessor;
+            this.mediator = mediator;
             this.torneosQuery = torneosQuery;
             this.equipoTasks = equipoTasks;
         }
@@ -75,8 +75,8 @@ namespace Padel.Web.Mvc.Controllers
                     ((PadelPrincipal)User).Id, 
                     idEquipo.GetValueOrDefault(), 
                     idJugador.GetValueOrDefault());
-                var results = this.commandProcessor.Process<CrearEquipoParaTorneoCommand, CommandResult>(command);
-                return Json(results.First(), JsonRequestBehavior.AllowGet);
+                var results = this.mediator.Send<CommandResult>(command).Result;
+                return Json(results, JsonRequestBehavior.AllowGet);
             }
 
             return Json(new CommandResult(false, "No se puedo registrar el equipo en el torneo. Intentelo más tarde."), JsonRequestBehavior.AllowGet);
@@ -90,11 +90,11 @@ namespace Padel.Web.Mvc.Controllers
         public virtual ActionResult _DesapuntanteDelTorneo(int idEquipoCategoria)
         {
             var command = new EliminarEquipoDeTorneoCommand(idEquipoCategoria);
-            var result = this.commandProcessor.Process<EliminarEquipoDeTorneoCommand, CommandResult>(command).First();
+            var result = this.mediator.Send<CommandResult>(command).Result;
             if (result.Success)
             {
                 var command2 = new RefrescarUsuarioCommand();
-                var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
+                var result2 = this.mediator.Send<CommandResult>(command2).Result;
             }
             return new JsonNetResult(result);
 
@@ -108,11 +108,11 @@ namespace Padel.Web.Mvc.Controllers
         public virtual ActionResult _PagaElTorneoConPuntos(int idEquipoCategoria, int tipo)
         {
             var command = new PagarJugadorConPuntosEnTorneoCommand(idEquipoCategoria, tipo);
-            var result = this.commandProcessor.Process<PagarJugadorConPuntosEnTorneoCommand, CommandResult>(command).First();
+            var result = this.mediator.Send<CommandResult>(command).Result;
             if (result.Success)
             {
                 var command2 = new RefrescarUsuarioCommand();
-                var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
+                var result2 = this.mediator.Send<CommandResult>(command2).Result;
             }
             return new JsonNetResult(result);
         }

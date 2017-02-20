@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpArch.Domain.Commands;
+using MediatR;
+using Padel.Tasks.CommandResults;
 
 namespace Padel.Tasks.Commands.Equipos
 {
-    public class CrearEquipoCommand : CommandBase
+    public class CrearEquipoCommand : IRequest<CommandResult>
     {
         public CrearEquipoCommand(int idJugadorA, int idJugadorB)
         {

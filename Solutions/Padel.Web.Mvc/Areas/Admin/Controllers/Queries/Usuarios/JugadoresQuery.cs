@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MvcContrib.Pagination;
+using NHibernate;
 using NHibernate.Transform;
 using Padel.Domain;
 using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Jugadores;
@@ -12,6 +13,10 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Usuarios
 {
     public class JugadoresQuery : NHibernateQuery, IJugadoresQuery
     {
+        public JugadoresQuery(ISession session) : base(session)
+        {
+        }
+
         public IPagination<JugadorViewModel> GetJugadoresList(int page, int size)
         {
             var query = Session.QueryOver<Usuario>().OrderBy(x => x.Nombre).Asc;

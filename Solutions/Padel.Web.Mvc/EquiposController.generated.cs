@@ -3,8 +3,10 @@
 // Don't change it directly as your change would get overwritten.  Instead, make changes
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
-// Make sure the compiler doesn't complain about missing Xml comments
-#pragma warning disable 1591
+// Make sure the compiler doesn't complain about missing Xml comments and CLS compliance
+// 0108: suppress "Foo hides inherited member Foo. Use the new keyword if hiding was intended." when a controller and its abstract parent are both processed
+// 0114: suppress "Foo.BarController.Baz()' hides inherited member 'Qux.BarController.Baz()'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword." when an action (with an argument) overrides an action in a parent controller
+#pragma warning disable 1591, 3008, 3009, 0108, 0114
 #region T4MVC
 
 using System;
@@ -13,6 +15,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -35,10 +38,22 @@ namespace Padel.Web.Mvc.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
         {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
         }
 
         [NonAction]
@@ -74,7 +89,7 @@ namespace Padel.Web.Mvc.Controllers
         public readonly string Name = "Equipos";
         [GeneratedCode("T4MVC", "2.0")]
         public const string NameConst = "Equipos";
-
+        [GeneratedCode("T4MVC", "2.0")]
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
@@ -148,8 +163,10 @@ namespace Padel.Web.Mvc.Controllers
     {
         public T4MVC_EquiposController() : base(Dummy.Instance) { }
 
+        [NonAction]
         partial void _EquiposPorJugadorOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string tipo);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult _EquiposPorJugador(string tipo)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._EquiposPorJugador);
@@ -158,8 +175,10 @@ namespace Padel.Web.Mvc.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void _VerificarJugadorOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int idEquipo);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult _VerificarJugador(int idEquipo)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._VerificarJugador);
@@ -168,8 +187,10 @@ namespace Padel.Web.Mvc.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void _AsignarJugadorSeleccionadoAlEquipoOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int idJugador);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult _AsignarJugadorSeleccionadoAlEquipo(int idJugador)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._AsignarJugadorSeleccionadoAlEquipo);
@@ -178,8 +199,10 @@ namespace Padel.Web.Mvc.Controllers
             return callInfo;
         }
 
+        [NonAction]
         partial void _EliminarEquipoOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int idEquipo);
 
+        [NonAction]
         public override System.Web.Mvc.ActionResult _EliminarEquipo(int idEquipo)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._EliminarEquipo);
@@ -192,4 +215,4 @@ namespace Padel.Web.Mvc.Controllers
 }
 
 #endregion T4MVC
-#pragma warning restore 1591
+#pragma warning restore 1591, 3008, 3009, 0108, 0114

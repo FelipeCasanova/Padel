@@ -12,11 +12,16 @@ using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
 using NHibernate.Criterion;
 using System.Threading;
 using Padel.Infrastructure.Utilities;
+using NHibernate;
 
 namespace Padel.Web.Mvc.Controllers.Queries.Usuarios
 {
     public class JugadoresQuery : NHibernateQuery, IJugadoresQuery
     {
+        public JugadoresQuery(ISession session) : base(session)
+        {
+        }
+
         public IList<JugadorViewModel> GetJugadorPorNombreList(string nombreJugador)
         {
             JugadorViewModel jugadorViewModel = null;

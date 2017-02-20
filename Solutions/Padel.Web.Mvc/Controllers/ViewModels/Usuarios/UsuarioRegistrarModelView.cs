@@ -16,7 +16,7 @@ namespace Padel.Web.Mvc.Controllers.ViewModels.Usuarios
         [Display(Name = "Password")]
         public virtual string Password { get; set; }
 
-        [Compare("Password", ErrorMessage = "Password and Confirm Password tienen que ser iguales.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Password and Confirm Password tienen que ser iguales.")]
         public string PasswordConfirm { get; set; }
 
         [Required]

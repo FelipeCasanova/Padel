@@ -5,16 +5,19 @@ using System.Text;
 using Padel.Domain.Contracts.Tasks;
 using Padel.Domain;
 using SharpArch.Domain.PersistenceSupport;
+using System.ComponentModel.DataAnnotations;
+using SharpArch.NHibernate.Contracts.Repositories;
 using SharpArch.NHibernate;
+using NHibernate;
 
 namespace Padel.Tasks
 {
     public class EquipoTasks : NHibernateQuery, IEquipoTasks
     {
-        private readonly IRepository<Equipo> equipoRepository;
-        private readonly IRepository<Usuario> usuarioRepository;
+        private readonly INHibernateRepositoryWithTypedId<Equipo, int> equipoRepository;
+        private readonly INHibernateRepositoryWithTypedId<Usuario, int> usuarioRepository;
 
-        public EquipoTasks(IRepository<Equipo> equipoRepository, IRepository<Usuario> usuarioRepository)
+        public EquipoTasks(INHibernateRepositoryWithTypedId<Equipo, int> equipoRepository, INHibernateRepositoryWithTypedId<Usuario, int> usuarioRepository, ISession session) : base(session)
         {
             this.equipoRepository = equipoRepository;
             this.usuarioRepository = usuarioRepository;
@@ -93,9 +96,10 @@ namespace Padel.Tasks
 
         protected Equipo CreateOrUpdate(Equipo equipo)
         {
-            if (equipo.IsValid())
+            var validatorCtx = new ValidationContext(equipo);
+            if (equipo.IsValid(validatorCtx))
             {
-                this.equipoRepository.SaveOrUpdate(equipo);
+                equipo = equipo.Id == 0 ? this.equipoRepository.Save(equipo) : this.equipoRepository.Update(equipo);
             }
             return equipo;
         }
@@ -108,27 +112,23 @@ namespace Padel.Tasks
 
         public List<Equipo> GetEquiposPorJugadorList(int idJugador, params EstadoEquipoEnum[] estados)
         {
-            var query = Session.QueryOver<Equipo>().OrderBy(x => x.Nombre).Asc;
-            query = query.Where(e => e.JugadorA.Id == idJugador);
-
+            var query = Session.QueryOver<Equipo>().Where(e => e.JugadorA.Id == idJugador); 
             foreach (var estado in estados)
             {
                 query = query.Where(e => (e.Estado == EstadoEquipoEnum.Activado));
             }
-            return query.Future().ToList();
+            return query.OrderBy(x => x.Nombre).Asc.Future().ToList();
         }
 
         public List<Equipo> GetEquiposPorJugadoresList(int idJugador1, int idJugador2, params EstadoEquipoEnum[] estados)
         {
-            var query = Session.QueryOver<Equipo>().OrderBy(x => x.Nombre).Asc;
-            query = query.Where(e => (e.JugadorA.Id == idJugador1 || e.JugadorB.Id == idJugador1)
-                && (e.JugadorA.Id == idJugador2 || e.JugadorB.Id == idJugador2));
-
+            var query = Session.QueryOver<Equipo>().Where(e => (e.JugadorA.Id == idJugador1 || e.JugadorB.Id == idJugador1)
+                && (e.JugadorA.Id == idJugador2 || e.JugadorB.Id == idJugador2)); ;
             foreach (var estado in estados)
             {
                 query = query.Where(e => (e.Estado == EstadoEquipoEnum.Activado));
             }
-            return query.Future().ToList();
+            return query.OrderBy(x => x.Nombre).Asc.Future().ToList();
         }
 
     }

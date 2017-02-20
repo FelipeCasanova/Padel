@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Padel.Tasks</RootNamespace>
     <AssemblyName>Padel.Tasks</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\Build\Signing\Padel.snk</AssemblyOriginatorKeyFile>
@@ -54,6 +54,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -63,34 +64,39 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\..\Packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MediatR, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\MediatR.3.0.0\lib\net45\MediatR.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.IdentityModel, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\Packages\Microsoft.IdentityModel.6.1.7600.16394\lib\net35\Microsoft.IdentityModel.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\..\Packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\..\Packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpArch.Domain, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Packages\SharpArch.Domain.2.1.2\lib\NET40\SharpArch.Domain.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpArch.NHibernate, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Packages\SharpArch.NHibernate.2.0.4\lib\NET40\SharpArch.NHibernate.dll</HintPath>
+    <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\NHibernate.4.1.0.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpArch.Domain, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\SharpArch.Domain.4.0.0\lib\net45\SharpArch.Domain.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpArch.NHibernate">
+      <HintPath>..\..\Packages\SharpArch.NHibernate.4.0.0\lib\net45\SharpArch.NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -139,23 +145,14 @@
     <Compile Include="Commands\Usuarios\RefrescarUsuarioCommand.cs" />
     <Compile Include="EmailTasks.cs" />
     <Compile Include="EquipoTasks.cs" />
-    <Compile Include="EventHandles\Equipos\ValidarJugadorEnEquipoEventHandle.cs" />
-    <Compile Include="EventHandles\Equipos\EliminarEquipoEventHandle.cs" />
-    <Compile Include="EventHandles\Equipos\CrearEquipoEventHandle.cs" />
-    <Compile Include="EventHandles\Usuarios\IngresarCorazonesEventHandle.cs" />
-    <Compile Include="EventHandles\Usuarios\RefrescarUsuarioEventHandle.cs" />
-    <Compile Include="EventHandles\Usuarios\EntrarEventHandle.cs" />
-    <Compile Include="EventHandles\Usuarios\IngresarDineroFicticioEventHandle.cs" />
-    <Compile Include="EventHandles\Usuarios\RegistrarEventHandle.cs" />
-    <Compile Include="Events\Admin\Jugadores\ModificarJugadorEvent.cs" />
-    <Compile Include="Events\Equipos\ValidarJugadorEnEquipoEvent.cs" />
-    <Compile Include="Events\Equipos\EliminarEquipoEvent.cs" />
-    <Compile Include="Events\Equipos\CrearEquipoEvent.cs" />
-    <Compile Include="Events\Usuarios\IngresarCorazonesEvent.cs" />
-    <Compile Include="Events\Usuarios\RefrescarUsuarioEvent.cs" />
-    <Compile Include="Events\Usuarios\EntrarEvent.cs" />
-    <Compile Include="Events\Usuarios\IngresarDineroFicticioEvent.cs" />
-    <Compile Include="Events\Usuarios\RegistrarEvent.cs" />
+    <Compile Include="EventHandlers\Equipos\ValidarJugadorEnEquipoEventHandle.cs" />
+    <Compile Include="EventHandlers\Equipos\EliminarEquipoEventHandle.cs" />
+    <Compile Include="EventHandlers\Equipos\CrearEquipoEventHandle.cs" />
+    <Compile Include="EventHandlers\Usuarios\IngresarCorazonesEventHandle.cs" />
+    <Compile Include="EventHandlers\Usuarios\RefrescarUsuarioEventHandle.cs" />
+    <Compile Include="EventHandlers\Usuarios\EntrarEventHandler.cs" />
+    <Compile Include="EventHandlers\Usuarios\IngresarDineroFicticioEventHandle.cs" />
+    <Compile Include="EventHandlers\Usuarios\RegistrarEventHandle.cs" />
     <Compile Include="OperacionTasks.cs" />
     <Compile Include="UsuarioTasks.cs" />
   </ItemGroup>

@@ -10,23 +10,25 @@ using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands;
 using Padel.Tasks.Commands.Usuarios;
-using Padel.Tasks.Events.Usuarios;
-using SharpArch.Domain.Commands;
-using SharpArch.Domain.Events;
 using SharpArch.Domain.PersistenceSupport;
 using Padel.Domain.Notificaciones;
+using MediatR;
+using Padel.Domain.Events.Usuarios;
+using System.ComponentModel.DataAnnotations;
 
 namespace Padel.Tasks.CommandHandlers.Usuarios
 {
-    public class RegistrarUsuarioCommandHandler : ICommandHandler<RegistrarUsuarioCommand, CommandResult>
+    public class RegistrarUsuarioCommandHandler : IRequestHandler<RegistrarUsuarioCommand, CommandResult>
     {
         private readonly IUsuarioTasks usuarioTasks;
         private readonly IRepository<Role> roleRepository;
+        private readonly IMediator mediator;
 
-        public RegistrarUsuarioCommandHandler(IUsuarioTasks usuarioTasks, IRepository<Role> roleRepository)
+        public RegistrarUsuarioCommandHandler(IUsuarioTasks usuarioTasks, IRepository<Role> roleRepository, IMediator mediator)
         {
             this.usuarioTasks = usuarioTasks;
             this.roleRepository = roleRepository;
+            this.mediator = mediator;
         }
 
         public CommandResult Handle(RegistrarUsuarioCommand command)
@@ -43,11 +45,12 @@ namespace Padel.Tasks.CommandHandlers.Usuarios
             usuario.Ip = command.IP;
             usuario.Roles.Add(roleRepository.Get(2));
 
-            if (usuario.IsValid())
+            var validatorCtx = new ValidationContext(usuario);
+            if (usuario.IsValid(validatorCtx))
             {
                 this.usuarioTasks.CreateOrUpdate(usuario);
-                DomainEvents.Raise<RegistrarEvent>(new RegistrarEvent(usuario.Id));
-                DomainEvents.Raise<IngresarCorazonesEvent>(new IngresarCorazonesEvent(usuario.Id, 3, CorazonNotificacion.AccionEnum.IngresoCorazonesRegistro.ToString()));
+                mediator.Publish(new RegistrarEvent(usuario.Id));
+                mediator.Publish(new IngresarCorazonesEvent(usuario.Id, 3, CorazonNotificacion.AccionEnum.IngresoCorazonesRegistro.ToString()));
                 return new CommandResult(true, string.Empty);
             }
             else 

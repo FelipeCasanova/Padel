@@ -18,20 +18,19 @@ using Padel.Tasks.Commands;
 using Padel.Tasks.Commands.Usuarios;
 using Padel.Web.Mvc.Controllers.Queries.Usuarios;
 using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
-using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
-using SharpArch.NHibernate.Web.Mvc;
-using SharpArch.Domain.Events;
-using Padel.Tasks.Events.Usuarios;
 using System.Threading;
 using Padel.Domain.Notificaciones;
+using MediatR;
+using SharpArch.Web.Mvc;
+using Padel.Domain.Events.Usuarios;
 
 namespace Padel.Web.Mvc.Controllers
 {
     [Authorize(Roles = "Administrador, Jugador")]
     public partial class UsuariosController : BaseController
     {
-        private readonly ICommandProcessor commandProcessor;
+        private readonly IMediator mediator;
 
         private readonly IUsuarioTasks usuarioTasks;
 
@@ -41,9 +40,9 @@ namespace Padel.Web.Mvc.Controllers
 
         private readonly IJugadoresQuery jugadoresQuery;
 
-        public UsuariosController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks,  IRepository<Notificacion> notificacionRepository, IEmailTasks emailTasks, IJugadoresQuery jugadoresQuery)
+        public UsuariosController(IMediator mediator, IUsuarioTasks usuarioTasks,  IRepository<Notificacion> notificacionRepository, IEmailTasks emailTasks, IJugadoresQuery jugadoresQuery)
         {
-            this.commandProcessor = commandProcessor;
+            this.mediator = mediator;
             this.usuarioTasks = usuarioTasks;
             this.notificacionRepository = notificacionRepository;
             this.emailTasks = emailTasks;
@@ -79,9 +78,9 @@ namespace Padel.Web.Mvc.Controllers
                 if (principal.Identity.IsAuthenticated && principal.Id == usuarioModelView.Usuario.Id &&
                 !notificacionRepository.GetAll().Any(n => n.Usuario.Id == usuarioModelView.Usuario.Id && n.Accion == CorazonNotificacion.AccionEnum.IngresoCorazonesActualizado.ToString()))
                 {
-                    DomainEvents.Raise<IngresarCorazonesEvent>(new IngresarCorazonesEvent(usuarioModelView.Usuario.Id, 3, CorazonNotificacion.AccionEnum.IngresoCorazonesActualizado.ToString()));
+                    mediator.Publish(new IngresarCorazonesEvent(usuarioModelView.Usuario.Id, 3, CorazonNotificacion.AccionEnum.IngresoCorazonesActualizado.ToString())).Start();
                 }
-                DomainEvents.Raise<RefrescarUsuarioEvent>(new RefrescarUsuarioEvent());
+                mediator.Publish<RefrescarUsuarioEvent>(new RefrescarUsuarioEvent()).Start();
             }
 
             return PartialView(MVC.Shared.Views.Usuarios._Modificar, usuarioModelView);
@@ -109,7 +108,7 @@ namespace Padel.Web.Mvc.Controllers
             {
                 var command = new RegistrarUsuarioCommand(usuarioModelView.Usuario.Nombre, usuarioModelView.Usuario.Sexo,
                     usuarioModelView.TelefonoMovil, usuarioModelView.Email, usuarioModelView.Password, GetVisitorIpAddress());
-                var result = this.commandProcessor.Process<RegistrarUsuarioCommand, CommandResult>(command).First();
+                var result = this.mediator.Send<CommandResult>(command).Result;
 
                 if (result.Success)
                 {
@@ -126,13 +125,13 @@ namespace Padel.Web.Mvc.Controllers
 
                     // Refrescar usuario. (Inicialize el principal con los datos del usuario)
                     var command2 = new RefrescarUsuarioCommand(usuarioModelView.TelefonoMovil);
-                    var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
+                    var result2 = this.mediator.Send<CommandResult>(command2).Result;
 
                     // Dar cinco puntos y refrescar usuario
                     if (bool.Parse(ConfigurationManager.AppSettings["Dar5puntosAlRegistrar"]) == true)
                     {
                         var command3 = new IngresarPuntosAUsuarioCommand(5, ((PadelPrincipal)User).Id);
-                        var result3 = this.commandProcessor.Process<IngresarPuntosAUsuarioCommand, CommandResult>(command3).First();
+                        var result3 = this.mediator.Send<CommandResult>(command3).Result;
                     }
 
                     return JavaScript("window.location = '" + Url.Action(MVC.Home.ActionNames.Index, MVC.Home.Name) + "';");
@@ -197,12 +196,12 @@ namespace Padel.Web.Mvc.Controllers
             if (ModelState.IsValid)
             {
                 var command = new EntrarUsuarioCommand(usuarioModelView.EmailOTelefonoMovil, usuarioModelView.PasswordEntrar);
-                var results = this.commandProcessor.Process<EntrarUsuarioCommand, CommandResult>(command);
+                var result = this.mediator.Send<CommandResult>(command).Result;
 
-                if (results.First().Success)
+                if (result.Success)
                 {
                     var command2 = new RefrescarUsuarioCommand(command.TelefonoMovil);
-                    var result2 = this.commandProcessor.Process<RefrescarUsuarioCommand, CommandResult>(command2).First();
+                    var result2 = this.mediator.Send<CommandResult>(command2).Result;
 
                     if (string.IsNullOrEmpty(returnUrl))
                     {

@@ -7,30 +7,30 @@ using Padel.Infrastructure.Utilities;
 using System.Threading;
 using Padel.Web.Mvc.Controllers.Queries.Operaciones;
 using Padel.Domain.Contracts.Tasks;
-using SharpArch.Domain.Commands;
 using SharpArch.Web.Mvc.JsonNet;
 using Microsoft.Web.Mvc;
-using SharpArch.NHibernate.Web.Mvc;
 using Padel.Web.Mvc.Filters;
 using Padel.Web.Mvc.Controllers.Queries.Torneos;
 using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
 using Padel.Web.Mvc.Controllers.Queries.Notificaciones;
+using MediatR;
+using SharpArch.Web.Mvc;
 
 namespace Padel.Web.Mvc.Controllers
 {
     [Authorize(Roles = "Administrador, Jugador")]
     public partial class JugadorController : BaseJugadorController
     {
-        private readonly ICommandProcessor commandProcessor;
+        private readonly IMediator mediator;
         private readonly IUsuarioTasks usuarioTasks;
         private readonly ITorneosQuery torneosQuery;
         private readonly IOperacionesQuery operacionesQuery;
         private readonly INotificacionesQuery notificacionesQuery;
 
-        public JugadorController(ICommandProcessor commandProcessor, IUsuarioTasks usuarioTasks, ITorneosQuery torneosQuery, IOperacionesQuery operacionesQuery
+        public JugadorController(IMediator mediator, IUsuarioTasks usuarioTasks, ITorneosQuery torneosQuery, IOperacionesQuery operacionesQuery
             , INotificacionesQuery notificacionesQuery)
         {
-            this.commandProcessor = commandProcessor;
+            this.mediator = mediator;
             this.usuarioTasks = usuarioTasks;
             this.torneosQuery = torneosQuery;
             this.operacionesQuery = operacionesQuery;

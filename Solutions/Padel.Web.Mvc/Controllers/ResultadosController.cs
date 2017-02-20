@@ -20,6 +20,5 @@ namespace Padel.Web.Mvc.Controllers
             return View();
         }
 
-
     }
 }

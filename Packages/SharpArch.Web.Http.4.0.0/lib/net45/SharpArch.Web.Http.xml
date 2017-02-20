@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpArch.Web.Http</name>
+    </assembly>
+    <members>
+        <member name="T:SharpArch.Web.Http.ControllerExtensions">
+            <summary>
+            Contains HTTP controller related extension methods.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Web.Http.ControllerExtensions.IsHttpController(System.Type)">
+            <summary>
+            Determines whether the specified type is a HTTP controller.
+            </summary>
+            <param name="type">The type to check.</param>
+            <returns><c>true</c>, if the type is a HTTP controller; <c>false</c>, otherwise.</returns>
+        </member>
+        <member name="T:SharpArch.Web.Http.TransactionAttribute">
+            <summary>
+                An attribute that implies a transaction.
+            </summary>
+        </member>
+        <member name="P:SharpArch.Web.Http.TransactionAttribute.IsolationLevel">
+            <summary>
+                Transaction isolation level.
+            </summary>
+            <value>Defaults to <c>ReadCommitted</c>.</value>
+        </member>
+        <member name="P:SharpArch.Web.Http.TransactionAttribute.RollbackOnModelValidationError">
+            <summary>
+                Gets or sets a value indicating whether rollback transaction in case of model validation error.
+            </summary>
+            <value>
+                <c>true</c> if transaction must be rolled back in case of model validation error; otherwise, <c>false</c>.
+                Defaults to <c>true</c>.
+            </value>
+        </member>
+        <member name="M:SharpArch.Web.Http.TransactionAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+                Occurs before the action method is invoked.
+                Begins transaction.
+            </summary>
+            <param name="actionContext">The action context.</param>
+        </member>
+        <member name="M:SharpArch.Web.Http.TransactionAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+                Occurs after the action method is invoked.
+                Commits transaction if no error occurred.
+            </summary>
+            <param name="actionExecutedContext">The action context.</param>
+        </member>
+    </members>
+</doc>

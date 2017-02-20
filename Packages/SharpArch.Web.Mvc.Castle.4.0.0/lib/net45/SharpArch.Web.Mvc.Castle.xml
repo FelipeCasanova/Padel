@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpArch.Web.Mvc.Castle</name>
+    </assembly>
+    <members>
+        <member name="T:SharpArch.Web.Mvc.Castle.WindsorControllerFactory">
+            <summary>
+            Controller Factory class for instantiating controllers using the Windsor IoC container.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorControllerFactory.#ctor(Castle.Windsor.IWindsorContainer)">
+            <summary>
+            Creates a new instance of the <see cref="T:SharpArch.Web.Mvc.Castle.WindsorControllerFactory"/> class.
+            </summary>
+            <param name="container">The Windsor container instance to use when creating controllers.</param>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorControllerFactory.ReleaseController(System.Web.Mvc.IController)">
+            <summary>
+            Disposes controller.
+            </summary>
+            <param name="controller">The controller to release.</param>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorControllerFactory.GetControllerInstance(System.Web.Routing.RequestContext,System.Type)">
+            <summary>
+            Resolves controller.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="controllerType">Type of the controller.</param>
+            <returns></returns>
+            <exception cref="T:System.Web.HttpException">Controller type can not be resolved.</exception>
+        </member>
+        <member name="T:SharpArch.Web.Mvc.Castle.WindsorDependencyResolver">
+            <summary>
+            Resolves dependency from <see cref="T:Castle.Windsor.IWindsorContainer"/>.
+            </summary>
+            <seealso cref="T:System.Web.Mvc.IDependencyResolver" />
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorDependencyResolver.#ctor(Castle.Windsor.IWindsorContainer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpArch.Web.Mvc.Castle.WindsorDependencyResolver"/> class.
+            </summary>
+            <param name="container">The container.</param>
+            <exception cref="T:System.ArgumentNullException"><see paramref="container"/> is null.</exception>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorDependencyResolver.GetService(System.Type)">
+            <summary>
+            Resolves singly registered services that support arbitrary object creation.
+            </summary>
+            <param name="serviceType">The type of the requested service or object.</param>
+            <returns>
+            The requested service or object.
+            </returns>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorDependencyResolver.GetServices(System.Type)">
+            <summary>
+            Resolves multiply registered services.
+            </summary>
+            <param name="serviceType">The type of the requested services.</param>
+            <returns>
+            The requested services.
+            </returns>
+        </member>
+        <member name="T:SharpArch.Web.Mvc.Castle.WindsorMvcExtensions">
+            <summary>
+            ASP.NET MVC extensions for Castle Windsor.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorMvcExtensions.FirstNonGenericCoreInterface(Castle.MicroKernel.Registration.ServiceDescriptor,System.String)">
+            <summary>
+                Searches for the first interface found associated with the
+                <see cref="T:Castle.MicroKernel.Registration.ServiceDescriptor" /> which is not generic and which
+                is found in the specified namespace.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorMvcExtensions.RegisterMvcController``1(Castle.Windsor.IWindsorContainer)">
+            <summary>
+                Register ASP.NET MVC controller.
+            </summary>
+            <typeparam name="T">Controller</typeparam>
+            <param name="container">Windsor container.</param>
+            <returns>Windsor container</returns>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorMvcExtensions.RegisterMvcControllers(Castle.Windsor.IWindsorContainer,System.Type[])">
+            <summary>
+                Register ASP.NET MVC controllers
+            </summary>
+            <param name="container">Windsor container</param>
+            <param name="controllerTypes">Controller types</param>
+            <returns>Windsor container</returns>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorMvcExtensions.InstallMvcFilterProvider(System.Web.Mvc.FilterProviderCollection,Castle.Windsor.IWindsorContainer,SharpArch.Domain.Reflection.TypePropertyDescriptorCache)">
+            <summary>
+                Add injectable dependencies support to FilterAttributetes.
+            </summary>
+            <remarks>
+                Replaces <see cref="T:System.Web.Mvc.FilterAttributeFilterProvider" /> with
+            </remarks>
+            <param name="container">The container.</param>
+            <param name="propertyDescriptorCache"></param>
+            <param name="filterProviders">The filter providers.</param>
+            <returns>Windsor container</returns>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorMvcExtensions.RegisterMvcControllers(Castle.Windsor.IWindsorContainer,System.Reflection.Assembly[])">
+            <summary>
+                Register ASP.NET MVC controllers from given assemblies.
+            </summary>
+            <param name="container">Windsor container</param>
+            <param name="assemblies">Assemblies to scan</param>
+            <returns>Windsor container</returns>
+        </member>
+        <member name="T:SharpArch.Web.Mvc.Castle.WindsorFilterAttributeProvider">
+            <summary>
+                Filter provider which performs property dependency injection.
+            </summary>
+            <remarks>
+                Based on http://thirteendaysaweek.com/2012/09/17/dependency-injection-with-asp-net-mvc-action-filters/
+            </remarks>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorFilterAttributeProvider.#ctor(Castle.Windsor.IWindsorContainer,SharpArch.Domain.Reflection.ITypePropertyDescriptorCache)">
+            <summary>
+                Create new instance.
+            </summary>
+            <param name="container">Windsor container.</param>
+            <param name="typePropertyDescriptorCache"></param>
+            <exception cref="T:System.ArgumentNullException">Container is <c>null</c>.</exception>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.Castle.WindsorFilterAttributeProvider.GetFilters(System.Web.Mvc.ControllerContext,System.Web.Mvc.ActionDescriptor)">
+            <summary>
+            Aggregates the filters from all of the filter providers into one collection.
+            </summary>
+            <returns>
+            The collection filters from all of the filter providers.
+            </returns>
+            <param name="controllerContext">The controller context.</param><param name="actionDescriptor">The action descriptor.</param>
+        </member>
+        <member name="T:SharpArch.Castle.Extensions.WindsorPropertyInjectionExtensions">
+            <summary>
+                Property injection support for Windsor.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Castle.Extensions.WindsorPropertyInjectionExtensions.InjectProperties(Castle.MicroKernel.IKernel,System.Object,SharpArch.Domain.Reflection.ITypePropertyDescriptorCache,System.Action{System.Reflection.PropertyInfo,Castle.Core.ComponentModel})">
+            <summary>
+                Injects dependencies into properties.
+            </summary>
+            <param name="kernel">Windsor kernel</param>
+            <param name="target">The target object to inject properties.</param>
+            <param name="cache">Injectable property descriptor cache.</param>
+            <param name="validatePropertyRegistration">
+                Callback to validate property dependency to be injected. Must throw
+                exception in case of failure.
+            </param>
+            <exception cref="T:Castle.MicroKernel.ComponentActivator.ComponentActivatorException"></exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="target" /> is <see langword="null" />.</exception>
+        </member>
+        <member name="M:SharpArch.Castle.Extensions.WindsorPropertyInjectionExtensions.CleanupInjectableProperties(Castle.MicroKernel.IKernel,System.Object,SharpArch.Domain.Reflection.ITypePropertyDescriptorCache)">
+            <summary>
+                Cleanups up injectable properties. All injectable properties will be set to <c>null</c>.
+            </summary>
+            <remarks>
+                Since this method does not perform dependency validation
+                <see cref="M:SharpArch.Castle.Extensions.WindsorPropertyInjectionExtensions.InjectProperties(Castle.MicroKernel.IKernel,System.Object,SharpArch.Domain.Reflection.ITypePropertyDescriptorCache,System.Action{System.Reflection.PropertyInfo,Castle.Core.ComponentModel})" /> , <paramref name="cache" /> is used as read-only.
+                Calling <see cref="M:SharpArch.Castle.Extensions.WindsorPropertyInjectionExtensions.CleanupInjectableProperties(Castle.MicroKernel.IKernel,System.Object,SharpArch.Domain.Reflection.ITypePropertyDescriptorCache)" /> without call to <see cref="M:SharpArch.Castle.Extensions.WindsorPropertyInjectionExtensions.InjectProperties(Castle.MicroKernel.IKernel,System.Object,SharpArch.Domain.Reflection.ITypePropertyDescriptorCache,System.Action{System.Reflection.PropertyInfo,Castle.Core.ComponentModel})" /> on the same type
+                will incur performance penalty as list of properties will be evaluated every time.
+            </remarks>
+            <param name="kernel">Windsor kernel.</param>
+            <param name="target">The target object to cleanup injectable properties.</param>
+            <param name="cache">Injectable property descriptor cache.</param>
+        </member>
+    </members>
+</doc>

@@ -2,34 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpArch.Domain.Commands;
 using Padel.Tasks.Commands.Usuarios;
 using Padel.Tasks.CommandResults;
 using Padel.Domain.Contracts.Tasks;
 using Padel.Domain;
-using SharpArch.Domain.Events;
-using Padel.Tasks.Events.Usuarios;
+using MediatR;
+using System.ComponentModel.DataAnnotations;
+using Padel.Domain.Events.Usuarios;
 
 namespace Padel.Tasks.CommandHandlers.Usuarios
 {
-    public class IngresarPuntosAUsuarioCommandHandler : ICommandHandler<IngresarPuntosAUsuarioCommand, CommandResult>
+    public class IngresarPuntosAUsuarioCommandHandler : IRequestHandler<IngresarPuntosAUsuarioCommand, CommandResult>
     {
         private readonly IUsuarioTasks usuarioTasks;
+        private readonly IMediator mediator;
 
-        public IngresarPuntosAUsuarioCommandHandler(IUsuarioTasks usuarioTasks)
+        public IngresarPuntosAUsuarioCommandHandler(IUsuarioTasks usuarioTasks, IMediator mediator)
         {
             this.usuarioTasks = usuarioTasks;
+            this.mediator = mediator;
         }
 
         public CommandResult Handle(IngresarPuntosAUsuarioCommand command)
         {
             Usuario usuario = this.usuarioTasks.Get(command.UsuarioId);
-            if (usuario.IsValid())
+            var validatorCtx = new ValidationContext(usuario);
+            if (usuario.IsValid(validatorCtx))
             {
                 usuario.DineroFicticio += command.CantidadPuntos;
                 this.usuarioTasks.CreateOrUpdate(usuario);
-                DomainEvents.Raise<IngresarDineroFicticioEvent>(new IngresarDineroFicticioEvent(usuario.Id, command.CantidadPuntos));
-                DomainEvents.Raise<RefrescarUsuarioEvent>(new RefrescarUsuarioEvent());
+                mediator.Publish(new IngresarDineroFicticioEvent(usuario.Id, command.CantidadPuntos));
+                mediator.Publish(new RefrescarUsuarioEvent());
                 return new CommandResult(true, string.Empty);
             }
             return new CommandResult(false, string.Empty);

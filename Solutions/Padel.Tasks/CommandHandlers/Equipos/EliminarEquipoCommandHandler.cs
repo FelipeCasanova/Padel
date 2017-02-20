@@ -1,29 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using MediatR;
 using Padel.Domain;
+using Padel.Domain.Events.Equipos;
 using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands;
 using Padel.Tasks.Commands.Equipos;
-using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
-using SharpArch.Domain.Events;
-using Padel.Tasks.Events.Equipos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
 
 namespace Padel.Tasks.CommandHandlers.Equipos
 {
-    public class EliminarEquipoCommandHandler : ICommandHandler<EliminarEquipoCommand, CommandResult>
+    public class EliminarEquipoCommandHandler : IRequestHandler<EliminarEquipoCommand, CommandResult>
     {
         private readonly IRepository<Equipo> equipoRepository;
         private readonly IRepository<Usuario> usuarioRepository;
+        private readonly IMediator mediator;
 
-        public EliminarEquipoCommandHandler(IRepository<Usuario> usuarioRepository, IRepository<Equipo> equipoRepository)
+        public EliminarEquipoCommandHandler(IRepository<Usuario> usuarioRepository, IRepository<Equipo> equipoRepository, IMediator mediator)
         {
             this.usuarioRepository = usuarioRepository;
             this.equipoRepository = equipoRepository;
+            this.mediator = mediator;
         }
 
         public CommandResult Handle(EliminarEquipoCommand command)
@@ -41,7 +42,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
                 equipo.JugadorBVerificado = false;
                 equipo.Estado = EstadoEquipoEnum.Eliminado;
                 this.equipoRepository.SaveOrUpdate(equipo);
-                DomainEvents.Raise<EliminarEquipoEvent>(new EliminarEquipoEvent(equipo.Id, equipo.JugadorA.Id, equipo.JugadorB.Id));
+                mediator.Publish(new EliminarEquipoEvent(equipo.Id, equipo.JugadorA.Id, equipo.JugadorB.Id));
                 return new CommandResult(true, "Se ha eliminado correctamente el equipo.");
             }
             else

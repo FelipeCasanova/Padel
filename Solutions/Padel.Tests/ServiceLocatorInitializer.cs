@@ -20,13 +20,13 @@
                         .ImplementedBy(typeof(EntityDuplicateChecker))
                         .Named("entityDuplicateChecker"));
 
-            container.Register(
-                    Component
-                        .For(typeof(ISessionFactoryKeyProvider))
-                        .ImplementedBy(typeof(DefaultSessionFactoryKeyProvider))
-                        .Named("sessionFactoryKeyProvider"));
+            //container.Register(
+            //        Component
+            //            .For(typeof(ISessionFactoryKeyProvider))
+            //            .ImplementedBy(typeof(DefaultSessionFactoryKeyProvider))
+            //            .Named("sessionFactoryKeyProvider"));
 
-            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
+            //ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
         }
     }
 }

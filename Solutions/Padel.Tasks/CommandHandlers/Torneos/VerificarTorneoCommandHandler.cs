@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpArch.Domain.Commands;
 using Padel.Tasks.Commands.Torneos;
 using Padel.Tasks.CommandResults;
 using SharpArch.Domain.PersistenceSupport;
 using Padel.Domain;
+using MediatR;
 
 namespace Padel.Tasks.CommandHandlers.Torneos
 {
-    public class VerificarTorneoCommandHandler : ICommandHandler<VerificarTorneoCommand, CommandResult>
+    public class VerificarTorneoCommandHandler : IRequestHandler<VerificarTorneoCommand, CommandResult>
     {
         private readonly IRepository<Torneo> torneoRepository;
         private readonly IRepository<Categoria> categoriaRepository;

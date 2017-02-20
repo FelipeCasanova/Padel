@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpArch.Domain.Commands;
+using MediatR;
+using Padel.Tasks.CommandResults;
 
 namespace Padel.Tasks.Commands.Equipos
 {
-    public class ValidarJugadorEnEquipoCommand : CommandBase
+    public class ValidarJugadorEnEquipoCommand : IRequest<CommandResult>
     {
         public ValidarJugadorEnEquipoCommand(int idEquipo, int idJugador)
         {

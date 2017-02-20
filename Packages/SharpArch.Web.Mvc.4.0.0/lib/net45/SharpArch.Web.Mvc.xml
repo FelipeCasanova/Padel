@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpArch.Web.Mvc</name>
+    </assembly>
+    <members>
+        <member name="T:SharpArch.Web.Mvc.ControllerExtensions">
+            <summary>
+            ASP.NET MVC controller extensions.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.ControllerExtensions.IsController(System.Type)">
+            <summary>
+            Determines whether the specified type is a controller
+            </summary>
+            <param name="type">Type to check</param>
+            <returns>True if type is a controller, otherwise false</returns>
+        </member>
+        <member name="T:SharpArch.Web.Mvc.JsonNet.JsonNetResult">
+            <summary>
+                An ActionResult to return JSON from ASP.NET MVC to the browser using Json.NET.
+                Taken from http://james.newtonking.com/archive/2008/10/16/asp-net-mvc-and-json-net.aspx
+            </summary>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.JsonNet.JsonNetResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpArch.Web.Mvc.JsonNet.JsonNetResult"/> class.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.JsonNet.JsonNetResult.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpArch.Web.Mvc.JsonNet.JsonNetResult"/> class.
+            </summary>
+            <param name="data">The data.</param>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.JsonNet.JsonNetResult.#ctor(System.Object,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpArch.Web.Mvc.JsonNet.JsonNetResult"/> class.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="contentType">Type of the content.</param>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.JsonNet.JsonNetResult.#ctor(System.Object,System.String,System.Text.Encoding)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpArch.Web.Mvc.JsonNet.JsonNetResult"/> class.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="contentType">Type of the content.</param>
+            <param name="encoding">The encoding.</param>
+        </member>
+        <member name="P:SharpArch.Web.Mvc.JsonNet.JsonNetResult.ContentEncoding">
+            <summary>
+            Content encoding.
+            </summary>
+        </member>
+        <member name="P:SharpArch.Web.Mvc.JsonNet.JsonNetResult.ContentType">
+            <summary>
+            MIME Content type.
+            </summary>
+            <remarks>
+            See http://www.freeformatter.com/mime-types-list.html#mime-types-list for list of content types.
+            </remarks>
+        </member>
+        <member name="P:SharpArch.Web.Mvc.JsonNet.JsonNetResult.Data">
+            <summary>
+            Data to serialize.
+            </summary>
+        </member>
+        <member name="P:SharpArch.Web.Mvc.JsonNet.JsonNetResult.Formatting">
+            <summary>
+            Controls Json formatting.
+            </summary>
+        </member>
+        <member name="P:SharpArch.Web.Mvc.JsonNet.JsonNetResult.SerializerSettings">
+            <summary>
+            Json serializer settings.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.JsonNet.JsonNetResult.ExecuteResult(System.Web.Mvc.ControllerContext)">
+            <summary>
+            Enables processing of the result of an action method by a custom type that inherits from the <see cref="T:System.Web.Mvc.ActionResult" /> class.
+            </summary>
+            <param name="context">The context in which the result is executed. The context information includes the controller, HTTP content, request context, and route data.</param>
+            <exception cref="T:System.ArgumentNullException">context</exception>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.ModelBinder.EntityCollectionValueBinder.BindModel(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext)">
+            <summary>
+                Binds the model to a value by using the specified controller context and binding context.
+            </summary>
+            <returns>
+                The bound value.
+            </returns>
+            <param name = "controllerContext">The controller context.</param>
+            <param name = "bindingContext">The binding context.</param>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.ModelBinder.EntityValueBinder.BindModel(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext)">
+            <summary>
+                Binds the model value to an entity by using the specified controller context and binding context.
+            </summary>
+            <returns>
+                The bound value.
+            </returns>
+            <param name = "controllerContext">The controller context.</param>
+            <param name = "bindingContext">The binding context.</param>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.ModelBinder.GenericRepositoryFactory.CreateEntityRepositoryFor(System.Type,System.Type)">
+            <summary>
+            Resolve repository for given entity type.
+            </summary>
+            <param name="entityType">Type of the entity.</param>
+            <param name="idType">Type of the identifier.</param>
+            <returns>Repository instance.</returns>
+            <exception cref="T:System.InvalidOperationException">If repository can not be resolved by <see cref="T:System.Web.Mvc.DependencyResolver"/>.</exception>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.ModelBinder.SharpModelBinder.OnModelUpdating(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext)">
+            <summary>
+                Called when the model is updating. We handle updating the Id property here because it gets filtered out
+                of the normal MVC2 property binding.
+            </summary>
+            <param name = "controllerContext">The context within which the controller operates. The context information includes the controller, HTTP content, request context, and route data.</param>
+            <param name = "bindingContext">The context within which the model is bound. The context includes information such as the model object, model name, model type, property filter, and value provider.</param>
+            <returns>
+                true if the model is updating; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.ModelBinder.SharpModelBinder.SetProperty(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext,System.ComponentModel.PropertyDescriptor,System.Object)">
+            <summary>
+            Sets the specified property by using the specified controller context, binding context, and property value.
+            </summary>
+            <param name="controllerContext">The context within which the controller operates. The context information includes the controller, HTTP content, request context, and route data.</param>
+            <param name="bindingContext">The context within which the model is bound. The context includes information such as the model object, model name, model type, property filter, and value provider.</param>
+            <param name="propertyDescriptor">Describes a property to be set. The descriptor provides information such as the component type, property type, and property value. It also provides methods to get or set the property value.</param>
+            <param name="value">The value to set for the property.</param>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.ModelBinder.SharpModelBinder.SetEntityCollectionProperty(System.Web.Mvc.ModelBindingContext,System.ComponentModel.PropertyDescriptor,System.Object)">
+            <summary>
+                If the property being bound is a simple, generic collection of entity objects, then use
+                reflection to get past the protected visibility of the collection property, if necessary.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.ModelBinder.SharpModelBinder.SetIdProperty(System.Web.Mvc.ModelBindingContext,System.ComponentModel.PropertyDescriptor,System.Object)">
+            <summary>
+                If the property being bound is an Id property, then use reflection to get past the
+                protected visibility of the Id property, accordingly.
+            </summary>
+        </member>
+        <member name="T:SharpArch.Web.Mvc.TransactionAttribute">
+            <summary>
+                An attribute that implies a transaction per MVC action.
+                <para>
+                    Transaction is either committed or rolled back after action execution is completed. See
+                    <see cref="M:SharpArch.Web.Mvc.TransactionAttribute.OnActionExecuted(System.Web.Mvc.ActionExecutedContext)" />.
+                    Note: accessing database from the View is considered as a bad practice.
+                </para>
+            </summary>
+            <remarks>
+                Transaction will be committed after action execution is completed and no unhandled exception occurred, see
+                <see cref="P:System.Web.Mvc.ActionExecutedContext.ExceptionHandled" />.
+                Transaction will be rolled back if there was unhandled exeption in action or model vaildation was failed and
+                <see cref="P:SharpArch.Web.Mvc.TransactionAttribute.RollbackOnModelValidationError" /> is <c>true</c>.
+            </remarks>
+        </member>
+        <member name="P:SharpArch.Web.Mvc.TransactionAttribute.TransactionManager">
+            <summary>
+                Transaction Manager reference.
+            </summary>
+            <remarks>
+                The value should be injected by the filter provider.
+            </remarks>
+        </member>
+        <member name="P:SharpArch.Web.Mvc.TransactionAttribute.RollbackOnModelValidationError">
+            <summary>
+                Gets or sets a value indicating whether rollback transaction in case of model validation error.
+            </summary>
+            <value>
+                <c>true</c> if transaction must be rolled back in case of model validation error; otherwise, <c>false</c>.
+                Defaults to <c>true</c>.
+            </value>
+        </member>
+        <member name="P:SharpArch.Web.Mvc.TransactionAttribute.IsolationLevel">
+            <summary>
+                Transaction isolation level.
+            </summary>
+            <value>Defaults to <c>ReadCommitted</c>.</value>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.TransactionAttribute.OnActionExecuted(System.Web.Mvc.ActionExecutedContext)">
+            <summary>
+                Ends transaction.
+            </summary>
+            <param name="filterContext">Action execution context.</param>
+        </member>
+        <member name="M:SharpArch.Web.Mvc.TransactionAttribute.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">
+            <summary>
+                Starts transaction.
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+    </members>
+</doc>

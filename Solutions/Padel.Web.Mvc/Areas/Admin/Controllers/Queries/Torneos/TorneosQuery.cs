@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MvcContrib.Pagination;
+using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Transform;
 using Padel.Domain;
@@ -14,6 +15,10 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Torneos
 {
     public class TorneosQuery : NHibernateQuery, ITorneosQuery
     {
+        public TorneosQuery(ISession session) : base(session)
+        {
+        }
+
         public IPagination<TorneoViewModel> GetTorneosList(int page, int size, params EstadoCategoriaEnum[] estados)
         {
             var query = Session.QueryOver<Torneo>().OrderBy(x => x.Nombre).Asc;

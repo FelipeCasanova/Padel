@@ -8,11 +8,16 @@ using Padel.Web.Mvc.Controllers.ViewModels.Equipos;
 using Padel.Domain;
 using SharpArch.NHibernate;
 using NHibernate.Transform;
+using NHibernate;
 
 namespace Padel.Web.Mvc.Controllers.Queries.Equipos
 {
     public class EquiposQuery : NHibernateQuery, IEquiposQuery
     {
+        public EquiposQuery(ISession session) : base(session)
+        {
+        }
+
         public IList<EquipoViewModel> GetEquiposPorJugadorList(int idJugador, string tipo = null)
         {
             EquipoViewModel equipoViewModel = null;

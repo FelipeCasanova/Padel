@@ -9,21 +9,21 @@ using Padel.Tasks.Commands;
 using Padel.Tasks.Commands.Equipos;
 using Padel.Web.Mvc.Controllers.Queries.Equipos;
 using Padel.Web.Mvc.Filters;
-using SharpArch.Domain.Commands;
-using SharpArch.NHibernate.Web.Mvc;
 using SharpArch.Web.Mvc.JsonNet;
+using MediatR;
+using SharpArch.Web.Mvc;
 
 namespace Padel.Web.Mvc.Controllers
 {
     [Authorize(Roles = "Administrador, Jugador")]
     public partial class EquiposController : Controller
     {
-        private readonly ICommandProcessor commandProcessor;
+        private readonly IMediator mediator;
         private readonly IEquiposQuery equiposQuery;
 
-        public EquiposController(ICommandProcessor commandProcessor, IEquiposQuery equiposQuery)
+        public EquiposController(IMediator commandProcessor, IEquiposQuery equiposQuery)
         {
-            this.commandProcessor = commandProcessor;
+            this.mediator = commandProcessor;
             this.equiposQuery = equiposQuery;
         }
 
@@ -41,8 +41,8 @@ namespace Padel.Web.Mvc.Controllers
         public virtual ActionResult _VerificarJugador(int idEquipo)
         {
             var command = new ValidarJugadorEnEquipoCommand(idEquipo, ((PadelPrincipal)User).Id);
-            var results = this.commandProcessor.Process<ValidarJugadorEnEquipoCommand, CommandResult>(command);
-            return new JsonNetResult(results.First());
+            var result = this.mediator.Send<CommandResult>(command).Result;
+            return new JsonNetResult(result);
             
         }
 
@@ -53,8 +53,8 @@ namespace Padel.Web.Mvc.Controllers
         public virtual ActionResult _AsignarJugadorSeleccionadoAlEquipo(int idJugador)
         {
             var command = new CrearEquipoCommand(((PadelPrincipal)User).Id, idJugador);
-            var results = this.commandProcessor.Process<CrearEquipoCommand, CommandResult>(command);
-            return new JsonNetResult(results.First());
+            var result = this.mediator.Send<CommandResult>(command).Result;
+            return new JsonNetResult(result);
         }
 
         [HttpPost]
@@ -63,8 +63,8 @@ namespace Padel.Web.Mvc.Controllers
         public virtual ActionResult _EliminarEquipo(int idEquipo)
         {
             var command = new EliminarEquipoCommand(idEquipo);
-            var results = this.commandProcessor.Process<EliminarEquipoCommand, CommandResult>(command);
-            return new JsonNetResult(results.First());
+            var result = this.mediator.Send<CommandResult>(command).Result;
+            return new JsonNetResult(result);
 
         }
     }

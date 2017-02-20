@@ -9,19 +9,18 @@ using SharpArch.NHibernate;
 using Padel.Infrastructure.Utilities;
 using System.Threading;
 using Microsoft.IdentityModel.Web;
-using SharpArch.Domain.Events;
-using Padel.Tasks.Events.Usuarios;
-using Padel.Tasks.Commands.Usuarios;
 using Padel.Domain.Notificaciones;
+using NHibernate;
+using SharpArch.NHibernate.Contracts.Repositories;
 
 namespace Padel.Tasks
 {
     public class UsuarioTasks : NHibernateQuery, IUsuarioTasks
     {
-        private readonly IRepository<Usuario> usuarioRepository;
-        private readonly IRepository<Notificacion> notificacionRepository;
+        private readonly INHibernateRepositoryWithTypedId<Usuario, int> usuarioRepository;
+        private readonly INHibernateRepositoryWithTypedId<Notificacion, int> notificacionRepository;
 
-        public UsuarioTasks(IRepository<Usuario> usuarioRepository, IRepository<Notificacion> notificacionRepository)
+        public UsuarioTasks(INHibernateRepositoryWithTypedId<Usuario, int> usuarioRepository, INHibernateRepositoryWithTypedId<Notificacion, int> notificacionRepository, ISession session) : base(session)
         {
             this.usuarioRepository = usuarioRepository;
             this.notificacionRepository = notificacionRepository;
@@ -40,8 +39,8 @@ namespace Padel.Tasks
 
         public Domain.Usuario CreateOrUpdate(Domain.Usuario usuario)
         {
-            this.usuarioRepository.SaveOrUpdate(usuario);
-            return usuario;
+            
+            return usuario.Id == 0 ? this.usuarioRepository.Save(usuario) : this.usuarioRepository.Update(usuario);
         }
 
         public void Delete(int id)
@@ -52,27 +51,23 @@ namespace Padel.Tasks
 
         public Domain.Usuario GetByEmail(string email)
         {
-            var query = Session.QueryOver<Usuario>();
-            return query.Where(u => u.Email == email).SingleOrDefault();
+            return Session.QueryOver<Usuario>().Where(u => u.Email == email).SingleOrDefault();
         }
 
         public Domain.Usuario GetByMovil(int telefonoMovil)
         {
-            var query = Session.QueryOver<Usuario>();
-            return query.Where(u => u.TelefonoMovil == telefonoMovil).SingleOrDefault();
+            return Session.QueryOver<Usuario>().Where(u => u.TelefonoMovil == telefonoMovil).SingleOrDefault();
         }
 
 
         public int GetNumeroUsuariosByMovil(int telefonoMovil)
         {
-            var query = Session.QueryOver<Usuario>();
-            return query.Where(u => u.TelefonoMovil == telefonoMovil).RowCount();
+            return Session.QueryOver<Usuario>().Where(u => u.TelefonoMovil == telefonoMovil).RowCount();
         }
 
         public int GetNumeroUsuariosByEmail(string email)
         {
-            var query = Session.QueryOver<Usuario>();
-            return query.Where(u => u.Email == email).RowCount();
+            return Session.QueryOver<Usuario>().Where(u => u.Email == email).RowCount();
         }
 
         public void RefreshUser(int? TelefonoMovil = null)
@@ -98,10 +93,9 @@ namespace Padel.Tasks
             telefonoMovilOut = 0;
             int telefonoMovil = 0;
             bool isNumeroTelefonico = Int32.TryParse(emailOrMovil, out telefonoMovil);
-            var query = Session.QueryOver<Usuario>();
             if (isNumeroTelefonico)
             {
-                Usuario usuario = query.Where(u => u.TelefonoMovil == telefonoMovil && u.Password == password).SingleOrDefault();
+                Usuario usuario = Session.QueryOver<Usuario>().Where(u => u.TelefonoMovil == telefonoMovil && u.Password == password).SingleOrDefault();
                 if (usuario != null)
                 {
                     telefonoMovilOut = usuario.TelefonoMovil;
@@ -110,7 +104,7 @@ namespace Padel.Tasks
             }
             else
             {
-                Usuario usuario = query.Where(u => u.Email == emailOrMovil && u.Password == password).SingleOrDefault();
+                Usuario usuario = Session.QueryOver<Usuario>().Where(u => u.Email == emailOrMovil && u.Password == password).SingleOrDefault();
                 if (usuario != null)
                 {
                     telefonoMovilOut = usuario.TelefonoMovil;

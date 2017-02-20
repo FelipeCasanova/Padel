@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharpArch.Domain.Commands;
 using Padel.Tasks.Commands.Usuarios;
 using Padel.Domain;
 

@@ -1,0 +1,287 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SharpArch.Testing.NUnit</name>
+    </assembly>
+    <members>
+        <member name="T:SharpArch.Testing.NUnit.BehaviorSpecificationTestsBase">
+            <summary>
+                Provides a base class for BDD unit tests, as described at http://flux88.com/blog/the-transition-from-tdd-to-bdd/.
+                This is an optional base class which need not be used with unit tests.
+            </summary>
+        </member>
+        <member name="P:SharpArch.Testing.NUnit.BehaviorSpecificationTestsBase.ExceptionThrown">
+            <summary>
+                Returns an exception thrown during execution of the <see cref="M:SharpArch.Testing.NUnit.BehaviorSpecificationTestsBase.Act" /> method.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.BehaviorSpecificationTestsBase.Act">
+            <summary>
+                Perform actions upon the model.  Separate test methods would then be employed to verify
+                the results of the system under test.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.BehaviorSpecificationTestsBase.EstablishContext">
+            <summary>
+                Method used to setup the model that will be tested.  This includes creating mock objects,
+                preparing the model properties, preparing the database, etc.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.BehaviorSpecificationTestsBase.SetUp">
+            <summary>
+                Establishes test context and runs the <see cref="M:SharpArch.Testing.NUnit.BehaviorSpecificationTestsBase.Act" /> method.
+                Execetuion exception will be captured in <see cref="P:SharpArch.Testing.NUnit.BehaviorSpecificationTestsBase.ExceptionThrown" /> property.
+            </summary>
+        </member>
+        <member name="T:SharpArch.Testing.NUnit.Helpers.EntityIdSetter">
+            <summary>
+                For better data integrity, it is imperative that the <see cref="P:SharpArch.Domain.DomainModel.EntityWithTypedId`1.Id" />
+                property is read-only and set only by the ORM.  With that said, some unit tests need
+                Id set to a particular value; therefore, this utility enables that ability.  This class should
+                never be used outside of the testing project; instead, implement <see cref="T:SharpArch.Domain.DomainModel.IHasAssignedId`1" /> to
+                expose a public setter.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.Helpers.EntityIdSetter.SetIdOf``1(SharpArch.Domain.DomainModel.IEntityWithTypedId{``0},``0)">
+            <summary>
+                Uses reflection to set the Id of a <see cref="T:SharpArch.Domain.DomainModel.EntityWithTypedId`1" />.
+            </summary>
+            <exception cref="T:System.ArgumentNullException"><paramref name="entity"/> is <see langword="null" />.</exception>
+            <exception cref="T:System.InvalidOperationException">Property with name 'Id' could not be found.</exception>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.Helpers.EntityIdSetter.SetIdTo``1(SharpArch.Domain.DomainModel.IEntityWithTypedId{``0},``0)">
+            <summary>
+                Uses reflection to set the Id of a <see cref="T:SharpArch.Domain.DomainModel.EntityWithTypedId`1" />.
+            </summary>
+        </member>
+        <member name="T:SharpArch.Testing.NUnit.NHibernate.DatabaseRepositoryTestsBase">
+            <summary>
+                Initiates a transaction before each test is run and rolls back the transaction after
+                the test completes.  Consequently, tests make no permanent changes to the DB.
+                This is appropriate as a base class if you're unit tests run against a live, development
+                database.  If, alternatively, you'd prefer to use an in-memory database such as SqlLite,
+                then use <see cref="T:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase" /> or <see cref="T:SharpArch.Testing.NUnit.NHibernate.RepositoryBehaviorSpecificationTestsBase" />
+                as your base class.
+                As the preferred mechanism is for in-memory unit testsing, this class is provided mainly
+                for backward compatibility.
+            </summary>
+            <remarks>
+                This class expects database structure to be present and up-to-date. It will not run schema export on it.
+            </remarks>
+        </member>
+        <member name="P:SharpArch.Testing.NUnit.NHibernate.DatabaseRepositoryTestsBase.Session">
+            <summary>
+            Returns current NHibernate session.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.DatabaseRepositoryTestsBase.OneTimeSetUp">
+            <summary>
+            Creates NHibernate <see cref="T:NHibernate.ISessionFactory"/>.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.DatabaseRepositoryTestsBase.UpdateConfiguration(NHibernate.Cfg.Configuration)">
+            <summary>
+            Can be used to override Session Factory settings.
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.DatabaseRepositoryTestsBase.SetUp">
+            <summary>
+            Creates new <see cref="T:NHibernate.ISession"/>.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.DatabaseRepositoryTestsBase.TearDown">
+            <summary>
+            Rollbacks active transaction and closes <see cref="T:NHibernate.ISession"/>.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.DatabaseRepositoryTestsBase.OneTimeTearDown">
+            <summary>
+            Disposes <see cref="T:NHibernate.ISessionFactory"/>.
+            </summary>
+        </member>
+        <member name="T:SharpArch.Testing.NUnit.NHibernate.RepositoryBehaviorSpecificationTestsBase">
+            <summary>
+                Provides a behavior driven approach to unit testing data persisted to a database.  
+                This base class creates the database from scratch using the specified connection details 
+                within NHibernate.config.  The original motivation for this class was to setup the database 
+                within an in-memory SqlLite database, although there's nothing to prevent any other target 
+                database being used.  If you'd prefer unit testing in the more traditional manner, but still 
+                using an in-memory database, then use <see cref = "T:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase" />.  For testing against
+                a "live" development database, such as a SQL Server instance, use <see cref = "T:SharpArch.Testing.NUnit.NHibernate.DatabaseRepositoryTestsBase" />
+                as your test fixture base class.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.RepositoryBehaviorSpecificationTestsBase.TearDown">
+            <summary>
+            Closes NHibernate session.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.RepositoryBehaviorSpecificationTestsBase.FlushSessionAndEvict(System.Object)">
+            <summary>
+            Flushes current NHibernate session and evicts entity from it.
+            </summary>
+            <param name="instance"></param>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.RepositoryBehaviorSpecificationTestsBase.SetUp">
+            <summary>
+            Establishes test context and runs the <see cref="M:SharpArch.Testing.NUnit.BehaviorSpecificationTestsBase.Act" /> method.
+            Execetuion exception will be captured in <see cref="P:SharpArch.Testing.NUnit.BehaviorSpecificationTestsBase.ExceptionThrown" /> property.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.RepositoryBehaviorSpecificationTestsBase.OneTimeSetup">
+            <summary>
+            Initializes NHibernate <see cref="T:NHibernate.ISessionFactory"/> (fixture setup).
+            </summary>
+        </member>
+        <member name="T:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase">
+            <summary>
+                Provides a base class for running unit tests against an in-memory database created
+                during test execution.  This builds the database using the connection details within
+                NHibernate.config.  If you'd prefer unit testing against a "live" development database
+                such as a SQL Server instance, then use <see cref = "T:SharpArch.Testing.NUnit.NHibernate.DatabaseRepositoryTestsBase" /> instead.
+                If you'd prefer a more behavior driven approach to testing against the in-memory database,
+                use <see cref = "T:SharpArch.Testing.NUnit.NHibernate.RepositoryBehaviorSpecificationTestsBase" /> instead.
+            </summary>
+        </member>
+        <member name="P:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase.TransactionManager">
+            <summary>
+            Transaction manager.
+            </summary>
+        </member>
+        <member name="P:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase.Session">
+            <summary>
+            NHibernate session
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase.OneTimeSetUp">
+            <summary>
+            Initializes NHibernate <see cref="T:NHibernate.ISessionFactory"/> (fixture setup).
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase.OneTimeTearDown">
+            <summary>
+            Called when [time tear down].
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase.TearDown">
+            <summary>
+            Closes NHibernate session.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase.FlushSessionAndEvict(System.Object)">
+            <summary>
+            Flushes the session and evicts entity from it.
+            </summary>
+            <param name="instance">The entity instance.</param>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase.LoadTestData">
+            <summary>
+            Initializes database before each test run.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.RepositoryTestsBase.SetUp">
+            <summary>
+            Initializes session and database before test run.
+            </summary>
+        </member>
+        <member name="T:SharpArch.Testing.NUnit.NHibernate.SessionExtensionMethods">
+            <summary>
+            NHibernate <see cref="T:NHibernate.ISession"/> extension methods.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.SessionExtensionMethods.FlushAndEvict(NHibernate.ISession,System.Object)">
+            <summary>
+            Flushes session and evict the object.
+            </summary>
+            <param name="session">The session.</param>
+            <param name="instance">The instance.</param>
+        </member>
+        <member name="T:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer">
+            <summary>
+                Performs NHibernate and database initialization.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer"/> class.
+            </summary>
+            <param name="basePath">Base bath to use when looking for mapping assemblies and default NHibernate configuration file.</param>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.GenerateAutoPersistenceModel(System.String[])">
+            <summary>
+            Generates auto-persistence model.
+            </summary>
+            <param name="assemblies">List of assemblies to look for auto-persistence model generators.</param>
+            <returns><see cref="T:FluentNHibernate.Automapping.AutoPersistenceModel"/></returns>
+            <remarks>
+            This method will load and scan assemblies for <see cref="T:SharpArch.NHibernate.FluentNHibernate.IAutoPersistenceModelGenerator"/>.
+            Only first generated model is returned.
+            </remarks>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.GetMappingAssemblies">
+            <summary>
+            Returns list of assemblies containing NHibernate mappings.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.GetMappingAssemblies(System.String)">
+            <summary>
+            Returns list of assemblies containing NHibernate mappings.
+            </summary>
+            <param name="basePath">Base path to prepend assembly names.</param>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.GetConfiguration">
+            <summary>
+            Returns NHibernate <see cref="T:NHibernate.Cfg.Configuration"/>.
+            Configuration instance is cached, all subsequent calls will return the same instance.
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.GetSessionFactory">
+            <summary>
+            Returns NHibernate <see cref="T:NHibernate.ISessionFactory"/>.
+            Session factory instance is cached, all subsequent calls to GetSessionFactory() will return the same instance. 
+            </summary>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.InitializeSession">
+            <summary>
+            Creates new NHibernate session and initializes database structure.
+            </summary>
+            <returns>NHibernate Session</returns>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.Close(NHibernate.ISession)">
+            <summary>
+            Closes the specified session.
+            </summary>
+            <param name="session">The session.</param>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.Shutdown(NHibernate.ISessionFactory)">
+            <summary>
+            Shutdowns the specified session factory.
+            </summary>
+            <param name="sessionFactory">The session factory.</param>
+            <remarks>
+            Dispose <see cref="T:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer"/> will destroy Session Factory associated with this instance.
+            </remarks>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.TryLoadAssembly(System.String)">
+            <summary>
+            Loads the assembly.
+            </summary>
+            <param name="assemblyPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.EnsureDllExtension(System.String)">
+            <summary>
+            Adds dll extension to assembly name if required.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpArch.Testing.NUnit.NHibernate.TestDatabaseInitializer.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            Method disposes SessionFactory.
+            </summary>
+        </member>
+    </members>
+</doc>

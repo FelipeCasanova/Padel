@@ -13,17 +13,14 @@
     using CommonServiceLocator.WindsorAdapter;
 
     using Controllers;
-    
+
     using Infrastructure.NHibernateMaps;
 
-    using SharpArch.Domain.Events;
-
     using log4net.Config;
-    
+
     using Microsoft.Practices.ServiceLocation;
-    
+
     using SharpArch.NHibernate;
-    using SharpArch.NHibernate.Web.Mvc;
     using SharpArch.Web.Mvc.Castle;
     using SharpArch.Web.Mvc.ModelBinder;
     using System.ComponentModel.DataAnnotations;
@@ -32,9 +29,9 @@
     using System.Configuration;
     using Microsoft.IdentityModel.Web;
     using System.Web.Optimization;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    
+    using SharpArch.Domain.Reflection;
+    using Castle.Windsor.Installer;
+
 
     /// <summary>
     /// Represents the MVC Application
@@ -45,24 +42,8 @@
     /// </remarks>
     public class MvcApplication : System.Web.HttpApplication
     {
-        private WebSessionStorage webSessionStorage;
-
-        /// <summary>
-        /// Due to issues on IIS7, the NHibernate initialization must occur in Init().
-        /// But Init() may be invoked more than once; accordingly, we introduce a thread-safe
-        /// mechanism to ensure it's only initialized once.
-        /// See http://msdn.microsoft.com/en-us/magazine/cc188793.aspx for explanation details.
-        /// </summary>
-        public override void Init()
-        {
-            base.Init();
-            this.webSessionStorage = new WebSessionStorage(this);
-        }
-
-        protected void Application_BeginRequest(object sender, EventArgs e)
-        {
-            NHibernateInitializer.Instance().InitializeNHibernateOnce(this.InitialiseNHibernateSessions);
-        }
+        private TypePropertyDescriptorCache injectablePropertiesCache;
+        private IWindsorContainer container;
 
         protected void Application_Error(object sender, EventArgs e) 
         {
@@ -75,15 +56,26 @@
         {
             XmlConfigurator.Configure();
 
-            ViewEngines.Engines.Clear();
+            AutoMapper.Mapper.Initialize(c =>
+            {
+               
+            });
 
+            // Container
+            injectablePropertiesCache = new TypePropertyDescriptorCache();
+            container = InitializeContainer();
+
+            // MVC
+            ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
 
             ModelBinders.Binders.DefaultBinder = new SharpModelBinder();
-            
             DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(DataTypeAttribute), typeof(DataTypeAttributeAdapter));
 
-            this.InitializeServiceLocator();
+            FilterProviders.Providers.InstallMvcFilterProvider(container, injectablePropertiesCache);
+            ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(container));
+
+            //this.InitializeServiceLocator();
 
             AreaRegistration.RegisterAllAreas();
 
@@ -103,35 +95,15 @@
         }
 
         /// <summary>
-        /// Instantiate the container and add all Controllers that derive from
-        /// WindsorController to the container.  Also associate the Controller
-        /// with the WindsorContainer ControllerFactory.
+        ///     Instantiate the container and add all Controllers that derive from
+        ///     WindsorController to the container. Also associate the Controller
+        ///     with the WindsorContainer ControllerFactory.
         /// </summary>
-        protected virtual void InitializeServiceLocator() 
+        protected IWindsorContainer InitializeContainer()
         {
-            IWindsorContainer container = new WindsorContainer();
-
-            ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(container));
-
-            container.RegisterControllers(typeof(HomeController).Assembly);
-            ComponentRegistrar.AddComponentsTo(container);
-
-            var windsorServiceLocator = new WindsorServiceLocator(container);
-            DomainEvents.ServiceLocator = windsorServiceLocator;
-            ServiceLocator.SetLocatorProvider(() => windsorServiceLocator);
-        }
-
-        private void InitialiseNHibernateSessions()
-        {
-            NHibernateSession.ConfigurationCache = new NHibernateConfigurationFileCache();
-
-            NHibernateSession.Init(
-                this.webSessionStorage,
-                new[] { Server.MapPath("~/bin/Padel.Infrastructure.dll") },
-                new AutoPersistenceModelGenerator().Generate(),
-                Server.MapPath("~/NHibernate.config"));
-
-            NHibernate.Glimpse.Plugin.RegisterSessionFactory(NHibernateSession.GetDefaultSessionFactory());
+            IWindsorContainer c = new WindsorContainer();
+            c.Install(FromAssembly.This());
+            return c;
         }
 
         void SessionAuthenticationModule_SessionSecurityTokenReceived(object sender, SessionSecurityTokenReceivedEventArgs e)

@@ -15,11 +15,16 @@ using Padel.Web.Mvc.Controllers.ViewModels.Usuarios;
 using SharpArch.NHibernate;
 using Padel.Web.Mvc.Controllers.ViewModels.Notificaciones;
 using Padel.Domain.Notificaciones;
+using NHibernate;
 
 namespace Padel.Web.Mvc.Controllers.Queries.Notificaciones
 {
     public class NotificacionesQuery : NHibernateQuery, INotificacionesQuery
     {
+        public NotificacionesQuery(ISession session) : base(session)
+        {
+        }
+
         public IList<NotificacionModelView> GetNotificacionesPorUsuario(int usuarioId)
         {
             var query = Session.QueryOver<Notificacion>().OrderBy(x => x.FechaCreacion).Desc;

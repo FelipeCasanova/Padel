@@ -7,12 +7,13 @@ using Padel.Domain;
 using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands.Torneos;
-using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
+using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace Padel.Tasks.CommandHandlers.Equipos
 {
-    public class EliminarEquipoDeTorneoCommandHandler : ICommandHandler<EliminarEquipoDeTorneoCommand, CommandResult>
+    public class EliminarEquipoDeTorneoCommandHandler : IRequestHandler<EliminarEquipoDeTorneoCommand, CommandResult>
     {
         private readonly IRepository<EquipoToCategoria> equipoToCategoriaRepository;
         private readonly IRepository<Usuario> usuarioRepository;
@@ -30,17 +31,18 @@ namespace Padel.Tasks.CommandHandlers.Equipos
             
             if (equiposToCategoria == null)
             {
-                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
+                //this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se ha podido eliminar el equipo del torneo. Intentelo más tarde.");
             }
 
             if (equiposToCategoria.Categoria.Estado == EstadoCategoriaEnum.Progreso)
             {
-                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
+                //this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se puede eliminar el equipo del torneo porque esta en progreso.");
             }
 
-            if (equiposToCategoria.IsValid() && 
+            var validatorCtx = new ValidationContext(equiposToCategoria);
+            if (equiposToCategoria.IsValid(validatorCtx) && 
                 (equiposToCategoria.Equipo.JugadorA.Id == principal.Id || equiposToCategoria.Equipo.JugadorB.Id == principal.Id 
                 || principal.IsInRole("Administrador")))
             {
@@ -68,7 +70,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
             }
             else
             {
-                this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
+                //this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se ha podido eliminar el equipo del torneo. Intentelo más tarde.");
             }
             

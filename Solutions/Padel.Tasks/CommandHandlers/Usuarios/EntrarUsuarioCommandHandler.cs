@@ -10,20 +10,21 @@ using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands;
 using Padel.Tasks.Commands.Usuarios;
-using Padel.Tasks.Events.Usuarios;
-using SharpArch.Domain.Commands;
-using SharpArch.Domain.Events;
 using SharpArch.Domain.PersistenceSupport;
+using MediatR;
+using Padel.Domain.Events.Usuarios;
 
 namespace Padel.Tasks.CommandHandlers.Usuarios
 {
-    public class EntrarUsuarioCommandHandler : ICommandHandler<EntrarUsuarioCommand, CommandResult>
+    public class EntrarUsuarioCommandHandler : IRequestHandler<EntrarUsuarioCommand, CommandResult>
     {
         private readonly IUsuarioTasks usuarioTasks;
+        private readonly IMediator mediator;
 
-        public EntrarUsuarioCommandHandler(IUsuarioTasks usuarioTasks)
+        public EntrarUsuarioCommandHandler(IUsuarioTasks usuarioTasks, IMediator mediator)
         {
             this.usuarioTasks = usuarioTasks;
+            this.mediator = mediator;
         }
 
         public CommandResult Handle(EntrarUsuarioCommand command)
@@ -32,7 +33,7 @@ namespace Padel.Tasks.CommandHandlers.Usuarios
             var result = usuarioTasks.ValidateUser(command.EmailOrMovil, password, out command.TelefonoMovil);
             if (result)
             {
-                DomainEvents.Raise<EntrarEvent>(new EntrarEvent(command.EmailOrMovil));
+                mediator.Publish(new EntrarEvent(command.EmailOrMovil));
             }
             return new CommandResult(result, string.Empty);
         }

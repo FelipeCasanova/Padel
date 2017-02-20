@@ -8,12 +8,12 @@ using Padel.Domain.Contracts.Tasks;
 using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands.Usuarios;
-using SharpArch.Domain.Commands;
 using Padel.Domain;
+using MediatR;
 
 namespace Padel.Tasks.CommandHandlers.Usuarios
 {
-    public class RefrescarUsuarioCommandHandler : ICommandHandler<RefrescarUsuarioCommand, CommandResult>
+    public class RefrescarUsuarioCommandHandler : IRequestHandler<RefrescarUsuarioCommand, CommandResult>
     {
         private readonly IUsuarioTasks usuarioTasks;
 

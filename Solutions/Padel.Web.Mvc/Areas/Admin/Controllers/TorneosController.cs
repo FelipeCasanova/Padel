@@ -10,29 +10,29 @@ using Padel.Tasks.Commands.Torneos;
 using Padel.Web.Mvc.Areas.Admin.Controllers.Queries.Torneos;
 using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Menus;
 using Padel.Web.Mvc.Areas.Admin.Controllers.ViewModels.Torneos;
-using SharpArch.Domain.Commands;
-using SharpArch.NHibernate.Web.Mvc;
 using Padel.Domain;
 using System.Text;
 using Padel.Web.Mvc.Filters;
 using Microsoft.Web.Mvc;
 using SharpArch.Web.Mvc.JsonNet;
+using MediatR;
+using SharpArch.Web.Mvc;
 
 namespace Padel.Web.Mvc.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Administrador")]
     public partial class TorneosController : BaseController
     {
-        private readonly ICommandProcessor commandProcessor;
+        private readonly IMediator mediator;
 
         private readonly IEmailTasks emailTasks;
 
         private readonly ITorneosQuery torneosQuery;
 
 
-        public TorneosController(ICommandProcessor commandProcessor, IEmailTasks emailTasks, ITorneosQuery torneosQuery)
+        public TorneosController(IMediator mediator, IEmailTasks emailTasks, ITorneosQuery torneosQuery)
         {
-            this.commandProcessor = commandProcessor;
+            this.mediator = mediator;
             this.emailTasks = emailTasks;
             this.torneosQuery = torneosQuery;
         }
@@ -80,7 +80,7 @@ namespace Padel.Web.Mvc.Areas.Admin.Controllers
         public virtual ActionResult _Verificar(int idCategoria)
         {
             var command = new VerificarTorneoCommand(idCategoria);
-            var result = this.commandProcessor.Process<VerificarTorneoCommand, CommandResult>(command).First();
+            var result = this.mediator.Send<CommandResult>(command).Result;
 
             if (!result.Success)
             {

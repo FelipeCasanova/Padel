@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using MediatR;
 using Padel.Domain;
 using Padel.Domain.Contracts.Tasks;
+using Padel.Domain.Events.Equipos;
 using Padel.Infrastructure.Utilities;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands;
 using Padel.Tasks.Commands.Equipos;
-using SharpArch.Domain.Commands;
 using SharpArch.Domain.PersistenceSupport;
-using Padel.Tasks.Events.Equipos;
-using SharpArch.Domain.Events;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
 
 namespace Padel.Tasks.CommandHandlers.Equipos
 {
-    public class CrearEquipoCommandHandler : ICommandHandler<CrearEquipoCommand, CommandResult>
+    public class CrearEquipoCommandHandler : IRequestHandler<CrearEquipoCommand, CommandResult>
     {
         private readonly IRepository<Usuario> usuarioRepository;
         private readonly IEquipoTasks equipoTasks;
+        private readonly IMediator mediator;
 
-        public CrearEquipoCommandHandler(IRepository<Usuario> usuarioRepository, IEquipoTasks equipoTasks)
+        public CrearEquipoCommandHandler(IRepository<Usuario> usuarioRepository, IEquipoTasks equipoTasks, IMediator mediator)
         {
             this.usuarioRepository = usuarioRepository;
             this.equipoTasks = equipoTasks;
+            this.mediator = mediator;
         }
 
         public CommandResult Handle(CrearEquipoCommand command)
@@ -41,7 +42,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
                 this.equipoTasks.CreateOrUpdate(equipoReactivate, command.Jugador1Id, command.Jugador2Id, principal.Id);
                 if (estabaEliminado)
                 {
-                    DomainEvents.Raise<CrearEquipoEvent>(new CrearEquipoEvent(equipoReactivate.Id, command.Jugador1Id, command.Jugador2Id));
+                    mediator.Publish(new CrearEquipoEvent(equipoReactivate.Id, command.Jugador1Id, command.Jugador2Id));
                     return new CommandResult(true, "Se ha creado correctamente el equipo.");
                 }
                 else
@@ -54,7 +55,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
                 // crear equipo nuevo
                 var equipo = new Equipo();
                 this.equipoTasks.CreateOrUpdate(equipo, command.Jugador1Id, command.Jugador2Id, principal.Id);
-                DomainEvents.Raise<CrearEquipoEvent>(new CrearEquipoEvent(equipo.Id, command.Jugador1Id, command.Jugador2Id));
+                mediator.Publish(new CrearEquipoEvent(equipo.Id, command.Jugador1Id, command.Jugador2Id));
                 return new CommandResult(true, "Se ha creado correctamente el equipo.");
             }
         }

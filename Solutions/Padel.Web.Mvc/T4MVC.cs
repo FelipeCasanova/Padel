@@ -3,8 +3,10 @@
 // Don't change it directly as your change would get overwritten.  Instead, make changes
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
-// Make sure the compiler doesn't complain about missing Xml comments
-#pragma warning disable 1591
+// Make sure the compiler doesn't complain about missing Xml comments and CLS compliance
+// 0108: suppress "Foo hides inherited member Foo. Use the new keyword if hiding was intended." when a controller and its abstract parent are both processed
+// 0114: suppress "Foo.BarController.Baz()' hides inherited member 'Qux.BarController.Baz()'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword." when an action (with an argument) overrides an action in a parent controller
+#pragma warning disable 1591, 3008, 3009, 0108, 0114
 #region T4MVC
 
 using System;
@@ -13,6 +15,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -22,7 +25,7 @@ using System.Web.Routing;
 using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-public static class MVC
+public static partial class MVC
 {
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
@@ -112,45 +115,68 @@ namespace Links
 {
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public static class Scripts {
-        private const string URLPATH = "~/Scripts";
-        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-        public static readonly string additional_methods_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/additional-methods.min.js") ? Url("additional-methods.min.js") : Url("additional-methods.js");
+        public const string UrlPath = "~/Scripts";
+        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+        public static readonly string additional_methods_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/additional-methods.min.js") ? Url("additional-methods.min.js") : Url("additional-methods.js");
         public static readonly string additional_methods_min_js = Url("additional-methods.min.js");
-        public static readonly string angular_bootstrap_prettify_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-bootstrap-prettify.min.js") ? Url("angular-bootstrap-prettify.min.js") : Url("angular-bootstrap-prettify.js");
-        public static readonly string angular_bootstrap_prettify_min_js = Url("angular-bootstrap-prettify.min.js");
-        public static readonly string angular_bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-bootstrap.min.js") ? Url("angular-bootstrap.min.js") : Url("angular-bootstrap.js");
-        public static readonly string angular_bootstrap_min_js = Url("angular-bootstrap.min.js");
-        public static readonly string angular_cookies_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-cookies.min.js") ? Url("angular-cookies.min.js") : Url("angular-cookies.js");
+        public static readonly string angular_animate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-animate.min.js") ? Url("angular-animate.min.js") : Url("angular-animate.js");
+        public static readonly string angular_animate_min_js = Url("angular-animate.min.js");
+        public static readonly string angular_animate_min_js_map = Url("angular-animate.min.js.map");
+        public static readonly string angular_aria_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-aria.min.js") ? Url("angular-aria.min.js") : Url("angular-aria.js");
+        public static readonly string angular_aria_min_js = Url("angular-aria.min.js");
+        public static readonly string angular_aria_min_js_map = Url("angular-aria.min.js.map");
+        public static readonly string angular_cookies_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-cookies.min.js") ? Url("angular-cookies.min.js") : Url("angular-cookies.js");
         public static readonly string angular_cookies_min_js = Url("angular-cookies.min.js");
-        public static readonly string angular_loader_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-loader.min.js") ? Url("angular-loader.min.js") : Url("angular-loader.js");
+        public static readonly string angular_cookies_min_js_map = Url("angular-cookies.min.js.map");
+        public static readonly string angular_csp_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-csp.min.css") ? Url("angular-csp.min.css") : Url("angular-csp.css");
+        public static readonly string angular_loader_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-loader.min.js") ? Url("angular-loader.min.js") : Url("angular-loader.js");
         public static readonly string angular_loader_min_js = Url("angular-loader.min.js");
-        public static readonly string angular_mocks_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-mocks.min.js") ? Url("angular-mocks.min.js") : Url("angular-mocks.js");
-        public static readonly string angular_resource_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-resource.min.js") ? Url("angular-resource.min.js") : Url("angular-resource.js");
+        public static readonly string angular_loader_min_js_map = Url("angular-loader.min.js.map");
+        public static readonly string angular_message_format_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-message-format.min.js") ? Url("angular-message-format.min.js") : Url("angular-message-format.js");
+        public static readonly string angular_message_format_min_js = Url("angular-message-format.min.js");
+        public static readonly string angular_message_format_min_js_map = Url("angular-message-format.min.js.map");
+        public static readonly string angular_messages_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-messages.min.js") ? Url("angular-messages.min.js") : Url("angular-messages.js");
+        public static readonly string angular_messages_min_js = Url("angular-messages.min.js");
+        public static readonly string angular_messages_min_js_map = Url("angular-messages.min.js.map");
+        public static readonly string angular_mocks_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-mocks.min.js") ? Url("angular-mocks.min.js") : Url("angular-mocks.js");
+        public static readonly string angular_parse_ext_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-parse-ext.min.js") ? Url("angular-parse-ext.min.js") : Url("angular-parse-ext.js");
+        public static readonly string angular_parse_ext_min_js = Url("angular-parse-ext.min.js");
+        public static readonly string angular_parse_ext_min_js_map = Url("angular-parse-ext.min.js.map");
+        public static readonly string angular_resource_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-resource.min.js") ? Url("angular-resource.min.js") : Url("angular-resource.js");
         public static readonly string angular_resource_min_js = Url("angular-resource.min.js");
-        public static readonly string angular_sanitize_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-sanitize.min.js") ? Url("angular-sanitize.min.js") : Url("angular-sanitize.js");
+        public static readonly string angular_resource_min_js_map = Url("angular-resource.min.js.map");
+        public static readonly string angular_route_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-route.min.js") ? Url("angular-route.min.js") : Url("angular-route.js");
+        public static readonly string angular_route_min_js = Url("angular-route.min.js");
+        public static readonly string angular_route_min_js_map = Url("angular-route.min.js.map");
+        public static readonly string angular_sanitize_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-sanitize.min.js") ? Url("angular-sanitize.min.js") : Url("angular-sanitize.js");
         public static readonly string angular_sanitize_min_js = Url("angular-sanitize.min.js");
-        public static readonly string angular_scenario_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-scenario.min.js") ? Url("angular-scenario.min.js") : Url("angular-scenario.js");
-        public static readonly string angular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular.min.js") ? Url("angular.min.js") : Url("angular.js");
+        public static readonly string angular_sanitize_min_js_map = Url("angular-sanitize.min.js.map");
+        public static readonly string angular_scenario_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-scenario.min.js") ? Url("angular-scenario.min.js") : Url("angular-scenario.js");
+        public static readonly string angular_touch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-touch.min.js") ? Url("angular-touch.min.js") : Url("angular-touch.js");
+        public static readonly string angular_touch_min_js = Url("angular-touch.min.js");
+        public static readonly string angular_touch_min_js_map = Url("angular-touch.min.js.map");
+        public static readonly string angular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular.min.js") ? Url("angular.min.js") : Url("angular.js");
         public static readonly string angular_min_js = Url("angular.min.js");
+        public static readonly string angular_min_js_map = Url("angular.min.js.map");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class angularjs {
-            private const string URLPATH = "~/Scripts/angularjs";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string angular_route_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-route.min.js") ? Url("angular-route.min.js") : Url("angular-route.js");
+            public const string UrlPath = "~/Scripts/angularjs";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string angular_route_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-route.min.js") ? Url("angular-route.min.js") : Url("angular-route.js");
             public static readonly string angular_route_min_js = Url("angular-route.min.js");
             public static readonly string angular_route_min_js_map = Url("angular-route.min.js.map");
-            public static readonly string angular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular.min.js") ? Url("angular.min.js") : Url("angular.js");
+            public static readonly string angular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular.min.js") ? Url("angular.min.js") : Url("angular.js");
             public static readonly string angular_min_js = Url("angular.min.js");
             public static readonly string angular_min_js_map = Url("angular.min.js.map");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class grid {
-                private const string URLPATH = "~/Scripts/angularjs/grid";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public const string UrlPath = "~/Scripts/angularjs/grid";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                 public static readonly string ng_grid_2_0_7_min_js = Url("ng-grid-2.0.7.min.js");
-                public static readonly string ng_grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ng-grid.min.js") ? Url("ng-grid.min.js") : Url("ng-grid.js");
+                public static readonly string ng_grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ng-grid.min.js") ? Url("ng-grid.min.js") : Url("ng-grid.js");
                 public static readonly string ng_grid_min_js = Url("ng-grid.min.js");
             }
         
@@ -158,529 +184,973 @@ namespace Links
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class bootstrap {
-            private const string URLPATH = "~/Scripts/bootstrap";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string bootstrap_validation_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-validation.min.js") ? Url("bootstrap-validation.min.js") : Url("bootstrap-validation.js");
-            public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
+            public const string UrlPath = "~/Scripts/bootstrap";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string bootstrap_validation_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap-validation.min.js") ? Url("bootstrap-validation.min.js") : Url("bootstrap-validation.js");
+            public static readonly string bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.js") ? Url("bootstrap.min.js") : Url("bootstrap.js");
             public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
-            public static readonly string holder_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/holder.min.js") ? Url("holder.min.js") : Url("holder.js");
+            public static readonly string holder_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/holder.min.js") ? Url("holder.min.js") : Url("holder.js");
         }
     
+        public static readonly string errors_json = Url("errors.json");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class fuelux {
-            private const string URLPATH = "~/Scripts/fuelux";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string wizard_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/wizard.min.js") ? Url("wizard.min.js") : Url("wizard.js");
+            public const string UrlPath = "~/Scripts/fuelux";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string wizard_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/wizard.min.js") ? Url("wizard.min.js") : Url("wizard.js");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class i18n {
-            private const string URLPATH = "~/Scripts/i18n";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string angular_locale_af_na_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_af-na.min.js") ? Url("angular-locale_af-na.min.js") : Url("angular-locale_af-na.js");
-            public static readonly string angular_locale_af_za_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_af-za.min.js") ? Url("angular-locale_af-za.min.js") : Url("angular-locale_af-za.js");
-            public static readonly string angular_locale_af_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_af.min.js") ? Url("angular-locale_af.min.js") : Url("angular-locale_af.js");
-            public static readonly string angular_locale_am_et_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_am-et.min.js") ? Url("angular-locale_am-et.min.js") : Url("angular-locale_am-et.js");
-            public static readonly string angular_locale_am_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_am.min.js") ? Url("angular-locale_am.min.js") : Url("angular-locale_am.js");
-            public static readonly string angular_locale_ar_001_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-001.min.js") ? Url("angular-locale_ar-001.min.js") : Url("angular-locale_ar-001.js");
-            public static readonly string angular_locale_ar_ae_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-ae.min.js") ? Url("angular-locale_ar-ae.min.js") : Url("angular-locale_ar-ae.js");
-            public static readonly string angular_locale_ar_bh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-bh.min.js") ? Url("angular-locale_ar-bh.min.js") : Url("angular-locale_ar-bh.js");
-            public static readonly string angular_locale_ar_dz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-dz.min.js") ? Url("angular-locale_ar-dz.min.js") : Url("angular-locale_ar-dz.js");
-            public static readonly string angular_locale_ar_eg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-eg.min.js") ? Url("angular-locale_ar-eg.min.js") : Url("angular-locale_ar-eg.js");
-            public static readonly string angular_locale_ar_iq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-iq.min.js") ? Url("angular-locale_ar-iq.min.js") : Url("angular-locale_ar-iq.js");
-            public static readonly string angular_locale_ar_jo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-jo.min.js") ? Url("angular-locale_ar-jo.min.js") : Url("angular-locale_ar-jo.js");
-            public static readonly string angular_locale_ar_kw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-kw.min.js") ? Url("angular-locale_ar-kw.min.js") : Url("angular-locale_ar-kw.js");
-            public static readonly string angular_locale_ar_lb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-lb.min.js") ? Url("angular-locale_ar-lb.min.js") : Url("angular-locale_ar-lb.js");
-            public static readonly string angular_locale_ar_ly_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-ly.min.js") ? Url("angular-locale_ar-ly.min.js") : Url("angular-locale_ar-ly.js");
-            public static readonly string angular_locale_ar_ma_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-ma.min.js") ? Url("angular-locale_ar-ma.min.js") : Url("angular-locale_ar-ma.js");
-            public static readonly string angular_locale_ar_om_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-om.min.js") ? Url("angular-locale_ar-om.min.js") : Url("angular-locale_ar-om.js");
-            public static readonly string angular_locale_ar_qa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-qa.min.js") ? Url("angular-locale_ar-qa.min.js") : Url("angular-locale_ar-qa.js");
-            public static readonly string angular_locale_ar_sa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-sa.min.js") ? Url("angular-locale_ar-sa.min.js") : Url("angular-locale_ar-sa.js");
-            public static readonly string angular_locale_ar_sd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-sd.min.js") ? Url("angular-locale_ar-sd.min.js") : Url("angular-locale_ar-sd.js");
-            public static readonly string angular_locale_ar_sy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-sy.min.js") ? Url("angular-locale_ar-sy.min.js") : Url("angular-locale_ar-sy.js");
-            public static readonly string angular_locale_ar_tn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-tn.min.js") ? Url("angular-locale_ar-tn.min.js") : Url("angular-locale_ar-tn.js");
-            public static readonly string angular_locale_ar_ye_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar-ye.min.js") ? Url("angular-locale_ar-ye.min.js") : Url("angular-locale_ar-ye.js");
-            public static readonly string angular_locale_ar_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ar.min.js") ? Url("angular-locale_ar.min.js") : Url("angular-locale_ar.js");
-            public static readonly string angular_locale_bg_bg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_bg-bg.min.js") ? Url("angular-locale_bg-bg.min.js") : Url("angular-locale_bg-bg.js");
-            public static readonly string angular_locale_bg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_bg.min.js") ? Url("angular-locale_bg.min.js") : Url("angular-locale_bg.js");
-            public static readonly string angular_locale_bn_bd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_bn-bd.min.js") ? Url("angular-locale_bn-bd.min.js") : Url("angular-locale_bn-bd.js");
-            public static readonly string angular_locale_bn_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_bn-in.min.js") ? Url("angular-locale_bn-in.min.js") : Url("angular-locale_bn-in.js");
-            public static readonly string angular_locale_bn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_bn.min.js") ? Url("angular-locale_bn.min.js") : Url("angular-locale_bn.js");
-            public static readonly string angular_locale_ca_ad_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ca-ad.min.js") ? Url("angular-locale_ca-ad.min.js") : Url("angular-locale_ca-ad.js");
-            public static readonly string angular_locale_ca_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ca-es.min.js") ? Url("angular-locale_ca-es.min.js") : Url("angular-locale_ca-es.js");
-            public static readonly string angular_locale_ca_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ca.min.js") ? Url("angular-locale_ca.min.js") : Url("angular-locale_ca.js");
-            public static readonly string angular_locale_chr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_chr.min.js") ? Url("angular-locale_chr.min.js") : Url("angular-locale_chr.js");
-            public static readonly string angular_locale_cs_cz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_cs-cz.min.js") ? Url("angular-locale_cs-cz.min.js") : Url("angular-locale_cs-cz.js");
-            public static readonly string angular_locale_cs_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_cs.min.js") ? Url("angular-locale_cs.min.js") : Url("angular-locale_cs.js");
-            public static readonly string angular_locale_cy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_cy.min.js") ? Url("angular-locale_cy.min.js") : Url("angular-locale_cy.js");
-            public static readonly string angular_locale_da_dk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_da-dk.min.js") ? Url("angular-locale_da-dk.min.js") : Url("angular-locale_da-dk.js");
-            public static readonly string angular_locale_da_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_da.min.js") ? Url("angular-locale_da.min.js") : Url("angular-locale_da.js");
-            public static readonly string angular_locale_de_at_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_de-at.min.js") ? Url("angular-locale_de-at.min.js") : Url("angular-locale_de-at.js");
-            public static readonly string angular_locale_de_be_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_de-be.min.js") ? Url("angular-locale_de-be.min.js") : Url("angular-locale_de-be.js");
-            public static readonly string angular_locale_de_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_de-ch.min.js") ? Url("angular-locale_de-ch.min.js") : Url("angular-locale_de-ch.js");
-            public static readonly string angular_locale_de_de_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_de-de.min.js") ? Url("angular-locale_de-de.min.js") : Url("angular-locale_de-de.js");
-            public static readonly string angular_locale_de_li_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_de-li.min.js") ? Url("angular-locale_de-li.min.js") : Url("angular-locale_de-li.js");
-            public static readonly string angular_locale_de_lu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_de-lu.min.js") ? Url("angular-locale_de-lu.min.js") : Url("angular-locale_de-lu.js");
-            public static readonly string angular_locale_de_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_de.min.js") ? Url("angular-locale_de.min.js") : Url("angular-locale_de.js");
-            public static readonly string angular_locale_el_cy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_el-cy.min.js") ? Url("angular-locale_el-cy.min.js") : Url("angular-locale_el-cy.js");
-            public static readonly string angular_locale_el_gr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_el-gr.min.js") ? Url("angular-locale_el-gr.min.js") : Url("angular-locale_el-gr.js");
-            public static readonly string angular_locale_el_polyton_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_el-polyton.min.js") ? Url("angular-locale_el-polyton.min.js") : Url("angular-locale_el-polyton.js");
-            public static readonly string angular_locale_el_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_el.min.js") ? Url("angular-locale_el.min.js") : Url("angular-locale_el.js");
-            public static readonly string angular_locale_en_as_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-as.min.js") ? Url("angular-locale_en-as.min.js") : Url("angular-locale_en-as.js");
-            public static readonly string angular_locale_en_au_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-au.min.js") ? Url("angular-locale_en-au.min.js") : Url("angular-locale_en-au.js");
-            public static readonly string angular_locale_en_bb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-bb.min.js") ? Url("angular-locale_en-bb.min.js") : Url("angular-locale_en-bb.js");
-            public static readonly string angular_locale_en_be_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-be.min.js") ? Url("angular-locale_en-be.min.js") : Url("angular-locale_en-be.js");
-            public static readonly string angular_locale_en_bm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-bm.min.js") ? Url("angular-locale_en-bm.min.js") : Url("angular-locale_en-bm.js");
-            public static readonly string angular_locale_en_bw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-bw.min.js") ? Url("angular-locale_en-bw.min.js") : Url("angular-locale_en-bw.js");
-            public static readonly string angular_locale_en_bz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-bz.min.js") ? Url("angular-locale_en-bz.min.js") : Url("angular-locale_en-bz.js");
-            public static readonly string angular_locale_en_ca_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-ca.min.js") ? Url("angular-locale_en-ca.min.js") : Url("angular-locale_en-ca.js");
-            public static readonly string angular_locale_en_dsrt_us_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-dsrt-us.min.js") ? Url("angular-locale_en-dsrt-us.min.js") : Url("angular-locale_en-dsrt-us.js");
-            public static readonly string angular_locale_en_dsrt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-dsrt.min.js") ? Url("angular-locale_en-dsrt.min.js") : Url("angular-locale_en-dsrt.js");
-            public static readonly string angular_locale_en_fm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-fm.min.js") ? Url("angular-locale_en-fm.min.js") : Url("angular-locale_en-fm.js");
-            public static readonly string angular_locale_en_gb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-gb.min.js") ? Url("angular-locale_en-gb.min.js") : Url("angular-locale_en-gb.js");
-            public static readonly string angular_locale_en_gu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-gu.min.js") ? Url("angular-locale_en-gu.min.js") : Url("angular-locale_en-gu.js");
-            public static readonly string angular_locale_en_gy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-gy.min.js") ? Url("angular-locale_en-gy.min.js") : Url("angular-locale_en-gy.js");
-            public static readonly string angular_locale_en_hk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-hk.min.js") ? Url("angular-locale_en-hk.min.js") : Url("angular-locale_en-hk.js");
-            public static readonly string angular_locale_en_ie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-ie.min.js") ? Url("angular-locale_en-ie.min.js") : Url("angular-locale_en-ie.js");
-            public static readonly string angular_locale_en_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-in.min.js") ? Url("angular-locale_en-in.min.js") : Url("angular-locale_en-in.js");
-            public static readonly string angular_locale_en_iso_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-iso.min.js") ? Url("angular-locale_en-iso.min.js") : Url("angular-locale_en-iso.js");
-            public static readonly string angular_locale_en_jm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-jm.min.js") ? Url("angular-locale_en-jm.min.js") : Url("angular-locale_en-jm.js");
-            public static readonly string angular_locale_en_mh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-mh.min.js") ? Url("angular-locale_en-mh.min.js") : Url("angular-locale_en-mh.js");
-            public static readonly string angular_locale_en_mp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-mp.min.js") ? Url("angular-locale_en-mp.min.js") : Url("angular-locale_en-mp.js");
-            public static readonly string angular_locale_en_mt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-mt.min.js") ? Url("angular-locale_en-mt.min.js") : Url("angular-locale_en-mt.js");
-            public static readonly string angular_locale_en_mu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-mu.min.js") ? Url("angular-locale_en-mu.min.js") : Url("angular-locale_en-mu.js");
-            public static readonly string angular_locale_en_na_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-na.min.js") ? Url("angular-locale_en-na.min.js") : Url("angular-locale_en-na.js");
-            public static readonly string angular_locale_en_nz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-nz.min.js") ? Url("angular-locale_en-nz.min.js") : Url("angular-locale_en-nz.js");
-            public static readonly string angular_locale_en_ph_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-ph.min.js") ? Url("angular-locale_en-ph.min.js") : Url("angular-locale_en-ph.js");
-            public static readonly string angular_locale_en_pk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-pk.min.js") ? Url("angular-locale_en-pk.min.js") : Url("angular-locale_en-pk.js");
-            public static readonly string angular_locale_en_pr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-pr.min.js") ? Url("angular-locale_en-pr.min.js") : Url("angular-locale_en-pr.js");
-            public static readonly string angular_locale_en_pw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-pw.min.js") ? Url("angular-locale_en-pw.min.js") : Url("angular-locale_en-pw.js");
-            public static readonly string angular_locale_en_sg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-sg.min.js") ? Url("angular-locale_en-sg.min.js") : Url("angular-locale_en-sg.js");
-            public static readonly string angular_locale_en_tc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-tc.min.js") ? Url("angular-locale_en-tc.min.js") : Url("angular-locale_en-tc.js");
-            public static readonly string angular_locale_en_tt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-tt.min.js") ? Url("angular-locale_en-tt.min.js") : Url("angular-locale_en-tt.js");
-            public static readonly string angular_locale_en_um_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-um.min.js") ? Url("angular-locale_en-um.min.js") : Url("angular-locale_en-um.js");
-            public static readonly string angular_locale_en_us_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-us.min.js") ? Url("angular-locale_en-us.min.js") : Url("angular-locale_en-us.js");
-            public static readonly string angular_locale_en_vg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-vg.min.js") ? Url("angular-locale_en-vg.min.js") : Url("angular-locale_en-vg.js");
-            public static readonly string angular_locale_en_vi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-vi.min.js") ? Url("angular-locale_en-vi.min.js") : Url("angular-locale_en-vi.js");
-            public static readonly string angular_locale_en_za_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-za.min.js") ? Url("angular-locale_en-za.min.js") : Url("angular-locale_en-za.js");
-            public static readonly string angular_locale_en_zw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-zw.min.js") ? Url("angular-locale_en-zw.min.js") : Url("angular-locale_en-zw.js");
-            public static readonly string angular_locale_en_zz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en-zz.min.js") ? Url("angular-locale_en-zz.min.js") : Url("angular-locale_en-zz.js");
-            public static readonly string angular_locale_en_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_en.min.js") ? Url("angular-locale_en.min.js") : Url("angular-locale_en.js");
-            public static readonly string angular_locale_es_419_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-419.min.js") ? Url("angular-locale_es-419.min.js") : Url("angular-locale_es-419.js");
-            public static readonly string angular_locale_es_ar_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-ar.min.js") ? Url("angular-locale_es-ar.min.js") : Url("angular-locale_es-ar.js");
-            public static readonly string angular_locale_es_bo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-bo.min.js") ? Url("angular-locale_es-bo.min.js") : Url("angular-locale_es-bo.js");
-            public static readonly string angular_locale_es_cl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-cl.min.js") ? Url("angular-locale_es-cl.min.js") : Url("angular-locale_es-cl.js");
-            public static readonly string angular_locale_es_co_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-co.min.js") ? Url("angular-locale_es-co.min.js") : Url("angular-locale_es-co.js");
-            public static readonly string angular_locale_es_cr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-cr.min.js") ? Url("angular-locale_es-cr.min.js") : Url("angular-locale_es-cr.js");
-            public static readonly string angular_locale_es_do_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-do.min.js") ? Url("angular-locale_es-do.min.js") : Url("angular-locale_es-do.js");
-            public static readonly string angular_locale_es_ea_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-ea.min.js") ? Url("angular-locale_es-ea.min.js") : Url("angular-locale_es-ea.js");
-            public static readonly string angular_locale_es_ec_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-ec.min.js") ? Url("angular-locale_es-ec.min.js") : Url("angular-locale_es-ec.js");
-            public static readonly string angular_locale_es_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-es.min.js") ? Url("angular-locale_es-es.min.js") : Url("angular-locale_es-es.js");
-            public static readonly string angular_locale_es_gq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-gq.min.js") ? Url("angular-locale_es-gq.min.js") : Url("angular-locale_es-gq.js");
-            public static readonly string angular_locale_es_gt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-gt.min.js") ? Url("angular-locale_es-gt.min.js") : Url("angular-locale_es-gt.js");
-            public static readonly string angular_locale_es_hn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-hn.min.js") ? Url("angular-locale_es-hn.min.js") : Url("angular-locale_es-hn.js");
-            public static readonly string angular_locale_es_ic_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-ic.min.js") ? Url("angular-locale_es-ic.min.js") : Url("angular-locale_es-ic.js");
-            public static readonly string angular_locale_es_mx_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-mx.min.js") ? Url("angular-locale_es-mx.min.js") : Url("angular-locale_es-mx.js");
-            public static readonly string angular_locale_es_ni_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-ni.min.js") ? Url("angular-locale_es-ni.min.js") : Url("angular-locale_es-ni.js");
-            public static readonly string angular_locale_es_pa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-pa.min.js") ? Url("angular-locale_es-pa.min.js") : Url("angular-locale_es-pa.js");
-            public static readonly string angular_locale_es_pe_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-pe.min.js") ? Url("angular-locale_es-pe.min.js") : Url("angular-locale_es-pe.js");
-            public static readonly string angular_locale_es_pr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-pr.min.js") ? Url("angular-locale_es-pr.min.js") : Url("angular-locale_es-pr.js");
-            public static readonly string angular_locale_es_py_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-py.min.js") ? Url("angular-locale_es-py.min.js") : Url("angular-locale_es-py.js");
-            public static readonly string angular_locale_es_sv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-sv.min.js") ? Url("angular-locale_es-sv.min.js") : Url("angular-locale_es-sv.js");
-            public static readonly string angular_locale_es_us_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-us.min.js") ? Url("angular-locale_es-us.min.js") : Url("angular-locale_es-us.js");
-            public static readonly string angular_locale_es_uy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-uy.min.js") ? Url("angular-locale_es-uy.min.js") : Url("angular-locale_es-uy.js");
-            public static readonly string angular_locale_es_ve_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es-ve.min.js") ? Url("angular-locale_es-ve.min.js") : Url("angular-locale_es-ve.js");
-            public static readonly string angular_locale_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_es.min.js") ? Url("angular-locale_es.min.js") : Url("angular-locale_es.js");
-            public static readonly string angular_locale_et_ee_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_et-ee.min.js") ? Url("angular-locale_et-ee.min.js") : Url("angular-locale_et-ee.js");
-            public static readonly string angular_locale_et_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_et.min.js") ? Url("angular-locale_et.min.js") : Url("angular-locale_et.js");
-            public static readonly string angular_locale_eu_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_eu-es.min.js") ? Url("angular-locale_eu-es.min.js") : Url("angular-locale_eu-es.js");
-            public static readonly string angular_locale_eu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_eu.min.js") ? Url("angular-locale_eu.min.js") : Url("angular-locale_eu.js");
-            public static readonly string angular_locale_fa_af_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fa-af.min.js") ? Url("angular-locale_fa-af.min.js") : Url("angular-locale_fa-af.js");
-            public static readonly string angular_locale_fa_ir_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fa-ir.min.js") ? Url("angular-locale_fa-ir.min.js") : Url("angular-locale_fa-ir.js");
-            public static readonly string angular_locale_fa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fa.min.js") ? Url("angular-locale_fa.min.js") : Url("angular-locale_fa.js");
-            public static readonly string angular_locale_fi_fi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fi-fi.min.js") ? Url("angular-locale_fi-fi.min.js") : Url("angular-locale_fi-fi.js");
-            public static readonly string angular_locale_fi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fi.min.js") ? Url("angular-locale_fi.min.js") : Url("angular-locale_fi.js");
-            public static readonly string angular_locale_fil_ph_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fil-ph.min.js") ? Url("angular-locale_fil-ph.min.js") : Url("angular-locale_fil-ph.js");
-            public static readonly string angular_locale_fil_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fil.min.js") ? Url("angular-locale_fil.min.js") : Url("angular-locale_fil.js");
-            public static readonly string angular_locale_fr_be_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-be.min.js") ? Url("angular-locale_fr-be.min.js") : Url("angular-locale_fr-be.js");
-            public static readonly string angular_locale_fr_bf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-bf.min.js") ? Url("angular-locale_fr-bf.min.js") : Url("angular-locale_fr-bf.js");
-            public static readonly string angular_locale_fr_bi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-bi.min.js") ? Url("angular-locale_fr-bi.min.js") : Url("angular-locale_fr-bi.js");
-            public static readonly string angular_locale_fr_bj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-bj.min.js") ? Url("angular-locale_fr-bj.min.js") : Url("angular-locale_fr-bj.js");
-            public static readonly string angular_locale_fr_bl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-bl.min.js") ? Url("angular-locale_fr-bl.min.js") : Url("angular-locale_fr-bl.js");
-            public static readonly string angular_locale_fr_ca_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-ca.min.js") ? Url("angular-locale_fr-ca.min.js") : Url("angular-locale_fr-ca.js");
-            public static readonly string angular_locale_fr_cd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-cd.min.js") ? Url("angular-locale_fr-cd.min.js") : Url("angular-locale_fr-cd.js");
-            public static readonly string angular_locale_fr_cf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-cf.min.js") ? Url("angular-locale_fr-cf.min.js") : Url("angular-locale_fr-cf.js");
-            public static readonly string angular_locale_fr_cg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-cg.min.js") ? Url("angular-locale_fr-cg.min.js") : Url("angular-locale_fr-cg.js");
-            public static readonly string angular_locale_fr_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-ch.min.js") ? Url("angular-locale_fr-ch.min.js") : Url("angular-locale_fr-ch.js");
-            public static readonly string angular_locale_fr_ci_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-ci.min.js") ? Url("angular-locale_fr-ci.min.js") : Url("angular-locale_fr-ci.js");
-            public static readonly string angular_locale_fr_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-cm.min.js") ? Url("angular-locale_fr-cm.min.js") : Url("angular-locale_fr-cm.js");
-            public static readonly string angular_locale_fr_dj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-dj.min.js") ? Url("angular-locale_fr-dj.min.js") : Url("angular-locale_fr-dj.js");
-            public static readonly string angular_locale_fr_fr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-fr.min.js") ? Url("angular-locale_fr-fr.min.js") : Url("angular-locale_fr-fr.js");
-            public static readonly string angular_locale_fr_ga_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-ga.min.js") ? Url("angular-locale_fr-ga.min.js") : Url("angular-locale_fr-ga.js");
-            public static readonly string angular_locale_fr_gf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-gf.min.js") ? Url("angular-locale_fr-gf.min.js") : Url("angular-locale_fr-gf.js");
-            public static readonly string angular_locale_fr_gn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-gn.min.js") ? Url("angular-locale_fr-gn.min.js") : Url("angular-locale_fr-gn.js");
-            public static readonly string angular_locale_fr_gp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-gp.min.js") ? Url("angular-locale_fr-gp.min.js") : Url("angular-locale_fr-gp.js");
-            public static readonly string angular_locale_fr_gq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-gq.min.js") ? Url("angular-locale_fr-gq.min.js") : Url("angular-locale_fr-gq.js");
-            public static readonly string angular_locale_fr_km_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-km.min.js") ? Url("angular-locale_fr-km.min.js") : Url("angular-locale_fr-km.js");
-            public static readonly string angular_locale_fr_lu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-lu.min.js") ? Url("angular-locale_fr-lu.min.js") : Url("angular-locale_fr-lu.js");
-            public static readonly string angular_locale_fr_mc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-mc.min.js") ? Url("angular-locale_fr-mc.min.js") : Url("angular-locale_fr-mc.js");
-            public static readonly string angular_locale_fr_mf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-mf.min.js") ? Url("angular-locale_fr-mf.min.js") : Url("angular-locale_fr-mf.js");
-            public static readonly string angular_locale_fr_mg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-mg.min.js") ? Url("angular-locale_fr-mg.min.js") : Url("angular-locale_fr-mg.js");
-            public static readonly string angular_locale_fr_ml_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-ml.min.js") ? Url("angular-locale_fr-ml.min.js") : Url("angular-locale_fr-ml.js");
-            public static readonly string angular_locale_fr_mq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-mq.min.js") ? Url("angular-locale_fr-mq.min.js") : Url("angular-locale_fr-mq.js");
-            public static readonly string angular_locale_fr_ne_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-ne.min.js") ? Url("angular-locale_fr-ne.min.js") : Url("angular-locale_fr-ne.js");
-            public static readonly string angular_locale_fr_re_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-re.min.js") ? Url("angular-locale_fr-re.min.js") : Url("angular-locale_fr-re.js");
-            public static readonly string angular_locale_fr_rw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-rw.min.js") ? Url("angular-locale_fr-rw.min.js") : Url("angular-locale_fr-rw.js");
-            public static readonly string angular_locale_fr_sn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-sn.min.js") ? Url("angular-locale_fr-sn.min.js") : Url("angular-locale_fr-sn.js");
-            public static readonly string angular_locale_fr_td_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-td.min.js") ? Url("angular-locale_fr-td.min.js") : Url("angular-locale_fr-td.js");
-            public static readonly string angular_locale_fr_tg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-tg.min.js") ? Url("angular-locale_fr-tg.min.js") : Url("angular-locale_fr-tg.js");
-            public static readonly string angular_locale_fr_yt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr-yt.min.js") ? Url("angular-locale_fr-yt.min.js") : Url("angular-locale_fr-yt.js");
-            public static readonly string angular_locale_fr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_fr.min.js") ? Url("angular-locale_fr.min.js") : Url("angular-locale_fr.js");
-            public static readonly string angular_locale_gl_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_gl-es.min.js") ? Url("angular-locale_gl-es.min.js") : Url("angular-locale_gl-es.js");
-            public static readonly string angular_locale_gl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_gl.min.js") ? Url("angular-locale_gl.min.js") : Url("angular-locale_gl.js");
-            public static readonly string angular_locale_gsw_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_gsw-ch.min.js") ? Url("angular-locale_gsw-ch.min.js") : Url("angular-locale_gsw-ch.js");
-            public static readonly string angular_locale_gsw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_gsw.min.js") ? Url("angular-locale_gsw.min.js") : Url("angular-locale_gsw.js");
-            public static readonly string angular_locale_gu_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_gu-in.min.js") ? Url("angular-locale_gu-in.min.js") : Url("angular-locale_gu-in.js");
-            public static readonly string angular_locale_gu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_gu.min.js") ? Url("angular-locale_gu.min.js") : Url("angular-locale_gu.js");
-            public static readonly string angular_locale_haw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_haw.min.js") ? Url("angular-locale_haw.min.js") : Url("angular-locale_haw.js");
-            public static readonly string angular_locale_he_il_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_he-il.min.js") ? Url("angular-locale_he-il.min.js") : Url("angular-locale_he-il.js");
-            public static readonly string angular_locale_he_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_he.min.js") ? Url("angular-locale_he.min.js") : Url("angular-locale_he.js");
-            public static readonly string angular_locale_hi_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_hi-in.min.js") ? Url("angular-locale_hi-in.min.js") : Url("angular-locale_hi-in.js");
-            public static readonly string angular_locale_hi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_hi.min.js") ? Url("angular-locale_hi.min.js") : Url("angular-locale_hi.js");
-            public static readonly string angular_locale_hr_hr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_hr-hr.min.js") ? Url("angular-locale_hr-hr.min.js") : Url("angular-locale_hr-hr.js");
-            public static readonly string angular_locale_hr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_hr.min.js") ? Url("angular-locale_hr.min.js") : Url("angular-locale_hr.js");
-            public static readonly string angular_locale_hu_hu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_hu-hu.min.js") ? Url("angular-locale_hu-hu.min.js") : Url("angular-locale_hu-hu.js");
-            public static readonly string angular_locale_hu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_hu.min.js") ? Url("angular-locale_hu.min.js") : Url("angular-locale_hu.js");
-            public static readonly string angular_locale_id_id_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_id-id.min.js") ? Url("angular-locale_id-id.min.js") : Url("angular-locale_id-id.js");
-            public static readonly string angular_locale_id_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_id.min.js") ? Url("angular-locale_id.min.js") : Url("angular-locale_id.js");
-            public static readonly string angular_locale_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_in.min.js") ? Url("angular-locale_in.min.js") : Url("angular-locale_in.js");
-            public static readonly string angular_locale_is_is_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_is-is.min.js") ? Url("angular-locale_is-is.min.js") : Url("angular-locale_is-is.js");
-            public static readonly string angular_locale_is_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_is.min.js") ? Url("angular-locale_is.min.js") : Url("angular-locale_is.js");
-            public static readonly string angular_locale_it_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_it-ch.min.js") ? Url("angular-locale_it-ch.min.js") : Url("angular-locale_it-ch.js");
-            public static readonly string angular_locale_it_it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_it-it.min.js") ? Url("angular-locale_it-it.min.js") : Url("angular-locale_it-it.js");
-            public static readonly string angular_locale_it_sm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_it-sm.min.js") ? Url("angular-locale_it-sm.min.js") : Url("angular-locale_it-sm.js");
-            public static readonly string angular_locale_it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_it.min.js") ? Url("angular-locale_it.min.js") : Url("angular-locale_it.js");
-            public static readonly string angular_locale_iw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_iw.min.js") ? Url("angular-locale_iw.min.js") : Url("angular-locale_iw.js");
-            public static readonly string angular_locale_ja_jp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ja-jp.min.js") ? Url("angular-locale_ja-jp.min.js") : Url("angular-locale_ja-jp.js");
-            public static readonly string angular_locale_ja_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ja.min.js") ? Url("angular-locale_ja.min.js") : Url("angular-locale_ja.js");
-            public static readonly string angular_locale_kn_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_kn-in.min.js") ? Url("angular-locale_kn-in.min.js") : Url("angular-locale_kn-in.js");
-            public static readonly string angular_locale_kn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_kn.min.js") ? Url("angular-locale_kn.min.js") : Url("angular-locale_kn.js");
-            public static readonly string angular_locale_ko_kr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ko-kr.min.js") ? Url("angular-locale_ko-kr.min.js") : Url("angular-locale_ko-kr.js");
-            public static readonly string angular_locale_ko_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ko.min.js") ? Url("angular-locale_ko.min.js") : Url("angular-locale_ko.js");
-            public static readonly string angular_locale_ln_cd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ln-cd.min.js") ? Url("angular-locale_ln-cd.min.js") : Url("angular-locale_ln-cd.js");
-            public static readonly string angular_locale_ln_cg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ln-cg.min.js") ? Url("angular-locale_ln-cg.min.js") : Url("angular-locale_ln-cg.js");
-            public static readonly string angular_locale_ln_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ln.min.js") ? Url("angular-locale_ln.min.js") : Url("angular-locale_ln.js");
-            public static readonly string angular_locale_lt_lt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_lt-lt.min.js") ? Url("angular-locale_lt-lt.min.js") : Url("angular-locale_lt-lt.js");
-            public static readonly string angular_locale_lt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_lt.min.js") ? Url("angular-locale_lt.min.js") : Url("angular-locale_lt.js");
-            public static readonly string angular_locale_lv_lv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_lv-lv.min.js") ? Url("angular-locale_lv-lv.min.js") : Url("angular-locale_lv-lv.js");
-            public static readonly string angular_locale_lv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_lv.min.js") ? Url("angular-locale_lv.min.js") : Url("angular-locale_lv.js");
-            public static readonly string angular_locale_ml_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ml-in.min.js") ? Url("angular-locale_ml-in.min.js") : Url("angular-locale_ml-in.js");
-            public static readonly string angular_locale_ml_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ml.min.js") ? Url("angular-locale_ml.min.js") : Url("angular-locale_ml.js");
-            public static readonly string angular_locale_mo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_mo.min.js") ? Url("angular-locale_mo.min.js") : Url("angular-locale_mo.js");
-            public static readonly string angular_locale_mr_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_mr-in.min.js") ? Url("angular-locale_mr-in.min.js") : Url("angular-locale_mr-in.js");
-            public static readonly string angular_locale_mr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_mr.min.js") ? Url("angular-locale_mr.min.js") : Url("angular-locale_mr.js");
-            public static readonly string angular_locale_ms_bn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ms-bn.min.js") ? Url("angular-locale_ms-bn.min.js") : Url("angular-locale_ms-bn.js");
-            public static readonly string angular_locale_ms_my_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ms-my.min.js") ? Url("angular-locale_ms-my.min.js") : Url("angular-locale_ms-my.js");
-            public static readonly string angular_locale_ms_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ms.min.js") ? Url("angular-locale_ms.min.js") : Url("angular-locale_ms.js");
-            public static readonly string angular_locale_mt_mt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_mt-mt.min.js") ? Url("angular-locale_mt-mt.min.js") : Url("angular-locale_mt-mt.js");
-            public static readonly string angular_locale_mt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_mt.min.js") ? Url("angular-locale_mt.min.js") : Url("angular-locale_mt.js");
-            public static readonly string angular_locale_nl_aw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_nl-aw.min.js") ? Url("angular-locale_nl-aw.min.js") : Url("angular-locale_nl-aw.js");
-            public static readonly string angular_locale_nl_be_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_nl-be.min.js") ? Url("angular-locale_nl-be.min.js") : Url("angular-locale_nl-be.js");
-            public static readonly string angular_locale_nl_cw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_nl-cw.min.js") ? Url("angular-locale_nl-cw.min.js") : Url("angular-locale_nl-cw.js");
-            public static readonly string angular_locale_nl_nl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_nl-nl.min.js") ? Url("angular-locale_nl-nl.min.js") : Url("angular-locale_nl-nl.js");
-            public static readonly string angular_locale_nl_sx_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_nl-sx.min.js") ? Url("angular-locale_nl-sx.min.js") : Url("angular-locale_nl-sx.js");
-            public static readonly string angular_locale_nl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_nl.min.js") ? Url("angular-locale_nl.min.js") : Url("angular-locale_nl.js");
-            public static readonly string angular_locale_no_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_no.min.js") ? Url("angular-locale_no.min.js") : Url("angular-locale_no.js");
-            public static readonly string angular_locale_or_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_or-in.min.js") ? Url("angular-locale_or-in.min.js") : Url("angular-locale_or-in.js");
-            public static readonly string angular_locale_or_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_or.min.js") ? Url("angular-locale_or.min.js") : Url("angular-locale_or.js");
-            public static readonly string angular_locale_pl_pl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_pl-pl.min.js") ? Url("angular-locale_pl-pl.min.js") : Url("angular-locale_pl-pl.js");
-            public static readonly string angular_locale_pl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_pl.min.js") ? Url("angular-locale_pl.min.js") : Url("angular-locale_pl.js");
-            public static readonly string angular_locale_pt_ao_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_pt-ao.min.js") ? Url("angular-locale_pt-ao.min.js") : Url("angular-locale_pt-ao.js");
-            public static readonly string angular_locale_pt_br_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_pt-br.min.js") ? Url("angular-locale_pt-br.min.js") : Url("angular-locale_pt-br.js");
-            public static readonly string angular_locale_pt_gw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_pt-gw.min.js") ? Url("angular-locale_pt-gw.min.js") : Url("angular-locale_pt-gw.js");
-            public static readonly string angular_locale_pt_mz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_pt-mz.min.js") ? Url("angular-locale_pt-mz.min.js") : Url("angular-locale_pt-mz.js");
-            public static readonly string angular_locale_pt_pt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_pt-pt.min.js") ? Url("angular-locale_pt-pt.min.js") : Url("angular-locale_pt-pt.js");
-            public static readonly string angular_locale_pt_st_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_pt-st.min.js") ? Url("angular-locale_pt-st.min.js") : Url("angular-locale_pt-st.js");
-            public static readonly string angular_locale_pt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_pt.min.js") ? Url("angular-locale_pt.min.js") : Url("angular-locale_pt.js");
-            public static readonly string angular_locale_ro_md_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ro-md.min.js") ? Url("angular-locale_ro-md.min.js") : Url("angular-locale_ro-md.js");
-            public static readonly string angular_locale_ro_ro_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ro-ro.min.js") ? Url("angular-locale_ro-ro.min.js") : Url("angular-locale_ro-ro.js");
-            public static readonly string angular_locale_ro_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ro.min.js") ? Url("angular-locale_ro.min.js") : Url("angular-locale_ro.js");
-            public static readonly string angular_locale_ru_md_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ru-md.min.js") ? Url("angular-locale_ru-md.min.js") : Url("angular-locale_ru-md.js");
-            public static readonly string angular_locale_ru_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ru-ru.min.js") ? Url("angular-locale_ru-ru.min.js") : Url("angular-locale_ru-ru.js");
-            public static readonly string angular_locale_ru_ua_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ru-ua.min.js") ? Url("angular-locale_ru-ua.min.js") : Url("angular-locale_ru-ua.js");
-            public static readonly string angular_locale_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ru.min.js") ? Url("angular-locale_ru.min.js") : Url("angular-locale_ru.js");
-            public static readonly string angular_locale_sk_sk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sk-sk.min.js") ? Url("angular-locale_sk-sk.min.js") : Url("angular-locale_sk-sk.js");
-            public static readonly string angular_locale_sk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sk.min.js") ? Url("angular-locale_sk.min.js") : Url("angular-locale_sk.js");
-            public static readonly string angular_locale_sl_si_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sl-si.min.js") ? Url("angular-locale_sl-si.min.js") : Url("angular-locale_sl-si.js");
-            public static readonly string angular_locale_sl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sl.min.js") ? Url("angular-locale_sl.min.js") : Url("angular-locale_sl.js");
-            public static readonly string angular_locale_sq_al_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sq-al.min.js") ? Url("angular-locale_sq-al.min.js") : Url("angular-locale_sq-al.js");
-            public static readonly string angular_locale_sq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sq.min.js") ? Url("angular-locale_sq.min.js") : Url("angular-locale_sq.js");
-            public static readonly string angular_locale_sr_cyrl_ba_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sr-cyrl-ba.min.js") ? Url("angular-locale_sr-cyrl-ba.min.js") : Url("angular-locale_sr-cyrl-ba.js");
-            public static readonly string angular_locale_sr_cyrl_me_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sr-cyrl-me.min.js") ? Url("angular-locale_sr-cyrl-me.min.js") : Url("angular-locale_sr-cyrl-me.js");
-            public static readonly string angular_locale_sr_cyrl_rs_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sr-cyrl-rs.min.js") ? Url("angular-locale_sr-cyrl-rs.min.js") : Url("angular-locale_sr-cyrl-rs.js");
-            public static readonly string angular_locale_sr_cyrl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sr-cyrl.min.js") ? Url("angular-locale_sr-cyrl.min.js") : Url("angular-locale_sr-cyrl.js");
-            public static readonly string angular_locale_sr_latn_ba_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sr-latn-ba.min.js") ? Url("angular-locale_sr-latn-ba.min.js") : Url("angular-locale_sr-latn-ba.js");
-            public static readonly string angular_locale_sr_latn_me_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sr-latn-me.min.js") ? Url("angular-locale_sr-latn-me.min.js") : Url("angular-locale_sr-latn-me.js");
-            public static readonly string angular_locale_sr_latn_rs_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sr-latn-rs.min.js") ? Url("angular-locale_sr-latn-rs.min.js") : Url("angular-locale_sr-latn-rs.js");
-            public static readonly string angular_locale_sr_latn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sr-latn.min.js") ? Url("angular-locale_sr-latn.min.js") : Url("angular-locale_sr-latn.js");
-            public static readonly string angular_locale_sr_rs_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sr-rs.min.js") ? Url("angular-locale_sr-rs.min.js") : Url("angular-locale_sr-rs.js");
-            public static readonly string angular_locale_sr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sr.min.js") ? Url("angular-locale_sr.min.js") : Url("angular-locale_sr.js");
-            public static readonly string angular_locale_sv_fi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sv-fi.min.js") ? Url("angular-locale_sv-fi.min.js") : Url("angular-locale_sv-fi.js");
-            public static readonly string angular_locale_sv_se_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sv-se.min.js") ? Url("angular-locale_sv-se.min.js") : Url("angular-locale_sv-se.js");
-            public static readonly string angular_locale_sv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sv.min.js") ? Url("angular-locale_sv.min.js") : Url("angular-locale_sv.js");
-            public static readonly string angular_locale_sw_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sw-ke.min.js") ? Url("angular-locale_sw-ke.min.js") : Url("angular-locale_sw-ke.js");
-            public static readonly string angular_locale_sw_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sw-tz.min.js") ? Url("angular-locale_sw-tz.min.js") : Url("angular-locale_sw-tz.js");
-            public static readonly string angular_locale_sw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_sw.min.js") ? Url("angular-locale_sw.min.js") : Url("angular-locale_sw.js");
-            public static readonly string angular_locale_ta_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ta-in.min.js") ? Url("angular-locale_ta-in.min.js") : Url("angular-locale_ta-in.js");
-            public static readonly string angular_locale_ta_lk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ta-lk.min.js") ? Url("angular-locale_ta-lk.min.js") : Url("angular-locale_ta-lk.js");
-            public static readonly string angular_locale_ta_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ta.min.js") ? Url("angular-locale_ta.min.js") : Url("angular-locale_ta.js");
-            public static readonly string angular_locale_te_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_te-in.min.js") ? Url("angular-locale_te-in.min.js") : Url("angular-locale_te-in.js");
-            public static readonly string angular_locale_te_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_te.min.js") ? Url("angular-locale_te.min.js") : Url("angular-locale_te.js");
-            public static readonly string angular_locale_th_th_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_th-th.min.js") ? Url("angular-locale_th-th.min.js") : Url("angular-locale_th-th.js");
-            public static readonly string angular_locale_th_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_th.min.js") ? Url("angular-locale_th.min.js") : Url("angular-locale_th.js");
-            public static readonly string angular_locale_tl_ph_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_tl-ph.min.js") ? Url("angular-locale_tl-ph.min.js") : Url("angular-locale_tl-ph.js");
-            public static readonly string angular_locale_tl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_tl.min.js") ? Url("angular-locale_tl.min.js") : Url("angular-locale_tl.js");
-            public static readonly string angular_locale_tr_tr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_tr-tr.min.js") ? Url("angular-locale_tr-tr.min.js") : Url("angular-locale_tr-tr.js");
-            public static readonly string angular_locale_tr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_tr.min.js") ? Url("angular-locale_tr.min.js") : Url("angular-locale_tr.js");
-            public static readonly string angular_locale_uk_ua_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_uk-ua.min.js") ? Url("angular-locale_uk-ua.min.js") : Url("angular-locale_uk-ua.js");
-            public static readonly string angular_locale_uk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_uk.min.js") ? Url("angular-locale_uk.min.js") : Url("angular-locale_uk.js");
-            public static readonly string angular_locale_ur_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ur-in.min.js") ? Url("angular-locale_ur-in.min.js") : Url("angular-locale_ur-in.js");
-            public static readonly string angular_locale_ur_pk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ur-pk.min.js") ? Url("angular-locale_ur-pk.min.js") : Url("angular-locale_ur-pk.js");
-            public static readonly string angular_locale_ur_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_ur.min.js") ? Url("angular-locale_ur.min.js") : Url("angular-locale_ur.js");
-            public static readonly string angular_locale_vi_vn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_vi-vn.min.js") ? Url("angular-locale_vi-vn.min.js") : Url("angular-locale_vi-vn.js");
-            public static readonly string angular_locale_vi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_vi.min.js") ? Url("angular-locale_vi.min.js") : Url("angular-locale_vi.js");
-            public static readonly string angular_locale_zh_cn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-cn.min.js") ? Url("angular-locale_zh-cn.min.js") : Url("angular-locale_zh-cn.js");
-            public static readonly string angular_locale_zh_hans_cn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-hans-cn.min.js") ? Url("angular-locale_zh-hans-cn.min.js") : Url("angular-locale_zh-hans-cn.js");
-            public static readonly string angular_locale_zh_hans_hk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-hans-hk.min.js") ? Url("angular-locale_zh-hans-hk.min.js") : Url("angular-locale_zh-hans-hk.js");
-            public static readonly string angular_locale_zh_hans_mo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-hans-mo.min.js") ? Url("angular-locale_zh-hans-mo.min.js") : Url("angular-locale_zh-hans-mo.js");
-            public static readonly string angular_locale_zh_hans_sg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-hans-sg.min.js") ? Url("angular-locale_zh-hans-sg.min.js") : Url("angular-locale_zh-hans-sg.js");
-            public static readonly string angular_locale_zh_hans_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-hans.min.js") ? Url("angular-locale_zh-hans.min.js") : Url("angular-locale_zh-hans.js");
-            public static readonly string angular_locale_zh_hant_hk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-hant-hk.min.js") ? Url("angular-locale_zh-hant-hk.min.js") : Url("angular-locale_zh-hant-hk.js");
-            public static readonly string angular_locale_zh_hant_mo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-hant-mo.min.js") ? Url("angular-locale_zh-hant-mo.min.js") : Url("angular-locale_zh-hant-mo.js");
-            public static readonly string angular_locale_zh_hant_tw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-hant-tw.min.js") ? Url("angular-locale_zh-hant-tw.min.js") : Url("angular-locale_zh-hant-tw.js");
-            public static readonly string angular_locale_zh_hant_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-hant.min.js") ? Url("angular-locale_zh-hant.min.js") : Url("angular-locale_zh-hant.js");
-            public static readonly string angular_locale_zh_hk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-hk.min.js") ? Url("angular-locale_zh-hk.min.js") : Url("angular-locale_zh-hk.js");
-            public static readonly string angular_locale_zh_tw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh-tw.min.js") ? Url("angular-locale_zh-tw.min.js") : Url("angular-locale_zh-tw.js");
-            public static readonly string angular_locale_zh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zh.min.js") ? Url("angular-locale_zh.min.js") : Url("angular-locale_zh.js");
-            public static readonly string angular_locale_zu_za_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zu-za.min.js") ? Url("angular-locale_zu-za.min.js") : Url("angular-locale_zu-za.js");
-            public static readonly string angular_locale_zu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-locale_zu.min.js") ? Url("angular-locale_zu.min.js") : Url("angular-locale_zu.js");
+            public const string UrlPath = "~/Scripts/i18n";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string angular_locale_af_na_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_af-na.min.js") ? Url("angular-locale_af-na.min.js") : Url("angular-locale_af-na.js");
+            public static readonly string angular_locale_af_za_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_af-za.min.js") ? Url("angular-locale_af-za.min.js") : Url("angular-locale_af-za.js");
+            public static readonly string angular_locale_af_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_af.min.js") ? Url("angular-locale_af.min.js") : Url("angular-locale_af.js");
+            public static readonly string angular_locale_agq_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_agq-cm.min.js") ? Url("angular-locale_agq-cm.min.js") : Url("angular-locale_agq-cm.js");
+            public static readonly string angular_locale_agq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_agq.min.js") ? Url("angular-locale_agq.min.js") : Url("angular-locale_agq.js");
+            public static readonly string angular_locale_ak_gh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ak-gh.min.js") ? Url("angular-locale_ak-gh.min.js") : Url("angular-locale_ak-gh.js");
+            public static readonly string angular_locale_ak_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ak.min.js") ? Url("angular-locale_ak.min.js") : Url("angular-locale_ak.js");
+            public static readonly string angular_locale_am_et_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_am-et.min.js") ? Url("angular-locale_am-et.min.js") : Url("angular-locale_am-et.js");
+            public static readonly string angular_locale_am_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_am.min.js") ? Url("angular-locale_am.min.js") : Url("angular-locale_am.js");
+            public static readonly string angular_locale_ar_001_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-001.min.js") ? Url("angular-locale_ar-001.min.js") : Url("angular-locale_ar-001.js");
+            public static readonly string angular_locale_ar_ae_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-ae.min.js") ? Url("angular-locale_ar-ae.min.js") : Url("angular-locale_ar-ae.js");
+            public static readonly string angular_locale_ar_bh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-bh.min.js") ? Url("angular-locale_ar-bh.min.js") : Url("angular-locale_ar-bh.js");
+            public static readonly string angular_locale_ar_dj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-dj.min.js") ? Url("angular-locale_ar-dj.min.js") : Url("angular-locale_ar-dj.js");
+            public static readonly string angular_locale_ar_dz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-dz.min.js") ? Url("angular-locale_ar-dz.min.js") : Url("angular-locale_ar-dz.js");
+            public static readonly string angular_locale_ar_eg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-eg.min.js") ? Url("angular-locale_ar-eg.min.js") : Url("angular-locale_ar-eg.js");
+            public static readonly string angular_locale_ar_eh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-eh.min.js") ? Url("angular-locale_ar-eh.min.js") : Url("angular-locale_ar-eh.js");
+            public static readonly string angular_locale_ar_er_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-er.min.js") ? Url("angular-locale_ar-er.min.js") : Url("angular-locale_ar-er.js");
+            public static readonly string angular_locale_ar_il_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-il.min.js") ? Url("angular-locale_ar-il.min.js") : Url("angular-locale_ar-il.js");
+            public static readonly string angular_locale_ar_iq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-iq.min.js") ? Url("angular-locale_ar-iq.min.js") : Url("angular-locale_ar-iq.js");
+            public static readonly string angular_locale_ar_jo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-jo.min.js") ? Url("angular-locale_ar-jo.min.js") : Url("angular-locale_ar-jo.js");
+            public static readonly string angular_locale_ar_km_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-km.min.js") ? Url("angular-locale_ar-km.min.js") : Url("angular-locale_ar-km.js");
+            public static readonly string angular_locale_ar_kw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-kw.min.js") ? Url("angular-locale_ar-kw.min.js") : Url("angular-locale_ar-kw.js");
+            public static readonly string angular_locale_ar_lb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-lb.min.js") ? Url("angular-locale_ar-lb.min.js") : Url("angular-locale_ar-lb.js");
+            public static readonly string angular_locale_ar_ly_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-ly.min.js") ? Url("angular-locale_ar-ly.min.js") : Url("angular-locale_ar-ly.js");
+            public static readonly string angular_locale_ar_ma_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-ma.min.js") ? Url("angular-locale_ar-ma.min.js") : Url("angular-locale_ar-ma.js");
+            public static readonly string angular_locale_ar_mr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-mr.min.js") ? Url("angular-locale_ar-mr.min.js") : Url("angular-locale_ar-mr.js");
+            public static readonly string angular_locale_ar_om_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-om.min.js") ? Url("angular-locale_ar-om.min.js") : Url("angular-locale_ar-om.js");
+            public static readonly string angular_locale_ar_ps_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-ps.min.js") ? Url("angular-locale_ar-ps.min.js") : Url("angular-locale_ar-ps.js");
+            public static readonly string angular_locale_ar_qa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-qa.min.js") ? Url("angular-locale_ar-qa.min.js") : Url("angular-locale_ar-qa.js");
+            public static readonly string angular_locale_ar_sa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-sa.min.js") ? Url("angular-locale_ar-sa.min.js") : Url("angular-locale_ar-sa.js");
+            public static readonly string angular_locale_ar_sd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-sd.min.js") ? Url("angular-locale_ar-sd.min.js") : Url("angular-locale_ar-sd.js");
+            public static readonly string angular_locale_ar_so_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-so.min.js") ? Url("angular-locale_ar-so.min.js") : Url("angular-locale_ar-so.js");
+            public static readonly string angular_locale_ar_ss_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-ss.min.js") ? Url("angular-locale_ar-ss.min.js") : Url("angular-locale_ar-ss.js");
+            public static readonly string angular_locale_ar_sy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-sy.min.js") ? Url("angular-locale_ar-sy.min.js") : Url("angular-locale_ar-sy.js");
+            public static readonly string angular_locale_ar_td_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-td.min.js") ? Url("angular-locale_ar-td.min.js") : Url("angular-locale_ar-td.js");
+            public static readonly string angular_locale_ar_tn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-tn.min.js") ? Url("angular-locale_ar-tn.min.js") : Url("angular-locale_ar-tn.js");
+            public static readonly string angular_locale_ar_xb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-xb.min.js") ? Url("angular-locale_ar-xb.min.js") : Url("angular-locale_ar-xb.js");
+            public static readonly string angular_locale_ar_ye_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar-ye.min.js") ? Url("angular-locale_ar-ye.min.js") : Url("angular-locale_ar-ye.js");
+            public static readonly string angular_locale_ar_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ar.min.js") ? Url("angular-locale_ar.min.js") : Url("angular-locale_ar.js");
+            public static readonly string angular_locale_as_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_as-in.min.js") ? Url("angular-locale_as-in.min.js") : Url("angular-locale_as-in.js");
+            public static readonly string angular_locale_as_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_as.min.js") ? Url("angular-locale_as.min.js") : Url("angular-locale_as.js");
+            public static readonly string angular_locale_asa_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_asa-tz.min.js") ? Url("angular-locale_asa-tz.min.js") : Url("angular-locale_asa-tz.js");
+            public static readonly string angular_locale_asa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_asa.min.js") ? Url("angular-locale_asa.min.js") : Url("angular-locale_asa.js");
+            public static readonly string angular_locale_ast_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ast-es.min.js") ? Url("angular-locale_ast-es.min.js") : Url("angular-locale_ast-es.js");
+            public static readonly string angular_locale_ast_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ast.min.js") ? Url("angular-locale_ast.min.js") : Url("angular-locale_ast.js");
+            public static readonly string angular_locale_az_cyrl_az_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_az-cyrl-az.min.js") ? Url("angular-locale_az-cyrl-az.min.js") : Url("angular-locale_az-cyrl-az.js");
+            public static readonly string angular_locale_az_cyrl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_az-cyrl.min.js") ? Url("angular-locale_az-cyrl.min.js") : Url("angular-locale_az-cyrl.js");
+            public static readonly string angular_locale_az_latn_az_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_az-latn-az.min.js") ? Url("angular-locale_az-latn-az.min.js") : Url("angular-locale_az-latn-az.js");
+            public static readonly string angular_locale_az_latn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_az-latn.min.js") ? Url("angular-locale_az-latn.min.js") : Url("angular-locale_az-latn.js");
+            public static readonly string angular_locale_az_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_az.min.js") ? Url("angular-locale_az.min.js") : Url("angular-locale_az.js");
+            public static readonly string angular_locale_bas_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bas-cm.min.js") ? Url("angular-locale_bas-cm.min.js") : Url("angular-locale_bas-cm.js");
+            public static readonly string angular_locale_bas_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bas.min.js") ? Url("angular-locale_bas.min.js") : Url("angular-locale_bas.js");
+            public static readonly string angular_locale_be_by_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_be-by.min.js") ? Url("angular-locale_be-by.min.js") : Url("angular-locale_be-by.js");
+            public static readonly string angular_locale_be_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_be.min.js") ? Url("angular-locale_be.min.js") : Url("angular-locale_be.js");
+            public static readonly string angular_locale_bem_zm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bem-zm.min.js") ? Url("angular-locale_bem-zm.min.js") : Url("angular-locale_bem-zm.js");
+            public static readonly string angular_locale_bem_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bem.min.js") ? Url("angular-locale_bem.min.js") : Url("angular-locale_bem.js");
+            public static readonly string angular_locale_bez_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bez-tz.min.js") ? Url("angular-locale_bez-tz.min.js") : Url("angular-locale_bez-tz.js");
+            public static readonly string angular_locale_bez_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bez.min.js") ? Url("angular-locale_bez.min.js") : Url("angular-locale_bez.js");
+            public static readonly string angular_locale_bg_bg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bg-bg.min.js") ? Url("angular-locale_bg-bg.min.js") : Url("angular-locale_bg-bg.js");
+            public static readonly string angular_locale_bg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bg.min.js") ? Url("angular-locale_bg.min.js") : Url("angular-locale_bg.js");
+            public static readonly string angular_locale_bm_ml_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bm-ml.min.js") ? Url("angular-locale_bm-ml.min.js") : Url("angular-locale_bm-ml.js");
+            public static readonly string angular_locale_bm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bm.min.js") ? Url("angular-locale_bm.min.js") : Url("angular-locale_bm.js");
+            public static readonly string angular_locale_bn_bd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bn-bd.min.js") ? Url("angular-locale_bn-bd.min.js") : Url("angular-locale_bn-bd.js");
+            public static readonly string angular_locale_bn_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bn-in.min.js") ? Url("angular-locale_bn-in.min.js") : Url("angular-locale_bn-in.js");
+            public static readonly string angular_locale_bn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bn.min.js") ? Url("angular-locale_bn.min.js") : Url("angular-locale_bn.js");
+            public static readonly string angular_locale_bo_cn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bo-cn.min.js") ? Url("angular-locale_bo-cn.min.js") : Url("angular-locale_bo-cn.js");
+            public static readonly string angular_locale_bo_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bo-in.min.js") ? Url("angular-locale_bo-in.min.js") : Url("angular-locale_bo-in.js");
+            public static readonly string angular_locale_bo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bo.min.js") ? Url("angular-locale_bo.min.js") : Url("angular-locale_bo.js");
+            public static readonly string angular_locale_br_fr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_br-fr.min.js") ? Url("angular-locale_br-fr.min.js") : Url("angular-locale_br-fr.js");
+            public static readonly string angular_locale_br_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_br.min.js") ? Url("angular-locale_br.min.js") : Url("angular-locale_br.js");
+            public static readonly string angular_locale_brx_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_brx-in.min.js") ? Url("angular-locale_brx-in.min.js") : Url("angular-locale_brx-in.js");
+            public static readonly string angular_locale_brx_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_brx.min.js") ? Url("angular-locale_brx.min.js") : Url("angular-locale_brx.js");
+            public static readonly string angular_locale_bs_cyrl_ba_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bs-cyrl-ba.min.js") ? Url("angular-locale_bs-cyrl-ba.min.js") : Url("angular-locale_bs-cyrl-ba.js");
+            public static readonly string angular_locale_bs_cyrl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bs-cyrl.min.js") ? Url("angular-locale_bs-cyrl.min.js") : Url("angular-locale_bs-cyrl.js");
+            public static readonly string angular_locale_bs_latn_ba_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bs-latn-ba.min.js") ? Url("angular-locale_bs-latn-ba.min.js") : Url("angular-locale_bs-latn-ba.js");
+            public static readonly string angular_locale_bs_latn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bs-latn.min.js") ? Url("angular-locale_bs-latn.min.js") : Url("angular-locale_bs-latn.js");
+            public static readonly string angular_locale_bs_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_bs.min.js") ? Url("angular-locale_bs.min.js") : Url("angular-locale_bs.js");
+            public static readonly string angular_locale_ca_ad_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ca-ad.min.js") ? Url("angular-locale_ca-ad.min.js") : Url("angular-locale_ca-ad.js");
+            public static readonly string angular_locale_ca_es_valencia_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ca-es-valencia.min.js") ? Url("angular-locale_ca-es-valencia.min.js") : Url("angular-locale_ca-es-valencia.js");
+            public static readonly string angular_locale_ca_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ca-es.min.js") ? Url("angular-locale_ca-es.min.js") : Url("angular-locale_ca-es.js");
+            public static readonly string angular_locale_ca_fr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ca-fr.min.js") ? Url("angular-locale_ca-fr.min.js") : Url("angular-locale_ca-fr.js");
+            public static readonly string angular_locale_ca_it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ca-it.min.js") ? Url("angular-locale_ca-it.min.js") : Url("angular-locale_ca-it.js");
+            public static readonly string angular_locale_ca_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ca.min.js") ? Url("angular-locale_ca.min.js") : Url("angular-locale_ca.js");
+            public static readonly string angular_locale_ce_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ce-ru.min.js") ? Url("angular-locale_ce-ru.min.js") : Url("angular-locale_ce-ru.js");
+            public static readonly string angular_locale_ce_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ce.min.js") ? Url("angular-locale_ce.min.js") : Url("angular-locale_ce.js");
+            public static readonly string angular_locale_cgg_ug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_cgg-ug.min.js") ? Url("angular-locale_cgg-ug.min.js") : Url("angular-locale_cgg-ug.js");
+            public static readonly string angular_locale_cgg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_cgg.min.js") ? Url("angular-locale_cgg.min.js") : Url("angular-locale_cgg.js");
+            public static readonly string angular_locale_chr_us_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_chr-us.min.js") ? Url("angular-locale_chr-us.min.js") : Url("angular-locale_chr-us.js");
+            public static readonly string angular_locale_chr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_chr.min.js") ? Url("angular-locale_chr.min.js") : Url("angular-locale_chr.js");
+            public static readonly string angular_locale_ckb_arab_iq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ckb-arab-iq.min.js") ? Url("angular-locale_ckb-arab-iq.min.js") : Url("angular-locale_ckb-arab-iq.js");
+            public static readonly string angular_locale_ckb_arab_ir_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ckb-arab-ir.min.js") ? Url("angular-locale_ckb-arab-ir.min.js") : Url("angular-locale_ckb-arab-ir.js");
+            public static readonly string angular_locale_ckb_arab_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ckb-arab.min.js") ? Url("angular-locale_ckb-arab.min.js") : Url("angular-locale_ckb-arab.js");
+            public static readonly string angular_locale_ckb_iq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ckb-iq.min.js") ? Url("angular-locale_ckb-iq.min.js") : Url("angular-locale_ckb-iq.js");
+            public static readonly string angular_locale_ckb_ir_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ckb-ir.min.js") ? Url("angular-locale_ckb-ir.min.js") : Url("angular-locale_ckb-ir.js");
+            public static readonly string angular_locale_ckb_latn_iq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ckb-latn-iq.min.js") ? Url("angular-locale_ckb-latn-iq.min.js") : Url("angular-locale_ckb-latn-iq.js");
+            public static readonly string angular_locale_ckb_latn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ckb-latn.min.js") ? Url("angular-locale_ckb-latn.min.js") : Url("angular-locale_ckb-latn.js");
+            public static readonly string angular_locale_ckb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ckb.min.js") ? Url("angular-locale_ckb.min.js") : Url("angular-locale_ckb.js");
+            public static readonly string angular_locale_cs_cz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_cs-cz.min.js") ? Url("angular-locale_cs-cz.min.js") : Url("angular-locale_cs-cz.js");
+            public static readonly string angular_locale_cs_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_cs.min.js") ? Url("angular-locale_cs.min.js") : Url("angular-locale_cs.js");
+            public static readonly string angular_locale_cu_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_cu-ru.min.js") ? Url("angular-locale_cu-ru.min.js") : Url("angular-locale_cu-ru.js");
+            public static readonly string angular_locale_cu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_cu.min.js") ? Url("angular-locale_cu.min.js") : Url("angular-locale_cu.js");
+            public static readonly string angular_locale_cy_gb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_cy-gb.min.js") ? Url("angular-locale_cy-gb.min.js") : Url("angular-locale_cy-gb.js");
+            public static readonly string angular_locale_cy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_cy.min.js") ? Url("angular-locale_cy.min.js") : Url("angular-locale_cy.js");
+            public static readonly string angular_locale_da_dk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_da-dk.min.js") ? Url("angular-locale_da-dk.min.js") : Url("angular-locale_da-dk.js");
+            public static readonly string angular_locale_da_gl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_da-gl.min.js") ? Url("angular-locale_da-gl.min.js") : Url("angular-locale_da-gl.js");
+            public static readonly string angular_locale_da_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_da.min.js") ? Url("angular-locale_da.min.js") : Url("angular-locale_da.js");
+            public static readonly string angular_locale_dav_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dav-ke.min.js") ? Url("angular-locale_dav-ke.min.js") : Url("angular-locale_dav-ke.js");
+            public static readonly string angular_locale_dav_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dav.min.js") ? Url("angular-locale_dav.min.js") : Url("angular-locale_dav.js");
+            public static readonly string angular_locale_de_at_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_de-at.min.js") ? Url("angular-locale_de-at.min.js") : Url("angular-locale_de-at.js");
+            public static readonly string angular_locale_de_be_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_de-be.min.js") ? Url("angular-locale_de-be.min.js") : Url("angular-locale_de-be.js");
+            public static readonly string angular_locale_de_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_de-ch.min.js") ? Url("angular-locale_de-ch.min.js") : Url("angular-locale_de-ch.js");
+            public static readonly string angular_locale_de_de_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_de-de.min.js") ? Url("angular-locale_de-de.min.js") : Url("angular-locale_de-de.js");
+            public static readonly string angular_locale_de_li_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_de-li.min.js") ? Url("angular-locale_de-li.min.js") : Url("angular-locale_de-li.js");
+            public static readonly string angular_locale_de_lu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_de-lu.min.js") ? Url("angular-locale_de-lu.min.js") : Url("angular-locale_de-lu.js");
+            public static readonly string angular_locale_de_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_de.min.js") ? Url("angular-locale_de.min.js") : Url("angular-locale_de.js");
+            public static readonly string angular_locale_dje_ne_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dje-ne.min.js") ? Url("angular-locale_dje-ne.min.js") : Url("angular-locale_dje-ne.js");
+            public static readonly string angular_locale_dje_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dje.min.js") ? Url("angular-locale_dje.min.js") : Url("angular-locale_dje.js");
+            public static readonly string angular_locale_dsb_de_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dsb-de.min.js") ? Url("angular-locale_dsb-de.min.js") : Url("angular-locale_dsb-de.js");
+            public static readonly string angular_locale_dsb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dsb.min.js") ? Url("angular-locale_dsb.min.js") : Url("angular-locale_dsb.js");
+            public static readonly string angular_locale_dua_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dua-cm.min.js") ? Url("angular-locale_dua-cm.min.js") : Url("angular-locale_dua-cm.js");
+            public static readonly string angular_locale_dua_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dua.min.js") ? Url("angular-locale_dua.min.js") : Url("angular-locale_dua.js");
+            public static readonly string angular_locale_dyo_sn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dyo-sn.min.js") ? Url("angular-locale_dyo-sn.min.js") : Url("angular-locale_dyo-sn.js");
+            public static readonly string angular_locale_dyo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dyo.min.js") ? Url("angular-locale_dyo.min.js") : Url("angular-locale_dyo.js");
+            public static readonly string angular_locale_dz_bt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dz-bt.min.js") ? Url("angular-locale_dz-bt.min.js") : Url("angular-locale_dz-bt.js");
+            public static readonly string angular_locale_dz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_dz.min.js") ? Url("angular-locale_dz.min.js") : Url("angular-locale_dz.js");
+            public static readonly string angular_locale_ebu_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ebu-ke.min.js") ? Url("angular-locale_ebu-ke.min.js") : Url("angular-locale_ebu-ke.js");
+            public static readonly string angular_locale_ebu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ebu.min.js") ? Url("angular-locale_ebu.min.js") : Url("angular-locale_ebu.js");
+            public static readonly string angular_locale_ee_gh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ee-gh.min.js") ? Url("angular-locale_ee-gh.min.js") : Url("angular-locale_ee-gh.js");
+            public static readonly string angular_locale_ee_tg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ee-tg.min.js") ? Url("angular-locale_ee-tg.min.js") : Url("angular-locale_ee-tg.js");
+            public static readonly string angular_locale_ee_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ee.min.js") ? Url("angular-locale_ee.min.js") : Url("angular-locale_ee.js");
+            public static readonly string angular_locale_el_cy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_el-cy.min.js") ? Url("angular-locale_el-cy.min.js") : Url("angular-locale_el-cy.js");
+            public static readonly string angular_locale_el_gr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_el-gr.min.js") ? Url("angular-locale_el-gr.min.js") : Url("angular-locale_el-gr.js");
+            public static readonly string angular_locale_el_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_el.min.js") ? Url("angular-locale_el.min.js") : Url("angular-locale_el.js");
+            public static readonly string angular_locale_en_001_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-001.min.js") ? Url("angular-locale_en-001.min.js") : Url("angular-locale_en-001.js");
+            public static readonly string angular_locale_en_150_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-150.min.js") ? Url("angular-locale_en-150.min.js") : Url("angular-locale_en-150.js");
+            public static readonly string angular_locale_en_ag_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ag.min.js") ? Url("angular-locale_en-ag.min.js") : Url("angular-locale_en-ag.js");
+            public static readonly string angular_locale_en_ai_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ai.min.js") ? Url("angular-locale_en-ai.min.js") : Url("angular-locale_en-ai.js");
+            public static readonly string angular_locale_en_as_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-as.min.js") ? Url("angular-locale_en-as.min.js") : Url("angular-locale_en-as.js");
+            public static readonly string angular_locale_en_at_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-at.min.js") ? Url("angular-locale_en-at.min.js") : Url("angular-locale_en-at.js");
+            public static readonly string angular_locale_en_au_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-au.min.js") ? Url("angular-locale_en-au.min.js") : Url("angular-locale_en-au.js");
+            public static readonly string angular_locale_en_bb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-bb.min.js") ? Url("angular-locale_en-bb.min.js") : Url("angular-locale_en-bb.js");
+            public static readonly string angular_locale_en_be_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-be.min.js") ? Url("angular-locale_en-be.min.js") : Url("angular-locale_en-be.js");
+            public static readonly string angular_locale_en_bi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-bi.min.js") ? Url("angular-locale_en-bi.min.js") : Url("angular-locale_en-bi.js");
+            public static readonly string angular_locale_en_bm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-bm.min.js") ? Url("angular-locale_en-bm.min.js") : Url("angular-locale_en-bm.js");
+            public static readonly string angular_locale_en_bs_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-bs.min.js") ? Url("angular-locale_en-bs.min.js") : Url("angular-locale_en-bs.js");
+            public static readonly string angular_locale_en_bw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-bw.min.js") ? Url("angular-locale_en-bw.min.js") : Url("angular-locale_en-bw.js");
+            public static readonly string angular_locale_en_bz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-bz.min.js") ? Url("angular-locale_en-bz.min.js") : Url("angular-locale_en-bz.js");
+            public static readonly string angular_locale_en_ca_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ca.min.js") ? Url("angular-locale_en-ca.min.js") : Url("angular-locale_en-ca.js");
+            public static readonly string angular_locale_en_cc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-cc.min.js") ? Url("angular-locale_en-cc.min.js") : Url("angular-locale_en-cc.js");
+            public static readonly string angular_locale_en_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ch.min.js") ? Url("angular-locale_en-ch.min.js") : Url("angular-locale_en-ch.js");
+            public static readonly string angular_locale_en_ck_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ck.min.js") ? Url("angular-locale_en-ck.min.js") : Url("angular-locale_en-ck.js");
+            public static readonly string angular_locale_en_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-cm.min.js") ? Url("angular-locale_en-cm.min.js") : Url("angular-locale_en-cm.js");
+            public static readonly string angular_locale_en_cx_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-cx.min.js") ? Url("angular-locale_en-cx.min.js") : Url("angular-locale_en-cx.js");
+            public static readonly string angular_locale_en_cy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-cy.min.js") ? Url("angular-locale_en-cy.min.js") : Url("angular-locale_en-cy.js");
+            public static readonly string angular_locale_en_de_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-de.min.js") ? Url("angular-locale_en-de.min.js") : Url("angular-locale_en-de.js");
+            public static readonly string angular_locale_en_dg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-dg.min.js") ? Url("angular-locale_en-dg.min.js") : Url("angular-locale_en-dg.js");
+            public static readonly string angular_locale_en_dk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-dk.min.js") ? Url("angular-locale_en-dk.min.js") : Url("angular-locale_en-dk.js");
+            public static readonly string angular_locale_en_dm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-dm.min.js") ? Url("angular-locale_en-dm.min.js") : Url("angular-locale_en-dm.js");
+            public static readonly string angular_locale_en_er_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-er.min.js") ? Url("angular-locale_en-er.min.js") : Url("angular-locale_en-er.js");
+            public static readonly string angular_locale_en_fi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-fi.min.js") ? Url("angular-locale_en-fi.min.js") : Url("angular-locale_en-fi.js");
+            public static readonly string angular_locale_en_fj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-fj.min.js") ? Url("angular-locale_en-fj.min.js") : Url("angular-locale_en-fj.js");
+            public static readonly string angular_locale_en_fk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-fk.min.js") ? Url("angular-locale_en-fk.min.js") : Url("angular-locale_en-fk.js");
+            public static readonly string angular_locale_en_fm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-fm.min.js") ? Url("angular-locale_en-fm.min.js") : Url("angular-locale_en-fm.js");
+            public static readonly string angular_locale_en_gb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-gb.min.js") ? Url("angular-locale_en-gb.min.js") : Url("angular-locale_en-gb.js");
+            public static readonly string angular_locale_en_gd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-gd.min.js") ? Url("angular-locale_en-gd.min.js") : Url("angular-locale_en-gd.js");
+            public static readonly string angular_locale_en_gg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-gg.min.js") ? Url("angular-locale_en-gg.min.js") : Url("angular-locale_en-gg.js");
+            public static readonly string angular_locale_en_gh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-gh.min.js") ? Url("angular-locale_en-gh.min.js") : Url("angular-locale_en-gh.js");
+            public static readonly string angular_locale_en_gi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-gi.min.js") ? Url("angular-locale_en-gi.min.js") : Url("angular-locale_en-gi.js");
+            public static readonly string angular_locale_en_gm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-gm.min.js") ? Url("angular-locale_en-gm.min.js") : Url("angular-locale_en-gm.js");
+            public static readonly string angular_locale_en_gu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-gu.min.js") ? Url("angular-locale_en-gu.min.js") : Url("angular-locale_en-gu.js");
+            public static readonly string angular_locale_en_gy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-gy.min.js") ? Url("angular-locale_en-gy.min.js") : Url("angular-locale_en-gy.js");
+            public static readonly string angular_locale_en_hk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-hk.min.js") ? Url("angular-locale_en-hk.min.js") : Url("angular-locale_en-hk.js");
+            public static readonly string angular_locale_en_ie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ie.min.js") ? Url("angular-locale_en-ie.min.js") : Url("angular-locale_en-ie.js");
+            public static readonly string angular_locale_en_il_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-il.min.js") ? Url("angular-locale_en-il.min.js") : Url("angular-locale_en-il.js");
+            public static readonly string angular_locale_en_im_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-im.min.js") ? Url("angular-locale_en-im.min.js") : Url("angular-locale_en-im.js");
+            public static readonly string angular_locale_en_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-in.min.js") ? Url("angular-locale_en-in.min.js") : Url("angular-locale_en-in.js");
+            public static readonly string angular_locale_en_io_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-io.min.js") ? Url("angular-locale_en-io.min.js") : Url("angular-locale_en-io.js");
+            public static readonly string angular_locale_en_iso_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-iso.min.js") ? Url("angular-locale_en-iso.min.js") : Url("angular-locale_en-iso.js");
+            public static readonly string angular_locale_en_je_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-je.min.js") ? Url("angular-locale_en-je.min.js") : Url("angular-locale_en-je.js");
+            public static readonly string angular_locale_en_jm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-jm.min.js") ? Url("angular-locale_en-jm.min.js") : Url("angular-locale_en-jm.js");
+            public static readonly string angular_locale_en_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ke.min.js") ? Url("angular-locale_en-ke.min.js") : Url("angular-locale_en-ke.js");
+            public static readonly string angular_locale_en_ki_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ki.min.js") ? Url("angular-locale_en-ki.min.js") : Url("angular-locale_en-ki.js");
+            public static readonly string angular_locale_en_kn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-kn.min.js") ? Url("angular-locale_en-kn.min.js") : Url("angular-locale_en-kn.js");
+            public static readonly string angular_locale_en_ky_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ky.min.js") ? Url("angular-locale_en-ky.min.js") : Url("angular-locale_en-ky.js");
+            public static readonly string angular_locale_en_lc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-lc.min.js") ? Url("angular-locale_en-lc.min.js") : Url("angular-locale_en-lc.js");
+            public static readonly string angular_locale_en_lr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-lr.min.js") ? Url("angular-locale_en-lr.min.js") : Url("angular-locale_en-lr.js");
+            public static readonly string angular_locale_en_ls_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ls.min.js") ? Url("angular-locale_en-ls.min.js") : Url("angular-locale_en-ls.js");
+            public static readonly string angular_locale_en_mg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-mg.min.js") ? Url("angular-locale_en-mg.min.js") : Url("angular-locale_en-mg.js");
+            public static readonly string angular_locale_en_mh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-mh.min.js") ? Url("angular-locale_en-mh.min.js") : Url("angular-locale_en-mh.js");
+            public static readonly string angular_locale_en_mo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-mo.min.js") ? Url("angular-locale_en-mo.min.js") : Url("angular-locale_en-mo.js");
+            public static readonly string angular_locale_en_mp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-mp.min.js") ? Url("angular-locale_en-mp.min.js") : Url("angular-locale_en-mp.js");
+            public static readonly string angular_locale_en_ms_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ms.min.js") ? Url("angular-locale_en-ms.min.js") : Url("angular-locale_en-ms.js");
+            public static readonly string angular_locale_en_mt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-mt.min.js") ? Url("angular-locale_en-mt.min.js") : Url("angular-locale_en-mt.js");
+            public static readonly string angular_locale_en_mu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-mu.min.js") ? Url("angular-locale_en-mu.min.js") : Url("angular-locale_en-mu.js");
+            public static readonly string angular_locale_en_mw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-mw.min.js") ? Url("angular-locale_en-mw.min.js") : Url("angular-locale_en-mw.js");
+            public static readonly string angular_locale_en_my_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-my.min.js") ? Url("angular-locale_en-my.min.js") : Url("angular-locale_en-my.js");
+            public static readonly string angular_locale_en_na_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-na.min.js") ? Url("angular-locale_en-na.min.js") : Url("angular-locale_en-na.js");
+            public static readonly string angular_locale_en_nf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-nf.min.js") ? Url("angular-locale_en-nf.min.js") : Url("angular-locale_en-nf.js");
+            public static readonly string angular_locale_en_ng_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ng.min.js") ? Url("angular-locale_en-ng.min.js") : Url("angular-locale_en-ng.js");
+            public static readonly string angular_locale_en_nl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-nl.min.js") ? Url("angular-locale_en-nl.min.js") : Url("angular-locale_en-nl.js");
+            public static readonly string angular_locale_en_nr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-nr.min.js") ? Url("angular-locale_en-nr.min.js") : Url("angular-locale_en-nr.js");
+            public static readonly string angular_locale_en_nu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-nu.min.js") ? Url("angular-locale_en-nu.min.js") : Url("angular-locale_en-nu.js");
+            public static readonly string angular_locale_en_nz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-nz.min.js") ? Url("angular-locale_en-nz.min.js") : Url("angular-locale_en-nz.js");
+            public static readonly string angular_locale_en_pg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-pg.min.js") ? Url("angular-locale_en-pg.min.js") : Url("angular-locale_en-pg.js");
+            public static readonly string angular_locale_en_ph_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ph.min.js") ? Url("angular-locale_en-ph.min.js") : Url("angular-locale_en-ph.js");
+            public static readonly string angular_locale_en_pk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-pk.min.js") ? Url("angular-locale_en-pk.min.js") : Url("angular-locale_en-pk.js");
+            public static readonly string angular_locale_en_pn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-pn.min.js") ? Url("angular-locale_en-pn.min.js") : Url("angular-locale_en-pn.js");
+            public static readonly string angular_locale_en_pr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-pr.min.js") ? Url("angular-locale_en-pr.min.js") : Url("angular-locale_en-pr.js");
+            public static readonly string angular_locale_en_pw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-pw.min.js") ? Url("angular-locale_en-pw.min.js") : Url("angular-locale_en-pw.js");
+            public static readonly string angular_locale_en_rw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-rw.min.js") ? Url("angular-locale_en-rw.min.js") : Url("angular-locale_en-rw.js");
+            public static readonly string angular_locale_en_sb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-sb.min.js") ? Url("angular-locale_en-sb.min.js") : Url("angular-locale_en-sb.js");
+            public static readonly string angular_locale_en_sc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-sc.min.js") ? Url("angular-locale_en-sc.min.js") : Url("angular-locale_en-sc.js");
+            public static readonly string angular_locale_en_sd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-sd.min.js") ? Url("angular-locale_en-sd.min.js") : Url("angular-locale_en-sd.js");
+            public static readonly string angular_locale_en_se_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-se.min.js") ? Url("angular-locale_en-se.min.js") : Url("angular-locale_en-se.js");
+            public static readonly string angular_locale_en_sg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-sg.min.js") ? Url("angular-locale_en-sg.min.js") : Url("angular-locale_en-sg.js");
+            public static readonly string angular_locale_en_sh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-sh.min.js") ? Url("angular-locale_en-sh.min.js") : Url("angular-locale_en-sh.js");
+            public static readonly string angular_locale_en_si_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-si.min.js") ? Url("angular-locale_en-si.min.js") : Url("angular-locale_en-si.js");
+            public static readonly string angular_locale_en_sl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-sl.min.js") ? Url("angular-locale_en-sl.min.js") : Url("angular-locale_en-sl.js");
+            public static readonly string angular_locale_en_ss_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ss.min.js") ? Url("angular-locale_en-ss.min.js") : Url("angular-locale_en-ss.js");
+            public static readonly string angular_locale_en_sx_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-sx.min.js") ? Url("angular-locale_en-sx.min.js") : Url("angular-locale_en-sx.js");
+            public static readonly string angular_locale_en_sz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-sz.min.js") ? Url("angular-locale_en-sz.min.js") : Url("angular-locale_en-sz.js");
+            public static readonly string angular_locale_en_tc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-tc.min.js") ? Url("angular-locale_en-tc.min.js") : Url("angular-locale_en-tc.js");
+            public static readonly string angular_locale_en_tk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-tk.min.js") ? Url("angular-locale_en-tk.min.js") : Url("angular-locale_en-tk.js");
+            public static readonly string angular_locale_en_to_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-to.min.js") ? Url("angular-locale_en-to.min.js") : Url("angular-locale_en-to.js");
+            public static readonly string angular_locale_en_tt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-tt.min.js") ? Url("angular-locale_en-tt.min.js") : Url("angular-locale_en-tt.js");
+            public static readonly string angular_locale_en_tv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-tv.min.js") ? Url("angular-locale_en-tv.min.js") : Url("angular-locale_en-tv.js");
+            public static readonly string angular_locale_en_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-tz.min.js") ? Url("angular-locale_en-tz.min.js") : Url("angular-locale_en-tz.js");
+            public static readonly string angular_locale_en_ug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ug.min.js") ? Url("angular-locale_en-ug.min.js") : Url("angular-locale_en-ug.js");
+            public static readonly string angular_locale_en_um_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-um.min.js") ? Url("angular-locale_en-um.min.js") : Url("angular-locale_en-um.js");
+            public static readonly string angular_locale_en_us_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-us.min.js") ? Url("angular-locale_en-us.min.js") : Url("angular-locale_en-us.js");
+            public static readonly string angular_locale_en_vc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-vc.min.js") ? Url("angular-locale_en-vc.min.js") : Url("angular-locale_en-vc.js");
+            public static readonly string angular_locale_en_vg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-vg.min.js") ? Url("angular-locale_en-vg.min.js") : Url("angular-locale_en-vg.js");
+            public static readonly string angular_locale_en_vi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-vi.min.js") ? Url("angular-locale_en-vi.min.js") : Url("angular-locale_en-vi.js");
+            public static readonly string angular_locale_en_vu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-vu.min.js") ? Url("angular-locale_en-vu.min.js") : Url("angular-locale_en-vu.js");
+            public static readonly string angular_locale_en_ws_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-ws.min.js") ? Url("angular-locale_en-ws.min.js") : Url("angular-locale_en-ws.js");
+            public static readonly string angular_locale_en_xa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-xa.min.js") ? Url("angular-locale_en-xa.min.js") : Url("angular-locale_en-xa.js");
+            public static readonly string angular_locale_en_za_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-za.min.js") ? Url("angular-locale_en-za.min.js") : Url("angular-locale_en-za.js");
+            public static readonly string angular_locale_en_zm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-zm.min.js") ? Url("angular-locale_en-zm.min.js") : Url("angular-locale_en-zm.js");
+            public static readonly string angular_locale_en_zw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en-zw.min.js") ? Url("angular-locale_en-zw.min.js") : Url("angular-locale_en-zw.js");
+            public static readonly string angular_locale_en_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_en.min.js") ? Url("angular-locale_en.min.js") : Url("angular-locale_en.js");
+            public static readonly string angular_locale_eo_001_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_eo-001.min.js") ? Url("angular-locale_eo-001.min.js") : Url("angular-locale_eo-001.js");
+            public static readonly string angular_locale_eo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_eo.min.js") ? Url("angular-locale_eo.min.js") : Url("angular-locale_eo.js");
+            public static readonly string angular_locale_es_419_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-419.min.js") ? Url("angular-locale_es-419.min.js") : Url("angular-locale_es-419.js");
+            public static readonly string angular_locale_es_ar_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-ar.min.js") ? Url("angular-locale_es-ar.min.js") : Url("angular-locale_es-ar.js");
+            public static readonly string angular_locale_es_bo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-bo.min.js") ? Url("angular-locale_es-bo.min.js") : Url("angular-locale_es-bo.js");
+            public static readonly string angular_locale_es_br_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-br.min.js") ? Url("angular-locale_es-br.min.js") : Url("angular-locale_es-br.js");
+            public static readonly string angular_locale_es_cl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-cl.min.js") ? Url("angular-locale_es-cl.min.js") : Url("angular-locale_es-cl.js");
+            public static readonly string angular_locale_es_co_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-co.min.js") ? Url("angular-locale_es-co.min.js") : Url("angular-locale_es-co.js");
+            public static readonly string angular_locale_es_cr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-cr.min.js") ? Url("angular-locale_es-cr.min.js") : Url("angular-locale_es-cr.js");
+            public static readonly string angular_locale_es_cu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-cu.min.js") ? Url("angular-locale_es-cu.min.js") : Url("angular-locale_es-cu.js");
+            public static readonly string angular_locale_es_do_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-do.min.js") ? Url("angular-locale_es-do.min.js") : Url("angular-locale_es-do.js");
+            public static readonly string angular_locale_es_ea_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-ea.min.js") ? Url("angular-locale_es-ea.min.js") : Url("angular-locale_es-ea.js");
+            public static readonly string angular_locale_es_ec_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-ec.min.js") ? Url("angular-locale_es-ec.min.js") : Url("angular-locale_es-ec.js");
+            public static readonly string angular_locale_es_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-es.min.js") ? Url("angular-locale_es-es.min.js") : Url("angular-locale_es-es.js");
+            public static readonly string angular_locale_es_gq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-gq.min.js") ? Url("angular-locale_es-gq.min.js") : Url("angular-locale_es-gq.js");
+            public static readonly string angular_locale_es_gt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-gt.min.js") ? Url("angular-locale_es-gt.min.js") : Url("angular-locale_es-gt.js");
+            public static readonly string angular_locale_es_hn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-hn.min.js") ? Url("angular-locale_es-hn.min.js") : Url("angular-locale_es-hn.js");
+            public static readonly string angular_locale_es_ic_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-ic.min.js") ? Url("angular-locale_es-ic.min.js") : Url("angular-locale_es-ic.js");
+            public static readonly string angular_locale_es_mx_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-mx.min.js") ? Url("angular-locale_es-mx.min.js") : Url("angular-locale_es-mx.js");
+            public static readonly string angular_locale_es_ni_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-ni.min.js") ? Url("angular-locale_es-ni.min.js") : Url("angular-locale_es-ni.js");
+            public static readonly string angular_locale_es_pa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-pa.min.js") ? Url("angular-locale_es-pa.min.js") : Url("angular-locale_es-pa.js");
+            public static readonly string angular_locale_es_pe_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-pe.min.js") ? Url("angular-locale_es-pe.min.js") : Url("angular-locale_es-pe.js");
+            public static readonly string angular_locale_es_ph_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-ph.min.js") ? Url("angular-locale_es-ph.min.js") : Url("angular-locale_es-ph.js");
+            public static readonly string angular_locale_es_pr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-pr.min.js") ? Url("angular-locale_es-pr.min.js") : Url("angular-locale_es-pr.js");
+            public static readonly string angular_locale_es_py_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-py.min.js") ? Url("angular-locale_es-py.min.js") : Url("angular-locale_es-py.js");
+            public static readonly string angular_locale_es_sv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-sv.min.js") ? Url("angular-locale_es-sv.min.js") : Url("angular-locale_es-sv.js");
+            public static readonly string angular_locale_es_us_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-us.min.js") ? Url("angular-locale_es-us.min.js") : Url("angular-locale_es-us.js");
+            public static readonly string angular_locale_es_uy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-uy.min.js") ? Url("angular-locale_es-uy.min.js") : Url("angular-locale_es-uy.js");
+            public static readonly string angular_locale_es_ve_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es-ve.min.js") ? Url("angular-locale_es-ve.min.js") : Url("angular-locale_es-ve.js");
+            public static readonly string angular_locale_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_es.min.js") ? Url("angular-locale_es.min.js") : Url("angular-locale_es.js");
+            public static readonly string angular_locale_et_ee_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_et-ee.min.js") ? Url("angular-locale_et-ee.min.js") : Url("angular-locale_et-ee.js");
+            public static readonly string angular_locale_et_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_et.min.js") ? Url("angular-locale_et.min.js") : Url("angular-locale_et.js");
+            public static readonly string angular_locale_eu_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_eu-es.min.js") ? Url("angular-locale_eu-es.min.js") : Url("angular-locale_eu-es.js");
+            public static readonly string angular_locale_eu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_eu.min.js") ? Url("angular-locale_eu.min.js") : Url("angular-locale_eu.js");
+            public static readonly string angular_locale_ewo_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ewo-cm.min.js") ? Url("angular-locale_ewo-cm.min.js") : Url("angular-locale_ewo-cm.js");
+            public static readonly string angular_locale_ewo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ewo.min.js") ? Url("angular-locale_ewo.min.js") : Url("angular-locale_ewo.js");
+            public static readonly string angular_locale_fa_af_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fa-af.min.js") ? Url("angular-locale_fa-af.min.js") : Url("angular-locale_fa-af.js");
+            public static readonly string angular_locale_fa_ir_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fa-ir.min.js") ? Url("angular-locale_fa-ir.min.js") : Url("angular-locale_fa-ir.js");
+            public static readonly string angular_locale_fa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fa.min.js") ? Url("angular-locale_fa.min.js") : Url("angular-locale_fa.js");
+            public static readonly string angular_locale_ff_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ff-cm.min.js") ? Url("angular-locale_ff-cm.min.js") : Url("angular-locale_ff-cm.js");
+            public static readonly string angular_locale_ff_gn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ff-gn.min.js") ? Url("angular-locale_ff-gn.min.js") : Url("angular-locale_ff-gn.js");
+            public static readonly string angular_locale_ff_mr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ff-mr.min.js") ? Url("angular-locale_ff-mr.min.js") : Url("angular-locale_ff-mr.js");
+            public static readonly string angular_locale_ff_sn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ff-sn.min.js") ? Url("angular-locale_ff-sn.min.js") : Url("angular-locale_ff-sn.js");
+            public static readonly string angular_locale_ff_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ff.min.js") ? Url("angular-locale_ff.min.js") : Url("angular-locale_ff.js");
+            public static readonly string angular_locale_fi_fi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fi-fi.min.js") ? Url("angular-locale_fi-fi.min.js") : Url("angular-locale_fi-fi.js");
+            public static readonly string angular_locale_fi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fi.min.js") ? Url("angular-locale_fi.min.js") : Url("angular-locale_fi.js");
+            public static readonly string angular_locale_fil_ph_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fil-ph.min.js") ? Url("angular-locale_fil-ph.min.js") : Url("angular-locale_fil-ph.js");
+            public static readonly string angular_locale_fil_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fil.min.js") ? Url("angular-locale_fil.min.js") : Url("angular-locale_fil.js");
+            public static readonly string angular_locale_fo_dk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fo-dk.min.js") ? Url("angular-locale_fo-dk.min.js") : Url("angular-locale_fo-dk.js");
+            public static readonly string angular_locale_fo_fo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fo-fo.min.js") ? Url("angular-locale_fo-fo.min.js") : Url("angular-locale_fo-fo.js");
+            public static readonly string angular_locale_fo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fo.min.js") ? Url("angular-locale_fo.min.js") : Url("angular-locale_fo.js");
+            public static readonly string angular_locale_fr_be_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-be.min.js") ? Url("angular-locale_fr-be.min.js") : Url("angular-locale_fr-be.js");
+            public static readonly string angular_locale_fr_bf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-bf.min.js") ? Url("angular-locale_fr-bf.min.js") : Url("angular-locale_fr-bf.js");
+            public static readonly string angular_locale_fr_bi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-bi.min.js") ? Url("angular-locale_fr-bi.min.js") : Url("angular-locale_fr-bi.js");
+            public static readonly string angular_locale_fr_bj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-bj.min.js") ? Url("angular-locale_fr-bj.min.js") : Url("angular-locale_fr-bj.js");
+            public static readonly string angular_locale_fr_bl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-bl.min.js") ? Url("angular-locale_fr-bl.min.js") : Url("angular-locale_fr-bl.js");
+            public static readonly string angular_locale_fr_ca_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-ca.min.js") ? Url("angular-locale_fr-ca.min.js") : Url("angular-locale_fr-ca.js");
+            public static readonly string angular_locale_fr_cd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-cd.min.js") ? Url("angular-locale_fr-cd.min.js") : Url("angular-locale_fr-cd.js");
+            public static readonly string angular_locale_fr_cf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-cf.min.js") ? Url("angular-locale_fr-cf.min.js") : Url("angular-locale_fr-cf.js");
+            public static readonly string angular_locale_fr_cg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-cg.min.js") ? Url("angular-locale_fr-cg.min.js") : Url("angular-locale_fr-cg.js");
+            public static readonly string angular_locale_fr_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-ch.min.js") ? Url("angular-locale_fr-ch.min.js") : Url("angular-locale_fr-ch.js");
+            public static readonly string angular_locale_fr_ci_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-ci.min.js") ? Url("angular-locale_fr-ci.min.js") : Url("angular-locale_fr-ci.js");
+            public static readonly string angular_locale_fr_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-cm.min.js") ? Url("angular-locale_fr-cm.min.js") : Url("angular-locale_fr-cm.js");
+            public static readonly string angular_locale_fr_dj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-dj.min.js") ? Url("angular-locale_fr-dj.min.js") : Url("angular-locale_fr-dj.js");
+            public static readonly string angular_locale_fr_dz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-dz.min.js") ? Url("angular-locale_fr-dz.min.js") : Url("angular-locale_fr-dz.js");
+            public static readonly string angular_locale_fr_fr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-fr.min.js") ? Url("angular-locale_fr-fr.min.js") : Url("angular-locale_fr-fr.js");
+            public static readonly string angular_locale_fr_ga_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-ga.min.js") ? Url("angular-locale_fr-ga.min.js") : Url("angular-locale_fr-ga.js");
+            public static readonly string angular_locale_fr_gf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-gf.min.js") ? Url("angular-locale_fr-gf.min.js") : Url("angular-locale_fr-gf.js");
+            public static readonly string angular_locale_fr_gn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-gn.min.js") ? Url("angular-locale_fr-gn.min.js") : Url("angular-locale_fr-gn.js");
+            public static readonly string angular_locale_fr_gp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-gp.min.js") ? Url("angular-locale_fr-gp.min.js") : Url("angular-locale_fr-gp.js");
+            public static readonly string angular_locale_fr_gq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-gq.min.js") ? Url("angular-locale_fr-gq.min.js") : Url("angular-locale_fr-gq.js");
+            public static readonly string angular_locale_fr_ht_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-ht.min.js") ? Url("angular-locale_fr-ht.min.js") : Url("angular-locale_fr-ht.js");
+            public static readonly string angular_locale_fr_km_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-km.min.js") ? Url("angular-locale_fr-km.min.js") : Url("angular-locale_fr-km.js");
+            public static readonly string angular_locale_fr_lu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-lu.min.js") ? Url("angular-locale_fr-lu.min.js") : Url("angular-locale_fr-lu.js");
+            public static readonly string angular_locale_fr_ma_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-ma.min.js") ? Url("angular-locale_fr-ma.min.js") : Url("angular-locale_fr-ma.js");
+            public static readonly string angular_locale_fr_mc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-mc.min.js") ? Url("angular-locale_fr-mc.min.js") : Url("angular-locale_fr-mc.js");
+            public static readonly string angular_locale_fr_mf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-mf.min.js") ? Url("angular-locale_fr-mf.min.js") : Url("angular-locale_fr-mf.js");
+            public static readonly string angular_locale_fr_mg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-mg.min.js") ? Url("angular-locale_fr-mg.min.js") : Url("angular-locale_fr-mg.js");
+            public static readonly string angular_locale_fr_ml_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-ml.min.js") ? Url("angular-locale_fr-ml.min.js") : Url("angular-locale_fr-ml.js");
+            public static readonly string angular_locale_fr_mq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-mq.min.js") ? Url("angular-locale_fr-mq.min.js") : Url("angular-locale_fr-mq.js");
+            public static readonly string angular_locale_fr_mr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-mr.min.js") ? Url("angular-locale_fr-mr.min.js") : Url("angular-locale_fr-mr.js");
+            public static readonly string angular_locale_fr_mu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-mu.min.js") ? Url("angular-locale_fr-mu.min.js") : Url("angular-locale_fr-mu.js");
+            public static readonly string angular_locale_fr_nc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-nc.min.js") ? Url("angular-locale_fr-nc.min.js") : Url("angular-locale_fr-nc.js");
+            public static readonly string angular_locale_fr_ne_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-ne.min.js") ? Url("angular-locale_fr-ne.min.js") : Url("angular-locale_fr-ne.js");
+            public static readonly string angular_locale_fr_pf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-pf.min.js") ? Url("angular-locale_fr-pf.min.js") : Url("angular-locale_fr-pf.js");
+            public static readonly string angular_locale_fr_pm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-pm.min.js") ? Url("angular-locale_fr-pm.min.js") : Url("angular-locale_fr-pm.js");
+            public static readonly string angular_locale_fr_re_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-re.min.js") ? Url("angular-locale_fr-re.min.js") : Url("angular-locale_fr-re.js");
+            public static readonly string angular_locale_fr_rw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-rw.min.js") ? Url("angular-locale_fr-rw.min.js") : Url("angular-locale_fr-rw.js");
+            public static readonly string angular_locale_fr_sc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-sc.min.js") ? Url("angular-locale_fr-sc.min.js") : Url("angular-locale_fr-sc.js");
+            public static readonly string angular_locale_fr_sn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-sn.min.js") ? Url("angular-locale_fr-sn.min.js") : Url("angular-locale_fr-sn.js");
+            public static readonly string angular_locale_fr_sy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-sy.min.js") ? Url("angular-locale_fr-sy.min.js") : Url("angular-locale_fr-sy.js");
+            public static readonly string angular_locale_fr_td_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-td.min.js") ? Url("angular-locale_fr-td.min.js") : Url("angular-locale_fr-td.js");
+            public static readonly string angular_locale_fr_tg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-tg.min.js") ? Url("angular-locale_fr-tg.min.js") : Url("angular-locale_fr-tg.js");
+            public static readonly string angular_locale_fr_tn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-tn.min.js") ? Url("angular-locale_fr-tn.min.js") : Url("angular-locale_fr-tn.js");
+            public static readonly string angular_locale_fr_vu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-vu.min.js") ? Url("angular-locale_fr-vu.min.js") : Url("angular-locale_fr-vu.js");
+            public static readonly string angular_locale_fr_wf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-wf.min.js") ? Url("angular-locale_fr-wf.min.js") : Url("angular-locale_fr-wf.js");
+            public static readonly string angular_locale_fr_yt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr-yt.min.js") ? Url("angular-locale_fr-yt.min.js") : Url("angular-locale_fr-yt.js");
+            public static readonly string angular_locale_fr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fr.min.js") ? Url("angular-locale_fr.min.js") : Url("angular-locale_fr.js");
+            public static readonly string angular_locale_fur_it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fur-it.min.js") ? Url("angular-locale_fur-it.min.js") : Url("angular-locale_fur-it.js");
+            public static readonly string angular_locale_fur_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fur.min.js") ? Url("angular-locale_fur.min.js") : Url("angular-locale_fur.js");
+            public static readonly string angular_locale_fy_nl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fy-nl.min.js") ? Url("angular-locale_fy-nl.min.js") : Url("angular-locale_fy-nl.js");
+            public static readonly string angular_locale_fy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_fy.min.js") ? Url("angular-locale_fy.min.js") : Url("angular-locale_fy.js");
+            public static readonly string angular_locale_ga_ie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ga-ie.min.js") ? Url("angular-locale_ga-ie.min.js") : Url("angular-locale_ga-ie.js");
+            public static readonly string angular_locale_ga_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ga.min.js") ? Url("angular-locale_ga.min.js") : Url("angular-locale_ga.js");
+            public static readonly string angular_locale_gd_gb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gd-gb.min.js") ? Url("angular-locale_gd-gb.min.js") : Url("angular-locale_gd-gb.js");
+            public static readonly string angular_locale_gd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gd.min.js") ? Url("angular-locale_gd.min.js") : Url("angular-locale_gd.js");
+            public static readonly string angular_locale_gl_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gl-es.min.js") ? Url("angular-locale_gl-es.min.js") : Url("angular-locale_gl-es.js");
+            public static readonly string angular_locale_gl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gl.min.js") ? Url("angular-locale_gl.min.js") : Url("angular-locale_gl.js");
+            public static readonly string angular_locale_gsw_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gsw-ch.min.js") ? Url("angular-locale_gsw-ch.min.js") : Url("angular-locale_gsw-ch.js");
+            public static readonly string angular_locale_gsw_fr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gsw-fr.min.js") ? Url("angular-locale_gsw-fr.min.js") : Url("angular-locale_gsw-fr.js");
+            public static readonly string angular_locale_gsw_li_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gsw-li.min.js") ? Url("angular-locale_gsw-li.min.js") : Url("angular-locale_gsw-li.js");
+            public static readonly string angular_locale_gsw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gsw.min.js") ? Url("angular-locale_gsw.min.js") : Url("angular-locale_gsw.js");
+            public static readonly string angular_locale_gu_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gu-in.min.js") ? Url("angular-locale_gu-in.min.js") : Url("angular-locale_gu-in.js");
+            public static readonly string angular_locale_gu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gu.min.js") ? Url("angular-locale_gu.min.js") : Url("angular-locale_gu.js");
+            public static readonly string angular_locale_guz_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_guz-ke.min.js") ? Url("angular-locale_guz-ke.min.js") : Url("angular-locale_guz-ke.js");
+            public static readonly string angular_locale_guz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_guz.min.js") ? Url("angular-locale_guz.min.js") : Url("angular-locale_guz.js");
+            public static readonly string angular_locale_gv_im_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gv-im.min.js") ? Url("angular-locale_gv-im.min.js") : Url("angular-locale_gv-im.js");
+            public static readonly string angular_locale_gv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_gv.min.js") ? Url("angular-locale_gv.min.js") : Url("angular-locale_gv.js");
+            public static readonly string angular_locale_ha_gh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ha-gh.min.js") ? Url("angular-locale_ha-gh.min.js") : Url("angular-locale_ha-gh.js");
+            public static readonly string angular_locale_ha_ne_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ha-ne.min.js") ? Url("angular-locale_ha-ne.min.js") : Url("angular-locale_ha-ne.js");
+            public static readonly string angular_locale_ha_ng_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ha-ng.min.js") ? Url("angular-locale_ha-ng.min.js") : Url("angular-locale_ha-ng.js");
+            public static readonly string angular_locale_ha_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ha.min.js") ? Url("angular-locale_ha.min.js") : Url("angular-locale_ha.js");
+            public static readonly string angular_locale_haw_us_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_haw-us.min.js") ? Url("angular-locale_haw-us.min.js") : Url("angular-locale_haw-us.js");
+            public static readonly string angular_locale_haw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_haw.min.js") ? Url("angular-locale_haw.min.js") : Url("angular-locale_haw.js");
+            public static readonly string angular_locale_he_il_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_he-il.min.js") ? Url("angular-locale_he-il.min.js") : Url("angular-locale_he-il.js");
+            public static readonly string angular_locale_he_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_he.min.js") ? Url("angular-locale_he.min.js") : Url("angular-locale_he.js");
+            public static readonly string angular_locale_hi_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hi-in.min.js") ? Url("angular-locale_hi-in.min.js") : Url("angular-locale_hi-in.js");
+            public static readonly string angular_locale_hi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hi.min.js") ? Url("angular-locale_hi.min.js") : Url("angular-locale_hi.js");
+            public static readonly string angular_locale_hr_ba_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hr-ba.min.js") ? Url("angular-locale_hr-ba.min.js") : Url("angular-locale_hr-ba.js");
+            public static readonly string angular_locale_hr_hr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hr-hr.min.js") ? Url("angular-locale_hr-hr.min.js") : Url("angular-locale_hr-hr.js");
+            public static readonly string angular_locale_hr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hr.min.js") ? Url("angular-locale_hr.min.js") : Url("angular-locale_hr.js");
+            public static readonly string angular_locale_hsb_de_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hsb-de.min.js") ? Url("angular-locale_hsb-de.min.js") : Url("angular-locale_hsb-de.js");
+            public static readonly string angular_locale_hsb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hsb.min.js") ? Url("angular-locale_hsb.min.js") : Url("angular-locale_hsb.js");
+            public static readonly string angular_locale_hu_hu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hu-hu.min.js") ? Url("angular-locale_hu-hu.min.js") : Url("angular-locale_hu-hu.js");
+            public static readonly string angular_locale_hu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hu.min.js") ? Url("angular-locale_hu.min.js") : Url("angular-locale_hu.js");
+            public static readonly string angular_locale_hy_am_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hy-am.min.js") ? Url("angular-locale_hy-am.min.js") : Url("angular-locale_hy-am.js");
+            public static readonly string angular_locale_hy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_hy.min.js") ? Url("angular-locale_hy.min.js") : Url("angular-locale_hy.js");
+            public static readonly string angular_locale_id_id_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_id-id.min.js") ? Url("angular-locale_id-id.min.js") : Url("angular-locale_id-id.js");
+            public static readonly string angular_locale_id_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_id.min.js") ? Url("angular-locale_id.min.js") : Url("angular-locale_id.js");
+            public static readonly string angular_locale_ig_ng_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ig-ng.min.js") ? Url("angular-locale_ig-ng.min.js") : Url("angular-locale_ig-ng.js");
+            public static readonly string angular_locale_ig_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ig.min.js") ? Url("angular-locale_ig.min.js") : Url("angular-locale_ig.js");
+            public static readonly string angular_locale_ii_cn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ii-cn.min.js") ? Url("angular-locale_ii-cn.min.js") : Url("angular-locale_ii-cn.js");
+            public static readonly string angular_locale_ii_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ii.min.js") ? Url("angular-locale_ii.min.js") : Url("angular-locale_ii.js");
+            public static readonly string angular_locale_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_in.min.js") ? Url("angular-locale_in.min.js") : Url("angular-locale_in.js");
+            public static readonly string angular_locale_is_is_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_is-is.min.js") ? Url("angular-locale_is-is.min.js") : Url("angular-locale_is-is.js");
+            public static readonly string angular_locale_is_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_is.min.js") ? Url("angular-locale_is.min.js") : Url("angular-locale_is.js");
+            public static readonly string angular_locale_it_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_it-ch.min.js") ? Url("angular-locale_it-ch.min.js") : Url("angular-locale_it-ch.js");
+            public static readonly string angular_locale_it_it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_it-it.min.js") ? Url("angular-locale_it-it.min.js") : Url("angular-locale_it-it.js");
+            public static readonly string angular_locale_it_sm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_it-sm.min.js") ? Url("angular-locale_it-sm.min.js") : Url("angular-locale_it-sm.js");
+            public static readonly string angular_locale_it_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_it.min.js") ? Url("angular-locale_it.min.js") : Url("angular-locale_it.js");
+            public static readonly string angular_locale_iw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_iw.min.js") ? Url("angular-locale_iw.min.js") : Url("angular-locale_iw.js");
+            public static readonly string angular_locale_ja_jp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ja-jp.min.js") ? Url("angular-locale_ja-jp.min.js") : Url("angular-locale_ja-jp.js");
+            public static readonly string angular_locale_ja_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ja.min.js") ? Url("angular-locale_ja.min.js") : Url("angular-locale_ja.js");
+            public static readonly string angular_locale_jgo_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_jgo-cm.min.js") ? Url("angular-locale_jgo-cm.min.js") : Url("angular-locale_jgo-cm.js");
+            public static readonly string angular_locale_jgo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_jgo.min.js") ? Url("angular-locale_jgo.min.js") : Url("angular-locale_jgo.js");
+            public static readonly string angular_locale_jmc_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_jmc-tz.min.js") ? Url("angular-locale_jmc-tz.min.js") : Url("angular-locale_jmc-tz.js");
+            public static readonly string angular_locale_jmc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_jmc.min.js") ? Url("angular-locale_jmc.min.js") : Url("angular-locale_jmc.js");
+            public static readonly string angular_locale_ka_ge_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ka-ge.min.js") ? Url("angular-locale_ka-ge.min.js") : Url("angular-locale_ka-ge.js");
+            public static readonly string angular_locale_ka_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ka.min.js") ? Url("angular-locale_ka.min.js") : Url("angular-locale_ka.js");
+            public static readonly string angular_locale_kab_dz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kab-dz.min.js") ? Url("angular-locale_kab-dz.min.js") : Url("angular-locale_kab-dz.js");
+            public static readonly string angular_locale_kab_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kab.min.js") ? Url("angular-locale_kab.min.js") : Url("angular-locale_kab.js");
+            public static readonly string angular_locale_kam_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kam-ke.min.js") ? Url("angular-locale_kam-ke.min.js") : Url("angular-locale_kam-ke.js");
+            public static readonly string angular_locale_kam_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kam.min.js") ? Url("angular-locale_kam.min.js") : Url("angular-locale_kam.js");
+            public static readonly string angular_locale_kde_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kde-tz.min.js") ? Url("angular-locale_kde-tz.min.js") : Url("angular-locale_kde-tz.js");
+            public static readonly string angular_locale_kde_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kde.min.js") ? Url("angular-locale_kde.min.js") : Url("angular-locale_kde.js");
+            public static readonly string angular_locale_kea_cv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kea-cv.min.js") ? Url("angular-locale_kea-cv.min.js") : Url("angular-locale_kea-cv.js");
+            public static readonly string angular_locale_kea_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kea.min.js") ? Url("angular-locale_kea.min.js") : Url("angular-locale_kea.js");
+            public static readonly string angular_locale_khq_ml_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_khq-ml.min.js") ? Url("angular-locale_khq-ml.min.js") : Url("angular-locale_khq-ml.js");
+            public static readonly string angular_locale_khq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_khq.min.js") ? Url("angular-locale_khq.min.js") : Url("angular-locale_khq.js");
+            public static readonly string angular_locale_ki_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ki-ke.min.js") ? Url("angular-locale_ki-ke.min.js") : Url("angular-locale_ki-ke.js");
+            public static readonly string angular_locale_ki_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ki.min.js") ? Url("angular-locale_ki.min.js") : Url("angular-locale_ki.js");
+            public static readonly string angular_locale_kk_kz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kk-kz.min.js") ? Url("angular-locale_kk-kz.min.js") : Url("angular-locale_kk-kz.js");
+            public static readonly string angular_locale_kk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kk.min.js") ? Url("angular-locale_kk.min.js") : Url("angular-locale_kk.js");
+            public static readonly string angular_locale_kkj_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kkj-cm.min.js") ? Url("angular-locale_kkj-cm.min.js") : Url("angular-locale_kkj-cm.js");
+            public static readonly string angular_locale_kkj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kkj.min.js") ? Url("angular-locale_kkj.min.js") : Url("angular-locale_kkj.js");
+            public static readonly string angular_locale_kl_gl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kl-gl.min.js") ? Url("angular-locale_kl-gl.min.js") : Url("angular-locale_kl-gl.js");
+            public static readonly string angular_locale_kl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kl.min.js") ? Url("angular-locale_kl.min.js") : Url("angular-locale_kl.js");
+            public static readonly string angular_locale_kln_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kln-ke.min.js") ? Url("angular-locale_kln-ke.min.js") : Url("angular-locale_kln-ke.js");
+            public static readonly string angular_locale_kln_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kln.min.js") ? Url("angular-locale_kln.min.js") : Url("angular-locale_kln.js");
+            public static readonly string angular_locale_km_kh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_km-kh.min.js") ? Url("angular-locale_km-kh.min.js") : Url("angular-locale_km-kh.js");
+            public static readonly string angular_locale_km_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_km.min.js") ? Url("angular-locale_km.min.js") : Url("angular-locale_km.js");
+            public static readonly string angular_locale_kn_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kn-in.min.js") ? Url("angular-locale_kn-in.min.js") : Url("angular-locale_kn-in.js");
+            public static readonly string angular_locale_kn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kn.min.js") ? Url("angular-locale_kn.min.js") : Url("angular-locale_kn.js");
+            public static readonly string angular_locale_ko_kp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ko-kp.min.js") ? Url("angular-locale_ko-kp.min.js") : Url("angular-locale_ko-kp.js");
+            public static readonly string angular_locale_ko_kr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ko-kr.min.js") ? Url("angular-locale_ko-kr.min.js") : Url("angular-locale_ko-kr.js");
+            public static readonly string angular_locale_ko_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ko.min.js") ? Url("angular-locale_ko.min.js") : Url("angular-locale_ko.js");
+            public static readonly string angular_locale_kok_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kok-in.min.js") ? Url("angular-locale_kok-in.min.js") : Url("angular-locale_kok-in.js");
+            public static readonly string angular_locale_kok_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kok.min.js") ? Url("angular-locale_kok.min.js") : Url("angular-locale_kok.js");
+            public static readonly string angular_locale_ks_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ks-in.min.js") ? Url("angular-locale_ks-in.min.js") : Url("angular-locale_ks-in.js");
+            public static readonly string angular_locale_ks_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ks.min.js") ? Url("angular-locale_ks.min.js") : Url("angular-locale_ks.js");
+            public static readonly string angular_locale_ksb_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ksb-tz.min.js") ? Url("angular-locale_ksb-tz.min.js") : Url("angular-locale_ksb-tz.js");
+            public static readonly string angular_locale_ksb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ksb.min.js") ? Url("angular-locale_ksb.min.js") : Url("angular-locale_ksb.js");
+            public static readonly string angular_locale_ksf_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ksf-cm.min.js") ? Url("angular-locale_ksf-cm.min.js") : Url("angular-locale_ksf-cm.js");
+            public static readonly string angular_locale_ksf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ksf.min.js") ? Url("angular-locale_ksf.min.js") : Url("angular-locale_ksf.js");
+            public static readonly string angular_locale_ksh_de_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ksh-de.min.js") ? Url("angular-locale_ksh-de.min.js") : Url("angular-locale_ksh-de.js");
+            public static readonly string angular_locale_ksh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ksh.min.js") ? Url("angular-locale_ksh.min.js") : Url("angular-locale_ksh.js");
+            public static readonly string angular_locale_kw_gb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kw-gb.min.js") ? Url("angular-locale_kw-gb.min.js") : Url("angular-locale_kw-gb.js");
+            public static readonly string angular_locale_kw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_kw.min.js") ? Url("angular-locale_kw.min.js") : Url("angular-locale_kw.js");
+            public static readonly string angular_locale_ky_kg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ky-kg.min.js") ? Url("angular-locale_ky-kg.min.js") : Url("angular-locale_ky-kg.js");
+            public static readonly string angular_locale_ky_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ky.min.js") ? Url("angular-locale_ky.min.js") : Url("angular-locale_ky.js");
+            public static readonly string angular_locale_lag_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lag-tz.min.js") ? Url("angular-locale_lag-tz.min.js") : Url("angular-locale_lag-tz.js");
+            public static readonly string angular_locale_lag_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lag.min.js") ? Url("angular-locale_lag.min.js") : Url("angular-locale_lag.js");
+            public static readonly string angular_locale_lb_lu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lb-lu.min.js") ? Url("angular-locale_lb-lu.min.js") : Url("angular-locale_lb-lu.js");
+            public static readonly string angular_locale_lb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lb.min.js") ? Url("angular-locale_lb.min.js") : Url("angular-locale_lb.js");
+            public static readonly string angular_locale_lg_ug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lg-ug.min.js") ? Url("angular-locale_lg-ug.min.js") : Url("angular-locale_lg-ug.js");
+            public static readonly string angular_locale_lg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lg.min.js") ? Url("angular-locale_lg.min.js") : Url("angular-locale_lg.js");
+            public static readonly string angular_locale_lkt_us_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lkt-us.min.js") ? Url("angular-locale_lkt-us.min.js") : Url("angular-locale_lkt-us.js");
+            public static readonly string angular_locale_lkt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lkt.min.js") ? Url("angular-locale_lkt.min.js") : Url("angular-locale_lkt.js");
+            public static readonly string angular_locale_ln_ao_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ln-ao.min.js") ? Url("angular-locale_ln-ao.min.js") : Url("angular-locale_ln-ao.js");
+            public static readonly string angular_locale_ln_cd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ln-cd.min.js") ? Url("angular-locale_ln-cd.min.js") : Url("angular-locale_ln-cd.js");
+            public static readonly string angular_locale_ln_cf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ln-cf.min.js") ? Url("angular-locale_ln-cf.min.js") : Url("angular-locale_ln-cf.js");
+            public static readonly string angular_locale_ln_cg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ln-cg.min.js") ? Url("angular-locale_ln-cg.min.js") : Url("angular-locale_ln-cg.js");
+            public static readonly string angular_locale_ln_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ln.min.js") ? Url("angular-locale_ln.min.js") : Url("angular-locale_ln.js");
+            public static readonly string angular_locale_lo_la_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lo-la.min.js") ? Url("angular-locale_lo-la.min.js") : Url("angular-locale_lo-la.js");
+            public static readonly string angular_locale_lo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lo.min.js") ? Url("angular-locale_lo.min.js") : Url("angular-locale_lo.js");
+            public static readonly string angular_locale_lrc_iq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lrc-iq.min.js") ? Url("angular-locale_lrc-iq.min.js") : Url("angular-locale_lrc-iq.js");
+            public static readonly string angular_locale_lrc_ir_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lrc-ir.min.js") ? Url("angular-locale_lrc-ir.min.js") : Url("angular-locale_lrc-ir.js");
+            public static readonly string angular_locale_lrc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lrc.min.js") ? Url("angular-locale_lrc.min.js") : Url("angular-locale_lrc.js");
+            public static readonly string angular_locale_lt_lt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lt-lt.min.js") ? Url("angular-locale_lt-lt.min.js") : Url("angular-locale_lt-lt.js");
+            public static readonly string angular_locale_lt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lt.min.js") ? Url("angular-locale_lt.min.js") : Url("angular-locale_lt.js");
+            public static readonly string angular_locale_lu_cd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lu-cd.min.js") ? Url("angular-locale_lu-cd.min.js") : Url("angular-locale_lu-cd.js");
+            public static readonly string angular_locale_lu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lu.min.js") ? Url("angular-locale_lu.min.js") : Url("angular-locale_lu.js");
+            public static readonly string angular_locale_luo_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_luo-ke.min.js") ? Url("angular-locale_luo-ke.min.js") : Url("angular-locale_luo-ke.js");
+            public static readonly string angular_locale_luo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_luo.min.js") ? Url("angular-locale_luo.min.js") : Url("angular-locale_luo.js");
+            public static readonly string angular_locale_luy_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_luy-ke.min.js") ? Url("angular-locale_luy-ke.min.js") : Url("angular-locale_luy-ke.js");
+            public static readonly string angular_locale_luy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_luy.min.js") ? Url("angular-locale_luy.min.js") : Url("angular-locale_luy.js");
+            public static readonly string angular_locale_lv_lv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lv-lv.min.js") ? Url("angular-locale_lv-lv.min.js") : Url("angular-locale_lv-lv.js");
+            public static readonly string angular_locale_lv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_lv.min.js") ? Url("angular-locale_lv.min.js") : Url("angular-locale_lv.js");
+            public static readonly string angular_locale_mas_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mas-ke.min.js") ? Url("angular-locale_mas-ke.min.js") : Url("angular-locale_mas-ke.js");
+            public static readonly string angular_locale_mas_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mas-tz.min.js") ? Url("angular-locale_mas-tz.min.js") : Url("angular-locale_mas-tz.js");
+            public static readonly string angular_locale_mas_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mas.min.js") ? Url("angular-locale_mas.min.js") : Url("angular-locale_mas.js");
+            public static readonly string angular_locale_mer_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mer-ke.min.js") ? Url("angular-locale_mer-ke.min.js") : Url("angular-locale_mer-ke.js");
+            public static readonly string angular_locale_mer_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mer.min.js") ? Url("angular-locale_mer.min.js") : Url("angular-locale_mer.js");
+            public static readonly string angular_locale_mfe_mu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mfe-mu.min.js") ? Url("angular-locale_mfe-mu.min.js") : Url("angular-locale_mfe-mu.js");
+            public static readonly string angular_locale_mfe_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mfe.min.js") ? Url("angular-locale_mfe.min.js") : Url("angular-locale_mfe.js");
+            public static readonly string angular_locale_mg_mg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mg-mg.min.js") ? Url("angular-locale_mg-mg.min.js") : Url("angular-locale_mg-mg.js");
+            public static readonly string angular_locale_mg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mg.min.js") ? Url("angular-locale_mg.min.js") : Url("angular-locale_mg.js");
+            public static readonly string angular_locale_mgh_mz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mgh-mz.min.js") ? Url("angular-locale_mgh-mz.min.js") : Url("angular-locale_mgh-mz.js");
+            public static readonly string angular_locale_mgh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mgh.min.js") ? Url("angular-locale_mgh.min.js") : Url("angular-locale_mgh.js");
+            public static readonly string angular_locale_mgo_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mgo-cm.min.js") ? Url("angular-locale_mgo-cm.min.js") : Url("angular-locale_mgo-cm.js");
+            public static readonly string angular_locale_mgo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mgo.min.js") ? Url("angular-locale_mgo.min.js") : Url("angular-locale_mgo.js");
+            public static readonly string angular_locale_mk_mk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mk-mk.min.js") ? Url("angular-locale_mk-mk.min.js") : Url("angular-locale_mk-mk.js");
+            public static readonly string angular_locale_mk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mk.min.js") ? Url("angular-locale_mk.min.js") : Url("angular-locale_mk.js");
+            public static readonly string angular_locale_ml_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ml-in.min.js") ? Url("angular-locale_ml-in.min.js") : Url("angular-locale_ml-in.js");
+            public static readonly string angular_locale_ml_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ml.min.js") ? Url("angular-locale_ml.min.js") : Url("angular-locale_ml.js");
+            public static readonly string angular_locale_mn_mn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mn-mn.min.js") ? Url("angular-locale_mn-mn.min.js") : Url("angular-locale_mn-mn.js");
+            public static readonly string angular_locale_mn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mn.min.js") ? Url("angular-locale_mn.min.js") : Url("angular-locale_mn.js");
+            public static readonly string angular_locale_mr_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mr-in.min.js") ? Url("angular-locale_mr-in.min.js") : Url("angular-locale_mr-in.js");
+            public static readonly string angular_locale_mr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mr.min.js") ? Url("angular-locale_mr.min.js") : Url("angular-locale_mr.js");
+            public static readonly string angular_locale_ms_bn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ms-bn.min.js") ? Url("angular-locale_ms-bn.min.js") : Url("angular-locale_ms-bn.js");
+            public static readonly string angular_locale_ms_my_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ms-my.min.js") ? Url("angular-locale_ms-my.min.js") : Url("angular-locale_ms-my.js");
+            public static readonly string angular_locale_ms_sg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ms-sg.min.js") ? Url("angular-locale_ms-sg.min.js") : Url("angular-locale_ms-sg.js");
+            public static readonly string angular_locale_ms_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ms.min.js") ? Url("angular-locale_ms.min.js") : Url("angular-locale_ms.js");
+            public static readonly string angular_locale_mt_mt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mt-mt.min.js") ? Url("angular-locale_mt-mt.min.js") : Url("angular-locale_mt-mt.js");
+            public static readonly string angular_locale_mt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mt.min.js") ? Url("angular-locale_mt.min.js") : Url("angular-locale_mt.js");
+            public static readonly string angular_locale_mua_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mua-cm.min.js") ? Url("angular-locale_mua-cm.min.js") : Url("angular-locale_mua-cm.js");
+            public static readonly string angular_locale_mua_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mua.min.js") ? Url("angular-locale_mua.min.js") : Url("angular-locale_mua.js");
+            public static readonly string angular_locale_my_mm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_my-mm.min.js") ? Url("angular-locale_my-mm.min.js") : Url("angular-locale_my-mm.js");
+            public static readonly string angular_locale_my_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_my.min.js") ? Url("angular-locale_my.min.js") : Url("angular-locale_my.js");
+            public static readonly string angular_locale_mzn_ir_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mzn-ir.min.js") ? Url("angular-locale_mzn-ir.min.js") : Url("angular-locale_mzn-ir.js");
+            public static readonly string angular_locale_mzn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_mzn.min.js") ? Url("angular-locale_mzn.min.js") : Url("angular-locale_mzn.js");
+            public static readonly string angular_locale_naq_na_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_naq-na.min.js") ? Url("angular-locale_naq-na.min.js") : Url("angular-locale_naq-na.js");
+            public static readonly string angular_locale_naq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_naq.min.js") ? Url("angular-locale_naq.min.js") : Url("angular-locale_naq.js");
+            public static readonly string angular_locale_nb_no_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nb-no.min.js") ? Url("angular-locale_nb-no.min.js") : Url("angular-locale_nb-no.js");
+            public static readonly string angular_locale_nb_sj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nb-sj.min.js") ? Url("angular-locale_nb-sj.min.js") : Url("angular-locale_nb-sj.js");
+            public static readonly string angular_locale_nb_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nb.min.js") ? Url("angular-locale_nb.min.js") : Url("angular-locale_nb.js");
+            public static readonly string angular_locale_nd_zw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nd-zw.min.js") ? Url("angular-locale_nd-zw.min.js") : Url("angular-locale_nd-zw.js");
+            public static readonly string angular_locale_nd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nd.min.js") ? Url("angular-locale_nd.min.js") : Url("angular-locale_nd.js");
+            public static readonly string angular_locale_ne_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ne-in.min.js") ? Url("angular-locale_ne-in.min.js") : Url("angular-locale_ne-in.js");
+            public static readonly string angular_locale_ne_np_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ne-np.min.js") ? Url("angular-locale_ne-np.min.js") : Url("angular-locale_ne-np.js");
+            public static readonly string angular_locale_ne_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ne.min.js") ? Url("angular-locale_ne.min.js") : Url("angular-locale_ne.js");
+            public static readonly string angular_locale_nl_aw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nl-aw.min.js") ? Url("angular-locale_nl-aw.min.js") : Url("angular-locale_nl-aw.js");
+            public static readonly string angular_locale_nl_be_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nl-be.min.js") ? Url("angular-locale_nl-be.min.js") : Url("angular-locale_nl-be.js");
+            public static readonly string angular_locale_nl_bq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nl-bq.min.js") ? Url("angular-locale_nl-bq.min.js") : Url("angular-locale_nl-bq.js");
+            public static readonly string angular_locale_nl_cw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nl-cw.min.js") ? Url("angular-locale_nl-cw.min.js") : Url("angular-locale_nl-cw.js");
+            public static readonly string angular_locale_nl_nl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nl-nl.min.js") ? Url("angular-locale_nl-nl.min.js") : Url("angular-locale_nl-nl.js");
+            public static readonly string angular_locale_nl_sr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nl-sr.min.js") ? Url("angular-locale_nl-sr.min.js") : Url("angular-locale_nl-sr.js");
+            public static readonly string angular_locale_nl_sx_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nl-sx.min.js") ? Url("angular-locale_nl-sx.min.js") : Url("angular-locale_nl-sx.js");
+            public static readonly string angular_locale_nl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nl.min.js") ? Url("angular-locale_nl.min.js") : Url("angular-locale_nl.js");
+            public static readonly string angular_locale_nmg_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nmg-cm.min.js") ? Url("angular-locale_nmg-cm.min.js") : Url("angular-locale_nmg-cm.js");
+            public static readonly string angular_locale_nmg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nmg.min.js") ? Url("angular-locale_nmg.min.js") : Url("angular-locale_nmg.js");
+            public static readonly string angular_locale_nn_no_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nn-no.min.js") ? Url("angular-locale_nn-no.min.js") : Url("angular-locale_nn-no.js");
+            public static readonly string angular_locale_nn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nn.min.js") ? Url("angular-locale_nn.min.js") : Url("angular-locale_nn.js");
+            public static readonly string angular_locale_nnh_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nnh-cm.min.js") ? Url("angular-locale_nnh-cm.min.js") : Url("angular-locale_nnh-cm.js");
+            public static readonly string angular_locale_nnh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nnh.min.js") ? Url("angular-locale_nnh.min.js") : Url("angular-locale_nnh.js");
+            public static readonly string angular_locale_no_no_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_no-no.min.js") ? Url("angular-locale_no-no.min.js") : Url("angular-locale_no-no.js");
+            public static readonly string angular_locale_no_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_no.min.js") ? Url("angular-locale_no.min.js") : Url("angular-locale_no.js");
+            public static readonly string angular_locale_nus_ss_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nus-ss.min.js") ? Url("angular-locale_nus-ss.min.js") : Url("angular-locale_nus-ss.js");
+            public static readonly string angular_locale_nus_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nus.min.js") ? Url("angular-locale_nus.min.js") : Url("angular-locale_nus.js");
+            public static readonly string angular_locale_nyn_ug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nyn-ug.min.js") ? Url("angular-locale_nyn-ug.min.js") : Url("angular-locale_nyn-ug.js");
+            public static readonly string angular_locale_nyn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_nyn.min.js") ? Url("angular-locale_nyn.min.js") : Url("angular-locale_nyn.js");
+            public static readonly string angular_locale_om_et_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_om-et.min.js") ? Url("angular-locale_om-et.min.js") : Url("angular-locale_om-et.js");
+            public static readonly string angular_locale_om_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_om-ke.min.js") ? Url("angular-locale_om-ke.min.js") : Url("angular-locale_om-ke.js");
+            public static readonly string angular_locale_om_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_om.min.js") ? Url("angular-locale_om.min.js") : Url("angular-locale_om.js");
+            public static readonly string angular_locale_or_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_or-in.min.js") ? Url("angular-locale_or-in.min.js") : Url("angular-locale_or-in.js");
+            public static readonly string angular_locale_or_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_or.min.js") ? Url("angular-locale_or.min.js") : Url("angular-locale_or.js");
+            public static readonly string angular_locale_os_ge_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_os-ge.min.js") ? Url("angular-locale_os-ge.min.js") : Url("angular-locale_os-ge.js");
+            public static readonly string angular_locale_os_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_os-ru.min.js") ? Url("angular-locale_os-ru.min.js") : Url("angular-locale_os-ru.js");
+            public static readonly string angular_locale_os_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_os.min.js") ? Url("angular-locale_os.min.js") : Url("angular-locale_os.js");
+            public static readonly string angular_locale_pa_arab_pk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pa-arab-pk.min.js") ? Url("angular-locale_pa-arab-pk.min.js") : Url("angular-locale_pa-arab-pk.js");
+            public static readonly string angular_locale_pa_arab_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pa-arab.min.js") ? Url("angular-locale_pa-arab.min.js") : Url("angular-locale_pa-arab.js");
+            public static readonly string angular_locale_pa_guru_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pa-guru-in.min.js") ? Url("angular-locale_pa-guru-in.min.js") : Url("angular-locale_pa-guru-in.js");
+            public static readonly string angular_locale_pa_guru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pa-guru.min.js") ? Url("angular-locale_pa-guru.min.js") : Url("angular-locale_pa-guru.js");
+            public static readonly string angular_locale_pa_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pa.min.js") ? Url("angular-locale_pa.min.js") : Url("angular-locale_pa.js");
+            public static readonly string angular_locale_pl_pl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pl-pl.min.js") ? Url("angular-locale_pl-pl.min.js") : Url("angular-locale_pl-pl.js");
+            public static readonly string angular_locale_pl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pl.min.js") ? Url("angular-locale_pl.min.js") : Url("angular-locale_pl.js");
+            public static readonly string angular_locale_prg_001_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_prg-001.min.js") ? Url("angular-locale_prg-001.min.js") : Url("angular-locale_prg-001.js");
+            public static readonly string angular_locale_prg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_prg.min.js") ? Url("angular-locale_prg.min.js") : Url("angular-locale_prg.js");
+            public static readonly string angular_locale_ps_af_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ps-af.min.js") ? Url("angular-locale_ps-af.min.js") : Url("angular-locale_ps-af.js");
+            public static readonly string angular_locale_ps_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ps.min.js") ? Url("angular-locale_ps.min.js") : Url("angular-locale_ps.js");
+            public static readonly string angular_locale_pt_ao_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-ao.min.js") ? Url("angular-locale_pt-ao.min.js") : Url("angular-locale_pt-ao.js");
+            public static readonly string angular_locale_pt_br_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-br.min.js") ? Url("angular-locale_pt-br.min.js") : Url("angular-locale_pt-br.js");
+            public static readonly string angular_locale_pt_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-ch.min.js") ? Url("angular-locale_pt-ch.min.js") : Url("angular-locale_pt-ch.js");
+            public static readonly string angular_locale_pt_cv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-cv.min.js") ? Url("angular-locale_pt-cv.min.js") : Url("angular-locale_pt-cv.js");
+            public static readonly string angular_locale_pt_gq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-gq.min.js") ? Url("angular-locale_pt-gq.min.js") : Url("angular-locale_pt-gq.js");
+            public static readonly string angular_locale_pt_gw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-gw.min.js") ? Url("angular-locale_pt-gw.min.js") : Url("angular-locale_pt-gw.js");
+            public static readonly string angular_locale_pt_lu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-lu.min.js") ? Url("angular-locale_pt-lu.min.js") : Url("angular-locale_pt-lu.js");
+            public static readonly string angular_locale_pt_mo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-mo.min.js") ? Url("angular-locale_pt-mo.min.js") : Url("angular-locale_pt-mo.js");
+            public static readonly string angular_locale_pt_mz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-mz.min.js") ? Url("angular-locale_pt-mz.min.js") : Url("angular-locale_pt-mz.js");
+            public static readonly string angular_locale_pt_pt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-pt.min.js") ? Url("angular-locale_pt-pt.min.js") : Url("angular-locale_pt-pt.js");
+            public static readonly string angular_locale_pt_st_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-st.min.js") ? Url("angular-locale_pt-st.min.js") : Url("angular-locale_pt-st.js");
+            public static readonly string angular_locale_pt_tl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt-tl.min.js") ? Url("angular-locale_pt-tl.min.js") : Url("angular-locale_pt-tl.js");
+            public static readonly string angular_locale_pt_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_pt.min.js") ? Url("angular-locale_pt.min.js") : Url("angular-locale_pt.js");
+            public static readonly string angular_locale_qu_bo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_qu-bo.min.js") ? Url("angular-locale_qu-bo.min.js") : Url("angular-locale_qu-bo.js");
+            public static readonly string angular_locale_qu_ec_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_qu-ec.min.js") ? Url("angular-locale_qu-ec.min.js") : Url("angular-locale_qu-ec.js");
+            public static readonly string angular_locale_qu_pe_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_qu-pe.min.js") ? Url("angular-locale_qu-pe.min.js") : Url("angular-locale_qu-pe.js");
+            public static readonly string angular_locale_qu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_qu.min.js") ? Url("angular-locale_qu.min.js") : Url("angular-locale_qu.js");
+            public static readonly string angular_locale_rm_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_rm-ch.min.js") ? Url("angular-locale_rm-ch.min.js") : Url("angular-locale_rm-ch.js");
+            public static readonly string angular_locale_rm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_rm.min.js") ? Url("angular-locale_rm.min.js") : Url("angular-locale_rm.js");
+            public static readonly string angular_locale_rn_bi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_rn-bi.min.js") ? Url("angular-locale_rn-bi.min.js") : Url("angular-locale_rn-bi.js");
+            public static readonly string angular_locale_rn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_rn.min.js") ? Url("angular-locale_rn.min.js") : Url("angular-locale_rn.js");
+            public static readonly string angular_locale_ro_md_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ro-md.min.js") ? Url("angular-locale_ro-md.min.js") : Url("angular-locale_ro-md.js");
+            public static readonly string angular_locale_ro_ro_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ro-ro.min.js") ? Url("angular-locale_ro-ro.min.js") : Url("angular-locale_ro-ro.js");
+            public static readonly string angular_locale_ro_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ro.min.js") ? Url("angular-locale_ro.min.js") : Url("angular-locale_ro.js");
+            public static readonly string angular_locale_rof_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_rof-tz.min.js") ? Url("angular-locale_rof-tz.min.js") : Url("angular-locale_rof-tz.js");
+            public static readonly string angular_locale_rof_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_rof.min.js") ? Url("angular-locale_rof.min.js") : Url("angular-locale_rof.js");
+            public static readonly string angular_locale_ru_by_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ru-by.min.js") ? Url("angular-locale_ru-by.min.js") : Url("angular-locale_ru-by.js");
+            public static readonly string angular_locale_ru_kg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ru-kg.min.js") ? Url("angular-locale_ru-kg.min.js") : Url("angular-locale_ru-kg.js");
+            public static readonly string angular_locale_ru_kz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ru-kz.min.js") ? Url("angular-locale_ru-kz.min.js") : Url("angular-locale_ru-kz.js");
+            public static readonly string angular_locale_ru_md_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ru-md.min.js") ? Url("angular-locale_ru-md.min.js") : Url("angular-locale_ru-md.js");
+            public static readonly string angular_locale_ru_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ru-ru.min.js") ? Url("angular-locale_ru-ru.min.js") : Url("angular-locale_ru-ru.js");
+            public static readonly string angular_locale_ru_ua_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ru-ua.min.js") ? Url("angular-locale_ru-ua.min.js") : Url("angular-locale_ru-ua.js");
+            public static readonly string angular_locale_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ru.min.js") ? Url("angular-locale_ru.min.js") : Url("angular-locale_ru.js");
+            public static readonly string angular_locale_rw_rw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_rw-rw.min.js") ? Url("angular-locale_rw-rw.min.js") : Url("angular-locale_rw-rw.js");
+            public static readonly string angular_locale_rw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_rw.min.js") ? Url("angular-locale_rw.min.js") : Url("angular-locale_rw.js");
+            public static readonly string angular_locale_rwk_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_rwk-tz.min.js") ? Url("angular-locale_rwk-tz.min.js") : Url("angular-locale_rwk-tz.js");
+            public static readonly string angular_locale_rwk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_rwk.min.js") ? Url("angular-locale_rwk.min.js") : Url("angular-locale_rwk.js");
+            public static readonly string angular_locale_sah_ru_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sah-ru.min.js") ? Url("angular-locale_sah-ru.min.js") : Url("angular-locale_sah-ru.js");
+            public static readonly string angular_locale_sah_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sah.min.js") ? Url("angular-locale_sah.min.js") : Url("angular-locale_sah.js");
+            public static readonly string angular_locale_saq_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_saq-ke.min.js") ? Url("angular-locale_saq-ke.min.js") : Url("angular-locale_saq-ke.js");
+            public static readonly string angular_locale_saq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_saq.min.js") ? Url("angular-locale_saq.min.js") : Url("angular-locale_saq.js");
+            public static readonly string angular_locale_sbp_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sbp-tz.min.js") ? Url("angular-locale_sbp-tz.min.js") : Url("angular-locale_sbp-tz.js");
+            public static readonly string angular_locale_sbp_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sbp.min.js") ? Url("angular-locale_sbp.min.js") : Url("angular-locale_sbp.js");
+            public static readonly string angular_locale_se_fi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_se-fi.min.js") ? Url("angular-locale_se-fi.min.js") : Url("angular-locale_se-fi.js");
+            public static readonly string angular_locale_se_no_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_se-no.min.js") ? Url("angular-locale_se-no.min.js") : Url("angular-locale_se-no.js");
+            public static readonly string angular_locale_se_se_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_se-se.min.js") ? Url("angular-locale_se-se.min.js") : Url("angular-locale_se-se.js");
+            public static readonly string angular_locale_se_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_se.min.js") ? Url("angular-locale_se.min.js") : Url("angular-locale_se.js");
+            public static readonly string angular_locale_seh_mz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_seh-mz.min.js") ? Url("angular-locale_seh-mz.min.js") : Url("angular-locale_seh-mz.js");
+            public static readonly string angular_locale_seh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_seh.min.js") ? Url("angular-locale_seh.min.js") : Url("angular-locale_seh.js");
+            public static readonly string angular_locale_ses_ml_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ses-ml.min.js") ? Url("angular-locale_ses-ml.min.js") : Url("angular-locale_ses-ml.js");
+            public static readonly string angular_locale_ses_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ses.min.js") ? Url("angular-locale_ses.min.js") : Url("angular-locale_ses.js");
+            public static readonly string angular_locale_sg_cf_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sg-cf.min.js") ? Url("angular-locale_sg-cf.min.js") : Url("angular-locale_sg-cf.js");
+            public static readonly string angular_locale_sg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sg.min.js") ? Url("angular-locale_sg.min.js") : Url("angular-locale_sg.js");
+            public static readonly string angular_locale_shi_latn_ma_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_shi-latn-ma.min.js") ? Url("angular-locale_shi-latn-ma.min.js") : Url("angular-locale_shi-latn-ma.js");
+            public static readonly string angular_locale_shi_latn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_shi-latn.min.js") ? Url("angular-locale_shi-latn.min.js") : Url("angular-locale_shi-latn.js");
+            public static readonly string angular_locale_shi_tfng_ma_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_shi-tfng-ma.min.js") ? Url("angular-locale_shi-tfng-ma.min.js") : Url("angular-locale_shi-tfng-ma.js");
+            public static readonly string angular_locale_shi_tfng_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_shi-tfng.min.js") ? Url("angular-locale_shi-tfng.min.js") : Url("angular-locale_shi-tfng.js");
+            public static readonly string angular_locale_shi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_shi.min.js") ? Url("angular-locale_shi.min.js") : Url("angular-locale_shi.js");
+            public static readonly string angular_locale_si_lk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_si-lk.min.js") ? Url("angular-locale_si-lk.min.js") : Url("angular-locale_si-lk.js");
+            public static readonly string angular_locale_si_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_si.min.js") ? Url("angular-locale_si.min.js") : Url("angular-locale_si.js");
+            public static readonly string angular_locale_sk_sk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sk-sk.min.js") ? Url("angular-locale_sk-sk.min.js") : Url("angular-locale_sk-sk.js");
+            public static readonly string angular_locale_sk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sk.min.js") ? Url("angular-locale_sk.min.js") : Url("angular-locale_sk.js");
+            public static readonly string angular_locale_sl_si_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sl-si.min.js") ? Url("angular-locale_sl-si.min.js") : Url("angular-locale_sl-si.js");
+            public static readonly string angular_locale_sl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sl.min.js") ? Url("angular-locale_sl.min.js") : Url("angular-locale_sl.js");
+            public static readonly string angular_locale_smn_fi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_smn-fi.min.js") ? Url("angular-locale_smn-fi.min.js") : Url("angular-locale_smn-fi.js");
+            public static readonly string angular_locale_smn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_smn.min.js") ? Url("angular-locale_smn.min.js") : Url("angular-locale_smn.js");
+            public static readonly string angular_locale_sn_zw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sn-zw.min.js") ? Url("angular-locale_sn-zw.min.js") : Url("angular-locale_sn-zw.js");
+            public static readonly string angular_locale_sn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sn.min.js") ? Url("angular-locale_sn.min.js") : Url("angular-locale_sn.js");
+            public static readonly string angular_locale_so_dj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_so-dj.min.js") ? Url("angular-locale_so-dj.min.js") : Url("angular-locale_so-dj.js");
+            public static readonly string angular_locale_so_et_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_so-et.min.js") ? Url("angular-locale_so-et.min.js") : Url("angular-locale_so-et.js");
+            public static readonly string angular_locale_so_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_so-ke.min.js") ? Url("angular-locale_so-ke.min.js") : Url("angular-locale_so-ke.js");
+            public static readonly string angular_locale_so_so_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_so-so.min.js") ? Url("angular-locale_so-so.min.js") : Url("angular-locale_so-so.js");
+            public static readonly string angular_locale_so_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_so.min.js") ? Url("angular-locale_so.min.js") : Url("angular-locale_so.js");
+            public static readonly string angular_locale_sq_al_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sq-al.min.js") ? Url("angular-locale_sq-al.min.js") : Url("angular-locale_sq-al.js");
+            public static readonly string angular_locale_sq_mk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sq-mk.min.js") ? Url("angular-locale_sq-mk.min.js") : Url("angular-locale_sq-mk.js");
+            public static readonly string angular_locale_sq_xk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sq-xk.min.js") ? Url("angular-locale_sq-xk.min.js") : Url("angular-locale_sq-xk.js");
+            public static readonly string angular_locale_sq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sq.min.js") ? Url("angular-locale_sq.min.js") : Url("angular-locale_sq.js");
+            public static readonly string angular_locale_sr_cyrl_ba_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr-cyrl-ba.min.js") ? Url("angular-locale_sr-cyrl-ba.min.js") : Url("angular-locale_sr-cyrl-ba.js");
+            public static readonly string angular_locale_sr_cyrl_me_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr-cyrl-me.min.js") ? Url("angular-locale_sr-cyrl-me.min.js") : Url("angular-locale_sr-cyrl-me.js");
+            public static readonly string angular_locale_sr_cyrl_rs_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr-cyrl-rs.min.js") ? Url("angular-locale_sr-cyrl-rs.min.js") : Url("angular-locale_sr-cyrl-rs.js");
+            public static readonly string angular_locale_sr_cyrl_xk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr-cyrl-xk.min.js") ? Url("angular-locale_sr-cyrl-xk.min.js") : Url("angular-locale_sr-cyrl-xk.js");
+            public static readonly string angular_locale_sr_cyrl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr-cyrl.min.js") ? Url("angular-locale_sr-cyrl.min.js") : Url("angular-locale_sr-cyrl.js");
+            public static readonly string angular_locale_sr_latn_ba_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr-latn-ba.min.js") ? Url("angular-locale_sr-latn-ba.min.js") : Url("angular-locale_sr-latn-ba.js");
+            public static readonly string angular_locale_sr_latn_me_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr-latn-me.min.js") ? Url("angular-locale_sr-latn-me.min.js") : Url("angular-locale_sr-latn-me.js");
+            public static readonly string angular_locale_sr_latn_rs_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr-latn-rs.min.js") ? Url("angular-locale_sr-latn-rs.min.js") : Url("angular-locale_sr-latn-rs.js");
+            public static readonly string angular_locale_sr_latn_xk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr-latn-xk.min.js") ? Url("angular-locale_sr-latn-xk.min.js") : Url("angular-locale_sr-latn-xk.js");
+            public static readonly string angular_locale_sr_latn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr-latn.min.js") ? Url("angular-locale_sr-latn.min.js") : Url("angular-locale_sr-latn.js");
+            public static readonly string angular_locale_sr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sr.min.js") ? Url("angular-locale_sr.min.js") : Url("angular-locale_sr.js");
+            public static readonly string angular_locale_sv_ax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sv-ax.min.js") ? Url("angular-locale_sv-ax.min.js") : Url("angular-locale_sv-ax.js");
+            public static readonly string angular_locale_sv_fi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sv-fi.min.js") ? Url("angular-locale_sv-fi.min.js") : Url("angular-locale_sv-fi.js");
+            public static readonly string angular_locale_sv_se_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sv-se.min.js") ? Url("angular-locale_sv-se.min.js") : Url("angular-locale_sv-se.js");
+            public static readonly string angular_locale_sv_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sv.min.js") ? Url("angular-locale_sv.min.js") : Url("angular-locale_sv.js");
+            public static readonly string angular_locale_sw_cd_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sw-cd.min.js") ? Url("angular-locale_sw-cd.min.js") : Url("angular-locale_sw-cd.js");
+            public static readonly string angular_locale_sw_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sw-ke.min.js") ? Url("angular-locale_sw-ke.min.js") : Url("angular-locale_sw-ke.js");
+            public static readonly string angular_locale_sw_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sw-tz.min.js") ? Url("angular-locale_sw-tz.min.js") : Url("angular-locale_sw-tz.js");
+            public static readonly string angular_locale_sw_ug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sw-ug.min.js") ? Url("angular-locale_sw-ug.min.js") : Url("angular-locale_sw-ug.js");
+            public static readonly string angular_locale_sw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_sw.min.js") ? Url("angular-locale_sw.min.js") : Url("angular-locale_sw.js");
+            public static readonly string angular_locale_ta_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ta-in.min.js") ? Url("angular-locale_ta-in.min.js") : Url("angular-locale_ta-in.js");
+            public static readonly string angular_locale_ta_lk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ta-lk.min.js") ? Url("angular-locale_ta-lk.min.js") : Url("angular-locale_ta-lk.js");
+            public static readonly string angular_locale_ta_my_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ta-my.min.js") ? Url("angular-locale_ta-my.min.js") : Url("angular-locale_ta-my.js");
+            public static readonly string angular_locale_ta_sg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ta-sg.min.js") ? Url("angular-locale_ta-sg.min.js") : Url("angular-locale_ta-sg.js");
+            public static readonly string angular_locale_ta_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ta.min.js") ? Url("angular-locale_ta.min.js") : Url("angular-locale_ta.js");
+            public static readonly string angular_locale_te_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_te-in.min.js") ? Url("angular-locale_te-in.min.js") : Url("angular-locale_te-in.js");
+            public static readonly string angular_locale_te_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_te.min.js") ? Url("angular-locale_te.min.js") : Url("angular-locale_te.js");
+            public static readonly string angular_locale_teo_ke_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_teo-ke.min.js") ? Url("angular-locale_teo-ke.min.js") : Url("angular-locale_teo-ke.js");
+            public static readonly string angular_locale_teo_ug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_teo-ug.min.js") ? Url("angular-locale_teo-ug.min.js") : Url("angular-locale_teo-ug.js");
+            public static readonly string angular_locale_teo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_teo.min.js") ? Url("angular-locale_teo.min.js") : Url("angular-locale_teo.js");
+            public static readonly string angular_locale_th_th_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_th-th.min.js") ? Url("angular-locale_th-th.min.js") : Url("angular-locale_th-th.js");
+            public static readonly string angular_locale_th_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_th.min.js") ? Url("angular-locale_th.min.js") : Url("angular-locale_th.js");
+            public static readonly string angular_locale_ti_er_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ti-er.min.js") ? Url("angular-locale_ti-er.min.js") : Url("angular-locale_ti-er.js");
+            public static readonly string angular_locale_ti_et_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ti-et.min.js") ? Url("angular-locale_ti-et.min.js") : Url("angular-locale_ti-et.js");
+            public static readonly string angular_locale_ti_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ti.min.js") ? Url("angular-locale_ti.min.js") : Url("angular-locale_ti.js");
+            public static readonly string angular_locale_tk_tm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_tk-tm.min.js") ? Url("angular-locale_tk-tm.min.js") : Url("angular-locale_tk-tm.js");
+            public static readonly string angular_locale_tk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_tk.min.js") ? Url("angular-locale_tk.min.js") : Url("angular-locale_tk.js");
+            public static readonly string angular_locale_tl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_tl.min.js") ? Url("angular-locale_tl.min.js") : Url("angular-locale_tl.js");
+            public static readonly string angular_locale_to_to_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_to-to.min.js") ? Url("angular-locale_to-to.min.js") : Url("angular-locale_to-to.js");
+            public static readonly string angular_locale_to_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_to.min.js") ? Url("angular-locale_to.min.js") : Url("angular-locale_to.js");
+            public static readonly string angular_locale_tr_cy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_tr-cy.min.js") ? Url("angular-locale_tr-cy.min.js") : Url("angular-locale_tr-cy.js");
+            public static readonly string angular_locale_tr_tr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_tr-tr.min.js") ? Url("angular-locale_tr-tr.min.js") : Url("angular-locale_tr-tr.js");
+            public static readonly string angular_locale_tr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_tr.min.js") ? Url("angular-locale_tr.min.js") : Url("angular-locale_tr.js");
+            public static readonly string angular_locale_twq_ne_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_twq-ne.min.js") ? Url("angular-locale_twq-ne.min.js") : Url("angular-locale_twq-ne.js");
+            public static readonly string angular_locale_twq_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_twq.min.js") ? Url("angular-locale_twq.min.js") : Url("angular-locale_twq.js");
+            public static readonly string angular_locale_tzm_ma_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_tzm-ma.min.js") ? Url("angular-locale_tzm-ma.min.js") : Url("angular-locale_tzm-ma.js");
+            public static readonly string angular_locale_tzm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_tzm.min.js") ? Url("angular-locale_tzm.min.js") : Url("angular-locale_tzm.js");
+            public static readonly string angular_locale_ug_cn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ug-cn.min.js") ? Url("angular-locale_ug-cn.min.js") : Url("angular-locale_ug-cn.js");
+            public static readonly string angular_locale_ug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ug.min.js") ? Url("angular-locale_ug.min.js") : Url("angular-locale_ug.js");
+            public static readonly string angular_locale_uk_ua_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_uk-ua.min.js") ? Url("angular-locale_uk-ua.min.js") : Url("angular-locale_uk-ua.js");
+            public static readonly string angular_locale_uk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_uk.min.js") ? Url("angular-locale_uk.min.js") : Url("angular-locale_uk.js");
+            public static readonly string angular_locale_ur_in_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ur-in.min.js") ? Url("angular-locale_ur-in.min.js") : Url("angular-locale_ur-in.js");
+            public static readonly string angular_locale_ur_pk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ur-pk.min.js") ? Url("angular-locale_ur-pk.min.js") : Url("angular-locale_ur-pk.js");
+            public static readonly string angular_locale_ur_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_ur.min.js") ? Url("angular-locale_ur.min.js") : Url("angular-locale_ur.js");
+            public static readonly string angular_locale_uz_arab_af_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_uz-arab-af.min.js") ? Url("angular-locale_uz-arab-af.min.js") : Url("angular-locale_uz-arab-af.js");
+            public static readonly string angular_locale_uz_arab_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_uz-arab.min.js") ? Url("angular-locale_uz-arab.min.js") : Url("angular-locale_uz-arab.js");
+            public static readonly string angular_locale_uz_cyrl_uz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_uz-cyrl-uz.min.js") ? Url("angular-locale_uz-cyrl-uz.min.js") : Url("angular-locale_uz-cyrl-uz.js");
+            public static readonly string angular_locale_uz_cyrl_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_uz-cyrl.min.js") ? Url("angular-locale_uz-cyrl.min.js") : Url("angular-locale_uz-cyrl.js");
+            public static readonly string angular_locale_uz_latn_uz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_uz-latn-uz.min.js") ? Url("angular-locale_uz-latn-uz.min.js") : Url("angular-locale_uz-latn-uz.js");
+            public static readonly string angular_locale_uz_latn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_uz-latn.min.js") ? Url("angular-locale_uz-latn.min.js") : Url("angular-locale_uz-latn.js");
+            public static readonly string angular_locale_uz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_uz.min.js") ? Url("angular-locale_uz.min.js") : Url("angular-locale_uz.js");
+            public static readonly string angular_locale_vai_latn_lr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vai-latn-lr.min.js") ? Url("angular-locale_vai-latn-lr.min.js") : Url("angular-locale_vai-latn-lr.js");
+            public static readonly string angular_locale_vai_latn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vai-latn.min.js") ? Url("angular-locale_vai-latn.min.js") : Url("angular-locale_vai-latn.js");
+            public static readonly string angular_locale_vai_vaii_lr_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vai-vaii-lr.min.js") ? Url("angular-locale_vai-vaii-lr.min.js") : Url("angular-locale_vai-vaii-lr.js");
+            public static readonly string angular_locale_vai_vaii_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vai-vaii.min.js") ? Url("angular-locale_vai-vaii.min.js") : Url("angular-locale_vai-vaii.js");
+            public static readonly string angular_locale_vai_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vai.min.js") ? Url("angular-locale_vai.min.js") : Url("angular-locale_vai.js");
+            public static readonly string angular_locale_vi_vn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vi-vn.min.js") ? Url("angular-locale_vi-vn.min.js") : Url("angular-locale_vi-vn.js");
+            public static readonly string angular_locale_vi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vi.min.js") ? Url("angular-locale_vi.min.js") : Url("angular-locale_vi.js");
+            public static readonly string angular_locale_vo_001_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vo-001.min.js") ? Url("angular-locale_vo-001.min.js") : Url("angular-locale_vo-001.js");
+            public static readonly string angular_locale_vo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vo.min.js") ? Url("angular-locale_vo.min.js") : Url("angular-locale_vo.js");
+            public static readonly string angular_locale_vun_tz_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vun-tz.min.js") ? Url("angular-locale_vun-tz.min.js") : Url("angular-locale_vun-tz.js");
+            public static readonly string angular_locale_vun_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_vun.min.js") ? Url("angular-locale_vun.min.js") : Url("angular-locale_vun.js");
+            public static readonly string angular_locale_wae_ch_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_wae-ch.min.js") ? Url("angular-locale_wae-ch.min.js") : Url("angular-locale_wae-ch.js");
+            public static readonly string angular_locale_wae_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_wae.min.js") ? Url("angular-locale_wae.min.js") : Url("angular-locale_wae.js");
+            public static readonly string angular_locale_xog_ug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_xog-ug.min.js") ? Url("angular-locale_xog-ug.min.js") : Url("angular-locale_xog-ug.js");
+            public static readonly string angular_locale_xog_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_xog.min.js") ? Url("angular-locale_xog.min.js") : Url("angular-locale_xog.js");
+            public static readonly string angular_locale_yav_cm_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_yav-cm.min.js") ? Url("angular-locale_yav-cm.min.js") : Url("angular-locale_yav-cm.js");
+            public static readonly string angular_locale_yav_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_yav.min.js") ? Url("angular-locale_yav.min.js") : Url("angular-locale_yav.js");
+            public static readonly string angular_locale_yi_001_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_yi-001.min.js") ? Url("angular-locale_yi-001.min.js") : Url("angular-locale_yi-001.js");
+            public static readonly string angular_locale_yi_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_yi.min.js") ? Url("angular-locale_yi.min.js") : Url("angular-locale_yi.js");
+            public static readonly string angular_locale_yo_bj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_yo-bj.min.js") ? Url("angular-locale_yo-bj.min.js") : Url("angular-locale_yo-bj.js");
+            public static readonly string angular_locale_yo_ng_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_yo-ng.min.js") ? Url("angular-locale_yo-ng.min.js") : Url("angular-locale_yo-ng.js");
+            public static readonly string angular_locale_yo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_yo.min.js") ? Url("angular-locale_yo.min.js") : Url("angular-locale_yo.js");
+            public static readonly string angular_locale_yue_hk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_yue-hk.min.js") ? Url("angular-locale_yue-hk.min.js") : Url("angular-locale_yue-hk.js");
+            public static readonly string angular_locale_yue_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_yue.min.js") ? Url("angular-locale_yue.min.js") : Url("angular-locale_yue.js");
+            public static readonly string angular_locale_zgh_ma_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zgh-ma.min.js") ? Url("angular-locale_zgh-ma.min.js") : Url("angular-locale_zgh-ma.js");
+            public static readonly string angular_locale_zgh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zgh.min.js") ? Url("angular-locale_zgh.min.js") : Url("angular-locale_zgh.js");
+            public static readonly string angular_locale_zh_cn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-cn.min.js") ? Url("angular-locale_zh-cn.min.js") : Url("angular-locale_zh-cn.js");
+            public static readonly string angular_locale_zh_hans_cn_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-hans-cn.min.js") ? Url("angular-locale_zh-hans-cn.min.js") : Url("angular-locale_zh-hans-cn.js");
+            public static readonly string angular_locale_zh_hans_hk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-hans-hk.min.js") ? Url("angular-locale_zh-hans-hk.min.js") : Url("angular-locale_zh-hans-hk.js");
+            public static readonly string angular_locale_zh_hans_mo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-hans-mo.min.js") ? Url("angular-locale_zh-hans-mo.min.js") : Url("angular-locale_zh-hans-mo.js");
+            public static readonly string angular_locale_zh_hans_sg_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-hans-sg.min.js") ? Url("angular-locale_zh-hans-sg.min.js") : Url("angular-locale_zh-hans-sg.js");
+            public static readonly string angular_locale_zh_hans_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-hans.min.js") ? Url("angular-locale_zh-hans.min.js") : Url("angular-locale_zh-hans.js");
+            public static readonly string angular_locale_zh_hant_hk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-hant-hk.min.js") ? Url("angular-locale_zh-hant-hk.min.js") : Url("angular-locale_zh-hant-hk.js");
+            public static readonly string angular_locale_zh_hant_mo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-hant-mo.min.js") ? Url("angular-locale_zh-hant-mo.min.js") : Url("angular-locale_zh-hant-mo.js");
+            public static readonly string angular_locale_zh_hant_tw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-hant-tw.min.js") ? Url("angular-locale_zh-hant-tw.min.js") : Url("angular-locale_zh-hant-tw.js");
+            public static readonly string angular_locale_zh_hant_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-hant.min.js") ? Url("angular-locale_zh-hant.min.js") : Url("angular-locale_zh-hant.js");
+            public static readonly string angular_locale_zh_hk_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-hk.min.js") ? Url("angular-locale_zh-hk.min.js") : Url("angular-locale_zh-hk.js");
+            public static readonly string angular_locale_zh_tw_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh-tw.min.js") ? Url("angular-locale_zh-tw.min.js") : Url("angular-locale_zh-tw.js");
+            public static readonly string angular_locale_zh_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zh.min.js") ? Url("angular-locale_zh.min.js") : Url("angular-locale_zh.js");
+            public static readonly string angular_locale_zu_za_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zu-za.min.js") ? Url("angular-locale_zu-za.min.js") : Url("angular-locale_zu-za.js");
+            public static readonly string angular_locale_zu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/angular-locale_zu.min.js") ? Url("angular-locale_zu.min.js") : Url("angular-locale_zu.js");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class jqtimeto {
-            private const string URLPATH = "~/Scripts/jqtimeto";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string jquery_timeTo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.timeTo.min.js") ? Url("jquery.timeTo.min.js") : Url("jquery.timeTo.js");
+            public const string UrlPath = "~/Scripts/jqtimeto";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string jquery_timeTo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.timeTo.min.js") ? Url("jquery.timeTo.min.js") : Url("jquery.timeTo.js");
             public static readonly string jquery_timeTo_min_js = Url("jquery.timeTo.min.js");
         }
     
-        public static readonly string jquery_1_9_1_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.9.1-vsdoc.min.js") ? Url("jquery-1.9.1-vsdoc.min.js") : Url("jquery-1.9.1-vsdoc.js");
-        public static readonly string jquery_1_9_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.9.1.min.js") ? Url("jquery-1.9.1.min.js") : Url("jquery-1.9.1.js");
+        public static readonly string jquery_1_9_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-1.9.1.intellisense.min.js") ? Url("jquery-1.9.1.intellisense.min.js") : Url("jquery-1.9.1.intellisense.js");
+        public static readonly string jquery_1_9_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery-1.9.1.min.js") ? Url("jquery-1.9.1.min.js") : Url("jquery-1.9.1.js");
         public static readonly string jquery_1_9_1_min_js = Url("jquery-1.9.1.min.js");
         public static readonly string jquery_1_9_1_min_map = Url("jquery-1.9.1.min.map");
-        public static readonly string jquery_unobtrusive_ajax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.unobtrusive-ajax.min.js") ? Url("jquery.unobtrusive-ajax.min.js") : Url("jquery.unobtrusive-ajax.js");
+        public static readonly string jquery_unobtrusive_ajax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.unobtrusive-ajax.min.js") ? Url("jquery.unobtrusive-ajax.min.js") : Url("jquery.unobtrusive-ajax.js");
         public static readonly string jquery_unobtrusive_ajax_min_js = Url("jquery.unobtrusive-ajax.min.js");
-        public static readonly string jquery_validate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.min.js") ? Url("jquery.validate.min.js") : Url("jquery.validate.js");
+        public static readonly string jquery_validate_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.validate-vsdoc.min.js") ? Url("jquery.validate-vsdoc.min.js") : Url("jquery.validate-vsdoc.js");
+        public static readonly string jquery_validate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.validate.min.js") ? Url("jquery.validate.min.js") : Url("jquery.validate.js");
         public static readonly string jquery_validate_min_js = Url("jquery.validate.min.js");
-        public static readonly string jquery_validate_unobtrusive_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.unobtrusive.min.js") ? Url("jquery.validate.unobtrusive.min.js") : Url("jquery.validate.unobtrusive.js");
+        public static readonly string jquery_validate_unobtrusive_bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.validate.unobtrusive.bootstrap.min.js") ? Url("jquery.validate.unobtrusive.bootstrap.min.js") : Url("jquery.validate.unobtrusive.bootstrap.js");
+        public static readonly string jquery_validate_unobtrusive_bootstrap_min_js = Url("jquery.validate.unobtrusive.bootstrap.min.js");
+        public static readonly string jquery_validate_unobtrusive_bootstrap_min_js_map = Url("jquery.validate.unobtrusive.bootstrap.min.js.map");
+        public static readonly string jquery_validate_unobtrusive_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.validate.unobtrusive.min.js") ? Url("jquery.validate.unobtrusive.min.js") : Url("jquery.validate.unobtrusive.js");
         public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
+        public static readonly string modernizr_2_8_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/modernizr-2.8.3.min.js") ? Url("modernizr-2.8.3.min.js") : Url("modernizr-2.8.3.js");
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class padel {
-            private const string URLPATH = "~/Scripts/padel";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public const string UrlPath = "~/Scripts/padel";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class admin {
-                private const string URLPATH = "~/Scripts/padel/admin";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string admin_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/admin.min.js") ? Url("admin.min.js") : Url("admin.js");
+                public const string UrlPath = "~/Scripts/padel/admin";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string admin_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/admin.min.js") ? Url("admin.min.js") : Url("admin.js");
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class jugadores {
-                    private const string URLPATH = "~/Scripts/padel/admin/jugadores";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/grid.min.js") ? Url("grid.min.js") : Url("grid.js");
+                    public const string UrlPath = "~/Scripts/padel/admin/jugadores";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/grid.min.js") ? Url("grid.min.js") : Url("grid.js");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class torneos {
-                    private const string URLPATH = "~/Scripts/padel/admin/torneos";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/grid.min.js") ? Url("grid.min.js") : Url("grid.js");
-                    public static readonly string verify_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/verify.min.js") ? Url("verify.min.js") : Url("verify.js");
+                    public const string UrlPath = "~/Scripts/padel/admin/torneos";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string grid_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/grid.min.js") ? Url("grid.min.js") : Url("grid.js");
+                    public static readonly string verify_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/verify.min.js") ? Url("verify.min.js") : Url("verify.js");
                 }
             
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class jugador {
-                private const string URLPATH = "~/Scripts/padel/jugador";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public const string UrlPath = "~/Scripts/padel/jugador";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class demo {
-                    private const string URLPATH = "~/Scripts/padel/jugador/demo";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string dashboard_demo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dashboard-demo.min.js") ? Url("dashboard-demo.min.js") : Url("dashboard-demo.js");
-                    public static readonly string flot_demo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/flot-demo.min.js") ? Url("flot-demo.min.js") : Url("flot-demo.js");
-                    public static readonly string morris_demo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/morris-demo.min.js") ? Url("morris-demo.min.js") : Url("morris-demo.js");
+                    public const string UrlPath = "~/Scripts/padel/jugador/demo";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string dashboard_demo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/dashboard-demo.min.js") ? Url("dashboard-demo.min.js") : Url("dashboard-demo.js");
+                    public static readonly string flot_demo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/flot-demo.min.js") ? Url("flot-demo.min.js") : Url("flot-demo.js");
+                    public static readonly string morris_demo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/morris-demo.min.js") ? Url("morris-demo.min.js") : Url("morris-demo.js");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class equipos {
-                    private const string URLPATH = "~/Scripts/padel/jugador/equipos";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string crud_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/crud.min.js") ? Url("crud.min.js") : Url("crud.js");
+                    public const string UrlPath = "~/Scripts/padel/jugador/equipos";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string crud_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/crud.min.js") ? Url("crud.min.js") : Url("crud.js");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class graficas {
-                    private const string URLPATH = "~/Scripts/padel/jugador/graficas";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string datos_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/datos.min.js") ? Url("datos.min.js") : Url("datos.js");
+                    public const string UrlPath = "~/Scripts/padel/jugador/graficas";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string datos_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/datos.min.js") ? Url("datos.min.js") : Url("datos.js");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class plugins {
-                    private const string URLPATH = "~/Scripts/padel/jugador/plugins";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public const string UrlPath = "~/Scripts/padel/jugador/plugins";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                     public static class dataTables {
-                        private const string URLPATH = "~/Scripts/padel/jugador/plugins/dataTables";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                        public static readonly string dataTables_bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dataTables.bootstrap.min.js") ? Url("dataTables.bootstrap.min.js") : Url("dataTables.bootstrap.js");
-                        public static readonly string jquery_dataTables_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.dataTables.min.js") ? Url("jquery.dataTables.min.js") : Url("jquery.dataTables.js");
+                        public const string UrlPath = "~/Scripts/padel/jugador/plugins/dataTables";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                        public static readonly string dataTables_bootstrap_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/dataTables.bootstrap.min.js") ? Url("dataTables.bootstrap.min.js") : Url("dataTables.bootstrap.js");
+                        public static readonly string jquery_dataTables_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.dataTables.min.js") ? Url("jquery.dataTables.min.js") : Url("jquery.dataTables.js");
                     }
                 
                     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                     public static class flot {
-                        private const string URLPATH = "~/Scripts/padel/jugador/plugins/flot";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                        public const string UrlPath = "~/Scripts/padel/jugador/plugins/flot";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                         public static readonly string excanvas_min_js = Url("excanvas.min.js");
-                        public static readonly string jquery_flot_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.flot.min.js") ? Url("jquery.flot.min.js") : Url("jquery.flot.js");
-                        public static readonly string jquery_flot_pie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.flot.pie.min.js") ? Url("jquery.flot.pie.min.js") : Url("jquery.flot.pie.js");
-                        public static readonly string jquery_flot_resize_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.flot.resize.min.js") ? Url("jquery.flot.resize.min.js") : Url("jquery.flot.resize.js");
+                        public static readonly string jquery_flot_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.flot.min.js") ? Url("jquery.flot.min.js") : Url("jquery.flot.js");
+                        public static readonly string jquery_flot_pie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.flot.pie.min.js") ? Url("jquery.flot.pie.min.js") : Url("jquery.flot.pie.js");
+                        public static readonly string jquery_flot_resize_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.flot.resize.min.js") ? Url("jquery.flot.resize.min.js") : Url("jquery.flot.resize.js");
                         public static readonly string jquery_flot_tooltip_min_js = Url("jquery.flot.tooltip.min.js");
                     }
                 
                     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                     public static class metisMenu {
-                        private const string URLPATH = "~/Scripts/padel/jugador/plugins/metisMenu";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                        public static readonly string jquery_metisMenu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.metisMenu.min.js") ? Url("jquery.metisMenu.min.js") : Url("jquery.metisMenu.js");
+                        public const string UrlPath = "~/Scripts/padel/jugador/plugins/metisMenu";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                        public static readonly string jquery_metisMenu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/jquery.metisMenu.min.js") ? Url("jquery.metisMenu.min.js") : Url("jquery.metisMenu.js");
                     }
                 
                     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                     public static class morris {
-                        private const string URLPATH = "~/Scripts/padel/jugador/plugins/morris";
-                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                        public static readonly string morris_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/morris.min.js") ? Url("morris.min.js") : Url("morris.js");
+                        public const string UrlPath = "~/Scripts/padel/jugador/plugins/morris";
+                        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                        public static readonly string morris_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/morris.min.js") ? Url("morris.min.js") : Url("morris.js");
                         public static readonly string raphael_2_1_0_min_js = Url("raphael-2.1.0.min.js");
                     }
                 
                 }
             
-                public static readonly string sb_admin_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/sb-admin.min.js") ? Url("sb-admin.min.js") : Url("sb-admin.js");
+                public static readonly string sb_admin_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/sb-admin.min.js") ? Url("sb-admin.min.js") : Url("sb-admin.js");
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class torneos {
-                    private const string URLPATH = "~/Scripts/padel/jugador/torneos";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string crud_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/crud.min.js") ? Url("crud.min.js") : Url("crud.js");
+                    public const string UrlPath = "~/Scripts/padel/jugador/torneos";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string crud_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/crud.min.js") ? Url("crud.min.js") : Url("crud.js");
                 }
             
             }
         
-            public static readonly string padel_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/padel.min.js") ? Url("padel.min.js") : Url("padel.js");
+            public static readonly string padel_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/padel.min.js") ? Url("padel.min.js") : Url("padel.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class torneos {
-                private const string URLPATH = "~/Scripts/padel/torneos";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string apuntate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/apuntate.min.js") ? Url("apuntate.min.js") : Url("apuntate.js");
+                public const string UrlPath = "~/Scripts/padel/torneos";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string apuntate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/apuntate.min.js") ? Url("apuntate.min.js") : Url("apuntate.js");
             }
         
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class slimscroll {
-            private const string URLPATH = "~/Scripts/slimscroll";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public const string UrlPath = "~/Scripts/slimscroll";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             public static readonly string jquery_slimscroll_min_js = Url("jquery.slimscroll.min.js");
         }
     
+        public static readonly string version_json = Url("version.json");
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public static class Content {
-        private const string URLPATH = "~/Content";
-        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        public const string UrlPath = "~/Content";
+        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class admin {
-            private const string URLPATH = "~/Content/admin";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public const string UrlPath = "~/Content/admin";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class grid {
-                private const string URLPATH = "~/Content/admin/grid";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string ng_grid_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ng-grid.min.css") ? Url("ng-grid.min.css") : Url("ng-grid.css");
-                     
+                public const string UrlPath = "~/Content/admin/grid";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string ng_grid_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ng-grid.min.css") ? Url("ng-grid.min.css") : Url("ng-grid.css");
             }
         
-            public static readonly string style_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/style.min.css") ? Url("style.min.css") : Url("style.css");
-                 
+            public static readonly string style_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/style.min.css") ? Url("style.min.css") : Url("style.css");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class bootstrap {
-            private const string URLPATH = "~/Content/bootstrap";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public const string UrlPath = "~/Content/bootstrap";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class carousel {
-                private const string URLPATH = "~/Content/bootstrap/carousel";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string carousel_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/carousel.min.css") ? Url("carousel.min.css") : Url("carousel.css");
-                     
+                public const string UrlPath = "~/Content/bootstrap/carousel";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string carousel_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/carousel.min.css") ? Url("carousel.min.css") : Url("carousel.css");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class css {
-                private const string URLPATH = "~/Content/bootstrap/css";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string bootstrap_theme_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-theme.min.css") ? Url("bootstrap-theme.min.css") : Url("bootstrap-theme.css");
-                     
+                public const string UrlPath = "~/Content/bootstrap/css";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string bootstrap_theme_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap-theme.min.css") ? Url("bootstrap-theme.min.css") : Url("bootstrap-theme.css");
                 public static readonly string bootstrap_theme_min_css = Url("bootstrap-theme.min.css");
-                public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
-                     
+                public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
                 public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class fonts {
-                private const string URLPATH = "~/Content/bootstrap/fonts";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public const string UrlPath = "~/Content/bootstrap/fonts";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                 public static readonly string glyphicons_halflings_regular_eot = Url("glyphicons-halflings-regular.eot");
                 public static readonly string glyphicons_halflings_regular_svg = Url("glyphicons-halflings-regular.svg");
                 public static readonly string glyphicons_halflings_regular_ttf = Url("glyphicons-halflings-regular.ttf");
@@ -691,24 +1161,23 @@ namespace Links
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class fontawesome {
-            private const string URLPATH = "~/Content/fontawesome";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public const string UrlPath = "~/Content/fontawesome";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class css {
-                private const string URLPATH = "~/Content/fontawesome/css";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string font_awesome_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/font-awesome.min.css") ? Url("font-awesome.min.css") : Url("font-awesome.css");
-                     
+                public const string UrlPath = "~/Content/fontawesome/css";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string font_awesome_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/font-awesome.min.css") ? Url("font-awesome.min.css") : Url("font-awesome.css");
                 public static readonly string font_awesome_min_css = Url("font-awesome.min.css");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class fonts {
-                private const string URLPATH = "~/Content/fontawesome/fonts";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public const string UrlPath = "~/Content/fontawesome/fonts";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                 public static readonly string fontawesome_webfont_eot = Url("fontawesome-webfont.eot");
                 public static readonly string fontawesome_webfont_svg = Url("fontawesome-webfont.svg");
                 public static readonly string fontawesome_webfont_ttf = Url("fontawesome-webfont.ttf");
@@ -720,9 +1189,9 @@ namespace Links
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class fonts {
-            private const string URLPATH = "~/Content/fonts";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public const string UrlPath = "~/Content/fonts";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             public static readonly string fontawesome_webfont_eot = Url("fontawesome-webfont.eot");
             public static readonly string fontawesome_webfont_svg = Url("fontawesome-webfont.svg");
             public static readonly string fontawesome_webfont_ttf = Url("fontawesome-webfont.ttf");
@@ -740,29 +1209,26 @@ namespace Links
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class fuelux {
-            private const string URLPATH = "~/Content/fuelux";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public const string UrlPath = "~/Content/fuelux";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class css {
-                private const string URLPATH = "~/Content/fuelux/css";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string fuelux_responsive_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/fuelux-responsive.min.css") ? Url("fuelux-responsive.min.css") : Url("fuelux-responsive.css");
-                     
+                public const string UrlPath = "~/Content/fuelux/css";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string fuelux_responsive_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/fuelux-responsive.min.css") ? Url("fuelux-responsive.min.css") : Url("fuelux-responsive.css");
                 public static readonly string fuelux_responsive_min_css = Url("fuelux-responsive.min.css");
-                public static readonly string fuelux_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/fuelux.min.css") ? Url("fuelux.min.css") : Url("fuelux.css");
-                     
+                public static readonly string fuelux_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/fuelux.min.css") ? Url("fuelux.min.css") : Url("fuelux.css");
                 public static readonly string fuelux_min_css = Url("fuelux.min.css");
-                public static readonly string padel_fuelux_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/padel-fuelux.min.css") ? Url("padel-fuelux.min.css") : Url("padel-fuelux.css");
-                     
+                public static readonly string padel_fuelux_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/padel-fuelux.min.css") ? Url("padel-fuelux.min.css") : Url("padel-fuelux.css");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class fonts {
-                private const string URLPATH = "~/Content/fuelux/fonts";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public const string UrlPath = "~/Content/fuelux/fonts";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                 public static readonly string fuelux_preloader_eot = Url("fuelux-preloader.eot");
                 public static readonly string fuelux_preloader_svg = Url("fuelux-preloader.svg");
                 public static readonly string fuelux_preloader_ttf = Url("fuelux-preloader.ttf");
@@ -771,9 +1237,9 @@ namespace Links
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class img {
-                private const string URLPATH = "~/Content/fuelux/img";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public const string UrlPath = "~/Content/fuelux/img";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                 public static readonly string form_png = Url("form.png");
                 public static readonly string glyphicons_halflings_white_png = Url("glyphicons-halflings-white.png");
                 public static readonly string glyphicons_halflings_png = Url("glyphicons-halflings.png");
@@ -783,9 +1249,9 @@ namespace Links
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class img {
-            private const string URLPATH = "~/Content/img";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public const string UrlPath = "~/Content/img";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             public static readonly string bola_red_jpg = Url("bola_red.jpg");
             public static readonly string chica_padel_jpg = Url("chica_padel.jpg");
             public static readonly string competicion_padel_jpg = Url("competicion_padel.jpg");
@@ -797,24 +1263,23 @@ namespace Links
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class ionicons {
-            private const string URLPATH = "~/Content/ionicons";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public const string UrlPath = "~/Content/ionicons";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class css {
-                private const string URLPATH = "~/Content/ionicons/css";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string ionicons_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ionicons.min.css") ? Url("ionicons.min.css") : Url("ionicons.css");
-                     
+                public const string UrlPath = "~/Content/ionicons/css";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                public static readonly string ionicons_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ionicons.min.css") ? Url("ionicons.min.css") : Url("ionicons.css");
                 public static readonly string ionicons_min_css = Url("ionicons.min.css");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class fonts {
-                private const string URLPATH = "~/Content/ionicons/fonts";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public const string UrlPath = "~/Content/ionicons/fonts";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                 public static readonly string ionicons_eot = Url("ionicons.eot");
                 public static readonly string ionicons_svg = Url("ionicons.svg");
                 public static readonly string ionicons_ttf = Url("ionicons.ttf");
@@ -825,78 +1290,1195 @@ namespace Links
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class jqtimeto {
-            private const string URLPATH = "~/Content/jqtimeto";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string timeTo_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/timeTo.min.css") ? Url("timeTo.min.css") : Url("timeTo.css");
-                 
+            public const string UrlPath = "~/Content/jqtimeto";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+            public static readonly string timeTo_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/timeTo.min.css") ? Url("timeTo.min.css") : Url("timeTo.css");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class jugador {
-            private const string URLPATH = "~/Content/jugador";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public const string UrlPath = "~/Content/jugador";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class plugins {
-                private const string URLPATH = "~/Content/jugador/plugins";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public const string UrlPath = "~/Content/jugador/plugins";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class dataTables {
-                    private const string URLPATH = "~/Content/jugador/plugins/dataTables";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string dataTables_bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dataTables.bootstrap.min.css") ? Url("dataTables.bootstrap.min.css") : Url("dataTables.bootstrap.css");
-                         
+                    public const string UrlPath = "~/Content/jugador/plugins/dataTables";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string dataTables_bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/dataTables.bootstrap.min.css") ? Url("dataTables.bootstrap.min.css") : Url("dataTables.bootstrap.css");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class morris {
-                    private const string URLPATH = "~/Content/jugador/plugins/morris";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public const string UrlPath = "~/Content/jugador/plugins/morris";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
                     public static readonly string morris_0_4_3_min_css = Url("morris-0.4.3.min.css");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class social_buttons {
-                    private const string URLPATH = "~/Content/jugador/plugins/social-buttons";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string social_buttons_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/social-buttons.min.css") ? Url("social-buttons.min.css") : Url("social-buttons.css");
-                         
+                    public const string UrlPath = "~/Content/jugador/plugins/social-buttons";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string social_buttons_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/social-buttons.min.css") ? Url("social-buttons.min.css") : Url("social-buttons.css");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class timeline {
-                    private const string URLPATH = "~/Content/jugador/plugins/timeline";
-                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string timeline_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/timeline.min.css") ? Url("timeline.min.css") : Url("timeline.css");
-                         
+                    public const string UrlPath = "~/Content/jugador/plugins/timeline";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(UrlPath); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(UrlPath + "/" + fileName); }
+                    public static readonly string timeline_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/timeline.min.css") ? Url("timeline.min.css") : Url("timeline.css");
                 }
             
             }
         
-            public static readonly string sb_admin_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/sb-admin.min.css") ? Url("sb-admin.min.css") : Url("sb-admin.css");
-                 
+            public static readonly string sb_admin_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/sb-admin.min.css") ? Url("sb-admin.min.css") : Url("sb-admin.css");
         }
     
-        public static readonly string ng_grid_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ng-grid.min.css") ? Url("ng-grid.min.css") : Url("ng-grid.css");
-             
+        public static readonly string ng_grid_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/ng-grid.min.css") ? Url("ng-grid.min.css") : Url("ng-grid.css");
         public static readonly string ng_grid_min_css = Url("ng-grid.min.css");
-        public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");
-             
+        public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(UrlPath + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");
     }
 
+    
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public static partial class Bundles
     {
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static partial class Scripts {}
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static partial class Styles {}
+        public static partial class Scripts 
+        {
+            public static partial class angularjs 
+            {
+                public static partial class grid 
+                {
+                    public static class Assets
+                    {
+                        public const string ng_grid_2_0_7_min_js = "~/Scripts/angularjs/grid/ng-grid-2.0.7.min.js"; 
+                        public const string ng_grid_js = "~/Scripts/angularjs/grid/ng-grid.js"; 
+                        public const string ng_grid_min_js = "~/Scripts/angularjs/grid/ng-grid.min.js"; 
+                    }
+                }
+                public static class Assets
+                {
+                    public const string angular_route_js = "~/Scripts/angularjs/angular-route.js"; 
+                    public const string angular_route_min_js = "~/Scripts/angularjs/angular-route.min.js"; 
+                    public const string angular_js = "~/Scripts/angularjs/angular.js"; 
+                    public const string angular_min_js = "~/Scripts/angularjs/angular.min.js"; 
+                }
+            }
+            public static partial class bootstrap 
+            {
+                public static class Assets
+                {
+                    public const string bootstrap_validation_js = "~/Scripts/bootstrap/bootstrap-validation.js"; 
+                    public const string bootstrap_js = "~/Scripts/bootstrap/bootstrap.js"; 
+                    public const string bootstrap_min_js = "~/Scripts/bootstrap/bootstrap.min.js"; 
+                    public const string holder_js = "~/Scripts/bootstrap/holder.js"; 
+                }
+            }
+            public static partial class fuelux 
+            {
+                public static class Assets
+                {
+                    public const string wizard_js = "~/Scripts/fuelux/wizard.js"; 
+                }
+            }
+            public static partial class i18n 
+            {
+                public static class Assets
+                {
+                    public const string angular_locale_af_na_js = "~/Scripts/i18n/angular-locale_af-na.js"; 
+                    public const string angular_locale_af_za_js = "~/Scripts/i18n/angular-locale_af-za.js"; 
+                    public const string angular_locale_af_js = "~/Scripts/i18n/angular-locale_af.js"; 
+                    public const string angular_locale_agq_cm_js = "~/Scripts/i18n/angular-locale_agq-cm.js"; 
+                    public const string angular_locale_agq_js = "~/Scripts/i18n/angular-locale_agq.js"; 
+                    public const string angular_locale_ak_gh_js = "~/Scripts/i18n/angular-locale_ak-gh.js"; 
+                    public const string angular_locale_ak_js = "~/Scripts/i18n/angular-locale_ak.js"; 
+                    public const string angular_locale_am_et_js = "~/Scripts/i18n/angular-locale_am-et.js"; 
+                    public const string angular_locale_am_js = "~/Scripts/i18n/angular-locale_am.js"; 
+                    public const string angular_locale_ar_001_js = "~/Scripts/i18n/angular-locale_ar-001.js"; 
+                    public const string angular_locale_ar_ae_js = "~/Scripts/i18n/angular-locale_ar-ae.js"; 
+                    public const string angular_locale_ar_bh_js = "~/Scripts/i18n/angular-locale_ar-bh.js"; 
+                    public const string angular_locale_ar_dj_js = "~/Scripts/i18n/angular-locale_ar-dj.js"; 
+                    public const string angular_locale_ar_dz_js = "~/Scripts/i18n/angular-locale_ar-dz.js"; 
+                    public const string angular_locale_ar_eg_js = "~/Scripts/i18n/angular-locale_ar-eg.js"; 
+                    public const string angular_locale_ar_eh_js = "~/Scripts/i18n/angular-locale_ar-eh.js"; 
+                    public const string angular_locale_ar_er_js = "~/Scripts/i18n/angular-locale_ar-er.js"; 
+                    public const string angular_locale_ar_il_js = "~/Scripts/i18n/angular-locale_ar-il.js"; 
+                    public const string angular_locale_ar_iq_js = "~/Scripts/i18n/angular-locale_ar-iq.js"; 
+                    public const string angular_locale_ar_jo_js = "~/Scripts/i18n/angular-locale_ar-jo.js"; 
+                    public const string angular_locale_ar_km_js = "~/Scripts/i18n/angular-locale_ar-km.js"; 
+                    public const string angular_locale_ar_kw_js = "~/Scripts/i18n/angular-locale_ar-kw.js"; 
+                    public const string angular_locale_ar_lb_js = "~/Scripts/i18n/angular-locale_ar-lb.js"; 
+                    public const string angular_locale_ar_ly_js = "~/Scripts/i18n/angular-locale_ar-ly.js"; 
+                    public const string angular_locale_ar_ma_js = "~/Scripts/i18n/angular-locale_ar-ma.js"; 
+                    public const string angular_locale_ar_mr_js = "~/Scripts/i18n/angular-locale_ar-mr.js"; 
+                    public const string angular_locale_ar_om_js = "~/Scripts/i18n/angular-locale_ar-om.js"; 
+                    public const string angular_locale_ar_ps_js = "~/Scripts/i18n/angular-locale_ar-ps.js"; 
+                    public const string angular_locale_ar_qa_js = "~/Scripts/i18n/angular-locale_ar-qa.js"; 
+                    public const string angular_locale_ar_sa_js = "~/Scripts/i18n/angular-locale_ar-sa.js"; 
+                    public const string angular_locale_ar_sd_js = "~/Scripts/i18n/angular-locale_ar-sd.js"; 
+                    public const string angular_locale_ar_so_js = "~/Scripts/i18n/angular-locale_ar-so.js"; 
+                    public const string angular_locale_ar_ss_js = "~/Scripts/i18n/angular-locale_ar-ss.js"; 
+                    public const string angular_locale_ar_sy_js = "~/Scripts/i18n/angular-locale_ar-sy.js"; 
+                    public const string angular_locale_ar_td_js = "~/Scripts/i18n/angular-locale_ar-td.js"; 
+                    public const string angular_locale_ar_tn_js = "~/Scripts/i18n/angular-locale_ar-tn.js"; 
+                    public const string angular_locale_ar_xb_js = "~/Scripts/i18n/angular-locale_ar-xb.js"; 
+                    public const string angular_locale_ar_ye_js = "~/Scripts/i18n/angular-locale_ar-ye.js"; 
+                    public const string angular_locale_ar_js = "~/Scripts/i18n/angular-locale_ar.js"; 
+                    public const string angular_locale_as_in_js = "~/Scripts/i18n/angular-locale_as-in.js"; 
+                    public const string angular_locale_as_js = "~/Scripts/i18n/angular-locale_as.js"; 
+                    public const string angular_locale_asa_tz_js = "~/Scripts/i18n/angular-locale_asa-tz.js"; 
+                    public const string angular_locale_asa_js = "~/Scripts/i18n/angular-locale_asa.js"; 
+                    public const string angular_locale_ast_es_js = "~/Scripts/i18n/angular-locale_ast-es.js"; 
+                    public const string angular_locale_ast_js = "~/Scripts/i18n/angular-locale_ast.js"; 
+                    public const string angular_locale_az_cyrl_az_js = "~/Scripts/i18n/angular-locale_az-cyrl-az.js"; 
+                    public const string angular_locale_az_cyrl_js = "~/Scripts/i18n/angular-locale_az-cyrl.js"; 
+                    public const string angular_locale_az_latn_az_js = "~/Scripts/i18n/angular-locale_az-latn-az.js"; 
+                    public const string angular_locale_az_latn_js = "~/Scripts/i18n/angular-locale_az-latn.js"; 
+                    public const string angular_locale_az_js = "~/Scripts/i18n/angular-locale_az.js"; 
+                    public const string angular_locale_bas_cm_js = "~/Scripts/i18n/angular-locale_bas-cm.js"; 
+                    public const string angular_locale_bas_js = "~/Scripts/i18n/angular-locale_bas.js"; 
+                    public const string angular_locale_be_by_js = "~/Scripts/i18n/angular-locale_be-by.js"; 
+                    public const string angular_locale_be_js = "~/Scripts/i18n/angular-locale_be.js"; 
+                    public const string angular_locale_bem_zm_js = "~/Scripts/i18n/angular-locale_bem-zm.js"; 
+                    public const string angular_locale_bem_js = "~/Scripts/i18n/angular-locale_bem.js"; 
+                    public const string angular_locale_bez_tz_js = "~/Scripts/i18n/angular-locale_bez-tz.js"; 
+                    public const string angular_locale_bez_js = "~/Scripts/i18n/angular-locale_bez.js"; 
+                    public const string angular_locale_bg_bg_js = "~/Scripts/i18n/angular-locale_bg-bg.js"; 
+                    public const string angular_locale_bg_js = "~/Scripts/i18n/angular-locale_bg.js"; 
+                    public const string angular_locale_bm_ml_js = "~/Scripts/i18n/angular-locale_bm-ml.js"; 
+                    public const string angular_locale_bm_js = "~/Scripts/i18n/angular-locale_bm.js"; 
+                    public const string angular_locale_bn_bd_js = "~/Scripts/i18n/angular-locale_bn-bd.js"; 
+                    public const string angular_locale_bn_in_js = "~/Scripts/i18n/angular-locale_bn-in.js"; 
+                    public const string angular_locale_bn_js = "~/Scripts/i18n/angular-locale_bn.js"; 
+                    public const string angular_locale_bo_cn_js = "~/Scripts/i18n/angular-locale_bo-cn.js"; 
+                    public const string angular_locale_bo_in_js = "~/Scripts/i18n/angular-locale_bo-in.js"; 
+                    public const string angular_locale_bo_js = "~/Scripts/i18n/angular-locale_bo.js"; 
+                    public const string angular_locale_br_fr_js = "~/Scripts/i18n/angular-locale_br-fr.js"; 
+                    public const string angular_locale_br_js = "~/Scripts/i18n/angular-locale_br.js"; 
+                    public const string angular_locale_brx_in_js = "~/Scripts/i18n/angular-locale_brx-in.js"; 
+                    public const string angular_locale_brx_js = "~/Scripts/i18n/angular-locale_brx.js"; 
+                    public const string angular_locale_bs_cyrl_ba_js = "~/Scripts/i18n/angular-locale_bs-cyrl-ba.js"; 
+                    public const string angular_locale_bs_cyrl_js = "~/Scripts/i18n/angular-locale_bs-cyrl.js"; 
+                    public const string angular_locale_bs_latn_ba_js = "~/Scripts/i18n/angular-locale_bs-latn-ba.js"; 
+                    public const string angular_locale_bs_latn_js = "~/Scripts/i18n/angular-locale_bs-latn.js"; 
+                    public const string angular_locale_bs_js = "~/Scripts/i18n/angular-locale_bs.js"; 
+                    public const string angular_locale_ca_ad_js = "~/Scripts/i18n/angular-locale_ca-ad.js"; 
+                    public const string angular_locale_ca_es_valencia_js = "~/Scripts/i18n/angular-locale_ca-es-valencia.js"; 
+                    public const string angular_locale_ca_es_js = "~/Scripts/i18n/angular-locale_ca-es.js"; 
+                    public const string angular_locale_ca_fr_js = "~/Scripts/i18n/angular-locale_ca-fr.js"; 
+                    public const string angular_locale_ca_it_js = "~/Scripts/i18n/angular-locale_ca-it.js"; 
+                    public const string angular_locale_ca_js = "~/Scripts/i18n/angular-locale_ca.js"; 
+                    public const string angular_locale_ce_ru_js = "~/Scripts/i18n/angular-locale_ce-ru.js"; 
+                    public const string angular_locale_ce_js = "~/Scripts/i18n/angular-locale_ce.js"; 
+                    public const string angular_locale_cgg_ug_js = "~/Scripts/i18n/angular-locale_cgg-ug.js"; 
+                    public const string angular_locale_cgg_js = "~/Scripts/i18n/angular-locale_cgg.js"; 
+                    public const string angular_locale_chr_us_js = "~/Scripts/i18n/angular-locale_chr-us.js"; 
+                    public const string angular_locale_chr_js = "~/Scripts/i18n/angular-locale_chr.js"; 
+                    public const string angular_locale_ckb_arab_iq_js = "~/Scripts/i18n/angular-locale_ckb-arab-iq.js"; 
+                    public const string angular_locale_ckb_arab_ir_js = "~/Scripts/i18n/angular-locale_ckb-arab-ir.js"; 
+                    public const string angular_locale_ckb_arab_js = "~/Scripts/i18n/angular-locale_ckb-arab.js"; 
+                    public const string angular_locale_ckb_iq_js = "~/Scripts/i18n/angular-locale_ckb-iq.js"; 
+                    public const string angular_locale_ckb_ir_js = "~/Scripts/i18n/angular-locale_ckb-ir.js"; 
+                    public const string angular_locale_ckb_latn_iq_js = "~/Scripts/i18n/angular-locale_ckb-latn-iq.js"; 
+                    public const string angular_locale_ckb_latn_js = "~/Scripts/i18n/angular-locale_ckb-latn.js"; 
+                    public const string angular_locale_ckb_js = "~/Scripts/i18n/angular-locale_ckb.js"; 
+                    public const string angular_locale_cs_cz_js = "~/Scripts/i18n/angular-locale_cs-cz.js"; 
+                    public const string angular_locale_cs_js = "~/Scripts/i18n/angular-locale_cs.js"; 
+                    public const string angular_locale_cu_ru_js = "~/Scripts/i18n/angular-locale_cu-ru.js"; 
+                    public const string angular_locale_cu_js = "~/Scripts/i18n/angular-locale_cu.js"; 
+                    public const string angular_locale_cy_gb_js = "~/Scripts/i18n/angular-locale_cy-gb.js"; 
+                    public const string angular_locale_cy_js = "~/Scripts/i18n/angular-locale_cy.js"; 
+                    public const string angular_locale_da_dk_js = "~/Scripts/i18n/angular-locale_da-dk.js"; 
+                    public const string angular_locale_da_gl_js = "~/Scripts/i18n/angular-locale_da-gl.js"; 
+                    public const string angular_locale_da_js = "~/Scripts/i18n/angular-locale_da.js"; 
+                    public const string angular_locale_dav_ke_js = "~/Scripts/i18n/angular-locale_dav-ke.js"; 
+                    public const string angular_locale_dav_js = "~/Scripts/i18n/angular-locale_dav.js"; 
+                    public const string angular_locale_de_at_js = "~/Scripts/i18n/angular-locale_de-at.js"; 
+                    public const string angular_locale_de_be_js = "~/Scripts/i18n/angular-locale_de-be.js"; 
+                    public const string angular_locale_de_ch_js = "~/Scripts/i18n/angular-locale_de-ch.js"; 
+                    public const string angular_locale_de_de_js = "~/Scripts/i18n/angular-locale_de-de.js"; 
+                    public const string angular_locale_de_li_js = "~/Scripts/i18n/angular-locale_de-li.js"; 
+                    public const string angular_locale_de_lu_js = "~/Scripts/i18n/angular-locale_de-lu.js"; 
+                    public const string angular_locale_de_js = "~/Scripts/i18n/angular-locale_de.js"; 
+                    public const string angular_locale_dje_ne_js = "~/Scripts/i18n/angular-locale_dje-ne.js"; 
+                    public const string angular_locale_dje_js = "~/Scripts/i18n/angular-locale_dje.js"; 
+                    public const string angular_locale_dsb_de_js = "~/Scripts/i18n/angular-locale_dsb-de.js"; 
+                    public const string angular_locale_dsb_js = "~/Scripts/i18n/angular-locale_dsb.js"; 
+                    public const string angular_locale_dua_cm_js = "~/Scripts/i18n/angular-locale_dua-cm.js"; 
+                    public const string angular_locale_dua_js = "~/Scripts/i18n/angular-locale_dua.js"; 
+                    public const string angular_locale_dyo_sn_js = "~/Scripts/i18n/angular-locale_dyo-sn.js"; 
+                    public const string angular_locale_dyo_js = "~/Scripts/i18n/angular-locale_dyo.js"; 
+                    public const string angular_locale_dz_bt_js = "~/Scripts/i18n/angular-locale_dz-bt.js"; 
+                    public const string angular_locale_dz_js = "~/Scripts/i18n/angular-locale_dz.js"; 
+                    public const string angular_locale_ebu_ke_js = "~/Scripts/i18n/angular-locale_ebu-ke.js"; 
+                    public const string angular_locale_ebu_js = "~/Scripts/i18n/angular-locale_ebu.js"; 
+                    public const string angular_locale_ee_gh_js = "~/Scripts/i18n/angular-locale_ee-gh.js"; 
+                    public const string angular_locale_ee_tg_js = "~/Scripts/i18n/angular-locale_ee-tg.js"; 
+                    public const string angular_locale_ee_js = "~/Scripts/i18n/angular-locale_ee.js"; 
+                    public const string angular_locale_el_cy_js = "~/Scripts/i18n/angular-locale_el-cy.js"; 
+                    public const string angular_locale_el_gr_js = "~/Scripts/i18n/angular-locale_el-gr.js"; 
+                    public const string angular_locale_el_js = "~/Scripts/i18n/angular-locale_el.js"; 
+                    public const string angular_locale_en_001_js = "~/Scripts/i18n/angular-locale_en-001.js"; 
+                    public const string angular_locale_en_150_js = "~/Scripts/i18n/angular-locale_en-150.js"; 
+                    public const string angular_locale_en_ag_js = "~/Scripts/i18n/angular-locale_en-ag.js"; 
+                    public const string angular_locale_en_ai_js = "~/Scripts/i18n/angular-locale_en-ai.js"; 
+                    public const string angular_locale_en_as_js = "~/Scripts/i18n/angular-locale_en-as.js"; 
+                    public const string angular_locale_en_at_js = "~/Scripts/i18n/angular-locale_en-at.js"; 
+                    public const string angular_locale_en_au_js = "~/Scripts/i18n/angular-locale_en-au.js"; 
+                    public const string angular_locale_en_bb_js = "~/Scripts/i18n/angular-locale_en-bb.js"; 
+                    public const string angular_locale_en_be_js = "~/Scripts/i18n/angular-locale_en-be.js"; 
+                    public const string angular_locale_en_bi_js = "~/Scripts/i18n/angular-locale_en-bi.js"; 
+                    public const string angular_locale_en_bm_js = "~/Scripts/i18n/angular-locale_en-bm.js"; 
+                    public const string angular_locale_en_bs_js = "~/Scripts/i18n/angular-locale_en-bs.js"; 
+                    public const string angular_locale_en_bw_js = "~/Scripts/i18n/angular-locale_en-bw.js"; 
+                    public const string angular_locale_en_bz_js = "~/Scripts/i18n/angular-locale_en-bz.js"; 
+                    public const string angular_locale_en_ca_js = "~/Scripts/i18n/angular-locale_en-ca.js"; 
+                    public const string angular_locale_en_cc_js = "~/Scripts/i18n/angular-locale_en-cc.js"; 
+                    public const string angular_locale_en_ch_js = "~/Scripts/i18n/angular-locale_en-ch.js"; 
+                    public const string angular_locale_en_ck_js = "~/Scripts/i18n/angular-locale_en-ck.js"; 
+                    public const string angular_locale_en_cm_js = "~/Scripts/i18n/angular-locale_en-cm.js"; 
+                    public const string angular_locale_en_cx_js = "~/Scripts/i18n/angular-locale_en-cx.js"; 
+                    public const string angular_locale_en_cy_js = "~/Scripts/i18n/angular-locale_en-cy.js"; 
+                    public const string angular_locale_en_de_js = "~/Scripts/i18n/angular-locale_en-de.js"; 
+                    public const string angular_locale_en_dg_js = "~/Scripts/i18n/angular-locale_en-dg.js"; 
+                    public const string angular_locale_en_dk_js = "~/Scripts/i18n/angular-locale_en-dk.js"; 
+                    public const string angular_locale_en_dm_js = "~/Scripts/i18n/angular-locale_en-dm.js"; 
+                    public const string angular_locale_en_er_js = "~/Scripts/i18n/angular-locale_en-er.js"; 
+                    public const string angular_locale_en_fi_js = "~/Scripts/i18n/angular-locale_en-fi.js"; 
+                    public const string angular_locale_en_fj_js = "~/Scripts/i18n/angular-locale_en-fj.js"; 
+                    public const string angular_locale_en_fk_js = "~/Scripts/i18n/angular-locale_en-fk.js"; 
+                    public const string angular_locale_en_fm_js = "~/Scripts/i18n/angular-locale_en-fm.js"; 
+                    public const string angular_locale_en_gb_js = "~/Scripts/i18n/angular-locale_en-gb.js"; 
+                    public const string angular_locale_en_gd_js = "~/Scripts/i18n/angular-locale_en-gd.js"; 
+                    public const string angular_locale_en_gg_js = "~/Scripts/i18n/angular-locale_en-gg.js"; 
+                    public const string angular_locale_en_gh_js = "~/Scripts/i18n/angular-locale_en-gh.js"; 
+                    public const string angular_locale_en_gi_js = "~/Scripts/i18n/angular-locale_en-gi.js"; 
+                    public const string angular_locale_en_gm_js = "~/Scripts/i18n/angular-locale_en-gm.js"; 
+                    public const string angular_locale_en_gu_js = "~/Scripts/i18n/angular-locale_en-gu.js"; 
+                    public const string angular_locale_en_gy_js = "~/Scripts/i18n/angular-locale_en-gy.js"; 
+                    public const string angular_locale_en_hk_js = "~/Scripts/i18n/angular-locale_en-hk.js"; 
+                    public const string angular_locale_en_ie_js = "~/Scripts/i18n/angular-locale_en-ie.js"; 
+                    public const string angular_locale_en_il_js = "~/Scripts/i18n/angular-locale_en-il.js"; 
+                    public const string angular_locale_en_im_js = "~/Scripts/i18n/angular-locale_en-im.js"; 
+                    public const string angular_locale_en_in_js = "~/Scripts/i18n/angular-locale_en-in.js"; 
+                    public const string angular_locale_en_io_js = "~/Scripts/i18n/angular-locale_en-io.js"; 
+                    public const string angular_locale_en_iso_js = "~/Scripts/i18n/angular-locale_en-iso.js"; 
+                    public const string angular_locale_en_je_js = "~/Scripts/i18n/angular-locale_en-je.js"; 
+                    public const string angular_locale_en_jm_js = "~/Scripts/i18n/angular-locale_en-jm.js"; 
+                    public const string angular_locale_en_ke_js = "~/Scripts/i18n/angular-locale_en-ke.js"; 
+                    public const string angular_locale_en_ki_js = "~/Scripts/i18n/angular-locale_en-ki.js"; 
+                    public const string angular_locale_en_kn_js = "~/Scripts/i18n/angular-locale_en-kn.js"; 
+                    public const string angular_locale_en_ky_js = "~/Scripts/i18n/angular-locale_en-ky.js"; 
+                    public const string angular_locale_en_lc_js = "~/Scripts/i18n/angular-locale_en-lc.js"; 
+                    public const string angular_locale_en_lr_js = "~/Scripts/i18n/angular-locale_en-lr.js"; 
+                    public const string angular_locale_en_ls_js = "~/Scripts/i18n/angular-locale_en-ls.js"; 
+                    public const string angular_locale_en_mg_js = "~/Scripts/i18n/angular-locale_en-mg.js"; 
+                    public const string angular_locale_en_mh_js = "~/Scripts/i18n/angular-locale_en-mh.js"; 
+                    public const string angular_locale_en_mo_js = "~/Scripts/i18n/angular-locale_en-mo.js"; 
+                    public const string angular_locale_en_mp_js = "~/Scripts/i18n/angular-locale_en-mp.js"; 
+                    public const string angular_locale_en_ms_js = "~/Scripts/i18n/angular-locale_en-ms.js"; 
+                    public const string angular_locale_en_mt_js = "~/Scripts/i18n/angular-locale_en-mt.js"; 
+                    public const string angular_locale_en_mu_js = "~/Scripts/i18n/angular-locale_en-mu.js"; 
+                    public const string angular_locale_en_mw_js = "~/Scripts/i18n/angular-locale_en-mw.js"; 
+                    public const string angular_locale_en_my_js = "~/Scripts/i18n/angular-locale_en-my.js"; 
+                    public const string angular_locale_en_na_js = "~/Scripts/i18n/angular-locale_en-na.js"; 
+                    public const string angular_locale_en_nf_js = "~/Scripts/i18n/angular-locale_en-nf.js"; 
+                    public const string angular_locale_en_ng_js = "~/Scripts/i18n/angular-locale_en-ng.js"; 
+                    public const string angular_locale_en_nl_js = "~/Scripts/i18n/angular-locale_en-nl.js"; 
+                    public const string angular_locale_en_nr_js = "~/Scripts/i18n/angular-locale_en-nr.js"; 
+                    public const string angular_locale_en_nu_js = "~/Scripts/i18n/angular-locale_en-nu.js"; 
+                    public const string angular_locale_en_nz_js = "~/Scripts/i18n/angular-locale_en-nz.js"; 
+                    public const string angular_locale_en_pg_js = "~/Scripts/i18n/angular-locale_en-pg.js"; 
+                    public const string angular_locale_en_ph_js = "~/Scripts/i18n/angular-locale_en-ph.js"; 
+                    public const string angular_locale_en_pk_js = "~/Scripts/i18n/angular-locale_en-pk.js"; 
+                    public const string angular_locale_en_pn_js = "~/Scripts/i18n/angular-locale_en-pn.js"; 
+                    public const string angular_locale_en_pr_js = "~/Scripts/i18n/angular-locale_en-pr.js"; 
+                    public const string angular_locale_en_pw_js = "~/Scripts/i18n/angular-locale_en-pw.js"; 
+                    public const string angular_locale_en_rw_js = "~/Scripts/i18n/angular-locale_en-rw.js"; 
+                    public const string angular_locale_en_sb_js = "~/Scripts/i18n/angular-locale_en-sb.js"; 
+                    public const string angular_locale_en_sc_js = "~/Scripts/i18n/angular-locale_en-sc.js"; 
+                    public const string angular_locale_en_sd_js = "~/Scripts/i18n/angular-locale_en-sd.js"; 
+                    public const string angular_locale_en_se_js = "~/Scripts/i18n/angular-locale_en-se.js"; 
+                    public const string angular_locale_en_sg_js = "~/Scripts/i18n/angular-locale_en-sg.js"; 
+                    public const string angular_locale_en_sh_js = "~/Scripts/i18n/angular-locale_en-sh.js"; 
+                    public const string angular_locale_en_si_js = "~/Scripts/i18n/angular-locale_en-si.js"; 
+                    public const string angular_locale_en_sl_js = "~/Scripts/i18n/angular-locale_en-sl.js"; 
+                    public const string angular_locale_en_ss_js = "~/Scripts/i18n/angular-locale_en-ss.js"; 
+                    public const string angular_locale_en_sx_js = "~/Scripts/i18n/angular-locale_en-sx.js"; 
+                    public const string angular_locale_en_sz_js = "~/Scripts/i18n/angular-locale_en-sz.js"; 
+                    public const string angular_locale_en_tc_js = "~/Scripts/i18n/angular-locale_en-tc.js"; 
+                    public const string angular_locale_en_tk_js = "~/Scripts/i18n/angular-locale_en-tk.js"; 
+                    public const string angular_locale_en_to_js = "~/Scripts/i18n/angular-locale_en-to.js"; 
+                    public const string angular_locale_en_tt_js = "~/Scripts/i18n/angular-locale_en-tt.js"; 
+                    public const string angular_locale_en_tv_js = "~/Scripts/i18n/angular-locale_en-tv.js"; 
+                    public const string angular_locale_en_tz_js = "~/Scripts/i18n/angular-locale_en-tz.js"; 
+                    public const string angular_locale_en_ug_js = "~/Scripts/i18n/angular-locale_en-ug.js"; 
+                    public const string angular_locale_en_um_js = "~/Scripts/i18n/angular-locale_en-um.js"; 
+                    public const string angular_locale_en_us_js = "~/Scripts/i18n/angular-locale_en-us.js"; 
+                    public const string angular_locale_en_vc_js = "~/Scripts/i18n/angular-locale_en-vc.js"; 
+                    public const string angular_locale_en_vg_js = "~/Scripts/i18n/angular-locale_en-vg.js"; 
+                    public const string angular_locale_en_vi_js = "~/Scripts/i18n/angular-locale_en-vi.js"; 
+                    public const string angular_locale_en_vu_js = "~/Scripts/i18n/angular-locale_en-vu.js"; 
+                    public const string angular_locale_en_ws_js = "~/Scripts/i18n/angular-locale_en-ws.js"; 
+                    public const string angular_locale_en_xa_js = "~/Scripts/i18n/angular-locale_en-xa.js"; 
+                    public const string angular_locale_en_za_js = "~/Scripts/i18n/angular-locale_en-za.js"; 
+                    public const string angular_locale_en_zm_js = "~/Scripts/i18n/angular-locale_en-zm.js"; 
+                    public const string angular_locale_en_zw_js = "~/Scripts/i18n/angular-locale_en-zw.js"; 
+                    public const string angular_locale_en_js = "~/Scripts/i18n/angular-locale_en.js"; 
+                    public const string angular_locale_eo_001_js = "~/Scripts/i18n/angular-locale_eo-001.js"; 
+                    public const string angular_locale_eo_js = "~/Scripts/i18n/angular-locale_eo.js"; 
+                    public const string angular_locale_es_419_js = "~/Scripts/i18n/angular-locale_es-419.js"; 
+                    public const string angular_locale_es_ar_js = "~/Scripts/i18n/angular-locale_es-ar.js"; 
+                    public const string angular_locale_es_bo_js = "~/Scripts/i18n/angular-locale_es-bo.js"; 
+                    public const string angular_locale_es_br_js = "~/Scripts/i18n/angular-locale_es-br.js"; 
+                    public const string angular_locale_es_cl_js = "~/Scripts/i18n/angular-locale_es-cl.js"; 
+                    public const string angular_locale_es_co_js = "~/Scripts/i18n/angular-locale_es-co.js"; 
+                    public const string angular_locale_es_cr_js = "~/Scripts/i18n/angular-locale_es-cr.js"; 
+                    public const string angular_locale_es_cu_js = "~/Scripts/i18n/angular-locale_es-cu.js"; 
+                    public const string angular_locale_es_do_js = "~/Scripts/i18n/angular-locale_es-do.js"; 
+                    public const string angular_locale_es_ea_js = "~/Scripts/i18n/angular-locale_es-ea.js"; 
+                    public const string angular_locale_es_ec_js = "~/Scripts/i18n/angular-locale_es-ec.js"; 
+                    public const string angular_locale_es_es_js = "~/Scripts/i18n/angular-locale_es-es.js"; 
+                    public const string angular_locale_es_gq_js = "~/Scripts/i18n/angular-locale_es-gq.js"; 
+                    public const string angular_locale_es_gt_js = "~/Scripts/i18n/angular-locale_es-gt.js"; 
+                    public const string angular_locale_es_hn_js = "~/Scripts/i18n/angular-locale_es-hn.js"; 
+                    public const string angular_locale_es_ic_js = "~/Scripts/i18n/angular-locale_es-ic.js"; 
+                    public const string angular_locale_es_mx_js = "~/Scripts/i18n/angular-locale_es-mx.js"; 
+                    public const string angular_locale_es_ni_js = "~/Scripts/i18n/angular-locale_es-ni.js"; 
+                    public const string angular_locale_es_pa_js = "~/Scripts/i18n/angular-locale_es-pa.js"; 
+                    public const string angular_locale_es_pe_js = "~/Scripts/i18n/angular-locale_es-pe.js"; 
+                    public const string angular_locale_es_ph_js = "~/Scripts/i18n/angular-locale_es-ph.js"; 
+                    public const string angular_locale_es_pr_js = "~/Scripts/i18n/angular-locale_es-pr.js"; 
+                    public const string angular_locale_es_py_js = "~/Scripts/i18n/angular-locale_es-py.js"; 
+                    public const string angular_locale_es_sv_js = "~/Scripts/i18n/angular-locale_es-sv.js"; 
+                    public const string angular_locale_es_us_js = "~/Scripts/i18n/angular-locale_es-us.js"; 
+                    public const string angular_locale_es_uy_js = "~/Scripts/i18n/angular-locale_es-uy.js"; 
+                    public const string angular_locale_es_ve_js = "~/Scripts/i18n/angular-locale_es-ve.js"; 
+                    public const string angular_locale_es_js = "~/Scripts/i18n/angular-locale_es.js"; 
+                    public const string angular_locale_et_ee_js = "~/Scripts/i18n/angular-locale_et-ee.js"; 
+                    public const string angular_locale_et_js = "~/Scripts/i18n/angular-locale_et.js"; 
+                    public const string angular_locale_eu_es_js = "~/Scripts/i18n/angular-locale_eu-es.js"; 
+                    public const string angular_locale_eu_js = "~/Scripts/i18n/angular-locale_eu.js"; 
+                    public const string angular_locale_ewo_cm_js = "~/Scripts/i18n/angular-locale_ewo-cm.js"; 
+                    public const string angular_locale_ewo_js = "~/Scripts/i18n/angular-locale_ewo.js"; 
+                    public const string angular_locale_fa_af_js = "~/Scripts/i18n/angular-locale_fa-af.js"; 
+                    public const string angular_locale_fa_ir_js = "~/Scripts/i18n/angular-locale_fa-ir.js"; 
+                    public const string angular_locale_fa_js = "~/Scripts/i18n/angular-locale_fa.js"; 
+                    public const string angular_locale_ff_cm_js = "~/Scripts/i18n/angular-locale_ff-cm.js"; 
+                    public const string angular_locale_ff_gn_js = "~/Scripts/i18n/angular-locale_ff-gn.js"; 
+                    public const string angular_locale_ff_mr_js = "~/Scripts/i18n/angular-locale_ff-mr.js"; 
+                    public const string angular_locale_ff_sn_js = "~/Scripts/i18n/angular-locale_ff-sn.js"; 
+                    public const string angular_locale_ff_js = "~/Scripts/i18n/angular-locale_ff.js"; 
+                    public const string angular_locale_fi_fi_js = "~/Scripts/i18n/angular-locale_fi-fi.js"; 
+                    public const string angular_locale_fi_js = "~/Scripts/i18n/angular-locale_fi.js"; 
+                    public const string angular_locale_fil_ph_js = "~/Scripts/i18n/angular-locale_fil-ph.js"; 
+                    public const string angular_locale_fil_js = "~/Scripts/i18n/angular-locale_fil.js"; 
+                    public const string angular_locale_fo_dk_js = "~/Scripts/i18n/angular-locale_fo-dk.js"; 
+                    public const string angular_locale_fo_fo_js = "~/Scripts/i18n/angular-locale_fo-fo.js"; 
+                    public const string angular_locale_fo_js = "~/Scripts/i18n/angular-locale_fo.js"; 
+                    public const string angular_locale_fr_be_js = "~/Scripts/i18n/angular-locale_fr-be.js"; 
+                    public const string angular_locale_fr_bf_js = "~/Scripts/i18n/angular-locale_fr-bf.js"; 
+                    public const string angular_locale_fr_bi_js = "~/Scripts/i18n/angular-locale_fr-bi.js"; 
+                    public const string angular_locale_fr_bj_js = "~/Scripts/i18n/angular-locale_fr-bj.js"; 
+                    public const string angular_locale_fr_bl_js = "~/Scripts/i18n/angular-locale_fr-bl.js"; 
+                    public const string angular_locale_fr_ca_js = "~/Scripts/i18n/angular-locale_fr-ca.js"; 
+                    public const string angular_locale_fr_cd_js = "~/Scripts/i18n/angular-locale_fr-cd.js"; 
+                    public const string angular_locale_fr_cf_js = "~/Scripts/i18n/angular-locale_fr-cf.js"; 
+                    public const string angular_locale_fr_cg_js = "~/Scripts/i18n/angular-locale_fr-cg.js"; 
+                    public const string angular_locale_fr_ch_js = "~/Scripts/i18n/angular-locale_fr-ch.js"; 
+                    public const string angular_locale_fr_ci_js = "~/Scripts/i18n/angular-locale_fr-ci.js"; 
+                    public const string angular_locale_fr_cm_js = "~/Scripts/i18n/angular-locale_fr-cm.js"; 
+                    public const string angular_locale_fr_dj_js = "~/Scripts/i18n/angular-locale_fr-dj.js"; 
+                    public const string angular_locale_fr_dz_js = "~/Scripts/i18n/angular-locale_fr-dz.js"; 
+                    public const string angular_locale_fr_fr_js = "~/Scripts/i18n/angular-locale_fr-fr.js"; 
+                    public const string angular_locale_fr_ga_js = "~/Scripts/i18n/angular-locale_fr-ga.js"; 
+                    public const string angular_locale_fr_gf_js = "~/Scripts/i18n/angular-locale_fr-gf.js"; 
+                    public const string angular_locale_fr_gn_js = "~/Scripts/i18n/angular-locale_fr-gn.js"; 
+                    public const string angular_locale_fr_gp_js = "~/Scripts/i18n/angular-locale_fr-gp.js"; 
+                    public const string angular_locale_fr_gq_js = "~/Scripts/i18n/angular-locale_fr-gq.js"; 
+                    public const string angular_locale_fr_ht_js = "~/Scripts/i18n/angular-locale_fr-ht.js"; 
+                    public const string angular_locale_fr_km_js = "~/Scripts/i18n/angular-locale_fr-km.js"; 
+                    public const string angular_locale_fr_lu_js = "~/Scripts/i18n/angular-locale_fr-lu.js"; 
+                    public const string angular_locale_fr_ma_js = "~/Scripts/i18n/angular-locale_fr-ma.js"; 
+                    public const string angular_locale_fr_mc_js = "~/Scripts/i18n/angular-locale_fr-mc.js"; 
+                    public const string angular_locale_fr_mf_js = "~/Scripts/i18n/angular-locale_fr-mf.js"; 
+                    public const string angular_locale_fr_mg_js = "~/Scripts/i18n/angular-locale_fr-mg.js"; 
+                    public const string angular_locale_fr_ml_js = "~/Scripts/i18n/angular-locale_fr-ml.js"; 
+                    public const string angular_locale_fr_mq_js = "~/Scripts/i18n/angular-locale_fr-mq.js"; 
+                    public const string angular_locale_fr_mr_js = "~/Scripts/i18n/angular-locale_fr-mr.js"; 
+                    public const string angular_locale_fr_mu_js = "~/Scripts/i18n/angular-locale_fr-mu.js"; 
+                    public const string angular_locale_fr_nc_js = "~/Scripts/i18n/angular-locale_fr-nc.js"; 
+                    public const string angular_locale_fr_ne_js = "~/Scripts/i18n/angular-locale_fr-ne.js"; 
+                    public const string angular_locale_fr_pf_js = "~/Scripts/i18n/angular-locale_fr-pf.js"; 
+                    public const string angular_locale_fr_pm_js = "~/Scripts/i18n/angular-locale_fr-pm.js"; 
+                    public const string angular_locale_fr_re_js = "~/Scripts/i18n/angular-locale_fr-re.js"; 
+                    public const string angular_locale_fr_rw_js = "~/Scripts/i18n/angular-locale_fr-rw.js"; 
+                    public const string angular_locale_fr_sc_js = "~/Scripts/i18n/angular-locale_fr-sc.js"; 
+                    public const string angular_locale_fr_sn_js = "~/Scripts/i18n/angular-locale_fr-sn.js"; 
+                    public const string angular_locale_fr_sy_js = "~/Scripts/i18n/angular-locale_fr-sy.js"; 
+                    public const string angular_locale_fr_td_js = "~/Scripts/i18n/angular-locale_fr-td.js"; 
+                    public const string angular_locale_fr_tg_js = "~/Scripts/i18n/angular-locale_fr-tg.js"; 
+                    public const string angular_locale_fr_tn_js = "~/Scripts/i18n/angular-locale_fr-tn.js"; 
+                    public const string angular_locale_fr_vu_js = "~/Scripts/i18n/angular-locale_fr-vu.js"; 
+                    public const string angular_locale_fr_wf_js = "~/Scripts/i18n/angular-locale_fr-wf.js"; 
+                    public const string angular_locale_fr_yt_js = "~/Scripts/i18n/angular-locale_fr-yt.js"; 
+                    public const string angular_locale_fr_js = "~/Scripts/i18n/angular-locale_fr.js"; 
+                    public const string angular_locale_fur_it_js = "~/Scripts/i18n/angular-locale_fur-it.js"; 
+                    public const string angular_locale_fur_js = "~/Scripts/i18n/angular-locale_fur.js"; 
+                    public const string angular_locale_fy_nl_js = "~/Scripts/i18n/angular-locale_fy-nl.js"; 
+                    public const string angular_locale_fy_js = "~/Scripts/i18n/angular-locale_fy.js"; 
+                    public const string angular_locale_ga_ie_js = "~/Scripts/i18n/angular-locale_ga-ie.js"; 
+                    public const string angular_locale_ga_js = "~/Scripts/i18n/angular-locale_ga.js"; 
+                    public const string angular_locale_gd_gb_js = "~/Scripts/i18n/angular-locale_gd-gb.js"; 
+                    public const string angular_locale_gd_js = "~/Scripts/i18n/angular-locale_gd.js"; 
+                    public const string angular_locale_gl_es_js = "~/Scripts/i18n/angular-locale_gl-es.js"; 
+                    public const string angular_locale_gl_js = "~/Scripts/i18n/angular-locale_gl.js"; 
+                    public const string angular_locale_gsw_ch_js = "~/Scripts/i18n/angular-locale_gsw-ch.js"; 
+                    public const string angular_locale_gsw_fr_js = "~/Scripts/i18n/angular-locale_gsw-fr.js"; 
+                    public const string angular_locale_gsw_li_js = "~/Scripts/i18n/angular-locale_gsw-li.js"; 
+                    public const string angular_locale_gsw_js = "~/Scripts/i18n/angular-locale_gsw.js"; 
+                    public const string angular_locale_gu_in_js = "~/Scripts/i18n/angular-locale_gu-in.js"; 
+                    public const string angular_locale_gu_js = "~/Scripts/i18n/angular-locale_gu.js"; 
+                    public const string angular_locale_guz_ke_js = "~/Scripts/i18n/angular-locale_guz-ke.js"; 
+                    public const string angular_locale_guz_js = "~/Scripts/i18n/angular-locale_guz.js"; 
+                    public const string angular_locale_gv_im_js = "~/Scripts/i18n/angular-locale_gv-im.js"; 
+                    public const string angular_locale_gv_js = "~/Scripts/i18n/angular-locale_gv.js"; 
+                    public const string angular_locale_ha_gh_js = "~/Scripts/i18n/angular-locale_ha-gh.js"; 
+                    public const string angular_locale_ha_ne_js = "~/Scripts/i18n/angular-locale_ha-ne.js"; 
+                    public const string angular_locale_ha_ng_js = "~/Scripts/i18n/angular-locale_ha-ng.js"; 
+                    public const string angular_locale_ha_js = "~/Scripts/i18n/angular-locale_ha.js"; 
+                    public const string angular_locale_haw_us_js = "~/Scripts/i18n/angular-locale_haw-us.js"; 
+                    public const string angular_locale_haw_js = "~/Scripts/i18n/angular-locale_haw.js"; 
+                    public const string angular_locale_he_il_js = "~/Scripts/i18n/angular-locale_he-il.js"; 
+                    public const string angular_locale_he_js = "~/Scripts/i18n/angular-locale_he.js"; 
+                    public const string angular_locale_hi_in_js = "~/Scripts/i18n/angular-locale_hi-in.js"; 
+                    public const string angular_locale_hi_js = "~/Scripts/i18n/angular-locale_hi.js"; 
+                    public const string angular_locale_hr_ba_js = "~/Scripts/i18n/angular-locale_hr-ba.js"; 
+                    public const string angular_locale_hr_hr_js = "~/Scripts/i18n/angular-locale_hr-hr.js"; 
+                    public const string angular_locale_hr_js = "~/Scripts/i18n/angular-locale_hr.js"; 
+                    public const string angular_locale_hsb_de_js = "~/Scripts/i18n/angular-locale_hsb-de.js"; 
+                    public const string angular_locale_hsb_js = "~/Scripts/i18n/angular-locale_hsb.js"; 
+                    public const string angular_locale_hu_hu_js = "~/Scripts/i18n/angular-locale_hu-hu.js"; 
+                    public const string angular_locale_hu_js = "~/Scripts/i18n/angular-locale_hu.js"; 
+                    public const string angular_locale_hy_am_js = "~/Scripts/i18n/angular-locale_hy-am.js"; 
+                    public const string angular_locale_hy_js = "~/Scripts/i18n/angular-locale_hy.js"; 
+                    public const string angular_locale_id_id_js = "~/Scripts/i18n/angular-locale_id-id.js"; 
+                    public const string angular_locale_id_js = "~/Scripts/i18n/angular-locale_id.js"; 
+                    public const string angular_locale_ig_ng_js = "~/Scripts/i18n/angular-locale_ig-ng.js"; 
+                    public const string angular_locale_ig_js = "~/Scripts/i18n/angular-locale_ig.js"; 
+                    public const string angular_locale_ii_cn_js = "~/Scripts/i18n/angular-locale_ii-cn.js"; 
+                    public const string angular_locale_ii_js = "~/Scripts/i18n/angular-locale_ii.js"; 
+                    public const string angular_locale_in_js = "~/Scripts/i18n/angular-locale_in.js"; 
+                    public const string angular_locale_is_is_js = "~/Scripts/i18n/angular-locale_is-is.js"; 
+                    public const string angular_locale_is_js = "~/Scripts/i18n/angular-locale_is.js"; 
+                    public const string angular_locale_it_ch_js = "~/Scripts/i18n/angular-locale_it-ch.js"; 
+                    public const string angular_locale_it_it_js = "~/Scripts/i18n/angular-locale_it-it.js"; 
+                    public const string angular_locale_it_sm_js = "~/Scripts/i18n/angular-locale_it-sm.js"; 
+                    public const string angular_locale_it_js = "~/Scripts/i18n/angular-locale_it.js"; 
+                    public const string angular_locale_iw_js = "~/Scripts/i18n/angular-locale_iw.js"; 
+                    public const string angular_locale_ja_jp_js = "~/Scripts/i18n/angular-locale_ja-jp.js"; 
+                    public const string angular_locale_ja_js = "~/Scripts/i18n/angular-locale_ja.js"; 
+                    public const string angular_locale_jgo_cm_js = "~/Scripts/i18n/angular-locale_jgo-cm.js"; 
+                    public const string angular_locale_jgo_js = "~/Scripts/i18n/angular-locale_jgo.js"; 
+                    public const string angular_locale_jmc_tz_js = "~/Scripts/i18n/angular-locale_jmc-tz.js"; 
+                    public const string angular_locale_jmc_js = "~/Scripts/i18n/angular-locale_jmc.js"; 
+                    public const string angular_locale_ka_ge_js = "~/Scripts/i18n/angular-locale_ka-ge.js"; 
+                    public const string angular_locale_ka_js = "~/Scripts/i18n/angular-locale_ka.js"; 
+                    public const string angular_locale_kab_dz_js = "~/Scripts/i18n/angular-locale_kab-dz.js"; 
+                    public const string angular_locale_kab_js = "~/Scripts/i18n/angular-locale_kab.js"; 
+                    public const string angular_locale_kam_ke_js = "~/Scripts/i18n/angular-locale_kam-ke.js"; 
+                    public const string angular_locale_kam_js = "~/Scripts/i18n/angular-locale_kam.js"; 
+                    public const string angular_locale_kde_tz_js = "~/Scripts/i18n/angular-locale_kde-tz.js"; 
+                    public const string angular_locale_kde_js = "~/Scripts/i18n/angular-locale_kde.js"; 
+                    public const string angular_locale_kea_cv_js = "~/Scripts/i18n/angular-locale_kea-cv.js"; 
+                    public const string angular_locale_kea_js = "~/Scripts/i18n/angular-locale_kea.js"; 
+                    public const string angular_locale_khq_ml_js = "~/Scripts/i18n/angular-locale_khq-ml.js"; 
+                    public const string angular_locale_khq_js = "~/Scripts/i18n/angular-locale_khq.js"; 
+                    public const string angular_locale_ki_ke_js = "~/Scripts/i18n/angular-locale_ki-ke.js"; 
+                    public const string angular_locale_ki_js = "~/Scripts/i18n/angular-locale_ki.js"; 
+                    public const string angular_locale_kk_kz_js = "~/Scripts/i18n/angular-locale_kk-kz.js"; 
+                    public const string angular_locale_kk_js = "~/Scripts/i18n/angular-locale_kk.js"; 
+                    public const string angular_locale_kkj_cm_js = "~/Scripts/i18n/angular-locale_kkj-cm.js"; 
+                    public const string angular_locale_kkj_js = "~/Scripts/i18n/angular-locale_kkj.js"; 
+                    public const string angular_locale_kl_gl_js = "~/Scripts/i18n/angular-locale_kl-gl.js"; 
+                    public const string angular_locale_kl_js = "~/Scripts/i18n/angular-locale_kl.js"; 
+                    public const string angular_locale_kln_ke_js = "~/Scripts/i18n/angular-locale_kln-ke.js"; 
+                    public const string angular_locale_kln_js = "~/Scripts/i18n/angular-locale_kln.js"; 
+                    public const string angular_locale_km_kh_js = "~/Scripts/i18n/angular-locale_km-kh.js"; 
+                    public const string angular_locale_km_js = "~/Scripts/i18n/angular-locale_km.js"; 
+                    public const string angular_locale_kn_in_js = "~/Scripts/i18n/angular-locale_kn-in.js"; 
+                    public const string angular_locale_kn_js = "~/Scripts/i18n/angular-locale_kn.js"; 
+                    public const string angular_locale_ko_kp_js = "~/Scripts/i18n/angular-locale_ko-kp.js"; 
+                    public const string angular_locale_ko_kr_js = "~/Scripts/i18n/angular-locale_ko-kr.js"; 
+                    public const string angular_locale_ko_js = "~/Scripts/i18n/angular-locale_ko.js"; 
+                    public const string angular_locale_kok_in_js = "~/Scripts/i18n/angular-locale_kok-in.js"; 
+                    public const string angular_locale_kok_js = "~/Scripts/i18n/angular-locale_kok.js"; 
+                    public const string angular_locale_ks_in_js = "~/Scripts/i18n/angular-locale_ks-in.js"; 
+                    public const string angular_locale_ks_js = "~/Scripts/i18n/angular-locale_ks.js"; 
+                    public const string angular_locale_ksb_tz_js = "~/Scripts/i18n/angular-locale_ksb-tz.js"; 
+                    public const string angular_locale_ksb_js = "~/Scripts/i18n/angular-locale_ksb.js"; 
+                    public const string angular_locale_ksf_cm_js = "~/Scripts/i18n/angular-locale_ksf-cm.js"; 
+                    public const string angular_locale_ksf_js = "~/Scripts/i18n/angular-locale_ksf.js"; 
+                    public const string angular_locale_ksh_de_js = "~/Scripts/i18n/angular-locale_ksh-de.js"; 
+                    public const string angular_locale_ksh_js = "~/Scripts/i18n/angular-locale_ksh.js"; 
+                    public const string angular_locale_kw_gb_js = "~/Scripts/i18n/angular-locale_kw-gb.js"; 
+                    public const string angular_locale_kw_js = "~/Scripts/i18n/angular-locale_kw.js"; 
+                    public const string angular_locale_ky_kg_js = "~/Scripts/i18n/angular-locale_ky-kg.js"; 
+                    public const string angular_locale_ky_js = "~/Scripts/i18n/angular-locale_ky.js"; 
+                    public const string angular_locale_lag_tz_js = "~/Scripts/i18n/angular-locale_lag-tz.js"; 
+                    public const string angular_locale_lag_js = "~/Scripts/i18n/angular-locale_lag.js"; 
+                    public const string angular_locale_lb_lu_js = "~/Scripts/i18n/angular-locale_lb-lu.js"; 
+                    public const string angular_locale_lb_js = "~/Scripts/i18n/angular-locale_lb.js"; 
+                    public const string angular_locale_lg_ug_js = "~/Scripts/i18n/angular-locale_lg-ug.js"; 
+                    public const string angular_locale_lg_js = "~/Scripts/i18n/angular-locale_lg.js"; 
+                    public const string angular_locale_lkt_us_js = "~/Scripts/i18n/angular-locale_lkt-us.js"; 
+                    public const string angular_locale_lkt_js = "~/Scripts/i18n/angular-locale_lkt.js"; 
+                    public const string angular_locale_ln_ao_js = "~/Scripts/i18n/angular-locale_ln-ao.js"; 
+                    public const string angular_locale_ln_cd_js = "~/Scripts/i18n/angular-locale_ln-cd.js"; 
+                    public const string angular_locale_ln_cf_js = "~/Scripts/i18n/angular-locale_ln-cf.js"; 
+                    public const string angular_locale_ln_cg_js = "~/Scripts/i18n/angular-locale_ln-cg.js"; 
+                    public const string angular_locale_ln_js = "~/Scripts/i18n/angular-locale_ln.js"; 
+                    public const string angular_locale_lo_la_js = "~/Scripts/i18n/angular-locale_lo-la.js"; 
+                    public const string angular_locale_lo_js = "~/Scripts/i18n/angular-locale_lo.js"; 
+                    public const string angular_locale_lrc_iq_js = "~/Scripts/i18n/angular-locale_lrc-iq.js"; 
+                    public const string angular_locale_lrc_ir_js = "~/Scripts/i18n/angular-locale_lrc-ir.js"; 
+                    public const string angular_locale_lrc_js = "~/Scripts/i18n/angular-locale_lrc.js"; 
+                    public const string angular_locale_lt_lt_js = "~/Scripts/i18n/angular-locale_lt-lt.js"; 
+                    public const string angular_locale_lt_js = "~/Scripts/i18n/angular-locale_lt.js"; 
+                    public const string angular_locale_lu_cd_js = "~/Scripts/i18n/angular-locale_lu-cd.js"; 
+                    public const string angular_locale_lu_js = "~/Scripts/i18n/angular-locale_lu.js"; 
+                    public const string angular_locale_luo_ke_js = "~/Scripts/i18n/angular-locale_luo-ke.js"; 
+                    public const string angular_locale_luo_js = "~/Scripts/i18n/angular-locale_luo.js"; 
+                    public const string angular_locale_luy_ke_js = "~/Scripts/i18n/angular-locale_luy-ke.js"; 
+                    public const string angular_locale_luy_js = "~/Scripts/i18n/angular-locale_luy.js"; 
+                    public const string angular_locale_lv_lv_js = "~/Scripts/i18n/angular-locale_lv-lv.js"; 
+                    public const string angular_locale_lv_js = "~/Scripts/i18n/angular-locale_lv.js"; 
+                    public const string angular_locale_mas_ke_js = "~/Scripts/i18n/angular-locale_mas-ke.js"; 
+                    public const string angular_locale_mas_tz_js = "~/Scripts/i18n/angular-locale_mas-tz.js"; 
+                    public const string angular_locale_mas_js = "~/Scripts/i18n/angular-locale_mas.js"; 
+                    public const string angular_locale_mer_ke_js = "~/Scripts/i18n/angular-locale_mer-ke.js"; 
+                    public const string angular_locale_mer_js = "~/Scripts/i18n/angular-locale_mer.js"; 
+                    public const string angular_locale_mfe_mu_js = "~/Scripts/i18n/angular-locale_mfe-mu.js"; 
+                    public const string angular_locale_mfe_js = "~/Scripts/i18n/angular-locale_mfe.js"; 
+                    public const string angular_locale_mg_mg_js = "~/Scripts/i18n/angular-locale_mg-mg.js"; 
+                    public const string angular_locale_mg_js = "~/Scripts/i18n/angular-locale_mg.js"; 
+                    public const string angular_locale_mgh_mz_js = "~/Scripts/i18n/angular-locale_mgh-mz.js"; 
+                    public const string angular_locale_mgh_js = "~/Scripts/i18n/angular-locale_mgh.js"; 
+                    public const string angular_locale_mgo_cm_js = "~/Scripts/i18n/angular-locale_mgo-cm.js"; 
+                    public const string angular_locale_mgo_js = "~/Scripts/i18n/angular-locale_mgo.js"; 
+                    public const string angular_locale_mk_mk_js = "~/Scripts/i18n/angular-locale_mk-mk.js"; 
+                    public const string angular_locale_mk_js = "~/Scripts/i18n/angular-locale_mk.js"; 
+                    public const string angular_locale_ml_in_js = "~/Scripts/i18n/angular-locale_ml-in.js"; 
+                    public const string angular_locale_ml_js = "~/Scripts/i18n/angular-locale_ml.js"; 
+                    public const string angular_locale_mn_mn_js = "~/Scripts/i18n/angular-locale_mn-mn.js"; 
+                    public const string angular_locale_mn_js = "~/Scripts/i18n/angular-locale_mn.js"; 
+                    public const string angular_locale_mr_in_js = "~/Scripts/i18n/angular-locale_mr-in.js"; 
+                    public const string angular_locale_mr_js = "~/Scripts/i18n/angular-locale_mr.js"; 
+                    public const string angular_locale_ms_bn_js = "~/Scripts/i18n/angular-locale_ms-bn.js"; 
+                    public const string angular_locale_ms_my_js = "~/Scripts/i18n/angular-locale_ms-my.js"; 
+                    public const string angular_locale_ms_sg_js = "~/Scripts/i18n/angular-locale_ms-sg.js"; 
+                    public const string angular_locale_ms_js = "~/Scripts/i18n/angular-locale_ms.js"; 
+                    public const string angular_locale_mt_mt_js = "~/Scripts/i18n/angular-locale_mt-mt.js"; 
+                    public const string angular_locale_mt_js = "~/Scripts/i18n/angular-locale_mt.js"; 
+                    public const string angular_locale_mua_cm_js = "~/Scripts/i18n/angular-locale_mua-cm.js"; 
+                    public const string angular_locale_mua_js = "~/Scripts/i18n/angular-locale_mua.js"; 
+                    public const string angular_locale_my_mm_js = "~/Scripts/i18n/angular-locale_my-mm.js"; 
+                    public const string angular_locale_my_js = "~/Scripts/i18n/angular-locale_my.js"; 
+                    public const string angular_locale_mzn_ir_js = "~/Scripts/i18n/angular-locale_mzn-ir.js"; 
+                    public const string angular_locale_mzn_js = "~/Scripts/i18n/angular-locale_mzn.js"; 
+                    public const string angular_locale_naq_na_js = "~/Scripts/i18n/angular-locale_naq-na.js"; 
+                    public const string angular_locale_naq_js = "~/Scripts/i18n/angular-locale_naq.js"; 
+                    public const string angular_locale_nb_no_js = "~/Scripts/i18n/angular-locale_nb-no.js"; 
+                    public const string angular_locale_nb_sj_js = "~/Scripts/i18n/angular-locale_nb-sj.js"; 
+                    public const string angular_locale_nb_js = "~/Scripts/i18n/angular-locale_nb.js"; 
+                    public const string angular_locale_nd_zw_js = "~/Scripts/i18n/angular-locale_nd-zw.js"; 
+                    public const string angular_locale_nd_js = "~/Scripts/i18n/angular-locale_nd.js"; 
+                    public const string angular_locale_ne_in_js = "~/Scripts/i18n/angular-locale_ne-in.js"; 
+                    public const string angular_locale_ne_np_js = "~/Scripts/i18n/angular-locale_ne-np.js"; 
+                    public const string angular_locale_ne_js = "~/Scripts/i18n/angular-locale_ne.js"; 
+                    public const string angular_locale_nl_aw_js = "~/Scripts/i18n/angular-locale_nl-aw.js"; 
+                    public const string angular_locale_nl_be_js = "~/Scripts/i18n/angular-locale_nl-be.js"; 
+                    public const string angular_locale_nl_bq_js = "~/Scripts/i18n/angular-locale_nl-bq.js"; 
+                    public const string angular_locale_nl_cw_js = "~/Scripts/i18n/angular-locale_nl-cw.js"; 
+                    public const string angular_locale_nl_nl_js = "~/Scripts/i18n/angular-locale_nl-nl.js"; 
+                    public const string angular_locale_nl_sr_js = "~/Scripts/i18n/angular-locale_nl-sr.js"; 
+                    public const string angular_locale_nl_sx_js = "~/Scripts/i18n/angular-locale_nl-sx.js"; 
+                    public const string angular_locale_nl_js = "~/Scripts/i18n/angular-locale_nl.js"; 
+                    public const string angular_locale_nmg_cm_js = "~/Scripts/i18n/angular-locale_nmg-cm.js"; 
+                    public const string angular_locale_nmg_js = "~/Scripts/i18n/angular-locale_nmg.js"; 
+                    public const string angular_locale_nn_no_js = "~/Scripts/i18n/angular-locale_nn-no.js"; 
+                    public const string angular_locale_nn_js = "~/Scripts/i18n/angular-locale_nn.js"; 
+                    public const string angular_locale_nnh_cm_js = "~/Scripts/i18n/angular-locale_nnh-cm.js"; 
+                    public const string angular_locale_nnh_js = "~/Scripts/i18n/angular-locale_nnh.js"; 
+                    public const string angular_locale_no_no_js = "~/Scripts/i18n/angular-locale_no-no.js"; 
+                    public const string angular_locale_no_js = "~/Scripts/i18n/angular-locale_no.js"; 
+                    public const string angular_locale_nus_ss_js = "~/Scripts/i18n/angular-locale_nus-ss.js"; 
+                    public const string angular_locale_nus_js = "~/Scripts/i18n/angular-locale_nus.js"; 
+                    public const string angular_locale_nyn_ug_js = "~/Scripts/i18n/angular-locale_nyn-ug.js"; 
+                    public const string angular_locale_nyn_js = "~/Scripts/i18n/angular-locale_nyn.js"; 
+                    public const string angular_locale_om_et_js = "~/Scripts/i18n/angular-locale_om-et.js"; 
+                    public const string angular_locale_om_ke_js = "~/Scripts/i18n/angular-locale_om-ke.js"; 
+                    public const string angular_locale_om_js = "~/Scripts/i18n/angular-locale_om.js"; 
+                    public const string angular_locale_or_in_js = "~/Scripts/i18n/angular-locale_or-in.js"; 
+                    public const string angular_locale_or_js = "~/Scripts/i18n/angular-locale_or.js"; 
+                    public const string angular_locale_os_ge_js = "~/Scripts/i18n/angular-locale_os-ge.js"; 
+                    public const string angular_locale_os_ru_js = "~/Scripts/i18n/angular-locale_os-ru.js"; 
+                    public const string angular_locale_os_js = "~/Scripts/i18n/angular-locale_os.js"; 
+                    public const string angular_locale_pa_arab_pk_js = "~/Scripts/i18n/angular-locale_pa-arab-pk.js"; 
+                    public const string angular_locale_pa_arab_js = "~/Scripts/i18n/angular-locale_pa-arab.js"; 
+                    public const string angular_locale_pa_guru_in_js = "~/Scripts/i18n/angular-locale_pa-guru-in.js"; 
+                    public const string angular_locale_pa_guru_js = "~/Scripts/i18n/angular-locale_pa-guru.js"; 
+                    public const string angular_locale_pa_js = "~/Scripts/i18n/angular-locale_pa.js"; 
+                    public const string angular_locale_pl_pl_js = "~/Scripts/i18n/angular-locale_pl-pl.js"; 
+                    public const string angular_locale_pl_js = "~/Scripts/i18n/angular-locale_pl.js"; 
+                    public const string angular_locale_prg_001_js = "~/Scripts/i18n/angular-locale_prg-001.js"; 
+                    public const string angular_locale_prg_js = "~/Scripts/i18n/angular-locale_prg.js"; 
+                    public const string angular_locale_ps_af_js = "~/Scripts/i18n/angular-locale_ps-af.js"; 
+                    public const string angular_locale_ps_js = "~/Scripts/i18n/angular-locale_ps.js"; 
+                    public const string angular_locale_pt_ao_js = "~/Scripts/i18n/angular-locale_pt-ao.js"; 
+                    public const string angular_locale_pt_br_js = "~/Scripts/i18n/angular-locale_pt-br.js"; 
+                    public const string angular_locale_pt_ch_js = "~/Scripts/i18n/angular-locale_pt-ch.js"; 
+                    public const string angular_locale_pt_cv_js = "~/Scripts/i18n/angular-locale_pt-cv.js"; 
+                    public const string angular_locale_pt_gq_js = "~/Scripts/i18n/angular-locale_pt-gq.js"; 
+                    public const string angular_locale_pt_gw_js = "~/Scripts/i18n/angular-locale_pt-gw.js"; 
+                    public const string angular_locale_pt_lu_js = "~/Scripts/i18n/angular-locale_pt-lu.js"; 
+                    public const string angular_locale_pt_mo_js = "~/Scripts/i18n/angular-locale_pt-mo.js"; 
+                    public const string angular_locale_pt_mz_js = "~/Scripts/i18n/angular-locale_pt-mz.js"; 
+                    public const string angular_locale_pt_pt_js = "~/Scripts/i18n/angular-locale_pt-pt.js"; 
+                    public const string angular_locale_pt_st_js = "~/Scripts/i18n/angular-locale_pt-st.js"; 
+                    public const string angular_locale_pt_tl_js = "~/Scripts/i18n/angular-locale_pt-tl.js"; 
+                    public const string angular_locale_pt_js = "~/Scripts/i18n/angular-locale_pt.js"; 
+                    public const string angular_locale_qu_bo_js = "~/Scripts/i18n/angular-locale_qu-bo.js"; 
+                    public const string angular_locale_qu_ec_js = "~/Scripts/i18n/angular-locale_qu-ec.js"; 
+                    public const string angular_locale_qu_pe_js = "~/Scripts/i18n/angular-locale_qu-pe.js"; 
+                    public const string angular_locale_qu_js = "~/Scripts/i18n/angular-locale_qu.js"; 
+                    public const string angular_locale_rm_ch_js = "~/Scripts/i18n/angular-locale_rm-ch.js"; 
+                    public const string angular_locale_rm_js = "~/Scripts/i18n/angular-locale_rm.js"; 
+                    public const string angular_locale_rn_bi_js = "~/Scripts/i18n/angular-locale_rn-bi.js"; 
+                    public const string angular_locale_rn_js = "~/Scripts/i18n/angular-locale_rn.js"; 
+                    public const string angular_locale_ro_md_js = "~/Scripts/i18n/angular-locale_ro-md.js"; 
+                    public const string angular_locale_ro_ro_js = "~/Scripts/i18n/angular-locale_ro-ro.js"; 
+                    public const string angular_locale_ro_js = "~/Scripts/i18n/angular-locale_ro.js"; 
+                    public const string angular_locale_rof_tz_js = "~/Scripts/i18n/angular-locale_rof-tz.js"; 
+                    public const string angular_locale_rof_js = "~/Scripts/i18n/angular-locale_rof.js"; 
+                    public const string angular_locale_ru_by_js = "~/Scripts/i18n/angular-locale_ru-by.js"; 
+                    public const string angular_locale_ru_kg_js = "~/Scripts/i18n/angular-locale_ru-kg.js"; 
+                    public const string angular_locale_ru_kz_js = "~/Scripts/i18n/angular-locale_ru-kz.js"; 
+                    public const string angular_locale_ru_md_js = "~/Scripts/i18n/angular-locale_ru-md.js"; 
+                    public const string angular_locale_ru_ru_js = "~/Scripts/i18n/angular-locale_ru-ru.js"; 
+                    public const string angular_locale_ru_ua_js = "~/Scripts/i18n/angular-locale_ru-ua.js"; 
+                    public const string angular_locale_ru_js = "~/Scripts/i18n/angular-locale_ru.js"; 
+                    public const string angular_locale_rw_rw_js = "~/Scripts/i18n/angular-locale_rw-rw.js"; 
+                    public const string angular_locale_rw_js = "~/Scripts/i18n/angular-locale_rw.js"; 
+                    public const string angular_locale_rwk_tz_js = "~/Scripts/i18n/angular-locale_rwk-tz.js"; 
+                    public const string angular_locale_rwk_js = "~/Scripts/i18n/angular-locale_rwk.js"; 
+                    public const string angular_locale_sah_ru_js = "~/Scripts/i18n/angular-locale_sah-ru.js"; 
+                    public const string angular_locale_sah_js = "~/Scripts/i18n/angular-locale_sah.js"; 
+                    public const string angular_locale_saq_ke_js = "~/Scripts/i18n/angular-locale_saq-ke.js"; 
+                    public const string angular_locale_saq_js = "~/Scripts/i18n/angular-locale_saq.js"; 
+                    public const string angular_locale_sbp_tz_js = "~/Scripts/i18n/angular-locale_sbp-tz.js"; 
+                    public const string angular_locale_sbp_js = "~/Scripts/i18n/angular-locale_sbp.js"; 
+                    public const string angular_locale_se_fi_js = "~/Scripts/i18n/angular-locale_se-fi.js"; 
+                    public const string angular_locale_se_no_js = "~/Scripts/i18n/angular-locale_se-no.js"; 
+                    public const string angular_locale_se_se_js = "~/Scripts/i18n/angular-locale_se-se.js"; 
+                    public const string angular_locale_se_js = "~/Scripts/i18n/angular-locale_se.js"; 
+                    public const string angular_locale_seh_mz_js = "~/Scripts/i18n/angular-locale_seh-mz.js"; 
+                    public const string angular_locale_seh_js = "~/Scripts/i18n/angular-locale_seh.js"; 
+                    public const string angular_locale_ses_ml_js = "~/Scripts/i18n/angular-locale_ses-ml.js"; 
+                    public const string angular_locale_ses_js = "~/Scripts/i18n/angular-locale_ses.js"; 
+                    public const string angular_locale_sg_cf_js = "~/Scripts/i18n/angular-locale_sg-cf.js"; 
+                    public const string angular_locale_sg_js = "~/Scripts/i18n/angular-locale_sg.js"; 
+                    public const string angular_locale_shi_latn_ma_js = "~/Scripts/i18n/angular-locale_shi-latn-ma.js"; 
+                    public const string angular_locale_shi_latn_js = "~/Scripts/i18n/angular-locale_shi-latn.js"; 
+                    public const string angular_locale_shi_tfng_ma_js = "~/Scripts/i18n/angular-locale_shi-tfng-ma.js"; 
+                    public const string angular_locale_shi_tfng_js = "~/Scripts/i18n/angular-locale_shi-tfng.js"; 
+                    public const string angular_locale_shi_js = "~/Scripts/i18n/angular-locale_shi.js"; 
+                    public const string angular_locale_si_lk_js = "~/Scripts/i18n/angular-locale_si-lk.js"; 
+                    public const string angular_locale_si_js = "~/Scripts/i18n/angular-locale_si.js"; 
+                    public const string angular_locale_sk_sk_js = "~/Scripts/i18n/angular-locale_sk-sk.js"; 
+                    public const string angular_locale_sk_js = "~/Scripts/i18n/angular-locale_sk.js"; 
+                    public const string angular_locale_sl_si_js = "~/Scripts/i18n/angular-locale_sl-si.js"; 
+                    public const string angular_locale_sl_js = "~/Scripts/i18n/angular-locale_sl.js"; 
+                    public const string angular_locale_smn_fi_js = "~/Scripts/i18n/angular-locale_smn-fi.js"; 
+                    public const string angular_locale_smn_js = "~/Scripts/i18n/angular-locale_smn.js"; 
+                    public const string angular_locale_sn_zw_js = "~/Scripts/i18n/angular-locale_sn-zw.js"; 
+                    public const string angular_locale_sn_js = "~/Scripts/i18n/angular-locale_sn.js"; 
+                    public const string angular_locale_so_dj_js = "~/Scripts/i18n/angular-locale_so-dj.js"; 
+                    public const string angular_locale_so_et_js = "~/Scripts/i18n/angular-locale_so-et.js"; 
+                    public const string angular_locale_so_ke_js = "~/Scripts/i18n/angular-locale_so-ke.js"; 
+                    public const string angular_locale_so_so_js = "~/Scripts/i18n/angular-locale_so-so.js"; 
+                    public const string angular_locale_so_js = "~/Scripts/i18n/angular-locale_so.js"; 
+                    public const string angular_locale_sq_al_js = "~/Scripts/i18n/angular-locale_sq-al.js"; 
+                    public const string angular_locale_sq_mk_js = "~/Scripts/i18n/angular-locale_sq-mk.js"; 
+                    public const string angular_locale_sq_xk_js = "~/Scripts/i18n/angular-locale_sq-xk.js"; 
+                    public const string angular_locale_sq_js = "~/Scripts/i18n/angular-locale_sq.js"; 
+                    public const string angular_locale_sr_cyrl_ba_js = "~/Scripts/i18n/angular-locale_sr-cyrl-ba.js"; 
+                    public const string angular_locale_sr_cyrl_me_js = "~/Scripts/i18n/angular-locale_sr-cyrl-me.js"; 
+                    public const string angular_locale_sr_cyrl_rs_js = "~/Scripts/i18n/angular-locale_sr-cyrl-rs.js"; 
+                    public const string angular_locale_sr_cyrl_xk_js = "~/Scripts/i18n/angular-locale_sr-cyrl-xk.js"; 
+                    public const string angular_locale_sr_cyrl_js = "~/Scripts/i18n/angular-locale_sr-cyrl.js"; 
+                    public const string angular_locale_sr_latn_ba_js = "~/Scripts/i18n/angular-locale_sr-latn-ba.js"; 
+                    public const string angular_locale_sr_latn_me_js = "~/Scripts/i18n/angular-locale_sr-latn-me.js"; 
+                    public const string angular_locale_sr_latn_rs_js = "~/Scripts/i18n/angular-locale_sr-latn-rs.js"; 
+                    public const string angular_locale_sr_latn_xk_js = "~/Scripts/i18n/angular-locale_sr-latn-xk.js"; 
+                    public const string angular_locale_sr_latn_js = "~/Scripts/i18n/angular-locale_sr-latn.js"; 
+                    public const string angular_locale_sr_js = "~/Scripts/i18n/angular-locale_sr.js"; 
+                    public const string angular_locale_sv_ax_js = "~/Scripts/i18n/angular-locale_sv-ax.js"; 
+                    public const string angular_locale_sv_fi_js = "~/Scripts/i18n/angular-locale_sv-fi.js"; 
+                    public const string angular_locale_sv_se_js = "~/Scripts/i18n/angular-locale_sv-se.js"; 
+                    public const string angular_locale_sv_js = "~/Scripts/i18n/angular-locale_sv.js"; 
+                    public const string angular_locale_sw_cd_js = "~/Scripts/i18n/angular-locale_sw-cd.js"; 
+                    public const string angular_locale_sw_ke_js = "~/Scripts/i18n/angular-locale_sw-ke.js"; 
+                    public const string angular_locale_sw_tz_js = "~/Scripts/i18n/angular-locale_sw-tz.js"; 
+                    public const string angular_locale_sw_ug_js = "~/Scripts/i18n/angular-locale_sw-ug.js"; 
+                    public const string angular_locale_sw_js = "~/Scripts/i18n/angular-locale_sw.js"; 
+                    public const string angular_locale_ta_in_js = "~/Scripts/i18n/angular-locale_ta-in.js"; 
+                    public const string angular_locale_ta_lk_js = "~/Scripts/i18n/angular-locale_ta-lk.js"; 
+                    public const string angular_locale_ta_my_js = "~/Scripts/i18n/angular-locale_ta-my.js"; 
+                    public const string angular_locale_ta_sg_js = "~/Scripts/i18n/angular-locale_ta-sg.js"; 
+                    public const string angular_locale_ta_js = "~/Scripts/i18n/angular-locale_ta.js"; 
+                    public const string angular_locale_te_in_js = "~/Scripts/i18n/angular-locale_te-in.js"; 
+                    public const string angular_locale_te_js = "~/Scripts/i18n/angular-locale_te.js"; 
+                    public const string angular_locale_teo_ke_js = "~/Scripts/i18n/angular-locale_teo-ke.js"; 
+                    public const string angular_locale_teo_ug_js = "~/Scripts/i18n/angular-locale_teo-ug.js"; 
+                    public const string angular_locale_teo_js = "~/Scripts/i18n/angular-locale_teo.js"; 
+                    public const string angular_locale_th_th_js = "~/Scripts/i18n/angular-locale_th-th.js"; 
+                    public const string angular_locale_th_js = "~/Scripts/i18n/angular-locale_th.js"; 
+                    public const string angular_locale_ti_er_js = "~/Scripts/i18n/angular-locale_ti-er.js"; 
+                    public const string angular_locale_ti_et_js = "~/Scripts/i18n/angular-locale_ti-et.js"; 
+                    public const string angular_locale_ti_js = "~/Scripts/i18n/angular-locale_ti.js"; 
+                    public const string angular_locale_tk_tm_js = "~/Scripts/i18n/angular-locale_tk-tm.js"; 
+                    public const string angular_locale_tk_js = "~/Scripts/i18n/angular-locale_tk.js"; 
+                    public const string angular_locale_tl_js = "~/Scripts/i18n/angular-locale_tl.js"; 
+                    public const string angular_locale_to_to_js = "~/Scripts/i18n/angular-locale_to-to.js"; 
+                    public const string angular_locale_to_js = "~/Scripts/i18n/angular-locale_to.js"; 
+                    public const string angular_locale_tr_cy_js = "~/Scripts/i18n/angular-locale_tr-cy.js"; 
+                    public const string angular_locale_tr_tr_js = "~/Scripts/i18n/angular-locale_tr-tr.js"; 
+                    public const string angular_locale_tr_js = "~/Scripts/i18n/angular-locale_tr.js"; 
+                    public const string angular_locale_twq_ne_js = "~/Scripts/i18n/angular-locale_twq-ne.js"; 
+                    public const string angular_locale_twq_js = "~/Scripts/i18n/angular-locale_twq.js"; 
+                    public const string angular_locale_tzm_ma_js = "~/Scripts/i18n/angular-locale_tzm-ma.js"; 
+                    public const string angular_locale_tzm_js = "~/Scripts/i18n/angular-locale_tzm.js"; 
+                    public const string angular_locale_ug_cn_js = "~/Scripts/i18n/angular-locale_ug-cn.js"; 
+                    public const string angular_locale_ug_js = "~/Scripts/i18n/angular-locale_ug.js"; 
+                    public const string angular_locale_uk_ua_js = "~/Scripts/i18n/angular-locale_uk-ua.js"; 
+                    public const string angular_locale_uk_js = "~/Scripts/i18n/angular-locale_uk.js"; 
+                    public const string angular_locale_ur_in_js = "~/Scripts/i18n/angular-locale_ur-in.js"; 
+                    public const string angular_locale_ur_pk_js = "~/Scripts/i18n/angular-locale_ur-pk.js"; 
+                    public const string angular_locale_ur_js = "~/Scripts/i18n/angular-locale_ur.js"; 
+                    public const string angular_locale_uz_arab_af_js = "~/Scripts/i18n/angular-locale_uz-arab-af.js"; 
+                    public const string angular_locale_uz_arab_js = "~/Scripts/i18n/angular-locale_uz-arab.js"; 
+                    public const string angular_locale_uz_cyrl_uz_js = "~/Scripts/i18n/angular-locale_uz-cyrl-uz.js"; 
+                    public const string angular_locale_uz_cyrl_js = "~/Scripts/i18n/angular-locale_uz-cyrl.js"; 
+                    public const string angular_locale_uz_latn_uz_js = "~/Scripts/i18n/angular-locale_uz-latn-uz.js"; 
+                    public const string angular_locale_uz_latn_js = "~/Scripts/i18n/angular-locale_uz-latn.js"; 
+                    public const string angular_locale_uz_js = "~/Scripts/i18n/angular-locale_uz.js"; 
+                    public const string angular_locale_vai_latn_lr_js = "~/Scripts/i18n/angular-locale_vai-latn-lr.js"; 
+                    public const string angular_locale_vai_latn_js = "~/Scripts/i18n/angular-locale_vai-latn.js"; 
+                    public const string angular_locale_vai_vaii_lr_js = "~/Scripts/i18n/angular-locale_vai-vaii-lr.js"; 
+                    public const string angular_locale_vai_vaii_js = "~/Scripts/i18n/angular-locale_vai-vaii.js"; 
+                    public const string angular_locale_vai_js = "~/Scripts/i18n/angular-locale_vai.js"; 
+                    public const string angular_locale_vi_vn_js = "~/Scripts/i18n/angular-locale_vi-vn.js"; 
+                    public const string angular_locale_vi_js = "~/Scripts/i18n/angular-locale_vi.js"; 
+                    public const string angular_locale_vo_001_js = "~/Scripts/i18n/angular-locale_vo-001.js"; 
+                    public const string angular_locale_vo_js = "~/Scripts/i18n/angular-locale_vo.js"; 
+                    public const string angular_locale_vun_tz_js = "~/Scripts/i18n/angular-locale_vun-tz.js"; 
+                    public const string angular_locale_vun_js = "~/Scripts/i18n/angular-locale_vun.js"; 
+                    public const string angular_locale_wae_ch_js = "~/Scripts/i18n/angular-locale_wae-ch.js"; 
+                    public const string angular_locale_wae_js = "~/Scripts/i18n/angular-locale_wae.js"; 
+                    public const string angular_locale_xog_ug_js = "~/Scripts/i18n/angular-locale_xog-ug.js"; 
+                    public const string angular_locale_xog_js = "~/Scripts/i18n/angular-locale_xog.js"; 
+                    public const string angular_locale_yav_cm_js = "~/Scripts/i18n/angular-locale_yav-cm.js"; 
+                    public const string angular_locale_yav_js = "~/Scripts/i18n/angular-locale_yav.js"; 
+                    public const string angular_locale_yi_001_js = "~/Scripts/i18n/angular-locale_yi-001.js"; 
+                    public const string angular_locale_yi_js = "~/Scripts/i18n/angular-locale_yi.js"; 
+                    public const string angular_locale_yo_bj_js = "~/Scripts/i18n/angular-locale_yo-bj.js"; 
+                    public const string angular_locale_yo_ng_js = "~/Scripts/i18n/angular-locale_yo-ng.js"; 
+                    public const string angular_locale_yo_js = "~/Scripts/i18n/angular-locale_yo.js"; 
+                    public const string angular_locale_yue_hk_js = "~/Scripts/i18n/angular-locale_yue-hk.js"; 
+                    public const string angular_locale_yue_js = "~/Scripts/i18n/angular-locale_yue.js"; 
+                    public const string angular_locale_zgh_ma_js = "~/Scripts/i18n/angular-locale_zgh-ma.js"; 
+                    public const string angular_locale_zgh_js = "~/Scripts/i18n/angular-locale_zgh.js"; 
+                    public const string angular_locale_zh_cn_js = "~/Scripts/i18n/angular-locale_zh-cn.js"; 
+                    public const string angular_locale_zh_hans_cn_js = "~/Scripts/i18n/angular-locale_zh-hans-cn.js"; 
+                    public const string angular_locale_zh_hans_hk_js = "~/Scripts/i18n/angular-locale_zh-hans-hk.js"; 
+                    public const string angular_locale_zh_hans_mo_js = "~/Scripts/i18n/angular-locale_zh-hans-mo.js"; 
+                    public const string angular_locale_zh_hans_sg_js = "~/Scripts/i18n/angular-locale_zh-hans-sg.js"; 
+                    public const string angular_locale_zh_hans_js = "~/Scripts/i18n/angular-locale_zh-hans.js"; 
+                    public const string angular_locale_zh_hant_hk_js = "~/Scripts/i18n/angular-locale_zh-hant-hk.js"; 
+                    public const string angular_locale_zh_hant_mo_js = "~/Scripts/i18n/angular-locale_zh-hant-mo.js"; 
+                    public const string angular_locale_zh_hant_tw_js = "~/Scripts/i18n/angular-locale_zh-hant-tw.js"; 
+                    public const string angular_locale_zh_hant_js = "~/Scripts/i18n/angular-locale_zh-hant.js"; 
+                    public const string angular_locale_zh_hk_js = "~/Scripts/i18n/angular-locale_zh-hk.js"; 
+                    public const string angular_locale_zh_tw_js = "~/Scripts/i18n/angular-locale_zh-tw.js"; 
+                    public const string angular_locale_zh_js = "~/Scripts/i18n/angular-locale_zh.js"; 
+                    public const string angular_locale_zu_za_js = "~/Scripts/i18n/angular-locale_zu-za.js"; 
+                    public const string angular_locale_zu_js = "~/Scripts/i18n/angular-locale_zu.js"; 
+                }
+            }
+            public static partial class jqtimeto 
+            {
+                public static class Assets
+                {
+                    public const string jquery_timeTo_js = "~/Scripts/jqtimeto/jquery.timeTo.js"; 
+                    public const string jquery_timeTo_min_js = "~/Scripts/jqtimeto/jquery.timeTo.min.js"; 
+                }
+            }
+            public static partial class padel 
+            {
+                public static partial class admin 
+                {
+                    public static partial class jugadores 
+                    {
+                        public static class Assets
+                        {
+                            public const string grid_js = "~/Scripts/padel/admin/jugadores/grid.js"; 
+                        }
+                    }
+                    public static partial class torneos 
+                    {
+                        public static class Assets
+                        {
+                            public const string grid_js = "~/Scripts/padel/admin/torneos/grid.js"; 
+                            public const string verify_js = "~/Scripts/padel/admin/torneos/verify.js"; 
+                        }
+                    }
+                    public static class Assets
+                    {
+                        public const string admin_js = "~/Scripts/padel/admin/admin.js"; 
+                    }
+                }
+                public static partial class jugador 
+                {
+                    public static partial class demo 
+                    {
+                        public static class Assets
+                        {
+                            public const string dashboard_demo_js = "~/Scripts/padel/jugador/demo/dashboard-demo.js"; 
+                            public const string flot_demo_js = "~/Scripts/padel/jugador/demo/flot-demo.js"; 
+                            public const string morris_demo_js = "~/Scripts/padel/jugador/demo/morris-demo.js"; 
+                        }
+                    }
+                    public static partial class equipos 
+                    {
+                        public static class Assets
+                        {
+                            public const string crud_js = "~/Scripts/padel/jugador/equipos/crud.js"; 
+                        }
+                    }
+                    public static partial class graficas 
+                    {
+                        public static class Assets
+                        {
+                            public const string datos_js = "~/Scripts/padel/jugador/graficas/datos.js"; 
+                        }
+                    }
+                    public static partial class plugins 
+                    {
+                        public static partial class dataTables 
+                        {
+                            public static class Assets
+                            {
+                                public const string dataTables_bootstrap_js = "~/Scripts/padel/jugador/plugins/dataTables/dataTables.bootstrap.js"; 
+                                public const string jquery_dataTables_js = "~/Scripts/padel/jugador/plugins/dataTables/jquery.dataTables.js"; 
+                            }
+                        }
+                        public static partial class flot 
+                        {
+                            public static class Assets
+                            {
+                                public const string excanvas_min_js = "~/Scripts/padel/jugador/plugins/flot/excanvas.min.js"; 
+                                public const string jquery_flot_js = "~/Scripts/padel/jugador/plugins/flot/jquery.flot.js"; 
+                                public const string jquery_flot_pie_js = "~/Scripts/padel/jugador/plugins/flot/jquery.flot.pie.js"; 
+                                public const string jquery_flot_resize_js = "~/Scripts/padel/jugador/plugins/flot/jquery.flot.resize.js"; 
+                                public const string jquery_flot_tooltip_min_js = "~/Scripts/padel/jugador/plugins/flot/jquery.flot.tooltip.min.js"; 
+                            }
+                        }
+                        public static partial class metisMenu 
+                        {
+                            public static class Assets
+                            {
+                                public const string jquery_metisMenu_js = "~/Scripts/padel/jugador/plugins/metisMenu/jquery.metisMenu.js"; 
+                            }
+                        }
+                        public static partial class morris 
+                        {
+                            public static class Assets
+                            {
+                                public const string morris_js = "~/Scripts/padel/jugador/plugins/morris/morris.js"; 
+                                public const string raphael_2_1_0_min_js = "~/Scripts/padel/jugador/plugins/morris/raphael-2.1.0.min.js"; 
+                            }
+                        }
+                        public static class Assets
+                        {
+                        }
+                    }
+                    public static partial class torneos 
+                    {
+                        public static class Assets
+                        {
+                            public const string crud_js = "~/Scripts/padel/jugador/torneos/crud.js"; 
+                        }
+                    }
+                    public static class Assets
+                    {
+                        public const string sb_admin_js = "~/Scripts/padel/jugador/sb-admin.js"; 
+                    }
+                }
+                public static partial class torneos 
+                {
+                    public static class Assets
+                    {
+                        public const string apuntate_js = "~/Scripts/padel/torneos/apuntate.js"; 
+                    }
+                }
+                public static class Assets
+                {
+                    public const string padel_js = "~/Scripts/padel/padel.js"; 
+                }
+            }
+            public static partial class slimscroll 
+            {
+                public static class Assets
+                {
+                    public const string jquery_slimscroll_min_js = "~/Scripts/slimscroll/jquery.slimscroll.min.js"; 
+                }
+            }
+            public static class Assets
+            {
+                public const string additional_methods_js = "~/Scripts/additional-methods.js"; 
+                public const string additional_methods_min_js = "~/Scripts/additional-methods.min.js"; 
+                public const string angular_animate_js = "~/Scripts/angular-animate.js"; 
+                public const string angular_animate_min_js = "~/Scripts/angular-animate.min.js"; 
+                public const string angular_aria_js = "~/Scripts/angular-aria.js"; 
+                public const string angular_aria_min_js = "~/Scripts/angular-aria.min.js"; 
+                public const string angular_cookies_js = "~/Scripts/angular-cookies.js"; 
+                public const string angular_cookies_min_js = "~/Scripts/angular-cookies.min.js"; 
+                public const string angular_csp_css = "~/Scripts/angular-csp.css";
+                public const string angular_loader_js = "~/Scripts/angular-loader.js"; 
+                public const string angular_loader_min_js = "~/Scripts/angular-loader.min.js"; 
+                public const string angular_message_format_js = "~/Scripts/angular-message-format.js"; 
+                public const string angular_message_format_min_js = "~/Scripts/angular-message-format.min.js"; 
+                public const string angular_messages_js = "~/Scripts/angular-messages.js"; 
+                public const string angular_messages_min_js = "~/Scripts/angular-messages.min.js"; 
+                public const string angular_mocks_js = "~/Scripts/angular-mocks.js"; 
+                public const string angular_parse_ext_js = "~/Scripts/angular-parse-ext.js"; 
+                public const string angular_parse_ext_min_js = "~/Scripts/angular-parse-ext.min.js"; 
+                public const string angular_resource_js = "~/Scripts/angular-resource.js"; 
+                public const string angular_resource_min_js = "~/Scripts/angular-resource.min.js"; 
+                public const string angular_route_js = "~/Scripts/angular-route.js"; 
+                public const string angular_route_min_js = "~/Scripts/angular-route.min.js"; 
+                public const string angular_sanitize_js = "~/Scripts/angular-sanitize.js"; 
+                public const string angular_sanitize_min_js = "~/Scripts/angular-sanitize.min.js"; 
+                public const string angular_scenario_js = "~/Scripts/angular-scenario.js"; 
+                public const string angular_touch_js = "~/Scripts/angular-touch.js"; 
+                public const string angular_touch_min_js = "~/Scripts/angular-touch.min.js"; 
+                public const string angular_js = "~/Scripts/angular.js"; 
+                public const string angular_min_js = "~/Scripts/angular.min.js"; 
+                public const string jquery_1_9_1_intellisense_js = "~/Scripts/jquery-1.9.1.intellisense.js"; 
+                public const string jquery_1_9_1_js = "~/Scripts/jquery-1.9.1.js"; 
+                public const string jquery_1_9_1_min_js = "~/Scripts/jquery-1.9.1.min.js"; 
+                public const string jquery_unobtrusive_ajax_js = "~/Scripts/jquery.unobtrusive-ajax.js"; 
+                public const string jquery_unobtrusive_ajax_min_js = "~/Scripts/jquery.unobtrusive-ajax.min.js"; 
+                public const string jquery_validate_js = "~/Scripts/jquery.validate.js"; 
+                public const string jquery_validate_min_js = "~/Scripts/jquery.validate.min.js"; 
+                public const string jquery_validate_unobtrusive_bootstrap_js = "~/Scripts/jquery.validate.unobtrusive.bootstrap.js"; 
+                public const string jquery_validate_unobtrusive_bootstrap_min_js = "~/Scripts/jquery.validate.unobtrusive.bootstrap.min.js"; 
+                public const string jquery_validate_unobtrusive_js = "~/Scripts/jquery.validate.unobtrusive.js"; 
+                public const string jquery_validate_unobtrusive_min_js = "~/Scripts/jquery.validate.unobtrusive.min.js"; 
+                public const string modernizr_2_8_3_js = "~/Scripts/modernizr-2.8.3.js"; 
+            }
+        }
+        public static partial class Content 
+        {
+            public static partial class admin 
+            {
+                public static partial class grid 
+                {
+                    public static class Assets
+                    {
+                        public const string ng_grid_css = "~/Content/admin/grid/ng-grid.css";
+                    }
+                }
+                public static class Assets
+                {
+                    public const string style_css = "~/Content/admin/style.css";
+                }
+            }
+            public static partial class bootstrap 
+            {
+                public static partial class carousel 
+                {
+                    public static class Assets
+                    {
+                        public const string carousel_css = "~/Content/bootstrap/carousel/carousel.css";
+                    }
+                }
+                public static partial class css 
+                {
+                    public static class Assets
+                    {
+                        public const string bootstrap_theme_css = "~/Content/bootstrap/css/bootstrap-theme.css";
+                        public const string bootstrap_theme_min_css = "~/Content/bootstrap/css/bootstrap-theme.min.css";
+                        public const string bootstrap_css = "~/Content/bootstrap/css/bootstrap.css";
+                        public const string bootstrap_min_css = "~/Content/bootstrap/css/bootstrap.min.css";
+                    }
+                }
+                public static partial class fonts 
+                {
+                    public static class Assets
+                    {
+                    }
+                }
+                public static class Assets
+                {
+                }
+            }
+            public static partial class fontawesome 
+            {
+                public static partial class css 
+                {
+                    public static class Assets
+                    {
+                        public const string font_awesome_css = "~/Content/fontawesome/css/font-awesome.css";
+                        public const string font_awesome_min_css = "~/Content/fontawesome/css/font-awesome.min.css";
+                    }
+                }
+                public static partial class fonts 
+                {
+                    public static class Assets
+                    {
+                    }
+                }
+                public static class Assets
+                {
+                }
+            }
+            public static partial class fonts 
+            {
+                public static class Assets
+                {
+                }
+            }
+            public static partial class fuelux 
+            {
+                public static partial class css 
+                {
+                    public static class Assets
+                    {
+                        public const string fuelux_responsive_css = "~/Content/fuelux/css/fuelux-responsive.css";
+                        public const string fuelux_responsive_min_css = "~/Content/fuelux/css/fuelux-responsive.min.css";
+                        public const string fuelux_css = "~/Content/fuelux/css/fuelux.css";
+                        public const string fuelux_min_css = "~/Content/fuelux/css/fuelux.min.css";
+                        public const string padel_fuelux_css = "~/Content/fuelux/css/padel-fuelux.css";
+                    }
+                }
+                public static partial class fonts 
+                {
+                    public static class Assets
+                    {
+                    }
+                }
+                public static partial class img 
+                {
+                    public static class Assets
+                    {
+                    }
+                }
+                public static class Assets
+                {
+                }
+            }
+            public static partial class img 
+            {
+                public static class Assets
+                {
+                }
+            }
+            public static partial class ionicons 
+            {
+                public static partial class css 
+                {
+                    public static class Assets
+                    {
+                        public const string ionicons_css = "~/Content/ionicons/css/ionicons.css";
+                        public const string ionicons_min_css = "~/Content/ionicons/css/ionicons.min.css";
+                    }
+                }
+                public static partial class fonts 
+                {
+                    public static class Assets
+                    {
+                    }
+                }
+                public static class Assets
+                {
+                }
+            }
+            public static partial class jqtimeto 
+            {
+                public static class Assets
+                {
+                    public const string timeTo_css = "~/Content/jqtimeto/timeTo.css";
+                }
+            }
+            public static partial class jugador 
+            {
+                public static partial class plugins 
+                {
+                    public static partial class dataTables 
+                    {
+                        public static class Assets
+                        {
+                            public const string dataTables_bootstrap_css = "~/Content/jugador/plugins/dataTables/dataTables.bootstrap.css";
+                        }
+                    }
+                    public static partial class morris 
+                    {
+                        public static class Assets
+                        {
+                            public const string morris_0_4_3_min_css = "~/Content/jugador/plugins/morris/morris-0.4.3.min.css";
+                        }
+                    }
+                    public static partial class social_buttons 
+                    {
+                        public static class Assets
+                        {
+                            public const string social_buttons_css = "~/Content/jugador/plugins/social-buttons/social-buttons.css";
+                        }
+                    }
+                    public static partial class timeline 
+                    {
+                        public static class Assets
+                        {
+                            public const string timeline_css = "~/Content/jugador/plugins/timeline/timeline.css";
+                        }
+                    }
+                    public static class Assets
+                    {
+                    }
+                }
+                public static class Assets
+                {
+                    public const string sb_admin_css = "~/Content/jugador/sb-admin.css";
+                }
+            }
+            public static class Assets
+            {
+                public const string ng_grid_css = "~/Content/ng-grid.css";
+                public const string ng_grid_min_css = "~/Content/ng-grid.min.css";
+                public const string Site_css = "~/Content/Site.css";
+            }
+        }
     }
 }
 
@@ -930,6 +2512,6 @@ internal static class T4MVCHelpers {
 
 
 #endregion T4MVC
-#pragma warning restore 1591
+#pragma warning restore 1591, 3008, 3009, 0108, 0114
 
 

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Padel.Domain;
-using SharpArch.Domain.Commands;
+using MediatR;
+using Padel.Tasks.CommandResults;
 
 namespace Padel.Tasks.Commands.Usuarios
 {
-    public class EntrarUsuarioCommand : CommandBase
+    public class EntrarUsuarioCommand : IRequest<CommandResult>
     {
         public EntrarUsuarioCommand(string emailOrMovil,  string password)
         {
