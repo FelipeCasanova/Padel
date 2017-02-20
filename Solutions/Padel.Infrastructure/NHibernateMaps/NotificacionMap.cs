@@ -15,6 +15,7 @@ namespace Padel.Infrastructure.NHibernateMaps
     {
         public void Override(AutoMapping<Notificacion> mapping)
         {
+            mapping.Id(x => x.Id).UnsavedValue(0);
             mapping.DiscriminateSubClassesOnColumn("NotificacionTipo");
         }
     }

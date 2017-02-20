@@ -9,16 +9,17 @@ using Padel.Infrastructure.Utilities;
 using Padel.Domain.Events.Equipos;
 using MediatR;
 using SharpArch.Domain.PersistenceSupport;
+using SharpArch.NHibernate.Contracts.Repositories;
 
 namespace Padel.Tasks.EventHandlers.Equipos
 {
     public class EliminarEquipoEventHandle : INotificationHandler<EliminarEquipoEvent>
     {
-        private readonly IRepository<Operacion> operacionRepository;
-        private readonly IRepository<Usuario> usuarioRepository;
-        private readonly IRepository<Equipo> equipoRepository;
+        private readonly INHibernateRepository<Operacion> operacionRepository;
+        private readonly INHibernateRepository<Usuario> usuarioRepository;
+        private readonly INHibernateRepository<Equipo> equipoRepository;
 
-        public EliminarEquipoEventHandle(IRepository<Operacion> operacionRepository, IRepository<Usuario> usuarioRepository, IRepository<Equipo> equipoRepository)
+        public EliminarEquipoEventHandle(INHibernateRepository<Operacion> operacionRepository, INHibernateRepository<Usuario> usuarioRepository, INHibernateRepository<Equipo> equipoRepository)
         {
             this.operacionRepository = operacionRepository;
             this.usuarioRepository = usuarioRepository;
@@ -54,7 +55,7 @@ namespace Padel.Tasks.EventHandlers.Equipos
 
             operacion.Usuario = this.usuarioRepository.Get(principal.Id);
             operacion.Equipo = this.equipoRepository.Get(args.EquipoId);
-            this.operacionRepository.SaveOrUpdate(operacion);
+            this.operacionRepository.Save(operacion);
         }
     }
 }

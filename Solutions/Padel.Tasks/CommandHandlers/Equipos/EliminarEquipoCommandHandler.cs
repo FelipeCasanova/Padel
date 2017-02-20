@@ -6,6 +6,7 @@ using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands;
 using Padel.Tasks.Commands.Equipos;
 using SharpArch.Domain.PersistenceSupport;
+using SharpArch.NHibernate.Contracts.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,11 @@ namespace Padel.Tasks.CommandHandlers.Equipos
 {
     public class EliminarEquipoCommandHandler : IRequestHandler<EliminarEquipoCommand, CommandResult>
     {
-        private readonly IRepository<Equipo> equipoRepository;
-        private readonly IRepository<Usuario> usuarioRepository;
+        private readonly INHibernateRepository<Equipo> equipoRepository;
+        private readonly INHibernateRepository<Usuario> usuarioRepository;
         private readonly IMediator mediator;
 
-        public EliminarEquipoCommandHandler(IRepository<Usuario> usuarioRepository, IRepository<Equipo> equipoRepository, IMediator mediator)
+        public EliminarEquipoCommandHandler(INHibernateRepository<Usuario> usuarioRepository, INHibernateRepository<Equipo> equipoRepository, IMediator mediator)
         {
             this.usuarioRepository = usuarioRepository;
             this.equipoRepository = equipoRepository;
@@ -41,7 +42,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
                 equipo.JugadorAVerificado = false;
                 equipo.JugadorBVerificado = false;
                 equipo.Estado = EstadoEquipoEnum.Eliminado;
-                this.equipoRepository.SaveOrUpdate(equipo);
+                this.equipoRepository.Update(equipo);
                 mediator.Publish(new EliminarEquipoEvent(equipo.Id, equipo.JugadorA.Id, equipo.JugadorB.Id));
                 return new CommandResult(true, "Se ha eliminado correctamente el equipo.");
             }

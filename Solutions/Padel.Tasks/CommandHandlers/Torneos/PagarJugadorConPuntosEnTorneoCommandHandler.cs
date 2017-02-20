@@ -10,15 +10,16 @@ using Padel.Tasks.Commands.Torneos;
 using SharpArch.Domain.PersistenceSupport;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
+using SharpArch.NHibernate.Contracts.Repositories;
 
 namespace Padel.Tasks.CommandHandlers.Equipos
 {
     public class PagarJugadorConPuntosEnTorneoCommandHandler : IRequestHandler<PagarJugadorConPuntosEnTorneoCommand, CommandResult>
     {
-        private readonly IRepository<EquipoToCategoria> equipoToCategoriaRepository;
-        private readonly IRepository<Usuario> usuarioRepository;
+        private readonly INHibernateRepository<EquipoToCategoria> equipoToCategoriaRepository;
+        private readonly INHibernateRepository<Usuario> usuarioRepository;
 
-        public PagarJugadorConPuntosEnTorneoCommandHandler(IRepository<EquipoToCategoria> equipoToCategoriaRepository, IRepository<Usuario> usuarioRepository)
+        public PagarJugadorConPuntosEnTorneoCommandHandler(INHibernateRepository<EquipoToCategoria> equipoToCategoriaRepository, INHibernateRepository<Usuario> usuarioRepository)
         {
             this.equipoToCategoriaRepository = equipoToCategoriaRepository;
             this.usuarioRepository = usuarioRepository;
@@ -76,7 +77,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
             var validatorCtx = new ValidationContext(usuario);
             if (equiposToCategoria.IsValid(validatorCtx))
             {
-                this.equipoToCategoriaRepository.SaveOrUpdate(equiposToCategoria);
+                this.equipoToCategoriaRepository.Update(equiposToCategoria);
                 return new CommandResult(true, (equiposToCategoria.Estado != EstadoEquipoCategoriaEnum.Pagado ? "Se ha pagado correctamente uno de los miembros del equipo." : "Se ha pagado correctamente el torneo."));
             }
             else

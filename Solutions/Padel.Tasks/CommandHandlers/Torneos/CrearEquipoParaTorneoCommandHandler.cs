@@ -14,6 +14,7 @@ using SharpArch.Domain.PersistenceSupport;
 using System.Threading;
 using System.ComponentModel.DataAnnotations;
 using MediatR;
+using SharpArch.NHibernate.Contracts.Repositories;
 
 namespace Padel.Tasks.CommandHandlers.Torneos
 {
@@ -21,12 +22,12 @@ namespace Padel.Tasks.CommandHandlers.Torneos
     {
         private readonly IEquipoTasks equipoTasks;
 
-        private readonly IRepository<Usuario> usuarioRepository;
-        private readonly IRepository<Categoria> categoriaRepository;
-        private readonly IRepository<EquipoToCategoria> equipoToCategoriaRepository;
+        private readonly INHibernateRepository<Usuario> usuarioRepository;
+        private readonly INHibernateRepository<Categoria> categoriaRepository;
+        private readonly INHibernateRepository<EquipoToCategoria> equipoToCategoriaRepository;
 
-        public CrearEquipoParaTorneoCommandHandler(IEquipoTasks equipoTasks, IRepository<Usuario> usuarioRepository, IRepository<Categoria> categoriaRepository, 
-            IRepository<EquipoToCategoria> equipoToCategoriaRepository)
+        public CrearEquipoParaTorneoCommandHandler(IEquipoTasks equipoTasks, INHibernateRepository<Usuario> usuarioRepository, INHibernateRepository<Categoria> categoriaRepository,
+            INHibernateRepository<EquipoToCategoria> equipoToCategoriaRepository)
         {
             this.equipoTasks = equipoTasks;
 
@@ -210,12 +211,11 @@ namespace Padel.Tasks.CommandHandlers.Torneos
             var validatorCtx = new ValidationContext(equipoToCategoria);
             if (equipoToCategoria.IsValid(validatorCtx))
             {
-                this.equipoToCategoriaRepository.SaveOrUpdate(equipoToCategoria);
+                this.equipoToCategoriaRepository.Save(equipoToCategoria);
                 return new CommandResult(true, "Se ha registrado correctamente en el torneo.");
             }
             else
             {
-                //this.equipoToCategoriaRepository.DbContext.RollbackTransaction();
                 return new CommandResult(false, "No se puedo registrar el equipo en el torneo. Intentelo más tarde.");
             }
         }

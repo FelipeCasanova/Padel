@@ -4,6 +4,7 @@ using Padel.Domain.Events.Equipos;
 using Padel.Tasks.CommandResults;
 using Padel.Tasks.Commands.Equipos;
 using SharpArch.Domain.PersistenceSupport;
+using SharpArch.NHibernate.Contracts.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,10 @@ namespace Padel.Tasks.CommandHandlers.Equipos
 {
     public class ValidarJugadorEnEquipoCommandHandler : IRequestHandler<ValidarJugadorEnEquipoCommand, CommandResult>
     {
-        private readonly IRepository<Equipo> equipoRepository;
+        private readonly INHibernateRepository<Equipo> equipoRepository;
         private readonly IMediator mediator;
 
-        public ValidarJugadorEnEquipoCommandHandler(IRepository<Equipo> equipoRepository, IMediator mediator)
+        public ValidarJugadorEnEquipoCommandHandler(INHibernateRepository<Equipo> equipoRepository, IMediator mediator)
         {
             this.equipoRepository = equipoRepository;
             this.mediator = mediator;
@@ -37,7 +38,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
             {
                 equipo.Estado = EstadoEquipoEnum.Activado;
             }
-            this.equipoRepository.SaveOrUpdate(equipo);
+            this.equipoRepository.Update(equipo);
             mediator.Publish(new ValidarJugadorEnEquipoEvent(command.IdEquipo, command.IdJugador));
             
             return new CommandResult(true, "Se ha activado correctamente el jugador.");

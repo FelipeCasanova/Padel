@@ -9,16 +9,17 @@ using Padel.Infrastructure.Utilities;
 using Padel.Domain.Events.Equipos;
 using MediatR;
 using SharpArch.Domain.PersistenceSupport;
+using SharpArch.NHibernate.Contracts.Repositories;
 
 namespace Padel.Tasks.EventHandlers.Equipos
 {
     public class ValidarJugadorEnEquipoEventHandle : INotificationHandler<ValidarJugadorEnEquipoEvent>
     {
-        private readonly IRepository<Operacion> operacionRepository;
-        private readonly IRepository<Usuario> usuarioRepository;
-        private readonly IRepository<Equipo> equipoRepository;
+        private readonly INHibernateRepository<Operacion> operacionRepository;
+        private readonly INHibernateRepository<Usuario> usuarioRepository;
+        private readonly INHibernateRepository<Equipo> equipoRepository;
 
-        public ValidarJugadorEnEquipoEventHandle(IRepository<Operacion> operacionRepository, IRepository<Usuario> usuarioRepository, IRepository<Equipo> equipoRepository)
+        public ValidarJugadorEnEquipoEventHandle(INHibernateRepository<Operacion> operacionRepository, INHibernateRepository<Usuario> usuarioRepository, INHibernateRepository<Equipo> equipoRepository)
         {
             this.operacionRepository = operacionRepository;
             this.usuarioRepository = usuarioRepository;
@@ -53,7 +54,7 @@ namespace Padel.Tasks.EventHandlers.Equipos
             }
             
             operacion.Usuario = this.usuarioRepository.Get(principal.Id);
-            this.operacionRepository.SaveOrUpdate(operacion);
+            this.operacionRepository.Save(operacion);
         }
     }
 }

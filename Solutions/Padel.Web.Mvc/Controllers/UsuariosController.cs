@@ -78,9 +78,9 @@ namespace Padel.Web.Mvc.Controllers
                 if (principal.Identity.IsAuthenticated && principal.Id == usuarioModelView.Usuario.Id &&
                 !notificacionRepository.GetAll().Any(n => n.Usuario.Id == usuarioModelView.Usuario.Id && n.Accion == CorazonNotificacion.AccionEnum.IngresoCorazonesActualizado.ToString()))
                 {
-                    mediator.Publish(new IngresarCorazonesEvent(usuarioModelView.Usuario.Id, 3, CorazonNotificacion.AccionEnum.IngresoCorazonesActualizado.ToString())).Start();
+                    mediator.Publish(new IngresarCorazonesEvent(usuarioModelView.Usuario.Id, 3, CorazonNotificacion.AccionEnum.IngresoCorazonesActualizado.ToString()));
                 }
-                mediator.Publish<RefrescarUsuarioEvent>(new RefrescarUsuarioEvent()).Start();
+                mediator.Publish<RefrescarUsuarioEvent>(new RefrescarUsuarioEvent());
             }
 
             return PartialView(MVC.Shared.Views.Usuarios._Modificar, usuarioModelView);

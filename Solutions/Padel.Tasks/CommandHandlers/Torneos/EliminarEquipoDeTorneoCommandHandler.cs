@@ -10,15 +10,16 @@ using Padel.Tasks.Commands.Torneos;
 using SharpArch.Domain.PersistenceSupport;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
+using SharpArch.NHibernate.Contracts.Repositories;
 
 namespace Padel.Tasks.CommandHandlers.Equipos
 {
     public class EliminarEquipoDeTorneoCommandHandler : IRequestHandler<EliminarEquipoDeTorneoCommand, CommandResult>
     {
-        private readonly IRepository<EquipoToCategoria> equipoToCategoriaRepository;
-        private readonly IRepository<Usuario> usuarioRepository;
+        private readonly INHibernateRepository<EquipoToCategoria> equipoToCategoriaRepository;
+        private readonly INHibernateRepository<Usuario> usuarioRepository;
 
-        public EliminarEquipoDeTorneoCommandHandler(IRepository<EquipoToCategoria> equipoToCategoriaRepository, IRepository<Usuario> usuarioRepository)
+        public EliminarEquipoDeTorneoCommandHandler(INHibernateRepository<EquipoToCategoria> equipoToCategoriaRepository, INHibernateRepository<Usuario> usuarioRepository)
         {
             this.equipoToCategoriaRepository = equipoToCategoriaRepository;
             this.usuarioRepository = usuarioRepository;
@@ -64,7 +65,7 @@ namespace Padel.Tasks.CommandHandlers.Equipos
                 }
 
                 equiposToCategoria.Estado = EstadoEquipoCategoriaEnum.Eliminado;
-                this.equipoToCategoriaRepository.SaveOrUpdate(equiposToCategoria);
+                this.equipoToCategoriaRepository.Update(equiposToCategoria);
                 
                 return new CommandResult(true, "Se ha eliminado correctamente el equipo del torneo.", new { Precio = devolver });    
             }

@@ -7,15 +7,16 @@ using Padel.Tasks.CommandResults;
 using SharpArch.Domain.PersistenceSupport;
 using Padel.Domain;
 using MediatR;
+using SharpArch.NHibernate.Contracts.Repositories;
 
 namespace Padel.Tasks.CommandHandlers.Torneos
 {
     public class VerificarTorneoCommandHandler : IRequestHandler<VerificarTorneoCommand, CommandResult>
     {
-        private readonly IRepository<Torneo> torneoRepository;
-        private readonly IRepository<Categoria> categoriaRepository;
+        private readonly INHibernateRepository<Torneo> torneoRepository;
+        private readonly INHibernateRepository<Categoria> categoriaRepository;
 
-        public VerificarTorneoCommandHandler(IRepository<Torneo> torneoRepository, IRepository<Categoria> categoriaRepository)
+        public VerificarTorneoCommandHandler(INHibernateRepository<Torneo> torneoRepository, INHibernateRepository<Categoria> categoriaRepository)
         {
             this.torneoRepository = torneoRepository;
             this.categoriaRepository = categoriaRepository;
@@ -30,7 +31,7 @@ namespace Padel.Tasks.CommandHandlers.Torneos
             {
                 categoria.Estado = EstadoCategoriaEnum.Pendiente;
                 categoria.FechaModificacion = DateTime.Now;
-                this.categoriaRepository.SaveOrUpdate(categoria);
+                this.categoriaRepository.Update(categoria);
                 return new CommandResult(false, "Hay equipos que no han pagado aun.", equiposPendientePorPagar.ToList());
             }
             else
@@ -38,7 +39,7 @@ namespace Padel.Tasks.CommandHandlers.Torneos
                 // Verificar estado
                 categoria.Estado = EstadoCategoriaEnum.Verificado;
                 categoria.FechaModificacion = DateTime.Now;
-                this.categoriaRepository.SaveOrUpdate(categoria);
+                this.categoriaRepository.Update(categoria);
                 return new CommandResult(true, "El torneo ha sido verificado.");
             }
         }

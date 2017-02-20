@@ -8,15 +8,16 @@ using Padel.Domain.Notificaciones;
 using SharpArch.Domain.PersistenceSupport;
 using Padel.Domain;
 using System.ComponentModel.DataAnnotations;
+using SharpArch.NHibernate.Contracts.Repositories;
 
 namespace Padel.Tasks.EventHandlers.Usuarios
 {
     public class IngresarCorazonesEventHandle : INotificationHandler<IngresarCorazonesEvent>
     {
-        private readonly IRepository<Notificacion> notificacionRepository;
-        private readonly IRepository<Usuario> usuarioRepository;
+        private readonly INHibernateRepository<Notificacion> notificacionRepository;
+        private readonly INHibernateRepository<Usuario> usuarioRepository;
 
-        public IngresarCorazonesEventHandle(IRepository<Notificacion> notificacionRepository, IRepository<Usuario> usuarioRepository)
+        public IngresarCorazonesEventHandle(INHibernateRepository<Notificacion> notificacionRepository, INHibernateRepository<Usuario> usuarioRepository)
         {
             this.notificacionRepository = notificacionRepository;
             this.usuarioRepository = usuarioRepository;
@@ -29,7 +30,7 @@ namespace Padel.Tasks.EventHandlers.Usuarios
             if (usuario.IsValid(validatorCtx))
             {
                 usuario.AplicacionExperiencia += args.CantidadPuntos;
-                this.usuarioRepository.SaveOrUpdate(usuario);
+                this.usuarioRepository.Update(usuario);
                 CorazonNotificacion notificacion = new CorazonNotificacion();
                 notificacion.Accion = args.Accion;
                 notificacion.FechaCreacion = DateTime.Now;
@@ -37,7 +38,7 @@ namespace Padel.Tasks.EventHandlers.Usuarios
                 notificacion.Mensaje = new StringBuilder("Has conseguido ").Append(args.CantidadPuntos).Append(" corazones más!").ToString();
                 notificacion.CantidadPuntos = args.CantidadPuntos;
                 notificacion.Usuario = this.usuarioRepository.Get(args.UsuarioId);
-                this.notificacionRepository.SaveOrUpdate(notificacion);
+                this.notificacionRepository.Save(notificacion);
             }
         }
     }
