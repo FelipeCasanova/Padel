@@ -75,8 +75,6 @@
             FilterProviders.Providers.InstallMvcFilterProvider(container, injectablePropertiesCache);
             ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(container));
 
-            //this.InitializeServiceLocator();
-
             AreaRegistration.RegisterAllAreas();
 
             BundleConfig.RegisterBundles(BundleTable.Bundles);
