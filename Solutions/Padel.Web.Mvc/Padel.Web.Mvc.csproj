@@ -39,6 +39,7 @@
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -280,7 +281,6 @@
     <Compile Include="Areas\Admin\Controllers\ViewModels\Menus\SideBarModelView.cs" />
     <Compile Include="Areas\Admin\Controllers\ViewModels\Torneos\TorneoViewModel.cs" />
     <Compile Include="Areas\Admin\Controllers\ViewModels\Torneos\VerificarTorneoEmailModelView.cs" />
-    <Compile Include="CastleWindsor\ComponentRegistrar.cs" />
     <Compile Include="CastleWindsor\HandlersInstaller.cs" />
     <Compile Include="CastleWindsor\HttpControllersInstaller.cs" />
     <Compile Include="CastleWindsor\MediatorInstaller.cs" />
@@ -1273,9 +1273,9 @@
     <Content Include="Areas\Admin\Views\Shared\Errors\_Error.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Errors\_ModalError.cshtml" />
     <Content Include="Areas\Admin\Views\Jugadores\Editar.cshtml" />
-    <None Include="Content\fonts\ionicons.eot" />
-    <None Include="Content\fonts\ionicons.ttf" />
-    <None Include="Content\fonts\ionicons.woff" />
+    <Content Include="Content\fonts\ionicons.eot" />
+    <Content Include="Content\fonts\ionicons.ttf" />
+    <Content Include="Content\fonts\ionicons.woff" />
     <None Include="Content\ionicons\fonts\ionicons.eot" />
     <None Include="Content\ionicons\fonts\ionicons.ttf" />
     <None Include="Content\ionicons\fonts\ionicons.woff" />

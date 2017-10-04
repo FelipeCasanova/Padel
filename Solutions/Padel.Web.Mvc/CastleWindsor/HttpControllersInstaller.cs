@@ -5,12 +5,14 @@
     using Castle.Windsor;
     using Controllers;
     using SharpArch.Web.Http.Castle;
+    using System.Web.Http;
 
     public class HttpControllersInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            //container.RegisterHttpControllers(typeof(ApiController).Assembly);
+            // For Web API
+            //container.RegisterHttpControllers(typeof(BaseController).Assembly);
         }
     }
 }
