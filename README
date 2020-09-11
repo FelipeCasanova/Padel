@@ -44,4 +44,4 @@ Now you should have the latest development branch of SA 2.0 and submodules.
 
 * /SharpArch.build:  The NAnt build script used by /go.bat to build the SharpArch class libraries.
 
-* /VersionHistory.txt:  Details version numbers of dependencies, changes since previous releases, upgrade details, and a roadmap of what's coming.  This is an important document.
+* /VersionHistory.txt:  Details version numbers of dependencies, changes since previous releases, upgrade details, and a roadmap of what's coming.  This is an important document.....
